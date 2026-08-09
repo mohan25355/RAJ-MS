@@ -1,0 +1,27 @@
+services:
+  app:
+    build: .
+    container_name: raja-electricals-app
+    restart: unless-stopped
+    ports:
+      - "4000:4000"
+    environment:
+      PORT: 4000
+      MONGODB_URI: mongodb://mongo:27017/raja-electricals
+      JWT_SECRET: ${JWT_SECRET:?Set JWT_SECRET in .env before deploying}
+      ADMIN_EMAIL: ${ADMIN_EMAIL:-admin@rajaelectricals.in}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:?Set ADMIN_PASSWORD in .env before deploying}
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:7
+    container_name: raja-electricals-mongo
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_DATABASE: raja-electricals
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  mongo_data:

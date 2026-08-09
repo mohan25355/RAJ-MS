@@ -1,4 +1,0 @@
-import { images } from '../data/catalog';
-import { CtaBand, PageHead } from '../components/ui';
-
-export default function GalleryPage({ go }) { const pictures = [images.worker, images.helmet, images.plant, images.hero, images.tools, images.pump, images.safety, images.site, images.pipes]; return <><PageHead crumb="Gallery" title={<>Our <em>Gallery</em></>} desc="A closer look at our products, project support and the people behind every delivery." /><section className="gallery"><small className="section-kicker">Work in action</small><div className="tabs"><button>All</button><button>Projects</button><button>Products</button><button>Store</button><button>Events</button><button>Safety</button></div><div>{pictures.map((picture, index) => <img src={picture} key={index} alt="Raja Electricals products and projects" />)}</div></section><CtaBand go={go} /></>; }

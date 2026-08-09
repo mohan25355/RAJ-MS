@@ -1,0 +1,3 @@
+const API = '/api';
+export async function getContent() { const response = await fetch(`${API}/content`); if (!response.ok) throw new Error('Could not load website content.'); return response.json(); }
+export async function request(path, method = 'GET', body) { const token = localStorage.getItem('raja_admin_token'); const response = await fetch(`${API}${path}`, { method, headers: { 'Content-Type': 'application/json', ...(token ? { Authorization: `Bearer ${token}` } : {}) }, body: body ? JSON.stringify(body) : undefined }); if (response.status === 204) return null; const payload = await response.json(); if (!response.ok) throw new Error(payload.error || 'Request failed.'); return payload; }

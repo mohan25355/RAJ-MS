@@ -1,0 +1,23 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+client/dist/
+
+# Local environment files
+.env
+server/.env
+
+# Local data (DB-backed content is stored in MongoDB)
+server/data/
+
+# Logs
+npm-debug.log*
+*.log
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
