@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
 
 const app = express();
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 10000;
 const MONGODB_URI = process.env.MONGODB_URI;
 const JWT_SECRET = process.env.JWT_SECRET || 'change-this-development-secret';
 app.use(express.json({ limit: '20mb' }));
@@ -38,7 +38,10 @@ async function ensureContentDefaults() { const record = await Content.findOne({ 
 function auth(req, res, next) { try { req.admin = jwt.verify((req.headers.authorization || '').replace('Bearer ', ''), JWT_SECRET); next(); } catch { res.status(401).json({ error: 'Please sign in to continue.' }); } }
 function publicItem(doc) { return { ...doc.toObject(), id: doc._id.toString(), _id: undefined }; }
 
-app.get('/api/health', (_req, res) => res.json({ ok: mongoose.connection.readyState === 1 }));
+app.get('/api/health', (_req, res) => {
+  const connected = mongoose.connection.readyState === 1;
+  res.json({ ok: connected, mongodb: connected ? 'connected' : 'disconnected' });
+});
 app.get('/api/content', async (_req, res, next) => { try { res.json(await content()); } catch (e) { next(e); } });
 app.post('/api/auth/login', async (req, res, next) => { try { const admin = await Admin.findOne({ email: String(req.body.email || '').toLowerCase() }); if (!admin || !await bcrypt.compare(req.body.password || '', admin.passwordHash)) return res.status(401).json({ error: 'Invalid email or password.' }); const token = jwt.sign({ id: admin.id, email: admin.email, role: 'admin' }, JWT_SECRET, { expiresIn: '8h' }); res.json({ token, admin: { email: admin.email } }); } catch (e) { next(e); } });
 app.post('/api/auth/logout', auth, (_req, res) => res.status(204).end());
@@ -57,15 +60,23 @@ app.delete('/api/:collection/:id', auth, async (req, res, next) => { try { const
 app.get('/api/admin/enquiries', auth, async (_req, res, next) => { try { res.json((await Enquiry.find().sort({ createdAt: -1 })).map(publicItem)); } catch (e) { next(e); } });
 app.get('/api/admin/orders', auth, async (_req, res, next) => { try { res.json((await Order.find().sort({ createdAt: -1 })).map(publicItem)); } catch (e) { next(e); } });
 app.patch('/api/admin/:type/:id', auth, async (req, res, next) => { try { const Model = req.params.type === 'orders' ? Order : req.params.type === 'enquiries' ? Enquiry : null; if (!Model) return res.status(404).json({ error: 'Unknown item type.' }); const item = await Model.findByIdAndUpdate(req.params.id, { status: req.body.status }, { new: true, runValidators: true }); if (!item) return res.status(404).json({ error: 'Item not found.' }); res.json(publicItem(item)); } catch (e) { next(e); } });
-const clientDist = path.join(__dirname, '..', 'client', 'dist');
-const clientIndex = path.join(clientDist, 'index.html');
-if (require('fs').existsSync(clientIndex)) {
-  app.use(express.static(clientDist));
-  app.get('/{*splat}', (_req, res) => res.sendFile(clientIndex));
-} else {
-  app.get('/{*splat}', (_req, res) => res.status(503).json({ error: 'Frontend build is missing. Run the client build before starting the server.' }));
-}
+app.get('/', (_req, res) => {
+  res.json({
+    success: true,
+    message: 'Raja Electricals API is running',
+    health: '/api/health'
+  });
+});
+
+app.use((req, res) => {
+  res.status(404).json({
+    success: false,
+    error: 'API route not found'
+  });
+});
 app.use((err, _req, res, _next) => { console.error(err); if (err?.name === 'ValidationError') return res.status(400).json({ error: Object.values(err.errors).map(item => item.message).join(' ') }); if (err?.code === 11000) return res.status(409).json({ error: 'A record with the same unique value already exists.' }); if (err?.type === 'entity.too.large') return res.status(413).json({ error: 'The uploaded image or catalogue is too large.' }); res.status(err.status || 500).json({ error: 'Something went wrong. Please try again.' }); });
 
 if (!MONGODB_URI) { console.error('MONGODB_URI is missing. Add it to your .env file.'); process.exit(1); }
-mongoose.connect(MONGODB_URI).then(seed).then(ensureContentDefaults).then(migrateProducts).then(() => app.listen(PORT, () => console.log(`Raja Electricals running at http://localhost:${PORT}`))).catch(error => { console.error('MongoDB connection failed:', error.message); process.exit(1); });
+mongoose.connect(MONGODB_URI).then(seed).then(ensureContentDefaults).then(migrateProducts).then(() => app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Raja Electricals API running on port ${PORT}`);
+})).catch(error => { console.error('MongoDB connection failed:', error.message); process.exit(1); });
