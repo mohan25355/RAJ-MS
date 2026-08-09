@@ -116,3 +116,25 @@
 @keyframes preloader-progress{from{transform:scaleX(0)}to{transform:scaleX(1)}}
 @keyframes preloader-logo-in{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 @media (max-width:390px){.preloader-logo{gap:6px}.preloader-logo b{font-size:52px}.preloader-logo span{font-size:8px}}
+
+/* Navigation, catalogue and project interaction refinements. */
+nav{gap:5px}
+nav a{font-size:13px!important;padding:13px 10px!important}
+nav .quote{font-size:13px!important;padding:14px 22px!important}
+.product-card,.project-grid article{overflow:hidden}
+.product-card img,.project-grid article img{transition:transform .3s ease,filter .3s ease}
+.product-card:hover img,.product-card:focus-within img,.project-grid article:hover img{transform:scale(1.06);filter:brightness(.9)}
+.product-card:active img,.project-grid article:active img{transform:scale(1.035);filter:brightness(.92)}
+.product-card:focus-within,.project-grid article:focus-within{outline:3px solid #e31b1640;outline-offset:2px}
+.catalog .product-card h3{font-size:21px!important;line-height:1.13!important}
+.catalog .product-card p{font-size:14px!important;line-height:1.4!important}
+.catalog .order-product{font-size:13px!important;padding:11px!important}
+.detail-copy p,.detail-copy li{font-size:16px!important;line-height:1.7!important}
+.details-box p,.details-box b,.details-box span{font-size:14px!important;line-height:1.45!important}
+.details-box h3{font-size:24px!important}
+@media(max-width:700px){
+  nav a{font-size:12px!important}
+  .catalog .product-card h3{font-size:18px!important}
+  .catalog .product-card p{font-size:13px!important}
+  .detail-copy p,.detail-copy li{font-size:15px!important}
+}

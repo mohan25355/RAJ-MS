@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Btn, PageHead } from '../components/ui';
 
-const selectProduct = (item, page, go) => { localStorage.setItem('raja_selected_product', JSON.stringify(item)); go(page); };
+const selectProduct = (item, page, go) => { localStorage.setItem('raja_selected_product', JSON.stringify(item)); go(page, { keepOrder: page === 'contact' }); };
 export function ProductsPage({ go, content }) {
   const [term, setTerm] = useState(''); const [category, setCategory] = useState(''); const items = content?.products || [];
   const filtered = items.filter(item => `${item.name} ${item.category}`.toLowerCase().includes(term.toLowerCase()) && (!category || item.category === category));

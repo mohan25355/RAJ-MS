@@ -51,7 +51,12 @@ function App() {
     return () => window.removeEventListener('hashchange', syncPage);
   }, []);
 
-  const go = target => { setPage(target); window.location.hash = target; window.scrollTo(0, 0); };
+  const go = (target, options = {}) => {
+    if ((target === 'contact' || target === 'contactus') && !options.keepOrder) localStorage.removeItem('raja_selected_product');
+    setPage(target);
+    window.location.hash = target;
+    window.scrollTo(0, 0);
+  };
   const Page = pages[page] || HomePage;
   if (page === 'dashboard') return <Page />;
   return <>{loading && <Preloader />}<Header go={go} site={content?.site} /><Page go={go} content={content} /><Footer go={go} site={content?.site} /></>;
