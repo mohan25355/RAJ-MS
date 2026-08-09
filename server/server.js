@@ -58,8 +58,13 @@ app.get('/api/admin/enquiries', auth, async (_req, res, next) => { try { res.jso
 app.get('/api/admin/orders', auth, async (_req, res, next) => { try { res.json((await Order.find().sort({ createdAt: -1 })).map(publicItem)); } catch (e) { next(e); } });
 app.patch('/api/admin/:type/:id', auth, async (req, res, next) => { try { const Model = req.params.type === 'orders' ? Order : req.params.type === 'enquiries' ? Enquiry : null; if (!Model) return res.status(404).json({ error: 'Unknown item type.' }); const item = await Model.findByIdAndUpdate(req.params.id, { status: req.body.status }, { new: true, runValidators: true }); if (!item) return res.status(404).json({ error: 'Item not found.' }); res.json(publicItem(item)); } catch (e) { next(e); } });
 const clientDist = path.join(__dirname, '..', 'client', 'dist');
-app.use(express.static(clientDist));
-app.get('/{*splat}', (_req, res) => res.sendFile(path.join(clientDist, 'index.html')));
+const clientIndex = path.join(clientDist, 'index.html');
+if (require('fs').existsSync(clientIndex)) {
+  app.use(express.static(clientDist));
+  app.get('/{*splat}', (_req, res) => res.sendFile(clientIndex));
+} else {
+  app.get('/{*splat}', (_req, res) => res.status(503).json({ error: 'Frontend build is missing. Run the client build before starting the server.' }));
+}
 app.use((err, _req, res, _next) => { console.error(err); if (err?.name === 'ValidationError') return res.status(400).json({ error: Object.values(err.errors).map(item => item.message).join(' ') }); if (err?.code === 11000) return res.status(409).json({ error: 'A record with the same unique value already exists.' }); if (err?.type === 'entity.too.large') return res.status(413).json({ error: 'The uploaded image or catalogue is too large.' }); res.status(err.status || 500).json({ error: 'Something went wrong. Please try again.' }); });
 
 if (!MONGODB_URI) { console.error('MONGODB_URI is missing. Add it to your .env file.'); process.exit(1); }
