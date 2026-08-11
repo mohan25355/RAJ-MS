@@ -10,11 +10,13 @@ import BrandsPage from './pages/BrandsPage';
 import ContactPage from './pages/ContactPage';
 import DashboardPage from './pages/DashboardPage';
 import { getContent } from './lib/api';
+import rajaLogo from './assets/raja-logo.svg';
 import './styles.css';
 import './overrides.css';
 import './mobile.css';
 import './cms.css';
 import './fixes.css';
+import './footer-fix.css';
 import './about.css';
 import './home.css';
 
@@ -23,7 +25,7 @@ const getPage = () => window.location.hash.slice(1).toLowerCase().replaceAll('-'
 
 function Preloader() {
   return <div className="site-preloader" role="status" aria-label="Loading Raja Electricals">
-    <div className="preloader-logo"><b>RAJA</b><span>ELECTRICALS 'N' HARDWARE<br />RK INNOVATIONS</span></div>
+    <img className="preloader-logo" src={rajaLogo} alt="Raja Electricals and Hardwares" />
     <div className="preloader-track"><i /></div>
     <small>Loading your electrical solutions</small>
   </div>;

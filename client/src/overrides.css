@@ -8,3 +8,14 @@ body{background:#fff}header{position:sticky;top:0;height:92px;border:0;border-bo
 
 /* Accessible reading scale */
 body{font-size:16px}.logo span{font-size:9px}.logo b{font-size:39px}nav a{font-size:11px}.quote,.btn{font-size:12px}.page-head small,.crumb,.section-kicker{font-size:12px}.page-head p,.center p{font-size:15px;line-height:1.6}.category small,.product-card p,.project-grid p,.project-grid small,.brand-grid small{font-size:12px}.catalog aside button{font-size:12px}.detail-copy p,.detail-copy li,.contact-info p{font-size:14px}.time p,.features p{font-size:12px;line-height:1.6}.stats small{font-size:10px}.check-list li,.service-grid p{font-size:14px}.contact input,.contact select,.contact textarea{font-size:13px}.contact label{font-size:12px}footer a,footer span,footer button{font-size:12px}@media(max-width:700px){.logo b{font-size:29px}.logo span{font-size:7px}nav a{font-size:12px}.page-head p,.center p{font-size:14px}.category small,.product-card p{font-size:11px}}
+
+/* Official RAJA lock-up used consistently in the header, mobile menu and footer. */
+.logo{display:inline-flex;flex:none;line-height:0}
+.logo img{display:block;width:245px;height:auto;max-height:62px;object-fit:contain}
+.drawer .logo img{width:250px;max-height:66px}
+.cta-kicker-row{display:flex;align-items:center;gap:10px;margin-bottom:9px}
+.cta-kicker-row img{display:block;width:42px;height:35px;object-fit:contain}
+.cta-kicker-row .section-kicker{margin:0}
+footer{grid-template-columns:1fr 1fr;justify-items:start}
+@media(max-width:900px){.logo img{width:205px;max-height:54px}header{padding-left:24px;padding-right:24px}nav{gap:2px}nav a{padding-left:7px;padding-right:7px}}
+@media(max-width:700px){.logo img{width:175px;max-height:47px}.drawer .logo img{width:230px;max-height:61px}.cta-kicker-row img{width:38px;height:32px}}
