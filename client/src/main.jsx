@@ -10,6 +10,7 @@ import BrandsPage from './pages/BrandsPage';
 import ContactPage from './pages/ContactPage';
 import DashboardPage from './pages/DashboardPage';
 import { getContent } from './lib/api';
+import preloaderLogoSrc from './assets/raja-logo.svg';
 import './styles.css';
 import './overrides.css';
 import './mobile.css';
@@ -21,8 +22,6 @@ import './home.css';
 
 const pages = { home: HomePage, about: AboutPage, aboutus: AboutPage, products: ProductsPage, productdetail: ProductDetailPage, projects: ProjectsPage, gallery: GalleryPage, brands: BrandsPage, contact: ContactPage, contactus: ContactPage, dashboard: DashboardPage };
 const getPage = () => window.location.hash.slice(1).toLowerCase().replaceAll('-', '') || 'home';
-// Use the same logo path as Layout.jsx when you add your logo.
-const preloaderLogoSrc = '';
 
 function Preloader() {
   return <div className="site-preloader" role="status" aria-label="Loading Raja Electricals">
