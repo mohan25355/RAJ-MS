@@ -103,7 +103,7 @@ export default function ContactPage({ content }) {
 
           <img src={images.site} alt="Raja Electricals" />
 
-          {/* Google Maps - Raja Electricals Location */}
+          {/* Exact Google Maps Location */}
           <div
             className="contact-map"
             style={{
@@ -114,7 +114,7 @@ export default function ContactPage({ content }) {
             }}
           >
             <iframe
-              src="https://www.google.com/maps?q=https://maps.app.goo.gl/E6NKJSVuto9cKdYx7&output=embed"
+              src="https://www.google.com/maps?q=13.0584917,80.2146022&z=17&output=embed"
               width="100%"
               height="350"
               style={{
