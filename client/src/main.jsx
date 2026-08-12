@@ -10,7 +10,6 @@ import BrandsPage from './pages/BrandsPage';
 import ContactPage from './pages/ContactPage';
 import DashboardPage from './pages/DashboardPage';
 import { getContent } from './lib/api';
-import rajaLogo from './assets/raja-logo.svg';
 import './styles.css';
 import './overrides.css';
 import './mobile.css';
@@ -22,10 +21,12 @@ import './home.css';
 
 const pages = { home: HomePage, about: AboutPage, aboutus: AboutPage, products: ProductsPage, productdetail: ProductDetailPage, projects: ProjectsPage, gallery: GalleryPage, brands: BrandsPage, contact: ContactPage, contactus: ContactPage, dashboard: DashboardPage };
 const getPage = () => window.location.hash.slice(1).toLowerCase().replaceAll('-', '') || 'home';
+// Use the same logo path as Layout.jsx when you add your logo.
+const preloaderLogoSrc = '';
 
 function Preloader() {
   return <div className="site-preloader" role="status" aria-label="Loading Raja Electricals">
-    <img className="preloader-logo" src={rajaLogo} alt="Raja Electricals and Hardwares" />
+    <img className="preloader-logo" src={preloaderLogoSrc || undefined} alt="" />
     <div className="preloader-track"><i /></div>
     <small>Loading your electrical solutions</small>
   </div>;
@@ -64,3 +65,4 @@ function App() {
   return <>{loading && <Preloader />}<Header go={go} site={content?.site} /><Page go={go} content={content} /><Footer go={go} site={content?.site} /></>;
 }
 createRoot(document.getElementById('root')).render(<App />);
+
