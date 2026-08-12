@@ -1,13 +1,20 @@
 import { useEffect, useState } from 'react';
 import { Award, Boxes, CheckCircle2, Clock, HardHat, Headphones, Package, Shield, Star, Truck, Users, Wrench, Zap } from 'lucide-react';
-import { images } from '../data/catalog';
+import { categories as staticCategories, images } from '../data/catalog';
 import { Btn, CtaBand } from '../components/ui';
 
 const fallbackImage = item => item?.image || item?.logo || images.worker;
+const homeContent = {
+  site: { welcome: 'Welcome to Raja Electricals', heroTitle: 'Powering Every Project.', heroText: 'Electrical · Hardware · Safety · Industrial Solutions', trustYears: '25+', productCount: '5,000+', happyClients: '2,000+', deliveryText: 'Same Day Delivery Available', supplyText: 'For over two decades, Raja Electricals has helped contractors, facilities and industrial teams source dependable products without unnecessary delays.' },
+  categories: staticCategories.map(([name, image, count], id) => ({ id, name, image: image || images.worker, count })),
+  products: [{ id: 1, name: 'Industrial Safety Helmet', image: images.helmet, price: 'Contact for price', badge: 'Popular' }, { id: 2, name: 'Power Tools', image: images.tools, price: 'Contact for price', badge: 'Featured' }, { id: 3, name: 'Water Pump', image: images.pump, price: 'Contact for price', badge: 'Reliable' }, { id: 4, name: 'Electrical Supplies', image: images.worker, price: 'Contact for price', badge: 'Top rated' }],
+  brands: [{ id: 1, name: 'Electrical Brands', logo: images.worker, products: 'Electrical supplies' }, { id: 2, name: 'Safety Brands', logo: images.safety, products: 'Safety products' }, { id: 3, name: 'Tool Brands', logo: images.tools, products: 'Tools and hardware' }, { id: 4, name: 'Pump Brands', logo: images.pump, products: 'Pumps and plumbing' }],
+  industries: [{ id: 1, name: 'Construction', image: images.site, description: 'Reliable supplies for active worksites.' }, { id: 2, name: 'Manufacturing', image: images.plant, description: 'Industrial products for daily operations.' }, { id: 3, name: 'Facilities', image: images.worker, description: 'Maintenance and repair essentials.' }, { id: 4, name: 'Infrastructure', image: images.safety, description: 'Safety and site-ready solutions.' }],
+};
 
-export default function HomePage({ go, content }) {
+export default function HomePage({ go }) {
   const [slide, setSlide] = useState(0);
-  const { site = {}, categories = [], products = [], brands = [], industries = [] } = content || {};
+  const { site, categories, products, brands, industries } = homeContent;
 
   const slides = [site.heroImage, site.heroImage2, site.heroImage3].filter(Boolean);
   useEffect(() => {
@@ -16,7 +23,6 @@ export default function HomePage({ go, content }) {
     return () => clearInterval(timer);
   }, [slides.length]);
 
-  if (!content) return <div className="page-loading">Loading Raja Electricals…</div>;
 
   const services = [
     { icon: Truck, title: 'Fast Supply', desc: 'Responsive fulfilment for urgent site and maintenance needs.', color: '#e31b16' },
@@ -187,3 +193,4 @@ function Section({ pill, tone = 'red', title, text, eyebrow, featured = false, s
     </section>
   );
 }
+

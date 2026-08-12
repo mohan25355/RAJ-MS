@@ -4,7 +4,6 @@ import { Footer, Header } from './components/Layout';
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 import { ProductDetailPage, ProductsPage } from './pages/ProductsPage';
-import ProjectsPage from './pages/ProjectsPage';
 import GalleryPage from './pages/GalleryPage';
 import BrandsPage from './pages/BrandsPage';
 import ContactPage from './pages/ContactPage';
@@ -20,7 +19,7 @@ import './footer-fix.css';
 import './about.css';
 import './home.css';
 
-const pages = { home: HomePage, about: AboutPage, aboutus: AboutPage, products: ProductsPage, productdetail: ProductDetailPage, projects: ProjectsPage, gallery: GalleryPage, brands: BrandsPage, contact: ContactPage, contactus: ContactPage, dashboard: DashboardPage };
+const pages = { home: HomePage, about: AboutPage, aboutus: AboutPage, products: ProductsPage, productdetail: ProductDetailPage, gallery: GalleryPage, brands: BrandsPage, contact: ContactPage, contactus: ContactPage, dashboard: DashboardPage };
 const getPage = () => window.location.hash.slice(1).toLowerCase().replaceAll('-', '') || 'home';
 
 function Preloader() {
