@@ -44,7 +44,7 @@ export default function HomePage({ go }) {
     <>
       <section className="cms-hero">
         <div>
-          <span className="hero-badge"><Award size={16} /> Trusted since 1998</span>
+          {/* <span className="hero-badge"><Award size={16} /> Trusted since 1998</span> */}
           <small>{site.welcome || 'Welcome to Raja Electricals'}</small>
           <HeroTitle title={site.heroTitle || 'Powering Every Project.'} />
           <p>{site.heroText || 'Electrical · Hardware · Safety · Industrial Solutions'}</p>

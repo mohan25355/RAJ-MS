@@ -118,7 +118,8 @@
 nav{gap:5px}
 nav a{font-size:13px!important;padding:13px 10px!important}
 nav .quote{font-size:13px!important;padding:14px 22px!important}
-.product-card,.project-grid article{overflow:hidden}
+.product-card,.project-grid article{overflow:hidden;position:relative}
+.product-badge{position:absolute;top:10px;right:10px;background:var(--red);color:#fff;padding:4px 10px;font-size:10px;font-weight:700;text-transform:uppercase;border-radius:3px;z-index:2}
 .product-card img,.project-grid article img{transition:transform .3s ease,filter .3s ease}
 .product-card:hover img,.product-card:focus-within img,.project-grid article:hover img{transform:scale(1.06);filter:brightness(.9)}
 .product-card:active img,.project-grid article:active img{transform:scale(1.035);filter:brightness(.92)}
@@ -131,12 +132,16 @@ nav .quote{font-size:13px!important;padding:14px 22px!important}
 .gallery img:focus-visible,.brand-grid article:focus-within,.brand-cms-card:focus-within{outline:3px solid #e31b1640;outline-offset:2px}
 .catalog .product-card h3{font-size:21px!important;line-height:1.13!important}
 .catalog .product-card p{font-size:14px!important;line-height:1.4!important}
+.product-price{font-weight:700!important;color:var(--red)!important;margin-bottom:4px!important}
+.product-category{font-size:11px!important;text-transform:uppercase;color:var(--muted)!important;font-weight:600!important}
 .catalog .order-product{font-size:13px!important;padding:11px!important}
 .detail-copy p,.detail-copy li{font-size:16px!important;line-height:1.7!important}
 .details-box p,.details-box b,.details-box span{font-size:14px!important;line-height:1.45!important}
 .details-box h3{font-size:24px!important}
+.no-products{text-align:center;padding:40px 20px;color:var(--muted);font-size:16px}
 @media(max-width:700px){
   nav a{font-size:12px!important}
+  .product-badge{padding:3px 8px;font-size:9px}
   .catalog .product-card h3{font-size:18px!important}
   .catalog .product-card p{font-size:13px!important}
   .detail-copy p,.detail-copy li{font-size:15px!important}
