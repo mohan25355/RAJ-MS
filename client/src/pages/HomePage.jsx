@@ -18,6 +18,12 @@ const partnerLogoModules = import.meta.glob('../assets/PARTNERS/PARTNERS/*', {
   query: '?url',
 });
 const partnerLogo = file => partnerLogoModules[`../assets/PARTNERS/PARTNERS/${file}`];
+const galleryImageModules = import.meta.glob('../assets/gallary/*.webp', {
+  eager: true,
+  import: 'default',
+  query: '?url',
+});
+const galleryImage = file => galleryImageModules[`../assets/gallary/${file}`];
 
 const brandsData = [
   ['1.png'], ['2.jpg'], ['3.jpg'], ['4.jpg'], ['5.png'], ['6.jpg'], ['7.png'], ['8.jpg'], ['9.png'], ['10.jpg'], ['11.png'], ['12.jpg'], ['13.png'],
@@ -325,7 +331,7 @@ export default function HomePage({ go }) {
       <section className="intro-section">
         <div className="intro-shop-image">
           <img
-            src="src/assets/gallary/1.webp"
+            src={galleryImage('1.webp')}
             alt="Raja Electricals 'N' Hardwares Shop"
           />
           <div className="shop-image-overlay">
