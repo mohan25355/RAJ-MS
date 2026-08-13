@@ -145,7 +145,7 @@ export default function BrandsPage({ content }) {
             PARTNERS MARQUEE
         ============================================ */}
         <div className="marquee-container">
-          <h2 className="marquee-title" style={{ color: '#e31b16' }}>Our Brands</h2>
+          <h2 className="marquee-title" style={{ color: '#e31b16' }}>OUR PARTNERS</h2>
           <div className="brand-marquee">
             <div className="brand-marquee-track">
               {[...filteredBrands, ...filteredBrands].map(
@@ -174,7 +174,7 @@ export default function BrandsPage({ content }) {
             DEALERS MARQUEE
         ============================================ */}
         <div className="marquee-container">
-          <h2 className="marquee-title" style={{ color: '#e31b16' }}> style Our Partners</h2>
+          <h2 className="marquee-title" style={{ color: '#e31b16' }}>  OUR BRAND</h2>
           <div className="brand-marquee dealer-marquee">
             <div className="brand-marquee-track dealer-track">
               {[...dealersData, ...dealersData].map(

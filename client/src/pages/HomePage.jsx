@@ -325,7 +325,7 @@ export default function HomePage({ go }) {
       <section className="intro-section">
         <div className="intro-shop-image">
           <img
-            src="/images/raja-shop.jpg"
+            src="src/assets/gallary/1.webp"
             alt="Raja Electricals 'N' Hardwares Shop"
           />
           <div className="shop-image-overlay">
