@@ -118,31 +118,49 @@
 nav{gap:5px}
 nav a{font-size:13px!important;padding:13px 10px!important}
 nav .quote{font-size:13px!important;padding:14px 22px!important}
-.product-card,.project-grid article{overflow:hidden;position:relative}
-.product-badge{position:absolute;top:10px;right:10px;background:var(--red);color:#fff;padding:4px 10px;font-size:10px;font-weight:700;text-transform:uppercase;border-radius:3px;z-index:2}
-.product-card img,.project-grid article img{transition:transform .3s ease,filter .3s ease}
-.product-card:hover img,.product-card:focus-within img,.project-grid article:hover img{transform:scale(1.06);filter:brightness(.9)}
-.product-card:active img,.project-grid article:active img{transform:scale(1.035);filter:brightness(.92)}
+
+/* Enhanced Product Card Hover Effects */
+.product-card,.project-grid article{overflow:hidden;position:relative;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.08);transition:all .3s cubic-bezier(.4,0,.2,1)}
+.product-card:hover,.product-card:focus-within,.project-grid article:hover,.project-grid article:focus-within{transform:translateY(-8px);box-shadow:0 12px 24px rgba(17,24,29,.15);border-radius:8px}
+.product-badge{position:absolute;top:10px;right:10px;background:var(--red);color:#fff;padding:4px 10px;font-size:10px;font-weight:700;text-transform:uppercase;border-radius:3px;z-index:2;transition:transform .3s ease}
+.product-card:hover .product-badge{transform:scale(1.1)}
+.product-card img,.project-grid article img{transition:transform .4s cubic-bezier(.4,0,.2,1),filter .3s ease;will-change:transform}
+.product-card:hover img,.product-card:focus-within img,.project-grid article:hover img{transform:scale(1.08);filter:brightness(.92)}
+.product-card:active img,.project-grid article:active img{transform:scale(1.05);filter:brightness(.94)}
 .product-card:focus-within,.project-grid article:focus-within{outline:3px solid #e31b1640;outline-offset:2px}
+
 .gallery img,.brand-grid article img,.brand-cms-card img{transition:transform .3s ease,filter .3s ease}
 .gallery img:hover,.gallery img:active{transform:scale(1.05);filter:brightness(.9)}
 .brand-grid article:hover img,.brand-grid article:active img,.brand-cms-card:hover img,.brand-cms-card:active img{transform:scale(1.06);filter:brightness(.94)}
 .brand-grid article,.brand-cms-card{transition:transform .25s ease,box-shadow .25s ease}
 .brand-grid article:hover,.brand-grid article:active,.brand-cms-card:hover,.brand-cms-card:active{transform:translateY(-4px);box-shadow:0 14px 28px rgba(17,24,29,.12)}
 .gallery img:focus-visible,.brand-grid article:focus-within,.brand-cms-card:focus-within{outline:3px solid #e31b1640;outline-offset:2px}
+
 .catalog .product-card h3{font-size:21px!important;line-height:1.13!important}
 .catalog .product-card p{font-size:14px!important;line-height:1.4!important}
-.product-price{font-weight:700!important;color:var(--red)!important;margin-bottom:4px!important}
+.product-price{font-weight:700!important;color:var(--red)!important;margin-bottom:4px!important;font-size:16px!important}
 .product-category{font-size:11px!important;text-transform:uppercase;color:var(--muted)!important;font-weight:600!important}
-.catalog .order-product{font-size:13px!important;padding:11px!important}
+.catalog .order-product{font-size:13px!important;padding:11px!important;border-radius:4px;transition:all .2s ease}
+.catalog .order-product:hover{background:var(--red);color:#fff;transform:translateY(-2px)}
 .detail-copy p,.detail-copy li{font-size:16px!important;line-height:1.7!important}
 .details-box p,.details-box b,.details-box span{font-size:14px!important;line-height:1.45!important}
 .details-box h3{font-size:24px!important}
 .no-products{text-align:center;padding:40px 20px;color:var(--muted);font-size:16px}
+
+/* Map section styling */
+.map-section{padding:40px 20px;background:#f9f9f9;text-align:center}
+.contact-map{width:100%;max-width:1200px;margin:0 auto;border-radius:12px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,.1)}
+
 @media(max-width:700px){
   nav a{font-size:12px!important}
   .product-badge{padding:3px 8px;font-size:9px}
+  .product-card{box-shadow:0 1px 4px rgba(0,0,0,.06)}
+  .product-card:hover{transform:translateY(-4px);box-shadow:0 8px 16px rgba(17,24,29,.12)}
+  .product-card img{border-radius:6px}
+  .product-price{font-size:14px!important}
   .catalog .product-card h3{font-size:18px!important}
   .catalog .product-card p{font-size:13px!important}
   .detail-copy p,.detail-copy li{font-size:15px!important}
+  .map-section{padding:30px 16px}
+  .contact-map iframe{height:280px!important}
 }

@@ -102,32 +102,6 @@ export default function ContactPage({ content }) {
           </p>
 
           <img src={images.site} alt="Raja Electricals" />
-
-          {/* Exact Google Maps Location */}
-          <div
-            className="contact-map"
-            style={{
-              width: '100%',
-              marginTop: '24px',
-              overflow: 'hidden',
-              borderRadius: '20px'
-            }}
-          >
-            <iframe
-              src="https://www.google.com/maps?q=13.0584917,80.2146022&z=17&output=embed"
-              width="100%"
-              height="350"
-              style={{
-                border: 0,
-                borderRadius: '20px',
-                display: 'block'
-              }}
-              loading="lazy"
-              allowFullScreen
-              referrerPolicy="no-referrer-when-downgrade"
-              title="Raja Electricals Location"
-            />
-          </div>
         </div>
 
         <form onSubmit={submit}>
@@ -222,6 +196,26 @@ export default function ContactPage({ content }) {
                 : 'Send enquiry'}
           </Btn>
         </form>
+      </section>
+
+      {/* Google Maps Below Contact Form */}
+      <section className="map-section">
+        <div className="contact-map">
+          <iframe
+            src="https://www.google.com/maps?q=13.0584917,80.2146022&z=17&output=embed"
+            width="100%"
+            height="400"
+            style={{
+              border: 0,
+              borderRadius: '12px',
+              display: 'block'
+            }}
+            loading="lazy"
+            allowFullScreen
+            referrerPolicy="no-referrer-when-downgrade"
+            title="Raja Electricals Location"
+          />
+        </div>
       </section>
     </>
   );
