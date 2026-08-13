@@ -24,9 +24,12 @@ const initialContent = { site: { businessName: "Raja Electricals 'N' Hardware", 
 const contentSchema = new mongoose.Schema({ key: { type: String, unique: true }, data: mongoose.Schema.Types.Mixed }, { timestamps: true });
 const adminSchema = new mongoose.Schema({ email: { type: String, unique: true, lowercase: true, trim: true }, passwordHash: String }, { timestamps: true });
 const enquirySchema = new mongoose.Schema({ name: { type: String, required: true, trim: true }, company: String, phone: { type: String, required: true }, email: String, product: String, quantity: String, message: String, status: { type: String, default: 'New', enum: ['New', 'Contacted', 'Closed'] } }, { timestamps: true });
+enquirySchema.index({ createdAt: -1 });
 const orderSchema = new mongoose.Schema({ customerName: { type: String, required: true, trim: true }, phone: { type: String, required: true }, email: String, company: String, productId: String, productName: { type: String, required: true }, quantity: { type: Number, min: 1, required: true }, notes: String, status: { type: String, default: 'New', enum: ['New', 'Confirmed', 'Processing', 'Completed', 'Cancelled'] } }, { timestamps: true });
+orderSchema.index({ createdAt: -1 });
 const catalogueSchema = new mongoose.Schema({ productId: { type: String, required: true, unique: true }, fileName: { type: String, required: true }, data: { type: Buffer, required: true }, contentType: { type: String, default: 'application/pdf' }, size: Number }, { timestamps: true });
-const productSchema = new mongoose.Schema({ id: { type: String, required: true, unique: true, index: true }, name: { type: String, required: true, trim: true }, category: { type: String, required: true, trim: true }, price: String, badge: String, description: String, image: String, features: String, specifications: String, colors: String, catalogName: String }, { timestamps: true, strict: true });
+const productSchema = new mongoose.Schema({ id: { type: String, required: true, unique: true, index: true }, name: { type: String, required: true, trim: true }, category: { type: String, required: true, trim: true, index: true }, price: String, badge: String, description: String, image: String, features: String, specifications: String, colors: String, catalogName: String }, { timestamps: true, strict: true });
+productSchema.index({ createdAt: -1 });
 const Content = mongoose.model('Content', contentSchema);
 const Admin = mongoose.model('Admin', adminSchema);
 const Enquiry = mongoose.model('Enquiry', enquirySchema);
@@ -47,7 +50,7 @@ function publicItem(doc) { return { ...doc.toObject(), id: doc._id.toString(), _
 
 app.get('/api/health', (_req, res) => {
   const connected = mongoose.connection.readyState === 1;
-  res.json({ ok: connected, mongodb: connected ? 'connected' : 'disconnected' });
+  res.json({ ok: connected, mongodb: connected ? 'connected' : 'disconnected', initialized: isInitialized });
 });
 app.get('/api/content', async (_req, res, next) => { try { res.json(await content()); } catch (e) { next(e); } });
 app.post('/api/auth/login', async (req, res, next) => { try { const admin = await Admin.findOne({ email: String(req.body.email || '').toLowerCase() }); if (!admin || !await bcrypt.compare(req.body.password || '', admin.passwordHash)) return res.status(401).json({ error: 'Invalid email or password.' }); const token = jwt.sign({ id: admin.id, email: admin.email, role: 'admin' }, JWT_SECRET, { expiresIn: '8h' }); res.json({ token, admin: { email: admin.email } }); } catch (e) { next(e); } });
@@ -84,6 +87,26 @@ app.use((req, res) => {
 app.use((err, _req, res, _next) => { console.error(err); if (err?.name === 'ValidationError') return res.status(400).json({ error: Object.values(err.errors).map(item => item.message).join(' ') }); if (err?.code === 11000) return res.status(409).json({ error: 'A record with the same unique value already exists.' }); if (err?.type === 'entity.too.large') return res.status(413).json({ error: 'The uploaded image or catalogue is too large.' }); res.status(err.status || 500).json({ error: 'Something went wrong. Please try again.' }); });
 
 if (!MONGODB_URI) { console.error('MONGODB_URI is missing. Add it to your .env file.'); process.exit(1); }
-mongoose.connect(MONGODB_URI).then(seed).then(ensureContentDefaults).then(migrateProducts).then(() => app.listen(PORT, '0.0.0.0', () => {
+
+let isInitialized = false;
+const server = app.listen(PORT, '0.0.0.0', () => {
   console.log(`Raja Electricals API running on port ${PORT}`);
-})).catch(error => { console.error('MongoDB connection failed:', error.message); process.exit(1); });
+});
+
+// Run initialization in background to not block startup
+mongoose.connect(MONGODB_URI, { serverSelectionTimeoutMS: 10000 })
+  .then(() => Promise.all([seed(), ensureContentDefaults(), migrateProducts()]))
+  .then(() => { isInitialized = true; console.log('Initialization complete'); })
+  .catch(error => {
+    console.error('Initialization error:', error.message);
+    // Continue running even if init fails - API can still respond to requests
+  });
+
+// Graceful shutdown
+process.on('SIGTERM', () => {
+  console.log('SIGTERM received, shutting down gracefully...');
+  server.close(() => {
+    mongoose.connection.close();
+    process.exit(0);
+  });
+});
