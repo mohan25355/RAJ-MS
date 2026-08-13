@@ -12,35 +12,21 @@ const homeContent = {
   industries: [{ id: 1, name: 'Construction', image: images.site, description: 'Reliable supplies for active worksites.' }, { id: 2, name: 'Manufacturing', image: images.plant, description: 'Industrial products for daily operations.' }, { id: 3, name: 'Facilities', image: images.worker, description: 'Maintenance and repair essentials.' }, { id: 4, name: 'Infrastructure', image: images.safety, description: 'Safety and site-ready solutions.' }],
 };
 
+const partnerLogoModules = import.meta.glob('../assets/PARTNERS/PARTNERS/*', {
+  eager: true,
+  import: 'default',
+  query: '?url',
+});
+const partnerLogo = file => partnerLogoModules[`../assets/PARTNERS/PARTNERS/${file}`];
+
 const brandsData = [
-  { id: 'brand-1', name: 'Brand 1', logo: 'src/assets/PARTNERS/PARTNERS/1.png' },
-  { id: 'brand-2', name: 'Brand 2', logo: 'src/assets/PARTNERS/PARTNERS/2.jpg' },
-  { id: 'brand-3', name: 'Brand 3', logo: 'src/assets/PARTNERS/PARTNERS/3.jpg' },
-  { id: 'brand-4', name: 'Brand 4', logo: 'src/assets/PARTNERS/PARTNERS/4.jpg' },
-  { id: 'brand-5', name: 'Brand 5', logo: 'src/assets/PARTNERS/PARTNERS/5.png' },
-  { id: 'brand-6', name: 'Brand 6', logo: 'src/assets/PARTNERS/PARTNERS/6.jpg' },
-  { id: 'brand-7', name: 'Brand 7', logo: 'src/assets/PARTNERS/PARTNERS/7.png' },
-  { id: 'brand-8', name: 'Brand 8', logo: 'src/assets/PARTNERS/PARTNERS/8.jpg' },
-  { id: 'brand-9', name: 'Brand 9', logo: 'src/assets/PARTNERS/PARTNERS/9.png' },
-  { id: 'brand-10', name: 'Brand 10', logo: 'src/assets/PARTNERS/PARTNERS/10.jpg' },
-    { id: 'brand-11', name: 'Brand 11', logo: 'src/assets/PARTNERS/PARTNERS/11.png' },
-  { id: 'brand-12', name: 'Brand 12', logo: 'src/assets/PARTNERS/PARTNERS/12.jpg' },
-  { id: 'brand-13', name: 'Brand 13', logo: 'src/assets/PARTNERS/PARTNERS/13.png' },
-  { id: 'brand-14', name: 'Brand 14', logo: 'src/assets/PARTNERS/PARTNERS/14.jpg' },
-  { id: 'brand-15', name: 'Brand 15', logo: 'src/assets/PARTNERS/PARTNERS/15.png' },
-  { id: 'brand-16', name: 'Brand 16', logo: 'src/assets/PARTNERS/PARTNERS/16.jpg' },
-  { id: 'brand-17', name: 'Brand 17', logo: 'src/assets/PARTNERS/PARTNERS/17.png' },
-  { id: 'brand-18', name: 'Brand 18', logo: 'src/assets/PARTNERS/PARTNERS/18.png' },
-  { id: 'brand-19', name: 'Brand 19', logo: 'src/assets/PARTNERS/PARTNERS/19.png' },
-  { id: 'brand-20', name: 'Brand 20', logo: 'src/assets/PARTNERS/PARTNERS/20.png' },
-   { id: 'brand-21', name: 'Brand 21', logo: 'src/assets/PARTNERS/PARTNERS/21.png' },
-   { id: 'brand-22', name: 'Brand 22', logo: 'src/assets/PARTNERS/PARTNERS/22.png' },
-   { id: 'brand-23', name: 'Brand 23', logo: 'src/assets/PARTNERS/PARTNERS/23.png' },
-   { id: 'brand-24', name: 'Brand 24', logo: 'src/assets/PARTNERS/PARTNERS/24.jpg' },
-   { id: 'brand-25', name: 'Brand 25', logo: 'src/assets/PARTNERS/PARTNERS/25.png' },
-   { id: 'brand-26', name: 'Brand 26', logo: 'src/assets/PARTNERS/PARTNERS/26.png' }
-  
-];
+  ['1.png'], ['2.jpg'], ['3.jpg'], ['4.jpg'], ['5.png'], ['6.jpg'], ['7.png'], ['8.jpg'], ['9.png'], ['10.jpg'], ['11.png'], ['12.jpg'], ['13.png'],
+  ['14.jpg'], ['15.png'], ['16.jpg'], ['17.png'], ['18.png'], ['19.png'], ['20.png'], ['21.png'], ['22.png'], ['23.png'], ['24.jpg'], ['25.png'], ['26.png'],
+].map(([file], index) => ({
+  id: `brand-${index + 1}`,
+  name: `Brand ${index + 1}`,
+  logo: partnerLogo(file),
+}));
 
 // Custom hook for count-up animation
 function useCountUp(targetValue, duration = 2000) {
