@@ -9,7 +9,7 @@ import BrandsPage from './pages/BrandsPage';
 import ContactPage from './pages/ContactPage';
 import DashboardPage from './pages/DashboardPage';
 import { getContent } from './lib/api';
-import preloaderLogoSrc from './assets/raja-logo.svg';
+import preloaderLogoSrc from './assets/logo/logo.jpeg';
 import './styles.css';
 import './overrides.css';
 import './mobile.css';
@@ -24,7 +24,10 @@ const getPage = () => window.location.hash.slice(1).toLowerCase().replaceAll('-'
 
 function Preloader() {
   return <div className="site-preloader" role="status" aria-label="Loading Raja Electricals">
-    <img className="preloader-logo" src={preloaderLogoSrc || undefined} alt="" />
+    <div className="preloader-brand" aria-hidden="true">
+      <span className="preloader-mark-frame"><img src={preloaderLogoSrc} alt="" /></span>
+      <span className="preloader-copy"><strong>RAJA</strong><small style={{ color: '#ffffff' }}>Electrical 'N' Hardwares</small></span>
+    </div>
     <div className="preloader-track"><i /></div>
     <small>Loading your electrical solutions</small>
   </div>;

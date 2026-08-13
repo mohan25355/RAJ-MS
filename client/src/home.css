@@ -107,12 +107,14 @@
 }
 
 .site-preloader{position:fixed;z-index:1000;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;background:linear-gradient(135deg,#fff 0%,#f5f7f9 100%);color:var(--ink)}
+.preloader-brand{display:flex;align-items:center;gap:18px;animation:preloader-logo-in .55s ease-out both}.preloader-mark-frame{width:150px;height:120px;overflow:hidden}.preloader-mark-frame img{display:block;width:200px;height:auto;max-width:none;transform:translate(-24px,-9px)}.preloader-copy{display:flex;flex-direction:column;gap:10px}.preloader-copy strong{font:900 clamp(58px,8vw,92px)/.78 'Barlow Condensed',sans-serif;color:var(--ink);letter-spacing:.01em}.preloader-copy small{display:block;width:max-content;padding:10px 14px;background:var(--red);color:#fff;font:800 clamp(10px,1.2vw,15px)/1 'DM Sans',sans-serif;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
 .preloader-logo{display:block;width:min(460px,82vw);height:auto;max-width:100%;animation:preloader-logo-in .55s ease-out both}
 .preloader-track{width:min(260px,76vw);height:4px;margin:28px 0 14px;overflow:hidden;border-radius:99px;background:#dfe4e7}
 .preloader-track i{display:block;width:100%;height:100%;transform-origin:left;background:var(--red);animation:preloader-progress 4s linear forwards}
 .site-preloader small{color:var(--muted);font-size:12px;font-weight:700;letter-spacing:.08em;text-align:center;text-transform:uppercase}
 @keyframes preloader-progress{from{transform:scaleX(0)}to{transform:scaleX(1)}}
 @keyframes preloader-logo-in{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:700px){.preloader-brand{gap:10px}.preloader-mark-frame{width:94px;height:76px}.preloader-mark-frame img{width:126px;transform:translate(-15px,-6px)}.preloader-copy{gap:6px}.preloader-copy strong{font-size:50px}.preloader-copy small{padding:6px 8px;font-size:8px}.preloader-track{margin-top:22px}}
 
 /* Navigation, catalogue and project interaction refinements. */
 nav{gap:5px}

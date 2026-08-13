@@ -90,3 +90,83 @@ footer{grid-template-columns:1fr 1fr;justify-items:start}
     height: auto !important;
   }
 }
+
+/* Exact RAJA mark and compact text lock-up. Kept last to override older logo rules. */
+.logo {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 9px !important;
+  height: 68px !important;
+  overflow: visible !important;
+  line-height: 1 !important;
+  text-decoration: none;
+}
+
+.logo .brand-mark-frame {
+  display: block;
+  width: 80px;
+  height: 64px;
+  flex: 0 0 80px;
+  overflow: hidden;
+}
+
+.logo .brand-mark {
+  display: block !important;
+  width: 107px !important;
+  height: auto !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  max-width: none !important;
+  max-height: none !important;
+  transform: translate(-13px, -5px);
+}
+
+.logo .brand-copy {
+  display: flex !important;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+}
+
+.logo .brand-copy strong {
+  color: var(--ink) !important;
+  font: 900 38px/.78 'Barlow Condensed', sans-serif !important;
+  letter-spacing: .01em;
+}
+
+.logo .brand-copy small {
+  display: block !important;
+  width: max-content;
+  max-width: 100%;
+  padding: 5px 8px;
+  background: var(--red);
+  color: #fff !important;
+  font: 800 9px/1 'DM Sans', sans-serif !important;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.drawer .logo .brand-copy strong { color: #fff !important; }
+
+@media (max-width: 900px) {
+  .logo { height: 58px !important; gap: 7px !important; }
+  .logo .brand-mark-frame { width: 67px; height: 54px; flex-basis: 67px; }
+  .logo .brand-mark { width: 90px !important; transform: translate(-11px, -4px); }
+  .logo .brand-copy strong { font-size: 32px !important; }
+  .logo .brand-copy small { padding: 4px 7px; font-size: 7px !important; }
+}
+
+@media (max-width: 700px) {
+  .logo { height: 52px !important; gap: 6px !important; }
+  .logo .brand-mark-frame { width: 55px; height: 45px; flex-basis: 55px; }
+  .logo .brand-mark { width: 74px !important; transform: translate(-9px, -3px); }
+  .logo .brand-copy { gap: 3px; }
+  .logo .brand-copy strong { font-size: 27px !important; }
+  .logo .brand-copy small { padding: 4px 5px; font-size: 6px !important; }
+  .drawer .logo { height: 60px !important; }
+  .drawer .logo .brand-mark-frame { width: 70px; height: 56px; flex-basis: 70px; }
+  .drawer .logo .brand-mark { width: 94px !important; transform: translate(-11px, -4px); }
+  .drawer .logo .brand-copy strong { font-size: 34px !important; }
+  .drawer .logo .brand-copy small { font-size: 8px !important; }
+}
