@@ -1,49 +1,48 @@
 import { useState } from 'react';
 import { CtaBand, PageHead } from '../components/ui';
-
-const galleryImageModules = import.meta.glob('../assets/gallary/*.webp', {
-  eager: true,
-  import: 'default',
-  query: '?url',
-});
-const galleryImage = file => galleryImageModules[`../assets/gallary/${file}`];
+import gallery1 from '../assets/gallary/1.webp';
+import gallery2 from '../assets/gallary/2.webp';
+import gallery3 from '../assets/gallary/3.webp';
+import gallery4 from '../assets/gallary/4.webp';
+import gallery5 from '../assets/gallary/5.webp';
+import gallery6 from '../assets/gallary/6.webp';
 
 // STATIC GALLERY DATA — 6 IMAGES
 const GALLERY_DATA = [
   {
     id: 'g1',
     title: 'Raja Electricals Store',
-    image: galleryImage('1.webp'),
+    image: gallery1,
     type: 'Store'
   },
   {
     id: 'g2',
     title: 'Electrical Products',
-    image: galleryImage('2.webp'),
+    image: gallery2,
     type: 'Products'
   },
   {
     id: 'g3',
     title: 'Safety Equipment Range',
-    image: galleryImage('3.webp'),
+    image: gallery3,
     type: 'Products'
   },
   {
     id: 'g4',
     title: 'Professional Tools Collection',
-    image: galleryImage('4.webp'),
+    image: gallery4,
     type: 'Products'
   },
   {
     id: 'g5',
     title: 'Industrial Site Supply',
-    image: galleryImage('5.webp'),
+    image: gallery5,
     type: 'Projects'
   },
   {
     id: 'g6',
     title: 'Fast Delivery Service',
-    image: galleryImage('6.webp'),
+    image: gallery6,
     type: 'Store'
   }
 ];
