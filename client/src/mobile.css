@@ -4,7 +4,7 @@
   .logo b { font-size: 28px !important; }
   .logo span { font-size: 7px !important; }
   .menu { display: grid !important; place-items: center; width: 42px; height: 42px; color: var(--ink); }
-  .drawer { inset: 0 !important; z-index: 30 !important; padding: 20px 18px !important; overflow-y: auto; }
+  .drawer { position: fixed !important; inset: 0 !important; z-index: 30 !important; display: flex !important; flex-direction: column !important; padding: 20px 18px !important; background: var(--ink) !important; color: #fff !important; overflow-y: auto; box-shadow: -8px 0 30px #0006; }
   .drawer-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 22px; }
   .drawer .logo { margin: 0 !important; }
   .drawer-close { display: inline-flex; align-items: center; gap: 6px; border: 1px solid #465057; border-radius: 5px; color: #fff; background: transparent; padding: 9px 10px; font-size: 11px; font-weight: 700; }

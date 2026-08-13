@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Menu, ChevronRight, X, Home, Package, Image as ImageIcon, FileText, Boxes, Phone, Users, MessageCircle } from 'lucide-react';
+import { Menu, ChevronRight, X, Home, Package, Image as ImageIcon, FileText, Boxes, Phone, Users, MessageCircle, FolderKanban } from 'lucide-react';
 import logoSrc from '../assets/raja-logo.svg';
 export function Logo() { return <a className="logo" href="#home" aria-label="Raja Electricals home"><img src={logoSrc} alt="Raja Electricals 'N' Hardwares" className="brand-logo" /></a>; }
 const links = [['Home', 'home'], ['About Us', 'about'], ['Products', 'products'], ['Gallery', 'gallery'], ['Brands', 'brands'], ['Contact Us', 'contact']];
