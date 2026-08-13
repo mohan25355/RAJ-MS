@@ -88,7 +88,7 @@ export default function ContactPage({ content }) {
 
           <p>
             <Phone />
-            {site.phone || '+91 99413 36125'}
+            {site.phone || '+91 9003900533'}
           </p>
 
           <p>

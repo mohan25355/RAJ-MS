@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Award, Boxes, Building2, Clock, Heart, MapPin, MessageCircle, Quote, ShieldCheck, Star, Target, Truck, Users, Wrench } from 'lucide-react';
 import { images } from '../data/catalog';
-import { Btn, CtaBand, PageHead } from '../components/ui';
+import { Btn, CountUp, CtaBand, PageHead } from '../components/ui';
 
 const JOURNEY = [
   { year: '2000', title: 'The First Store', text: 'Raja Electricals opens as a modest electrical store in Chennai with a handful of products and a strong commitment to service.' },
@@ -25,9 +25,9 @@ export default function AboutPage({ go, content }) {
   const site = content?.site || {};
   const image = site.aboutImage || (images && images.worker) || site.heroImage;
   const stats = [
-    { icon: Clock, number: site.trustYears || '25+', label: 'Years of Trust' },
-    { icon: Heart, number: site.happyClients || '10K+', label: 'Happy Customers' },
-    { icon: Boxes, number: site.productCount || '5K+', label: 'Products' },
+    { icon: Clock, number: '25+', label: 'Years of Trust' },
+    { icon: Heart, number: '10K+', label: 'Happy Customers' },
+    { icon: Boxes, number: '5K+', label: 'Products' },
   ];
 
   return (
@@ -53,7 +53,7 @@ export default function AboutPage({ go, content }) {
                 return (
                   <div key={stat.label}>
                     <Icon size={20} />
-                    <b>{stat.number}</b>
+                    <b><CountUp value={stat.number} /></b>
                     <small>{stat.label}</small>
                   </div>
                 );

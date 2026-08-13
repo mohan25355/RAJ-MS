@@ -1,16 +1,127 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { Award, Boxes, CheckCircle2, Clock, HardHat, Headphones, Package, Shield, Star, Truck, Users, Wrench, Zap } from 'lucide-react';
 import { categories as staticCategories, images } from '../data/catalog';
 import { Btn, CtaBand } from '../components/ui';
 
 const fallbackImage = item => item?.image || item?.logo || images.worker;
 const homeContent = {
-  site: { welcome: 'Welcome to Raja Electricals', heroTitle: 'Powering Every Project.', heroText: 'Electrical · Hardware · Safety · Industrial Solutions', trustYears: '25+', productCount: '5,000+', happyClients: '2,000+', deliveryText: 'Same Day Delivery Available', supplyText: 'For over two decades, Raja Electricals has helped contractors, facilities and industrial teams source dependable products without unnecessary delays.' },
+  site: { welcome: 'Welcome to Raja Electricals', heroTitle: 'Powering Every Project.', heroText: 'Electrical · Hardware · Safety · Industrial Solutions', trustYears: 25, productCount: 5000, happyClients: 2000, deliveryText: 'Same Day Delivery Available', supplyText: 'For over two decades, Raja Electricals has helped contractors, facilities and industrial teams source dependable products without unnecessary delays.' },
   categories: staticCategories.map(([name, image, count], id) => ({ id, name, image: image || images.worker, count })),
   products: [{ id: 1, name: 'Industrial Safety Helmet', image: images.helmet, price: 'Contact for price', badge: 'Popular' }, { id: 2, name: 'Power Tools', image: images.tools, price: 'Contact for price', badge: 'Featured' }, { id: 3, name: 'Water Pump', image: images.pump, price: 'Contact for price', badge: 'Reliable' }, { id: 4, name: 'Electrical Supplies', image: images.worker, price: 'Contact for price', badge: 'Top rated' }],
-  brands: [{ id: 1, name: 'Electrical Brands', logo: images.worker, products: 'Electrical supplies' }, { id: 2, name: 'Safety Brands', logo: images.safety, products: 'Safety products' }, { id: 3, name: 'Tool Brands', logo: images.tools, products: 'Tools and hardware' },],
+  brands: [{ id: 1, name: 'Electrical Brands', logo: images.worker, products: 'Electrical supplies' }, { id: 2, name: 'Safety Brands', logo: images.safety, products: 'Safety products' }, { id: 3, name: 'Tool Brands', logo: images.tools, products: 'Tools and hardware' }],
   industries: [{ id: 1, name: 'Construction', image: images.site, description: 'Reliable supplies for active worksites.' }, { id: 2, name: 'Manufacturing', image: images.plant, description: 'Industrial products for daily operations.' }, { id: 3, name: 'Facilities', image: images.worker, description: 'Maintenance and repair essentials.' }, { id: 4, name: 'Infrastructure', image: images.safety, description: 'Safety and site-ready solutions.' }],
 };
+
+const brandsData = [
+  { id: 'brand-1', name: 'Brand 1', logo: 'src/assets/PARTNERS/PARTNERS/1.png' },
+  { id: 'brand-2', name: 'Brand 2', logo: 'src/assets/PARTNERS/PARTNERS/2.jpg' },
+  { id: 'brand-3', name: 'Brand 3', logo: 'src/assets/PARTNERS/PARTNERS/3.jpg' },
+  { id: 'brand-4', name: 'Brand 4', logo: 'src/assets/PARTNERS/PARTNERS/4.jpg' },
+  { id: 'brand-5', name: 'Brand 5', logo: 'src/assets/PARTNERS/PARTNERS/5.png' },
+  { id: 'brand-6', name: 'Brand 6', logo: 'src/assets/PARTNERS/PARTNERS/6.jpg' },
+  { id: 'brand-7', name: 'Brand 7', logo: 'src/assets/PARTNERS/PARTNERS/7.png' },
+  { id: 'brand-8', name: 'Brand 8', logo: 'src/assets/PARTNERS/PARTNERS/8.jpg' },
+  { id: 'brand-9', name: 'Brand 9', logo: 'src/assets/PARTNERS/PARTNERS/9.png' },
+  { id: 'brand-10', name: 'Brand 10', logo: 'src/assets/PARTNERS/PARTNERS/10.jpg' },
+    { id: 'brand-11', name: 'Brand 11', logo: 'src/assets/PARTNERS/PARTNERS/11.png' },
+  { id: 'brand-12', name: 'Brand 12', logo: 'src/assets/PARTNERS/PARTNERS/12.jpg' },
+  { id: 'brand-13', name: 'Brand 13', logo: 'src/assets/PARTNERS/PARTNERS/13.png' },
+  { id: 'brand-14', name: 'Brand 14', logo: 'src/assets/PARTNERS/PARTNERS/14.jpg' },
+  { id: 'brand-15', name: 'Brand 15', logo: 'src/assets/PARTNERS/PARTNERS/15.png' },
+  { id: 'brand-16', name: 'Brand 16', logo: 'src/assets/PARTNERS/PARTNERS/16.jpg' },
+  { id: 'brand-17', name: 'Brand 17', logo: 'src/assets/PARTNERS/PARTNERS/17.png' },
+  { id: 'brand-18', name: 'Brand 18', logo: 'src/assets/PARTNERS/PARTNERS/18.png' },
+  { id: 'brand-19', name: 'Brand 19', logo: 'src/assets/PARTNERS/PARTNERS/19.png' },
+  { id: 'brand-20', name: 'Brand 20', logo: 'src/assets/PARTNERS/PARTNERS/20.png' },
+   { id: 'brand-21', name: 'Brand 21', logo: 'src/assets/PARTNERS/PARTNERS/21.png' },
+   { id: 'brand-22', name: 'Brand 22', logo: 'src/assets/PARTNERS/PARTNERS/22.png' },
+   { id: 'brand-23', name: 'Brand 23', logo: 'src/assets/PARTNERS/PARTNERS/23.png' },
+   { id: 'brand-24', name: 'Brand 24', logo: 'src/assets/PARTNERS/PARTNERS/24.jpg' },
+   { id: 'brand-25', name: 'Brand 25', logo: 'src/assets/PARTNERS/PARTNERS/25.png' },
+   { id: 'brand-26', name: 'Brand 26', logo: 'src/assets/PARTNERS/PARTNERS/26.png' }
+  
+];
+
+// Custom hook for count-up animation
+function useCountUp(targetValue, duration = 2000) {
+  const [value, setValue] = useState(0);
+  const [isInView, setIsInView] = useState(false);
+  const elementRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsInView(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (elementRef.current) {
+      observer.observe(elementRef.current);
+    }
+
+    return () => {
+      if (elementRef.current) {
+        observer.unobserve(elementRef.current);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!isInView) return;
+
+    let startTime;
+    let animationFrame;
+
+    const animate = (currentTime) => {
+      if (!startTime) startTime = currentTime;
+      const progress = Math.min((currentTime - startTime) / duration, 1);
+      
+      // Easing function for smooth animation
+      const easeOutExpo = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+      const currentValue = Math.floor(easeOutExpo * targetValue);
+      
+      setValue(currentValue);
+
+      if (progress < 1) {
+        animationFrame = requestAnimationFrame(animate);
+      } else {
+        setValue(targetValue);
+      }
+    };
+
+    animationFrame = requestAnimationFrame(animate);
+
+    return () => {
+      if (animationFrame) {
+        cancelAnimationFrame(animationFrame);
+      }
+    };
+  }, [isInView, targetValue, duration]);
+
+  return { value, elementRef };
+}
+
+// Component for hero animated numbers
+function AnimatedHeroNumber({ targetValue, suffix = '+', duration = 2000 }) {
+  const { value, elementRef } = useCountUp(targetValue, duration);
+  
+  const formatValue = (val) => {
+    if (val >= 1000) {
+      return (val / 1000).toFixed(1).replace(/\.0$/, '') + 'k';
+    }
+    return val.toString();
+  };
+
+  return (
+    <b ref={elementRef}>
+      {formatValue(value)}{suffix}
+    </b>
+  );
+}
 
 export default function HomePage({ go }) {
   const [slide, setSlide] = useState(0);
@@ -23,7 +134,6 @@ export default function HomePage({ go }) {
     return () => clearInterval(timer);
   }, [slides.length]);
 
-
   const services = [
     { icon: Truck, title: 'Fast Supply', desc: 'Responsive fulfilment for urgent site and maintenance needs.', color: '#e31b16' },
     { icon: HardHat, title: 'Site Ready', desc: 'Products selected for demanding industrial environments.', color: '#ff6b00' },
@@ -34,24 +144,32 @@ export default function HomePage({ go }) {
   ];
 
   const trustStats = [
-    { icon: Award, value: site.trustYears || '25+', label: 'Years of Trust' },
-    { icon: Users, value: site.happyClients || '10,000+', label: 'Happy Customers' },
-    { icon: Package, value: site.productCount || '5,000+', label: 'Products' },
-    { icon: Shield, value: '100%', label: 'Genuine Products' },
+    { icon: Award, value: site.trustYears || 25, label: 'Years of Trust', suffix: '' },
+    { icon: Users, value: site.happyClients || 2000, label: 'Happy Customers', suffix: '+' },
+    { icon: Package, value: site.productCount || 5000, label: 'Products', suffix: '+' },
+    { icon: Shield, value: 100, label: 'Genuine Products', suffix: '%' },
   ];
 
   return (
     <>
       <section className="cms-hero">
         <div>
-          {/* <span className="hero-badge"><Award size={16} /> Trusted since 1998</span> */}
           <small>{site.welcome || 'Welcome to Raja Electricals'}</small>
           <HeroTitle title={site.heroTitle || 'Powering Every Project.'} />
           <p>{site.heroText || 'Electrical · Hardware · Safety · Industrial Solutions'}</p>
           <div className="hero-numbers">
-            <b>{site.trustYears || '25+'}<span>Years of Trust</span></b>
-            <b>{site.productCount || '5000+'}<span>Products</span></b>
-            <b>{site.happyClients || '2000+'}<span>Happy Clients</span></b>
+            <div>
+              <AnimatedHeroNumber targetValue={site.trustYears || 25} suffix="" />
+              <span>Years of Trust</span>
+            </div>
+            <div>
+              <AnimatedHeroNumber targetValue={site.productCount || 5000} suffix="+" />
+              <span>Products</span>
+            </div>
+            <div>
+              <AnimatedHeroNumber targetValue={site.happyClients || 2000} suffix="+" />
+              <span>Happy Clients</span>
+            </div>
           </div>
           <Btn onClick={() => go('products')}>Explore products</Btn> <Btn plain onClick={() => go('contactus')}>Request a quote</Btn>
         </div>
@@ -69,6 +187,130 @@ export default function HomePage({ go }) {
           )}
         </div>
       </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <Section
+        pill="BRANDS"
+        tone="violet"
+        title="Top Partners We Stock"
+        text="Authentic products from industry-leading manufacturers."
+      >
+        <div className="brand-marquee">
+          <div className="brand-marquee-track">
+            {[...brandsData, ...brandsData].map((item, index) => (
+              <div
+                className="brand-logo-item"
+                key={`${item.id}-${index}`}
+                aria-hidden={index >= brandsData.length || undefined}
+              >
+                <img
+                  src={item.logo}
+                  alt={item.name}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <style>{`
+          .brand-marquee {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            margin-top: 25px;
+            padding: 10px 0;
+          }
+
+          .brand-marquee-track {
+            display: flex;
+            align-items: center;
+            width: max-content;
+            gap: 70px;
+            animation: brand-scroll 28s linear infinite;
+          }
+
+          .brand-logo-item {
+            flex: 0 0 auto;
+            width: 150px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+          }
+
+          .brand-logo-item img {
+            width: 140px;
+            height: 70px;
+            object-fit: contain;
+            display: block;
+            filter: grayscale(10%);
+            opacity: 0.9;
+            transition:
+              opacity 0.25s ease,
+              transform 0.25s ease,
+              filter 0.25s ease;
+          }
+
+          .brand-logo-item img:hover {
+            opacity: 1;
+            filter: grayscale(0%);
+            transform: scale(1.08);
+          }
+
+          @keyframes brand-scroll {
+            from {
+              transform: translateX(0);
+            }
+            to {
+              transform: translateX(-50%);
+            }
+          }
+
+          @media (max-width: 700px) {
+            .brand-marquee {
+              margin-top: 20px;
+              overflow: hidden;
+            }
+
+            .brand-marquee-track {
+              display: flex;
+              width: max-content;
+              gap: 32px;
+              animation: brand-scroll 22s linear infinite;
+            }
+
+            .brand-logo-item {
+              width: 105px;
+              height: 62px;
+            }
+
+            .brand-logo-item img {
+              width: 96px;
+              max-width: 100%;
+              height: 54px;
+            }
+          }
+        `}</style>
+      </Section>
 
       <Section pill="CATEGORIES" featured sectionClass="category-section" eyebrow="OUR PRODUCT RANGE" title="Everything Your Project Needs" text="One dependable source for electricals, hardware, safety, tools, pumps and infrastructure supplies.">
         <div className="cms-grid category-cms-grid">
@@ -95,23 +337,68 @@ export default function HomePage({ go }) {
       </Section>
 
       <section className="intro-section">
-        <div>
-          <small className="section-kicker">Why choose Raja</small>
-          <h2>Supply that keeps <em>work moving.</em></h2>
+        <div className="intro-shop-image">
+          <img
+            src="/images/raja-shop.jpg"
+            alt="Raja Electricals 'N' Hardwares Shop"
+          />
+          <div className="shop-image-overlay">
+            <span>RAJA ELECTRICALS 'N' HARDWARES</span>
+            <strong>Trusted Supply. Reliable Service.</strong>
+          </div>
         </div>
-        <div>
-          <p style={{ fontSize: '15px', lineHeight: '1.85', color: 'var(--muted)', margin: '0 0 22px' }}>
-            {site.supplyText || 'For over two decades, Raja Electricals has helped contractors, facilities and industrial teams source dependable products without unnecessary delays.'}
+
+        <div className="intro-content">
+          <small className="section-kicker">
+            Why choose Raja Electricals 'N' Hardwares
+          </small>
+
+          <h2>
+            Supply that keeps <em>work moving.</em>
+          </h2>
+
+          <p
+            style={{
+              fontSize: '15px',
+              lineHeight: '1.85',
+              color: 'var(--muted)',
+              margin: '0 0 22px'
+            }}
+          >
+            {site.supplyText ||
+              'For over two decades, Raja Electricals has helped contractors, facilities and industrial teams source dependable products without unnecessary delays.'}
           </p>
+
           <ul className="check-list">
-            {['Genuine branded products with warranty', 'Project and bulk-order support', 'Reliable local delivery within 24 hours', 'Helpful technical guidance from experts'].map(item => <li key={item}>{item}</li>)}
+            {[
+              'Genuine branded products with warranty',
+              'Project and bulk-order support',
+              'Reliable local delivery within 24 hours',
+              'Helpful technical guidance from experts'
+            ].map(item => (
+              <li key={item}>{item}</li>
+            ))}
           </ul>
+
           <div className="service-grid">
             {services.map(service => {
               const Icon = service.icon;
               return (
                 <article key={service.title}>
-                  <span style={{ display: 'grid', placeItems: 'center', width: '54px', height: '54px', borderRadius: '12px', background: `${service.color}18`, color: service.color, marginBottom: '16px' }}><Icon size={26} /></span>
+                  <span
+                    style={{
+                      display: 'grid',
+                      placeItems: 'center',
+                      width: '54px',
+                      height: '54px',
+                      borderRadius: '12px',
+                      background: `${service.color}18`,
+                      color: service.color,
+                      marginBottom: '16px'
+                    }}
+                  >
+                    <Icon size={26} />
+                  </span>
                   <h3>{service.title}</h3>
                   <p>{service.desc}</p>
                 </article>
@@ -119,19 +406,204 @@ export default function HomePage({ go }) {
             })}
           </div>
         </div>
+
+        <style>{`
+          .intro-section {
+            display: grid;
+            grid-template-columns: minmax(320px, 0.85fr) minmax(0, 1.6fr);
+            gap: 70px;
+            align-items: start;
+          }
+
+          .intro-shop-image {
+            position: relative;
+            width: 100%;
+            height: 620px;
+            overflow: hidden;
+            border-radius: 18px;
+            background: #f3f3f3;
+            box-shadow: 0 18px 45px rgba(0, 0, 0, 0.08);
+          }
+
+          .intro-shop-image img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            object-position: center;
+          }
+
+          .intro-shop-image::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+              to top,
+              rgba(0, 0, 0, 0.72),
+              rgba(0, 0, 0, 0.05) 55%,
+              transparent
+            );
+            pointer-events: none;
+          }
+
+          .shop-image-overlay {
+            position: absolute;
+            z-index: 2;
+            left: 28px;
+            right: 28px;
+            bottom: 28px;
+            color: #fff;
+          }
+
+          .shop-image-overlay span {
+            display: block;
+            margin-bottom: 8px;
+            color: #ff2b2b;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+          }
+
+          .shop-image-overlay strong {
+            display: block;
+            font-size: 22px;
+            line-height: 1.25;
+          }
+
+          .intro-content {
+            min-width: 0;
+          }
+
+          .intro-content .section-kicker {
+            display: block;
+            margin-bottom: 14px;
+          }
+
+          .intro-content h2 {
+            margin: 0 0 25px;
+          }
+
+          .check-list {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px 35px;
+            margin: 0 0 28px;
+            padding: 0;
+            list-style: none;
+          }
+
+          .check-list li {
+            position: relative;
+            padding-left: 36px;
+            font-size: 15px;
+            line-height: 1.5;
+            font-weight: 700;
+          }
+
+          .check-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 25px;
+            height: 25px;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            background: #ef1d1d;
+            color: #fff;
+            font-size: 14px;
+            font-weight: 900;
+          }
+
+          .service-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+          }
+
+          .service-grid article {
+            min-height: 260px;
+            padding: 32px;
+            border: 1px solid #e3e3e3;
+            background: #fff;
+            transition:
+              transform 0.25s ease,
+              box-shadow 0.25s ease,
+              border-color 0.25s ease;
+          }
+
+          .service-grid article:hover {
+            transform: translateY(-5px);
+            border-color: #d5d5d5;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+          }
+
+          .service-grid article h3 {
+            margin: 0 0 10px;
+          }
+
+          .service-grid article p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 15px;
+            line-height: 1.7;
+          }
+
+          @media (max-width: 1100px) {
+            .intro-section {
+              grid-template-columns: 1fr;
+              gap: 40px;
+            }
+
+            .intro-shop-image {
+              height: 420px;
+            }
+
+            .service-grid {
+              grid-template-columns: repeat(3, 1fr);
+            }
+          }
+
+          @media (max-width: 700px) {
+            .intro-section {
+              gap: 30px;
+            }
+
+            .intro-shop-image {
+              height: 330px;
+              border-radius: 14px;
+            }
+
+            .shop-image-overlay {
+              left: 20px;
+              right: 20px;
+              bottom: 20px;
+            }
+
+            .shop-image-overlay strong {
+              font-size: 18px;
+            }
+
+            .check-list {
+              grid-template-columns: 1fr;
+              gap: 12px;
+            }
+
+            .service-grid {
+              grid-template-columns: 1fr;
+            }
+
+            .service-grid article {
+              min-height: auto;
+              padding: 25px;
+            }
+          }
+        `}</style>
       </section>
 
-      <Section pill="BRANDS" tone="violet" title="Top Brands We Stock" text="Authentic products from industry-leading manufacturers.">
-        <div className="cms-grid brand-cms-grid">
-          {brands.map(item => (
-            <article className="brand-cms-card" key={item.id}>
-              <img src={item.logo} alt={item.name} />
-              <b>{item.name}</b>
-              <small>{item.products} products</small>
-            </article>
-          ))}
-        </div>
-      </Section>
+      
 
       <Section pill="INDUSTRIES" tone="green" title="Industries We Serve" text="Products and support shaped around your work.">
         <div className="cms-grid industry-cms-grid">
@@ -151,7 +623,7 @@ export default function HomePage({ go }) {
             return (
               <div className="home-trust-card" key={stat.label}>
                 <Icon size={30} />
-                <b>{stat.value}</b>
+                <b>{stat.value}{stat.suffix}</b>
                 <small>{stat.label}</small>
               </div>
             );
@@ -174,7 +646,7 @@ function Section({ pill, tone = 'red', title, text, eyebrow, featured = false, s
   const color = tones[tone] || tones.red;
   const header = featured ? (
     <header className="range-featured">
-      <small className="section-pill" style={{ borderColor: color, color, margin: 0, alignSelf: 'start' }}>{pill}</small>
+      <small className="section-pill" style={{ borderColor: color, color, margin: 0 }}>{pill}</small>
       {eyebrow && <small className="range-eyebrow">{eyebrow}</small>}
       <h2 style={{ margin: 0 }}>{title}</h2>
       <p style={{ margin: 0 }}>{text}</p>
@@ -193,4 +665,3 @@ function Section({ pill, tone = 'red', title, text, eyebrow, featured = false, s
     </section>
   );
 }
-
