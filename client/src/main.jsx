@@ -10,6 +10,7 @@ import ContactPage from './pages/ContactPage';
 import DashboardPage from './pages/DashboardPage';
 import { getContent } from './lib/api';
 import preloaderLogoSrc from './assets/logo/logo.jpeg';
+import promotionImage from './assets/addimage/add.jpeg';
 import './styles.css';
 import './overrides.css';
 import './mobile.css';
@@ -37,6 +38,7 @@ function App() {
   const [page, setPage] = useState(getPage);
   const [content, setContent] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [showPromotion, setShowPromotion] = useState(true);
   const refreshContent = () => getContent().then(setContent).catch(() => setContent({}));
 
   useEffect(() => {
@@ -63,7 +65,7 @@ function App() {
   };
   const Page = pages[page] || HomePage;
   if (page === 'dashboard') return <Page />;
-  return <>{loading && <Preloader />}<Header go={go} site={content?.site} /><Page go={go} content={content} /><Footer go={go} site={content?.site} /></>;
+  return <>{loading && <Preloader />}<Header go={go} site={content?.site} /><Page go={go} content={content} /><Footer go={go} site={content?.site} />{!loading && showPromotion && <div className="promotion-popup" role="dialog" aria-modal="true" aria-label="Special offer"><div className="promotion-card"><button type="button" className="promotion-close" onClick={() => setShowPromotion(false)} aria-label="Close promotion">×</button><img src={promotionImage} alt="Special offer" /><button type="button" className="promotion-cancel" onClick={() => setShowPromotion(false)}>Cancel</button></div></div>}</>;
 }
 createRoot(document.getElementById('root')).render(<App />);
 
