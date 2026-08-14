@@ -478,7 +478,7 @@ export function ProductDetailPage({ go, content }) {
   if (!product) return <section className="page-loading">Choose a product from our catalogue to view its details.</section>;
   const related = PRODUCTS_DATA.filter(item => item.id !== product.id && item.category === product.category).slice(0, 5);
   const whatsapp = `https://wa.me/${String(content?.site?.whatsappNumber || '').replace(/\D/g, '')}?text=${encodeURIComponent(`Hello, I am interested in ${product.name}.`)}`;
-  const phone = content?.site?.phone || '+91 99413 36125';
+  const phone = content?.site?.phone || '+91 9003900533';
   const openRelatedProduct = item => {
     localStorage.setItem('raja_selected_product', JSON.stringify(item));
     setProduct(item);
