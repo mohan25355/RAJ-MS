@@ -22,6 +22,15 @@ import './home.css';
 
 const pages = { home: HomePage, about: AboutPage, aboutus: AboutPage, products: ProductsPage, productdetail: ProductDetailPage, gallery: GalleryPage, brands: BrandsPage, contact: ContactPage, contactus: ContactPage, dashboard: DashboardPage };
 const getPage = () => window.location.hash.slice(1).toLowerCase().replaceAll('-', '') || 'home';
+const LEGACY_PHONE = '9941336125';
+const COMPANY_PHONE = '+91 9003900533';
+const COMPANY_WHATSAPP = '919003900533';
+const replaceLegacyContact = data => {
+  const digits = value => String(value || '').replace(/\D/g, '');
+  if (!data?.site) return data;
+  const site = data.site;
+  return { ...data, site: { ...site, phone: digits(site.phone).endsWith(LEGACY_PHONE) ? COMPANY_PHONE : site.phone, whatsappNumber: digits(site.whatsappNumber).endsWith(LEGACY_PHONE) ? COMPANY_WHATSAPP : site.whatsappNumber } };
+};
 
 function Preloader() {
   return <div className="site-preloader" role="status" aria-label="Loading Raja Electricals">
@@ -39,7 +48,7 @@ function App() {
   const [content, setContent] = useState(null);
   const [loading, setLoading] = useState(true);
   const [showPromotion, setShowPromotion] = useState(true);
-  const refreshContent = () => getContent().then(setContent).catch(() => setContent({}));
+  const refreshContent = () => getContent().then(data => setContent(replaceLegacyContact(data))).catch(() => setContent({}));
 
   useEffect(() => {
     refreshContent();
