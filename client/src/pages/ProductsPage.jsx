@@ -467,12 +467,23 @@ export function ProductsPage({ go }) {
 // ============================================
 
 export function ProductDetailPage({ go, content }) {
-  const selected = (() => { try { return JSON.parse(localStorage.getItem('raja_selected_product')); } catch { return null; } })();
-  const product = selected && PRODUCTS_DATA.find(item => item.id === selected.id) || selected;
+  const [product, setProduct] = useState(() => {
+    try {
+      const selected = JSON.parse(localStorage.getItem('raja_selected_product'));
+      return selected && PRODUCTS_DATA.find(item => item.id === selected.id) || selected;
+    } catch {
+      return null;
+    }
+  });
   if (!product) return <section className="page-loading">Choose a product from our catalogue to view its details.</section>;
   const related = PRODUCTS_DATA.filter(item => item.id !== product.id && item.category === product.category).slice(0, 5);
   const whatsapp = `https://wa.me/${String(content?.site?.whatsappNumber || '').replace(/\D/g, '')}?text=${encodeURIComponent(`Hello, I am interested in ${product.name}.`)}`;
   const phone = content?.site?.phone || '+91 99413 36125';
+  const openRelatedProduct = item => {
+    localStorage.setItem('raja_selected_product', JSON.stringify(item));
+    setProduct(item);
+    window.scrollTo(0, 0);
+  };
 
   return <>
     <div className="crumb">Home / {productCategory(product)} / {product.name}</div>
@@ -491,8 +502,8 @@ export function ProductDetailPage({ go, content }) {
       </aside>
     </section>
     <section className="related"><h2>Related Products in {product.category}</h2>
-      {related.length > 0 ? <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '12px', marginTop: '20px' }}>
-        {related.map(item => <button key={item.id} onClick={() => selectProduct(item, 'productdetail', go)} style={{ display: 'flex', flexDirection: 'column', gap: '8px', padding: '12px', border: '1px solid var(--line)', borderRadius: '3px', cursor: 'pointer', backgroundColor: '#fff' }}><img src={item.image} alt={item.name} onError={event => handleImgError(event, item.category)} loading="lazy" style={{ width: '100%', height: '100px', objectFit: 'cover' }}/><b style={{ fontSize: '12px' }}>{item.name}</b><span style={{ fontSize: '11px', color: 'var(--red)', fontWeight: '700' }}>{item.price}</span></button>)}
+      {related.length > 0 ? <div className="related-products-grid">
+        {related.map(item => <button key={item.id} onClick={() => openRelatedProduct(item)}><img src={item.image} alt={item.name} onError={event => handleImgError(event, item.category)} loading="lazy"/><b>{item.name}</b><span>{item.price}</span></button>)}
       </div> : <p>No other products in this category.</p>}
     </section>
   </>;
