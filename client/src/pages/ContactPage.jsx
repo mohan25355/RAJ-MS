@@ -83,7 +83,7 @@ export default function ContactPage({ content }) {
           <p>
             <MapPin />
             {site.address ||
-              'NO-74 / 82, Periyar Pathai, Andavar Nagar, Choolaimedu, Chennai, Greater Chennai, Tamil Nadu 600094'}
+              'NO-74 / 82, Periyar Pathai, Andavar Nagar, Choolaimedu, Chennai 600094'}
           </p>
 
           <p>
