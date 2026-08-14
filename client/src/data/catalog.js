@@ -1,6 +1,8 @@
+import safetyHelmetImage from '../assets/product image/Head Protection/Safety Helmet Std. Series.jpg';
+
 export const images = {
   worker: 'https://images.unsplash.com/photo-1565008447742-97f6f38c985c?auto=format&fit=crop&w=1200&q=85',
-  helmet: 'https://images.unsplash.com/photo-1590650153855-d9e808231d41?auto=format&fit=crop&w=900&q=85',
+  helmet: safetyHelmetImage,
   tools: 'https://images.unsplash.com/photo-1530124566582-a618bc2615dc?auto=format&fit=crop&w=700&q=85',
   // The previous Unsplash asset is no longer available. Keep a dependable
   // industrial-supply image here so the Water Pump card never renders broken.
