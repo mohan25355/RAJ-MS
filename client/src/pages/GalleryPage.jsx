@@ -50,7 +50,8 @@ const GALLERY_DATA = [
 export default function GalleryPage({ go, content }) {
   const [filter, setFilter] = useState('All');
 
-  const items = GALLERY_DATA;
+  // Gallery uploads are stored in the database and returned in content.gallery.
+  const items = Array.isArray(content?.gallery) ? content.gallery : [];
 
   const types = [
     'All',
@@ -103,6 +104,7 @@ export default function GalleryPage({ go, content }) {
                 </figcaption>
               </figure>
             ))}
+          {!items.length && <p>No gallery images have been added yet.</p>}
         </div>
 
       </section>

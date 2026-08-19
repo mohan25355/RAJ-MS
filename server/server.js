@@ -1,5 +1,6 @@
 const path = require('path');
 require('dotenv').config({ path: path.join(__dirname, '.env') });
+const supabase = require('./supabase');
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -51,37 +52,259 @@ const defaultProjects = [{ id: 'metro-rail', name: 'Chennai Metro Rail Project',
 async function ensureContentDefaults() { const record = await Content.findOne({ key: 'main' }); if (!record) return; const data = record.data; data.site = replaceLegacyContact({ phone: COMPANY_PHONE, email: 'sales@rkinnovations.com', address: 'Chennai, Tamil Nadu', whatsappNumber: COMPANY_WHATSAPP, whatsappMessage: 'Hello Raja Electricals', heroImage2: photo('photo-1581092160607-ee22621dd758', 1300), heroImage3: photo('photo-1544724569-5f546fd6f2b5', 1300), aboutKicker: 'ABOUT RAJA ELECTRICALS', aboutTitle: 'Supply that keeps work moving.', aboutIntro: 'A dependable supply partner for professionals building, maintaining and growing.', aboutDescription: 'For over two decades, Raja Electricals has helped contractors, facilities and industrial teams source dependable products without unnecessary delays.', aboutValues: 'Genuine products with warranty\nHelpful technical guidance\nReliable local delivery\nProject and bulk-order support', aboutImage: photo('photo-1516321318423-f06f85e504b3', 1300), ...data.site }); data.products = (data.products || []).map(product => ({ features: 'High quality construction\nReliable performance\nSuitable for professional use', specifications: 'Brand|RAJA\nMaterial|Premium grade\nApplications|Industrial and commercial', colors: '#f5bd13,#ef2b1c,#ffffff,#111111', catalogUrl: '', ...product })); data.projects = (data.projects?.length ? data.projects : defaultProjects); record.data = data; record.markModified('data'); await record.save(); }
 function auth(req, res, next) { try { req.admin = jwt.verify((req.headers.authorization || '').replace('Bearer ', ''), JWT_SECRET); next(); } catch { res.status(401).json({ error: 'Please sign in to continue.' }); } }
 function publicItem(doc) { return { ...doc.toObject(), id: doc._id.toString(), _id: undefined }; }
+const managedCollections = {
+  products: ['id', 'name', 'category', 'description', 'price', 'image'],
+  categories: ['id', 'name', 'image'],
+  brands: ['id', 'name', 'logo'],
+  industries: ['id', 'name', 'image'],
+  gallery: ['id', 'title', 'image'],
+  projects: ['id', 'name', 'description', 'image'],
+};
+const recordFromRow = row => {
+  if (!row) return row;
+  const { data, ...columns } = row;
+  return { ...columns, ...(data && typeof data === 'object' ? data : {}) };
+};
+const recordsFromRows = rows => (rows || []).map(recordFromRow);
+const rowForCollection = (collection, item) => {
+  const columns = Object.fromEntries(
+    managedCollections[collection]
+      // The products table keeps price as a numeric convenience column, while
+      // the CMS intentionally allows labels such as "From ₹450" in JSON data.
+      .filter(column => item[column] !== undefined && !(collection === 'products' && column === 'price' && typeof item.price !== 'number'))
+      .map(column => [column, item[column]])
+  );
+  return { ...columns, data: item, updated_at: new Date().toISOString() };
+};
+
+// Admin accounts were migrated to Supabase. Keep authentication on the API so
+// the service-role key and password hashes never reach the browser.
+app.post('/api/auth/login', async (req, res, next) => {
+  try {
+    const email = String(req.body?.email || '').trim().toLowerCase();
+    const password = String(req.body?.password || '');
+
+    if (!email || !password) {
+      return res.status(400).json({ error: 'Email and password are required.' });
+    }
+
+    const { data: admin, error } = await supabase
+      .from('admins')
+      .select('email, password_hash')
+      .eq('email', email)
+      .maybeSingle();
+
+    if (error) throw error;
+
+    if (!admin?.password_hash || !(await bcrypt.compare(password, admin.password_hash))) {
+      return res.status(401).json({ error: 'Invalid email or password.' });
+    }
+
+    const token = jwt.sign({ email: admin.email }, JWT_SECRET, { expiresIn: '12h' });
+    return res.json({ token });
+  } catch (error) {
+    next(error);
+  }
+});
+
+app.post('/api/auth/logout', (_req, res) => res.sendStatus(204));
 
 app.get('/api/health', (_req, res) => {
   const connected = mongoose.connection.readyState === 1;
   res.json({ ok: connected, mongodb: connected ? 'connected' : 'disconnected', initialized: isInitialized });
 });
-app.get('/api/content', async (_req, res, next) => { try { res.json(await content()); } catch (e) { next(e); } });
-app.post('/api/auth/login', async (req, res, next) => { try { const admin = await Admin.findOne({ email: String(req.body.email || '').toLowerCase() }); if (!admin || !await bcrypt.compare(req.body.password || '', admin.passwordHash)) return res.status(401).json({ error: 'Invalid email or password.' }); const token = jwt.sign({ id: admin.id, email: admin.email, role: 'admin' }, JWT_SECRET, { expiresIn: '8h' }); res.json({ token, admin: { email: admin.email } }); } catch (e) { next(e); } });
-app.post('/api/auth/logout', auth, (_req, res) => res.status(204).end());
-app.put('/api/site', auth, async (req, res, next) => { try { const data = await updateContent(data => ({ ...data, site: { ...data.site, ...req.body } })); res.json(data.site); } catch (e) { next(e); } });
-app.post('/api/enquiries', async (req, res, next) => { try { const { name, phone, email, company, product, quantity, message } = req.body; if (!name || !phone) return res.status(400).json({ error: 'Name and phone number are required.' }); const enquiry = await Enquiry.create({ name, phone, email, company, product, quantity, message }); res.status(201).json({ enquiry: publicItem(enquiry), message: 'Thanks — your enquiry has been sent.' }); } catch (e) { next(e); } });
-app.post('/api/orders', async (req, res, next) => { try { const { customerName, phone, email, company, productId, productName, quantity, notes } = req.body; if (!customerName || !phone || !productName || !quantity) return res.status(400).json({ error: 'Customer details, product and quantity are required.' }); const order = await Order.create({ customerName, phone, email, company, productId, productName, quantity, notes }); res.status(201).json({ order: publicItem(order), message: 'Your order request has been received.' }); } catch (e) { next(e); } });
-app.post('/api/products', auth, async (req, res, next) => { try { const product = await Product.create({ ...req.body, id: req.body.id || id() }); res.status(201).json(publicProduct(product)); } catch (e) { next(e); } });
-app.put('/api/products/:id/catalogue', auth, async (req, res, next) => { try { const { fileName, data } = req.body || {}; if (!fileName || !data) return res.status(400).json({ error: 'Catalogue file is required.' }); const product = await Product.findOne({ id: req.params.id }); if (!product) return res.status(404).json({ error: 'Product not found.' }); const buffer = Buffer.from(String(data).split(',')[1] || String(data), 'base64'); if (!buffer.length) return res.status(400).json({ error: 'The uploaded file is empty or invalid.' }); product.catalogName = String(fileName).slice(0, 120); await Promise.all([product.save(), Catalogue.findOneAndUpdate({ productId: req.params.id }, { fileName: product.catalogName, data: buffer, contentType: 'application/pdf', size: buffer.length }, { upsert: true })]); res.json(publicProduct(product)); } catch (e) { next(e); } });
-app.delete('/api/products/:id/catalogue', auth, async (req, res, next) => { try { const product = await Product.findOneAndUpdate({ id: req.params.id }, { $unset: { catalogName: 1 } }, { new: true }); if (!product) return res.status(404).json({ error: 'Product not found.' }); await Catalogue.deleteOne({ productId: req.params.id }); res.status(204).end(); } catch (e) { next(e); } });
-app.put('/api/products/:id', auth, async (req, res, next) => { try { const product = await Product.findOneAndUpdate({ id: req.params.id }, { ...req.body, id: req.params.id }, { new: true, runValidators: true }); if (!product) return res.status(404).json({ error: 'Product not found.' }); res.json(publicProduct(product)); } catch (e) { next(e); } });
-app.delete('/api/products/:id', auth, async (req, res, next) => { try { const product = await Product.findOneAndDelete({ id: req.params.id }); if (!product) return res.status(404).json({ error: 'Product not found.' }); await Catalogue.deleteOne({ productId: req.params.id }); res.status(204).end(); } catch (e) { next(e); } });
-app.post('/api/:collection', auth, async (req, res, next) => { try { const allowed = ['categories', 'brands', 'industries', 'gallery', 'projects']; if (!allowed.includes(req.params.collection)) return res.status(404).json({ error: 'Unknown collection.' }); const item = { ...req.body, id: req.body.id || id() }; await updateContent(data => ({ ...data, [req.params.collection]: [...(data[req.params.collection] || []), item] })); res.status(201).json(item); } catch (e) { next(e); } });
-app.get('/api/catalogue/:productId', async (req, res, next) => { try { const file = await Catalogue.findOne({ productId: req.params.productId }); if (!file) return res.status(404).json({ error: 'Catalogue not found.' }); res.setHeader('Content-Type', file.contentType || 'application/pdf'); res.setHeader('Content-Disposition', `attachment; filename="${String(file.fileName).replace(/[^a-zA-Z0-9._-]/g, '_')}"`); res.setHeader('Content-Length', file.data.length); res.send(file.data); } catch (e) { next(e); } });
-app.put('/api/:collection/:id', auth, async (req, res, next) => { try { const allowed = ['categories', 'brands', 'industries', 'gallery', 'projects']; if (!allowed.includes(req.params.collection)) return res.status(404).json({ error: 'Unknown collection.' }); let result; await updateContent(data => { const index = data[req.params.collection].findIndex(x => x.id === req.params.id); if (index < 0) return data; result = { ...data[req.params.collection][index], ...req.body, id: req.params.id }; const items = [...data[req.params.collection]]; items[index] = result; return { ...data, [req.params.collection]: items }; }); if (!result) return res.status(404).json({ error: 'Item not found.' }); res.json(result); } catch (e) { next(e); } });
-app.delete('/api/:collection/:id', auth, async (req, res, next) => { try { const allowed = ['categories', 'brands', 'industries', 'gallery', 'projects']; if (!allowed.includes(req.params.collection)) return res.status(404).json({ error: 'Unknown collection.' }); await updateContent(data => ({ ...data, [req.params.collection]: data[req.params.collection].filter(x => x.id !== req.params.id) })); res.status(204).end(); } catch (e) { next(e); } });
-app.get('/api/admin/enquiries', auth, async (_req, res, next) => { try { res.json((await Enquiry.find().sort({ createdAt: -1 })).map(publicItem)); } catch (e) { next(e); } });
-app.get('/api/admin/orders', auth, async (_req, res, next) => { try { res.json((await Order.find().sort({ createdAt: -1 })).map(publicItem)); } catch (e) { next(e); } });
-app.patch('/api/admin/:type/:id', auth, async (req, res, next) => { try { const Model = req.params.type === 'orders' ? Order : req.params.type === 'enquiries' ? Enquiry : null; if (!Model) return res.status(404).json({ error: 'Unknown item type.' }); const item = await Model.findByIdAndUpdate(req.params.id, { status: req.body.status }, { new: true, runValidators: true }); if (!item) return res.status(404).json({ error: 'Item not found.' }); res.json(publicItem(item)); } catch (e) { next(e); } });
-app.get('/', (_req, res) => {
-  res.json({
-    success: true,
-    message: 'Raja Electricals API is running',
-    health: '/api/health'
-  });
+app.get('/api/content', async (_req, res, next) => {
+  try {
+    const [
+      siteResult,
+      productsResult,
+      projectsResult,
+      galleryResult,
+      brandsResult,
+      categoriesResult,
+      industriesResult,
+    ] = await Promise.all([
+      supabase
+        .from('site_settings')
+        .select('data')
+        .eq('id', 1)
+        .maybeSingle(),
+
+      supabase
+        .from('products')
+        .select('*')
+        .order('created_at', { ascending: false }),
+
+      supabase
+        .from('projects')
+        .select('*')
+        .order('created_at', { ascending: false }),
+
+      supabase
+        .from('gallery')
+        .select('*')
+        .order('created_at', { ascending: false }),
+
+      supabase
+        .from('brands')
+        .select('*')
+        .order('created_at', { ascending: false }),
+
+      supabase
+        .from('categories')
+        .select('*')
+        .order('created_at', { ascending: false }),
+
+      supabase
+        .from('industries')
+        .select('*')
+        .order('created_at', { ascending: false }),
+    ]);
+
+    const results = [
+      siteResult,
+      productsResult,
+      projectsResult,
+      galleryResult,
+      brandsResult,
+      categoriesResult,
+      industriesResult,
+    ];
+
+    const failed = results.find(result => result.error);
+
+    if (failed) {
+      console.error('Supabase content error:', failed.error);
+
+      return res.status(500).json({
+        error: failed.error.message,
+      });
+    }
+
+    const siteData = siteResult.data?.data || {};
+
+    res.json({
+      ...siteData,
+      products: recordsFromRows(productsResult.data),
+      projects: recordsFromRows(projectsResult.data),
+      gallery: recordsFromRows(galleryResult.data),
+      brands: recordsFromRows(brandsResult.data),
+      categories: recordsFromRows(categoriesResult.data),
+      industries: recordsFromRows(industriesResult.data),
+    });
+  } catch (e) {
+    next(e);
+  }
 });
 
+app.put('/api/site', auth, async (req, res, next) => {
+  try {
+    const current = await supabase.from('site_settings').select('data').eq('id', 1).maybeSingle();
+    if (current.error) throw current.error;
+    const site = { ...(current.data?.data?.site || {}), ...req.body };
+    const data = { ...(current.data?.data || {}), site };
+    const { error } = await supabase.from('site_settings').upsert({ id: 1, data, updated_at: new Date().toISOString() }, { onConflict: 'id' });
+    if (error) throw error;
+    res.json(site);
+  } catch (error) { next(error); }
+});
+
+app.post('/api/:collection', (req, res, next) => {
+  // Public customer submissions are handled by the dedicated routes below.
+  // Skip the rest of this generic route, otherwise its handler returns
+  // "Unknown collection" before the dedicated Supabase route can run.
+  if (['enquiries', 'orders'].includes(req.params.collection)) return next('route');
+  return auth(req, res, next);
+}, async (req, res, next) => {
+  try {
+    const collection = req.params.collection;
+    if (!managedCollections[collection]) return res.status(404).json({ error: 'Unknown collection.' });
+    const item = { ...req.body, id: req.body.id || id() };
+    const { data, error } = await supabase.from(collection).insert(rowForCollection(collection, item)).select().single();
+    if (error) throw error;
+    res.status(201).json(recordFromRow(data));
+  } catch (error) { next(error); }
+});
+
+app.put('/api/:collection/:id', auth, async (req, res, next) => {
+  try {
+    const collection = req.params.collection;
+    if (!managedCollections[collection]) return res.status(404).json({ error: 'Unknown collection.' });
+    const existing = await supabase.from(collection).select('*').eq('id', req.params.id).maybeSingle();
+    if (existing.error) throw existing.error;
+    if (!existing.data) return res.status(404).json({ error: 'Item not found.' });
+    const item = { ...recordFromRow(existing.data), ...req.body, id: req.params.id };
+    const { data, error } = await supabase.from(collection).update(rowForCollection(collection, item)).eq('id', req.params.id).select().single();
+    if (error) throw error;
+    res.json(recordFromRow(data));
+  } catch (error) { next(error); }
+});
+
+app.delete('/api/:collection/:id', auth, async (req, res, next) => {
+  try {
+    const collection = req.params.collection;
+    if (!managedCollections[collection]) return res.status(404).json({ error: 'Unknown collection.' });
+    const { error, count } = await supabase.from(collection).delete({ count: 'exact' }).eq('id', req.params.id);
+    if (error) throw error;
+    if (!count) return res.status(404).json({ error: 'Item not found.' });
+    res.sendStatus(204);
+  } catch (error) { next(error); }
+});
+
+app.post('/api/enquiries', async (req, res, next) => {
+  try {
+    const { name, phone, company, email, product, quantity, message, source } = req.body || {};
+    if (!name || !phone) return res.status(400).json({ error: 'Name and phone number are required.' });
+    const submittedAt = new Date().toISOString();
+    const enquiry = {
+      name: String(name).trim(),
+      phone: String(phone).trim(),
+      company: String(company || '').trim(),
+      email: String(email || '').trim(),
+      product: String(product || '').trim(),
+      quantity: String(quantity || '').trim(),
+      message: String(message || '').trim(),
+      source: String(source || 'Contact page').trim(),
+      status: 'New',
+      submittedAt,
+    };
+    const { error } = await supabase.from('enquiries').insert({ data: enquiry, created_at: submittedAt });
+    if (error) throw error;
+    res.status(201).json({ message: 'Thanks — your enquiry has been sent.' });
+  } catch (error) { next(error); }
+});
+
+app.post('/api/orders', async (req, res, next) => {
+  try {
+    const { customerName, phone, productName, quantity } = req.body || {};
+    if (!customerName || !phone || !productName || !quantity) return res.status(400).json({ error: 'Customer details, product and quantity are required.' });
+    const { error } = await supabase.from('orders').insert({ data: { ...req.body, status: 'New' }, created_at: new Date().toISOString() });
+    if (error) throw error;
+    res.status(201).json({ message: 'Your order request has been received.' });
+  } catch (error) { next(error); }
+});
+
+app.get('/api/admin/:collection', auth, async (req, res, next) => {
+  try {
+    if (!['enquiries', 'orders'].includes(req.params.collection)) return res.status(404).json({ error: 'Unknown record type.' });
+    const { data, error } = await supabase.from(req.params.collection).select('*').order('created_at', { ascending: false });
+    if (error) throw error;
+    res.json(recordsFromRows(data));
+  } catch (error) { next(error); }
+});
+
+app.patch('/api/admin/:collection/:id', auth, async (req, res, next) => {
+  try {
+    if (!['enquiries', 'orders'].includes(req.params.collection)) return res.status(404).json({ error: 'Unknown record type.' });
+    const existing = await supabase.from(req.params.collection).select('*').eq('id', req.params.id).maybeSingle();
+    if (existing.error) throw existing.error;
+    if (!existing.data) return res.status(404).json({ error: 'Item not found.' });
+    const data = { ...(existing.data.data || {}), status: req.body.status };
+    const result = await supabase.from(req.params.collection).update({ data }).eq('id', req.params.id).select().single();
+    if (result.error) throw result.error;
+    res.json(recordFromRow(result.data));
+  } catch (error) { next(error); }
+});
 app.use((req, res) => {
   res.status(404).json({
     success: false,
@@ -90,21 +313,22 @@ app.use((req, res) => {
 });
 app.use((err, _req, res, _next) => { console.error(err); if (err?.name === 'ValidationError') return res.status(400).json({ error: Object.values(err.errors).map(item => item.message).join(' ') }); if (err?.code === 11000) return res.status(409).json({ error: 'A record with the same unique value already exists.' }); if (err?.type === 'entity.too.large') return res.status(413).json({ error: 'The uploaded image or catalogue is too large.' }); res.status(err.status || 500).json({ error: 'Something went wrong. Please try again.' }); });
 
-if (!MONGODB_URI) { console.error('MONGODB_URI is missing. Add it to your .env file.'); process.exit(1); }
-
 let isInitialized = false;
 const server = app.listen(PORT, '0.0.0.0', () => {
   console.log(`Raja Electricals API running on port ${PORT}`);
 });
 
-// Run initialization in background to not block startup
-mongoose.connect(MONGODB_URI, { serverSelectionTimeoutMS: 10000 })
-  .then(() => Promise.all([seed(), ensureContentDefaults(), migrateProducts()]))
-  .then(() => { isInitialized = true; console.log('Initialization complete'); })
-  .catch(error => {
-    console.error('Initialization error:', error.message);
-    // Continue running even if init fails - API can still respond to requests
-  });
+// MongoDB is optional after the Supabase migration. Retain this initialization
+// only for legacy local databases that have not been retired yet.
+if (MONGODB_URI) {
+  mongoose.connect(MONGODB_URI, { serverSelectionTimeoutMS: 10000 })
+    .then(() => Promise.all([seed(), ensureContentDefaults(), migrateProducts()]))
+    .then(() => { isInitialized = true; console.log('Legacy MongoDB initialization complete'); })
+    .catch(error => console.error('Legacy MongoDB initialization error:', error.message));
+} else {
+  isInitialized = true;
+  console.log('Running with Supabase only.');
+}
 
 // Graceful shutdown
 process.on('SIGTERM', () => {

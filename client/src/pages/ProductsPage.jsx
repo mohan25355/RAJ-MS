@@ -410,19 +410,34 @@ const PRODUCTS_DATA = CATEGORY_DATA.flatMap(([category, entries], categoryIndex)
 const CATEGORIES_LIST = CATEGORY_DATA.map(([name]) => ({ id: name.toLowerCase().replace(/[^a-z0-9]+/g, '-'), name }));
 const productCategory = item => item.subcategory ? `${item.category} / ${item.subcategory}` : item.category;
 
+// Supabase is the source of truth. The local catalogue only keeps the page
+// usable until the one-time catalogue seed has been run.
+const uniqueItems = (items, key = 'id') => Array.from(
+  new Map(items.filter(Boolean).map(item => [item[key] || item.name, item])).values()
+);
+const catalogueFromContent = content => {
+  const databaseProducts = Array.isArray(content?.products) ? content.products : [];
+  const databaseCategories = Array.isArray(content?.categories) ? content.categories : [];
+  return {
+    products: databaseProducts.length ? databaseProducts : PRODUCTS_DATA,
+    categories: databaseCategories.length ? databaseCategories : CATEGORIES_LIST,
+  };
+};
+
 // ============================================
 // PRODUCTS PAGE COMPONENT
 // ============================================
 
-export function ProductsPage({ go }) {
+export function ProductsPage({ go, content }) {
   const [term, setTerm] = useState('');
   const [category, setCategory] = useState('');
-  const filtered = PRODUCTS_DATA.filter(item =>
+  const { products, categories } = catalogueFromContent(content);
+  const filtered = products.filter(item =>
     `${item.name} ${item.category} ${item.subcategory}`.toLowerCase().includes(term.toLowerCase()) && (!category || item.category === category)
   );
 
   return <>
-    <PageHead crumb="Products" title={<>Our <em>Products</em></>} desc={`Browse our complete industrial safety catalogue: ${PRODUCTS_DATA.length} products across ${CATEGORIES_LIST.length} categories.`}/>
+    <PageHead crumb="Products" title={<>Our <em>Products</em></>} desc={`Browse our complete industrial safety catalogue: ${products.length} products across ${categories.length} categories.`}/>
     <section className="catalog">
       <aside className="product-categories">
         <h3>Categories</h3>
@@ -430,12 +445,12 @@ export function ProductsPage({ go }) {
           <span>Select a category</span>
           <select value={category} onChange={event => setCategory(event.target.value)} aria-label="Select a product category">
             <option value="">All products</option>
-            {CATEGORIES_LIST.map(item => <option key={item.id} value={item.name}>{item.name}</option>)}
+            {categories.map(item => <option key={item.id} value={item.name}>{item.name}</option>)}
           </select>
         </label>
         <div className="category-filter-list" aria-label="Product categories">
           <button className={!category ? 'selected' : ''} onClick={() => setCategory('')}>All products</button>
-          {CATEGORIES_LIST.map(item => <button className={category === item.name ? 'selected' : ''} key={item.id} onClick={() => setCategory(item.name)}>{item.name}</button>)}
+          {categories.map(item => <button className={category === item.name ? 'selected' : ''} key={item.id} onClick={() => setCategory(item.name)}>{item.name}</button>)}
         </div>
       </aside>
       <main>
@@ -448,7 +463,7 @@ export function ProductsPage({ go }) {
           {filtered.map(item => <article key={item.id} className="product-card">
             <div className="product-badge">{item.badge}</div>
             <button className="product-open" onClick={() => selectProduct(item, 'productdetail', go)}>
-              <img src={item.image} alt={item.name} onError={event => handleImgError(event, item.category)} loading="lazy"/>
+              <img src={item.image || getProductImage(item.category, item.name)} alt={item.name} onError={event => handleImgError(event, item.category)} loading="lazy"/>
               <h3>{item.name}</h3>
               <p className="product-price">{item.price}</p>
               <p className="product-category">{productCategory(item)}</p>
@@ -467,6 +482,7 @@ export function ProductsPage({ go }) {
 // ============================================
 
 export function ProductDetailPage({ go, content }) {
+  const { products } = catalogueFromContent(content);
   const [product, setProduct] = useState(() => {
     try {
       const selected = JSON.parse(localStorage.getItem('raja_selected_product'));
@@ -476,7 +492,8 @@ export function ProductDetailPage({ go, content }) {
     }
   });
   if (!product) return <section className="page-loading">Choose a product from our catalogue to view its details.</section>;
-  const related = PRODUCTS_DATA.filter(item => item.id !== product.id && item.category === product.category).slice(0, 5);
+  const currentProduct = products.find(item => item.id === product.id) || product;
+  const related = products.filter(item => item.id !== currentProduct.id && item.category === currentProduct.category).slice(0, 5);
   const whatsapp = `https://wa.me/${String(content?.site?.whatsappNumber || '').replace(/\D/g, '')}?text=${encodeURIComponent(`Hello, I am interested in ${product.name}.`)}`;
   const phone = content?.site?.phone || '+91 9003900533';
   const openRelatedProduct = item => {
@@ -486,24 +503,24 @@ export function ProductDetailPage({ go, content }) {
   };
 
   return <>
-    <div className="crumb">Home / {productCategory(product)} / {product.name}</div>
+    <div className="crumb">Home / {productCategory(currentProduct)} / {currentProduct.name}</div>
     <section className="detail">
-      <div className="product-image"><span>{product.badge || 'Product'}</span><img src={product.image} alt={product.name} onError={event => handleImgError(event, product.category)}/></div>
+      <div className="product-image"><span>{currentProduct.badge || 'Product'}</span><img src={currentProduct.image || getProductImage(currentProduct.category, currentProduct.name)} alt={currentProduct.name} onError={event => handleImgError(event, currentProduct.category)}/></div>
       <div className="detail-copy">
-        <small>{productCategory(product)}</small><h1>{product.name}</h1>
-        <p className="product-detail-price" style={{ fontSize: '18px', color: 'var(--red)', fontWeight: '700', margin: '10px 0' }}>{product.price}</p>
-        <p>{product.description}</p><Btn onClick={() => selectProduct(product, 'contact', go)}>Request this product</Btn>
+        <small>{productCategory(currentProduct)}</small><h1>{currentProduct.name}</h1>
+        <p className="product-detail-price" style={{ fontSize: '18px', color: 'var(--red)', fontWeight: '700', margin: '10px 0' }}>{currentProduct.price}</p>
+        <p>{currentProduct.description}</p><Btn onClick={() => selectProduct(currentProduct, 'contact', go)}>Request this product</Btn>
       </div>
       <aside className="details-box">
-        <h3>Product Details</h3><p><b>Category</b><span>{product.category}</span></p>
-        {product.subcategory && <p><b>Series</b><span>{product.subcategory}</span></p>}
-        <p><b>Price</b><span>{product.price}</span></p><p><b>Availability</b><span>Contact us</span></p>
+        <h3>Product Details</h3><p><b>Category</b><span>{currentProduct.category}</span></p>
+        {currentProduct.subcategory && <p><b>Series</b><span>{currentProduct.subcategory}</span></p>}
+        <p><b>Price</b><span>{currentProduct.price}</span></p><p><b>Availability</b><span>Contact us</span></p>
         <div className="help"><b>Need help?</b><a href={`tel:${phone}`}>{phone}</a><a className="whatsapp-button" href={whatsapp} target="_blank" rel="noreferrer">WhatsApp Us</a></div>
       </aside>
     </section>
-    <section className="related"><h2>Related Products in {product.category}</h2>
+    <section className="related"><h2>Related Products in {currentProduct.category}</h2>
       {related.length > 0 ? <div className="related-products-grid">
-        {related.map(item => <button key={item.id} onClick={() => openRelatedProduct(item)}><img src={item.image} alt={item.name} onError={event => handleImgError(event, item.category)} loading="lazy"/><b>{item.name}</b><span>{item.price}</span></button>)}
+        {related.map(item => <button key={item.id} onClick={() => openRelatedProduct(item)}><img src={item.image || getProductImage(item.category, item.name)} alt={item.name} onError={event => handleImgError(event, item.category)} loading="lazy"/><b>{item.name}</b><span>{item.price}</span></button>)}
       </div> : <p>No other products in this category.</p>}
     </section>
   </>;

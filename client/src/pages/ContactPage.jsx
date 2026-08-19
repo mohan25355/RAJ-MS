@@ -35,7 +35,10 @@ export default function ContactPage({ content }) {
             quantity: Number(values.quantity) || 1,
             notes: values.message
           })
-        : await request('/enquiries', 'POST', values);
+        : await request('/enquiries', 'POST', {
+            ...values,
+            source: 'Contact page — Connect with us form',
+          });
 
       setNotice(result.message);
       event.currentTarget.reset();
@@ -148,19 +151,16 @@ export default function ContactPage({ content }) {
               readOnly
             />
           ) : (
-            <select
-              name="product"
-              defaultValue=""
-            >
+            <select name="product" defaultValue="">
               <option value="" disabled>
                 Product / Category
               </option>
-
-              {(content?.categories || []).map(item => (
-                <option key={item.id}>
-                  {item.name}
-                </option>
-              ))}
+              <optgroup label="Categories">
+                {(content?.categories || []).map(item => <option key={`category-${item.id}`} value={`Category: ${item.name}`}>{item.name}</option>)}
+              </optgroup>
+              <optgroup label="Products">
+                {(content?.products || []).map(item => <option key={`product-${item.id}`} value={`Product: ${item.name}`}>{item.name}</option>)}
+              </optgroup>
             </select>
           )}
 
