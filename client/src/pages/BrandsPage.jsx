@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { PageHead } from '../components/ui';
 
 // ============================================
@@ -122,12 +121,6 @@ const dealersData = [
 // ============================================
 
 export default function BrandsPage({ content }) {
-  const [term, setTerm] = useState('');
-
-  const filteredBrands = brandsData.filter(item =>
-    item.name.toLowerCase().includes(term.toLowerCase())
-  );
-
   return (
     <>
       <PageHead
@@ -141,185 +134,101 @@ export default function BrandsPage({ content }) {
       />
 
       <section className="brands-section">
-        {/* ============================================
-            PARTNERS MARQUEE
-        ============================================ */}
-        <div className="marquee-container">
+        <div className="logo-group">
           <h2 className="marquee-title" style={{ color: '#e31b16' }}>OUR PARTNERS</h2>
-          <div className="brand-marquee">
-            <div className="brand-marquee-track">
-              {[...filteredBrands, ...filteredBrands].map(
-                (item, index) => (
-                  <div
-                    className="brand-logo-item"
-                    key={`${item.id}-${index}`}
-                    aria-hidden={
-                      index >= filteredBrands.length
-                        ? true
-                        : undefined
-                    }
-                  >
-                    <img
-                      src={item.logo}
-                      alt={item.name}
-                    />
-                  </div>
-                )
-              )}
+          <div className="logo-wall">
+            <div className="logo-grid">
+              {brandsData.map((item, index) => (
+                <div className="logo-card" key={item.id} style={{ '--logo-order': index }}>
+                  <img src={item.logo} alt={item.name} />
+                </div>
+              ))}
             </div>
           </div>
         </div>
 
-        {/* ============================================
-            DEALERS MARQUEE
-        ============================================ */}
-        <div className="marquee-container">
-          <h2 className="marquee-title" style={{ color: '#e31b16' }}>  OUR BRAND</h2>
-          <div className="brand-marquee dealer-marquee">
-            <div className="brand-marquee-track dealer-track">
-              {[...dealersData, ...dealersData].map(
-                (item, index) => (
-                  <div
-                    className="brand-logo-item"
-                    key={`${item.id}-${index}`}
-                    aria-hidden={
-                      index >= dealersData.length
-                        ? true
-                        : undefined
-                    }
-                  >
-                    <img
-                      src={item.logo}
-                      alt={item.name}
-                    />
-                  </div>
-                )
-              )}
+        <div className="logo-group">
+          <h2 className="marquee-title" style={{ color: '#e31b16' }}>OUR BRANDS</h2>
+          <div className="logo-wall">
+            <div className="logo-grid">
+              {dealersData.map((item, index) => (
+                <div className="logo-card" key={item.id} style={{ '--logo-order': index }}>
+                  <img src={item.logo} alt={item.name} />
+                </div>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
       {/* ============================================
-          MARQUEE CSS
+          LOGO WALL CSS
       ============================================ */}
       <style>{`
         .brands-section {
-          padding: 40px 0;
+          padding: 54px 8% 20px;
+          background: #fff;
         }
 
-        .marquee-container {
-          margin-bottom: 60px;
+        .logo-group {
+          max-width: 1280px;
+          margin: 0 auto 58px;
         }
 
         .marquee-title {
           font-size: 28px;
           font-weight: 800;
-          margin-bottom: 20px;
+          margin: 0 0 22px;
           text-align: center;
           color: #1a1a1a;
         }
 
-        .brand-marquee {
-          width: 100%;
-          overflow: hidden;
-          position: relative;
-          margin-top: 20px;
-          padding: 15px 0;
-          background: #f8f8f8;
+        .logo-wall {
+          padding: clamp(18px, 3vw, 38px);
+          background: linear-gradient(135deg, #f7f9fc, #fff);
+          border: 1px solid #e4e9ed;
+          border-radius: 22px;
+          box-shadow: 0 18px 45px rgba(21, 32, 43, .07);
+        }
+
+        .logo-grid {
+          display: grid;
+          grid-template-columns: repeat(5, minmax(0, 1fr));
+          gap: 14px;
+        }
+
+        .logo-card {
+          min-height: 108px;
+          display: grid;
+          place-items: center;
+          padding: 16px;
+          background: #fff;
+          border: 1px solid #e7ebef;
           border-radius: 12px;
+          animation: logo-card-reveal .55s both;
+          animation-delay: calc(var(--logo-order) * 55ms);
+          animation-timeline: view();
+          animation-range: entry 8% cover 28%;
+          transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
         }
 
-        .brand-marquee-track {
-          display: flex;
-          align-items: center;
-          width: max-content;
-          gap: 70px;
-
-          animation:
-            brand-scroll
-            35s
-            linear
-            infinite;
-
-          will-change: transform;
+        .logo-card:hover {
+          transform: translateY(-5px);
+          border-color: #f2b4b0;
+          box-shadow: 0 12px 25px rgba(227, 27, 22, .12);
         }
 
-        /* Dealer marquee scrolls in opposite direction */
-        .dealer-track {
-          animation:
-            brand-scroll-reverse
-            30s
-            linear
-            infinite;
-        }
-
-        .brand-logo-item {
-          flex: 0 0 auto;
-
-          width: 160px;
-          height: 90px;
-
-          display: flex;
-          align-items: center;
-          justify-content: center;
-
-          background: transparent;
-        }
-
-        .brand-logo-item img {
-          width: 145px;
-          height: 75px;
-
-          max-width: 100%;
-
+        .logo-card img {
+          width: 100%;
+          max-width: 145px;
+          height: 68px;
           object-fit: contain;
-
           display: block;
-
-          filter: grayscale(8%);
-
-          opacity: 0.92;
-
-          transition:
-            opacity 0.25s ease,
-            transform 0.25s ease,
-            filter 0.25s ease;
         }
 
-        .brand-logo-item img:hover {
-          opacity: 1;
-
-          filter: grayscale(0%);
-
-          transform: scale(1.08);
-        }
-
-
-        /* ============================================
-           CONTINUOUS LEFT SCROLL
-        ============================================ */
-        @keyframes brand-scroll {
-          from {
-            transform: translateX(0);
-          }
-
-          to {
-            transform: translateX(-50%);
-          }
-        }
-
-        /* ============================================
-           CONTINUOUS RIGHT SCROLL (FOR DEALERS)
-        ============================================ */
-        @keyframes brand-scroll-reverse {
-          from {
-            transform: translateX(-50%);
-          }
-
-          to {
-            transform: translateX(0);
-          }
+        @keyframes logo-card-reveal {
+          from { opacity: 0; transform: translateY(18px) scale(.96); }
+          to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
 
@@ -327,39 +236,18 @@ export default function BrandsPage({ content }) {
            MOBILE
         ============================================ */
         @media (max-width: 700px) {
-          .marquee-container {
-            margin-bottom: 40px;
-          }
+          .brands-section { padding: 40px 18px 10px; }
+          .logo-group { margin-bottom: 42px; }
 
           .marquee-title {
             font-size: 22px;
-            margin-bottom: 15px;
+            margin-bottom: 16px;
           }
 
-          .brand-marquee {
-            margin-top: 15px;
-            padding: 10px 0;
-          }
-
-          .brand-marquee-track {
-            gap: 35px;
-
-            animation-duration: 25s;
-          }
-
-          .dealer-track {
-            animation-duration: 22s;
-          }
-
-          .brand-logo-item {
-            width: 110px;
-            height: 65px;
-          }
-
-          .brand-logo-item img {
-            width: 100px;
-            height: 55px;
-          }
+          .logo-wall { padding: 14px; border-radius: 16px; }
+          .logo-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+          .logo-card { min-height: 82px; padding: 10px; }
+          .logo-card img { height: 50px; }
         }
 
 
@@ -367,25 +255,8 @@ export default function BrandsPage({ content }) {
            SMALL MOBILE
         ============================================ */
         @media (max-width: 420px) {
-          .brand-marquee-track {
-            gap: 25px;
-
-            animation-duration: 22s;
-          }
-
-          .dealer-track {
-            animation-duration: 20s;
-          }
-
-          .brand-logo-item {
-            width: 95px;
-            height: 60px;
-          }
-
-          .brand-logo-item img {
-            width: 88px;
-            height: 50px;
-          }
+          .logo-card { min-height: 72px; }
+          .logo-card img { height: 44px; }
         }
       `}</style>
     </>

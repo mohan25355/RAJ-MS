@@ -14,7 +14,7 @@ import DashboardPage from './pages/DashboardPage';
 import { getContent } from './lib/api';
 import { testSupabase } from './lib/testSupabase';
 
-import preloaderLogoSrc from './assets/logo/logo.jpeg';
+import preloaderLogoSrc from './assets/logo/logo.png';
 import promotionImage from './assets/addimage/add.jpeg';
 
 import './styles.css';

@@ -205,101 +205,71 @@ export default function HomePage({ go }) {
         title="Top Partners We Stock"
         text="Authentic products from industry-leading manufacturers."
       >
-        <div className="brand-marquee">
-          <div className="brand-marquee-track">
-            {[...brandsData, ...brandsData].map((item, index) => (
-              <div
-                className="brand-logo-item"
-                key={`${item.id}-${index}`}
-                aria-hidden={index >= brandsData.length || undefined}
-              >
-                <img
-                  src={item.logo}
-                  alt={item.name}
-                />
+        <div className="partner-logo-wall">
+          <div className="partner-logo-grid">
+            {brandsData.map((item, index) => (
+              <div className="partner-logo-card" key={item.id} style={{ '--logo-order': index }}>
+                <img src={item.logo} alt={item.name} />
               </div>
             ))}
           </div>
         </div>
 
         <style>{`
-          .brand-marquee {
-            width: 100%;
-            overflow: hidden;
-            position: relative;
-            margin-top: 25px;
-            padding: 10px 0;
+          .partner-logo-wall {
+            margin-top: 28px;
+            padding: clamp(18px, 3vw, 38px);
+            background: linear-gradient(135deg, #f7f9fc, #ffffff);
+            border: 1px solid #e5e9ee;
+            border-radius: 22px;
+            box-shadow: 0 18px 45px rgba(21, 32, 43, 0.07);
           }
 
-          .brand-marquee-track {
-            display: flex;
-            align-items: center;
-            width: max-content;
-            gap: 70px;
-            animation: brand-scroll 28s linear infinite;
+          .partner-logo-grid {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: 14px;
           }
 
-          .brand-logo-item {
-            flex: 0 0 auto;
-            width: 150px;
-            height: 80px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: transparent;
+          .partner-logo-card {
+            min-height: 105px;
+            display: grid;
+            place-items: center;
+            padding: 16px;
+            border: 1px solid #e7ebef;
+            border-radius: 12px;
+            background: #fff;
+            animation: logo-reveal 0.55s both;
+            animation-delay: calc(var(--logo-order) * 55ms);
+            animation-timeline: view();
+            animation-range: entry 8% cover 28%;
+            transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
           }
 
-          .brand-logo-item img {
-            width: 140px;
-            height: 70px;
-            object-fit: contain;
+          .partner-logo-card:hover {
+            transform: translateY(-5px);
+            border-color: #d8b5ff;
+            box-shadow: 0 12px 25px rgba(91, 51, 173, 0.13);
+          }
+
+          .partner-logo-card img {
             display: block;
-            filter: grayscale(10%);
-            opacity: 0.9;
-            transition:
-              opacity 0.25s ease,
-              transform 0.25s ease,
-              filter 0.25s ease;
+            width: 100%;
+            max-width: 145px;
+            height: 68px;
+            object-fit: contain;
           }
 
-          .brand-logo-item img:hover {
-            opacity: 1;
-            filter: grayscale(0%);
-            transform: scale(1.08);
-          }
-
-          @keyframes brand-scroll {
-            from {
-              transform: translateX(0);
-            }
-            to {
-              transform: translateX(-50%);
-            }
+          @keyframes logo-reveal {
+            from { opacity: 0; transform: translateY(18px) scale(.96); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
           }
 
           @media (max-width: 700px) {
-            .brand-marquee {
-              margin-top: 20px;
-              overflow: hidden;
-            }
-
-            .brand-marquee-track {
-              display: flex;
-              width: max-content;
-              gap: 32px;
-              animation: brand-scroll 22s linear infinite;
-            }
-
-            .brand-logo-item {
-              width: 105px;
-              height: 62px;
-            }
-
-            .brand-logo-item img {
-              width: 96px;
-              max-width: 100%;
-              height: 54px;
-            }
+            .partner-logo-wall { margin-top: 20px; padding: 14px; border-radius: 16px; }
+            .partner-logo-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+            .partner-logo-card { min-height: 82px; padding: 10px; }
+            .partner-logo-card img { height: 50px; }
           }
         `}</style>
       </Section>

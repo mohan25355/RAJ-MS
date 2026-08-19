@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { ArrowRight, ShieldCheck } from 'lucide-react';
-import rajaMark from '../assets/logo/logo.jpeg';
+import rajaMark from '../assets/logo/logo.png';
 
 export const Btn = ({ children, onClick, plain = false, type = 'button', disabled = false }) => <button type={type} disabled={disabled} onClick={onClick} className={`btn ${plain ? 'plain' : ''}`}>{children}</button>;
 export function CountUp({ value, duration = 1300 }) {

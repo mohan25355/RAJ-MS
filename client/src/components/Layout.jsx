@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Menu, ChevronRight, X, Home, Package, Image as ImageIcon, FileText, Boxes, Phone, Users, MessageCircle, FolderKanban } from 'lucide-react';
-import rajaMark from '../assets/logo/logo.jpeg';
+import rajaMark from '../assets/logo/logo.png';
 export function Logo() {
   return <a className="logo" href="#home" aria-label="Raja Electricals 'N' Hardwares home">
     <span className="brand-mark-frame"><img src={rajaMark} alt="" className="brand-mark" /></span>
