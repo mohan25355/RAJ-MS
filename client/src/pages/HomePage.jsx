@@ -147,7 +147,7 @@ export default function HomePage({ go }) {
       <section className="cms-hero">
         <div>
           <small>{site.welcome || 'Welcome to Raja Electricals'}</small>
-          <HeroTitle title={site.heroTitle || 'Powering Every Project.'} />
+          <HeroTitle title={site.heroTitle || 'Powering Every Project'} />
           <p>{site.heroText || 'Electrical · Hardware · Safety · Industrial Solutions'}</p>
           <div className="hero-numbers">
             <div>
