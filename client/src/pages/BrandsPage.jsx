@@ -259,16 +259,16 @@ function LegacyBrandsPage({ content }) {
   );
 }
 
-export default function BrandsPage({ go }) {
-  return <BrandShowcase go={go} />;
+export default function BrandsPage() {
+  return <BrandShowcase />;
 }
 
 const brandGroups = [
-  ['Paints & Coatings', 'Colours for a brighter tomorrow.', PaintRoller, 'rose', 'https://images.unsplash.com/photo-1562259949-a4ca0ea981cd?auto=format&fit=crop&w=1000&q=85', [partnerLogo('1.png'), partnerLogo('10.jpg'), partnerLogo('26.png')]],
+  ['Paints & Coatings', 'Colours for a brighter tomorrow.', PaintRoller, 'rose', 'https://images.unsplash.com/photo-1525909002-1b05e0c869d8?auto=format&fit=crop&w=1000&q=85', [partnerLogo('1.png'), partnerLogo('10.jpg'), partnerLogo('26.png')]],
   ['Wires & Cables', 'Powering a safer tomorrow.', Cable, 'gold', 'https://images.unsplash.com/photo-1530124566582-a618bc2615dc?auto=format&fit=crop&w=1000&q=85', [partnerLogo('3.jpg'), partnerLogo('24.jpg')]],
   ['Pipes & Plumbing', 'Flowing solutions for life.', Droplets, 'blue', 'https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?auto=format&fit=crop&w=1000&q=85', [partnerLogo('4.jpg'), partnerLogo('9.png'), partnerLogo('15.png')]],
   ['Switches & Electrical', 'Smart solutions for modern spaces.', Wrench, 'purple', 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=1000&q=85', [partnerLogo('5.png'), partnerLogo('7.png'), partnerLogo('11.png'), partnerLogo('23.png'), partnerLogo('25.png')]],
-  ['Lighting', 'Bright ideas for every space.', Lightbulb, 'gold', 'https://images.unsplash.com/photo-1513506003901-1e6a229e7e1e?auto=format&fit=crop&w=1000&q=85', [partnerLogo('14.jpg'), partnerLogo('20.png'), partnerLogo('21.png')]],
+  ['Lighting', 'Bright ideas for every space.', Lightbulb, 'gold', 'https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=1000&q=85', [partnerLogo('14.jpg'), partnerLogo('20.png'), partnerLogo('21.png')]],
   ['Fans', 'Cool comfort. Every day.', Fan, 'blue', 'https://images.unsplash.com/photo-1615874694520-474822394e73?auto=format&fit=crop&w=1000&q=85', [partnerLogo('16.jpg'), dealer1, partnerLogo('22.png'), partnerLogo('8.jpg')]],
   ['Water Heaters', 'Hot water. Happier living.', Thermometer, 'rose', 'https://images.unsplash.com/photo-1585704032915-c3400ca199e7?auto=format&fit=crop&w=1000&q=85', [partnerLogo('22.png'), partnerLogo('8.jpg'), partnerLogo('21.png'), partnerLogo('13.png')]],
   ['Sanitaryware & Bathroom', 'Elegance for everyday living.', Bath, 'mint', 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1000&q=85', [partnerLogo('20.png'), partnerLogo('6.jpg'), partnerLogo('17.png'), partnerLogo('13.png')]],
@@ -278,7 +278,7 @@ const brandGroups = [
   ['Home Appliances', 'Everyday essentials. Trusted brands.', House, 'orange', 'https://images.unsplash.com/photo-1556911220-bff31c812dba?auto=format&fit=crop&w=1000&q=85', [partnerLogo('8.jpg'), partnerLogo('16.jpg')]],
 ];
 
-function BrandShowcase({ go }) {
+function BrandShowcase() {
   return <main className="brand-showcase" id="top">
     <h1 className="brand-page-label">OUR BRANDS</h1>
     <section className="brand-group-grid" aria-label="Brands by category">
@@ -286,7 +286,6 @@ function BrandShowcase({ go }) {
         <img className="brand-group-image" src={image} alt="" />
         <div className="brand-group-copy"><span className="brand-group-icon"><Icon size={22} strokeWidth={2.5} /></span><h2>{name}</h2><p>{description}</p></div>
         <div className="brand-logo-grid">{logos.filter(Boolean).map((logo, index) => <div className="brand-logo" key={`${name}-${index}`}><img src={logo} alt={`${name} brand`} /></div>)}</div>
-        <button className="brand-view-all" type="button" onClick={() => go('home')}>View All <ArrowRight size={18} /></button>
       </article>)}
     </section>
 
