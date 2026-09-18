@@ -3,6 +3,7 @@ import { Award, Boxes, CheckCircle2, Clock, HardHat, Headphones, Package, Shield
 import { categories as staticCategories, images } from '../data/catalog';
 import { Btn, CtaBand } from '../components/ui';
 import { Store } from 'lucide-react';
+import homeStorefront from '../assets/gallary/new home.jpeg';
 
 const fallbackImage = item => item?.image || item?.logo || images.worker;
 const homeContent = {
@@ -305,7 +306,7 @@ export default function HomePage({ go }) {
       <section className="intro-section">
         <div className="intro-shop-image">
           <img
-            src={galleryImage('1.webp')}
+            src={homeStorefront}
             alt="Raja Electricals 'N' Hardwares Shop"
           />
           <div className="shop-image-overlay">
