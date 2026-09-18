@@ -30,6 +30,7 @@ import { PageHead } from '../components/ui';
 // import brand24 from '../assets/PARTNERS/PARTNERS/24.jpg';
 // import brand25 from '../assets/PARTNERS/PARTNERS/25.png';
 // import brand26 from '../assets/PARTNERS/PARTNERS/26.png';
+
 // ============================================
 // DEALER IMAGES
 // ============================================
@@ -58,7 +59,6 @@ import dealer20 from '../assets/DEALERS/DEALERS/20.png';
 // ============================================
 // BRANDS DATA (PARTNERS)
 // ============================================
-
 
 // const brandsData = [
   // { id: 'brand-1', name: 'Brand 1', logo: brand1 },
