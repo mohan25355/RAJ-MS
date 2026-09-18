@@ -4,33 +4,32 @@ import { PageHead } from '../components/ui';
 // PARTNER / BRAND IMAGES
 // ============================================
 
-import brand1 from '../assets/PARTNERS/PARTNERS/1.png';
-import brand2 from '../assets/PARTNERS/PARTNERS/2.jpg';
-import brand3 from '../assets/PARTNERS/PARTNERS/3.jpg';
-import brand4 from '../assets/PARTNERS/PARTNERS/4.jpg';
-import brand5 from '../assets/PARTNERS/PARTNERS/5.png';
-import brand6 from '../assets/PARTNERS/PARTNERS/6.jpg';
-import brand7 from '../assets/PARTNERS/PARTNERS/7.png';
-import brand8 from '../assets/PARTNERS/PARTNERS/8.jpg';
-import brand9 from '../assets/PARTNERS/PARTNERS/9.png';
-import brand10 from '../assets/PARTNERS/PARTNERS/10.jpg';
-import brand11 from '../assets/PARTNERS/PARTNERS/11.png';
-import brand12 from '../assets/PARTNERS/PARTNERS/12.jpg';
-import brand13 from '../assets/PARTNERS/PARTNERS/13.png';
-import brand14 from '../assets/PARTNERS/PARTNERS/14.jpg';
-import brand15 from '../assets/PARTNERS/PARTNERS/15.png';
-import brand16 from '../assets/PARTNERS/PARTNERS/16.jpg';
-import brand17 from '../assets/PARTNERS/PARTNERS/17.png';
-import brand18 from '../assets/PARTNERS/PARTNERS/18.png';
-import brand19 from '../assets/PARTNERS/PARTNERS/19.png';
-import brand20 from '../assets/PARTNERS/PARTNERS/20.png';
-import brand21 from '../assets/PARTNERS/PARTNERS/21.png';
-import brand22 from '../assets/PARTNERS/PARTNERS/22.png';
-import brand23 from '../assets/PARTNERS/PARTNERS/23.png';
-import brand24 from '../assets/PARTNERS/PARTNERS/24.jpg';
-import brand25 from '../assets/PARTNERS/PARTNERS/25.png';
-import brand26 from '../assets/PARTNERS/PARTNERS/26.png';
-
+// import brand1 from '../assets/PARTNERS/PARTNERS/1.png';
+// import brand2 from '../assets/PARTNERS/PARTNERS/2.jpg';
+// import brand3 from '../assets/PARTNERS/PARTNERS/3.jpg';
+// import brand4 from '../assets/PARTNERS/PARTNERS/4.jpg';
+// import brand5 from '../assets/PARTNERS/PARTNERS/5.png';
+// import brand6 from '../assets/PARTNERS/PARTNERS/6.jpg';
+// import brand7 from '../assets/PARTNERS/PARTNERS/7.png';
+// import brand8 from '../assets/PARTNERS/PARTNERS/8.jpg';
+// import brand9 from '../assets/PARTNERS/PARTNERS/9.png';
+// import brand10 from '../assets/PARTNERS/PARTNERS/10.jpg';
+// import brand11 from '../assets/PARTNERS/PARTNERS/11.png';
+// import brand12 from '../assets/PARTNERS/PARTNERS/12.jpg';
+// import brand13 from '../assets/PARTNERS/PARTNERS/13.png';
+// import brand14 from '../assets/PARTNERS/PARTNERS/14.jpg';
+// import brand15 from '../assets/PARTNERS/PARTNERS/15.png';
+// import brand16 from '../assets/PARTNERS/PARTNERS/16.jpg';
+// import brand17 from '../assets/PARTNERS/PARTNERS/17.png';
+// import brand18 from '../assets/PARTNERS/PARTNERS/18.png';
+// import brand19 from '../assets/PARTNERS/PARTNERS/19.png';
+// import brand20 from '../assets/PARTNERS/PARTNERS/20.png';
+// import brand21 from '../assets/PARTNERS/PARTNERS/21.png';
+// import brand22 from '../assets/PARTNERS/PARTNERS/22.png';
+// import brand23 from '../assets/PARTNERS/PARTNERS/23.png';
+// import brand24 from '../assets/PARTNERS/PARTNERS/24.jpg';
+// import brand25 from '../assets/PARTNERS/PARTNERS/25.png';
+// import brand26 from '../assets/PARTNERS/PARTNERS/26.png';
 // ============================================
 // DEALER IMAGES
 // ============================================
@@ -60,34 +59,35 @@ import dealer20 from '../assets/DEALERS/DEALERS/20.png';
 // BRANDS DATA (PARTNERS)
 // ============================================
 
-const brandsData = [
-  { id: 'brand-1', name: 'Brand 1', logo: brand1 },
-  { id: 'brand-2', name: 'Brand 2', logo: brand2 },
-  { id: 'brand-3', name: 'Brand 3', logo: brand3 },
-  { id: 'brand-4', name: 'Brand 4', logo: brand4 },
-  { id: 'brand-5', name: 'Brand 5', logo: brand5 },
-  { id: 'brand-6', name: 'Brand 6', logo: brand6 },
-  { id: 'brand-7', name: 'Brand 7', logo: brand7 },
-  { id: 'brand-8', name: 'Brand 8', logo: brand8 },
-  { id: 'brand-9', name: 'Brand 9', logo: brand9 },
-  { id: 'brand-10', name: 'Brand 10', logo: brand10 },
-  { id: 'brand-11', name: 'Brand 11', logo: brand11 },
-  { id: 'brand-12', name: 'Brand 12', logo: brand12 },
-  { id: 'brand-13', name: 'Brand 13', logo: brand13 },
-  { id: 'brand-14', name: 'Brand 14', logo: brand14 },
-  { id: 'brand-15', name: 'Brand 15', logo: brand15 },
-  { id: 'brand-16', name: 'Brand 16', logo: brand16 },
-  { id: 'brand-17', name: 'Brand 17', logo: brand17 },
-  { id: 'brand-18', name: 'Brand 18', logo: brand18 },
-  { id: 'brand-19', name: 'Brand 19', logo: brand19 },
-  { id: 'brand-20', name: 'Brand 20', logo: brand20 },
-  { id: 'brand-21', name: 'Brand 21', logo: brand21 },
-  { id: 'brand-22', name: 'Brand 22', logo: brand22 },
-  { id: 'brand-23', name: 'Brand 23', logo: brand23 },
-  { id: 'brand-24', name: 'Brand 24', logo: brand24 },
-  { id: 'brand-25', name: 'Brand 25', logo: brand25 },
-  { id: 'brand-26', name: 'Brand 26', logo: brand26 }
-];
+
+// const brandsData = [
+  // { id: 'brand-1', name: 'Brand 1', logo: brand1 },
+  // { id: 'brand-2', name: 'Brand 2', logo: brand2 },
+  // { id: 'brand-3', name: 'Brand 3', logo: brand3 },
+  // { id: 'brand-4', name: 'Brand 4', logo: brand4 },
+  // { id: 'brand-5', name: 'Brand 5', logo: brand5 },
+  // { id: 'brand-6', name: 'Brand 6', logo: brand6 },
+  // { id: 'brand-7', name: 'Brand 7', logo: brand7 },
+  // { id: 'brand-8', name: 'Brand 8', logo: brand8 },
+  // { id: 'brand-9', name: 'Brand 9', logo: brand9 },
+  // { id: 'brand-10', name: 'Brand 10', logo: brand10 },
+  // { id: 'brand-11', name: 'Brand 11', logo: brand11 },
+  // { id: 'brand-12', name: 'Brand 12', logo: brand12 },
+  // { id: 'brand-13', name: 'Brand 13', logo: brand13 },
+  // { id: 'brand-14', name: 'Brand 14', logo: brand14 },
+  // { id: 'brand-15', name: 'Brand 15', logo: brand15 },
+  // { id: 'brand-16', name: 'Brand 16', logo: brand16 },
+  // { id: 'brand-17', name: 'Brand 17', logo: brand17 },
+  // { id: 'brand-18', name: 'Brand 18', logo: brand18 },
+  // { id: 'brand-19', name: 'Brand 19', logo: brand19 },
+  // { id: 'brand-20', name: 'Brand 20', logo: brand20 },
+  // { id: 'brand-21', name: 'Brand 21', logo: brand21 },
+  // { id: 'brand-22', name: 'Brand 22', logo: brand22 },
+  // { id: 'brand-23', name: 'Brand 23', logo: brand23 },
+  // { id: 'brand-24', name: 'Brand 24', logo: brand24 },
+  // { id: 'brand-25', name: 'Brand 25', logo: brand25 },
+  // { id: 'brand-26', name: 'Brand 26', logo: brand26 }
+// ];
 
 // ============================================
 // DEALERS DATA
