@@ -169,7 +169,7 @@ export default function HomePage({ go }) {
           {slides.length
             ? <img key={slides[slide]} src={slides[slide]} alt="Raja Electricals supplies" />
             : <img src={images.worker} alt="Raja Electricals supplies" />}
-          <span><Truck size={19} />{site.deliveryText || 'Same Day Delivery Available'}</span>
+          <span><Truck size={19} />{site.deliveryText || 'All Your Electrical Needs, Under One Roof'}</span>
           {slides.length > 1 && (
             <div className="hero-dots">
               {slides.map((_, index) => (
