@@ -101,7 +101,7 @@ export default function ContactPage({ content }) {
 
           <p>
             <Clock />
-            Mon - Sat: 08:00 AM - 7:00 PM
+            Monday to Saturday: 9:00 AM – 8:00 PM
           </p>
 
           <img src={contactStorefront} alt="Raja Electricals storefront" />
