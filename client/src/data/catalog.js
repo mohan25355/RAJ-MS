@@ -9,7 +9,7 @@ export const images = {
   pump: 'https://images.openai.com/static-rsc-4/r1i_7ROnzsBSpBE0e-aCkqqfc9QRvxTcQDWI9kwavPsQTRQr06E3kvZjz7thRWFvcQ9l2uMPAmoWNmSBuExOyfCKobIqNICkdVv2pnOthnN52hxUkl-7R9wlnpORJ717l_GS_iZTPxDK-D_Rhx2ycrXogkRWJBp3AA3aIH-Zb2w?purpose=inline',
   plant: 'https://images.unsplash.com/photo-1513828583688-c52646db42da?auto=format&fit=crop&w=1000&q=85',
   construction: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1000&q=85',
-  manufacturing: 'https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?auto=format&fit=crop&w=1000&q=85',
+  manufacturing: 'https://images.unsplash.com/photo-1513828583688-c52646db42da?auto=format&fit=crop&w=1000&q=85',
   facilities: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1000&q=85',
   infrastructure: 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=1000&q=85',
   site: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1000&q=85',
