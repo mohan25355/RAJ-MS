@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Clock, Mail, MapPin, Phone } from 'lucide-react';
-import { images } from '../data/catalog';
+import contactStorefront from '../assets/addimage/new contact image.jpeg';
 import { request } from '../lib/api';
 import { Btn, PageHead } from '../components/ui';
 
@@ -104,7 +104,7 @@ export default function ContactPage({ content }) {
             Mon - Sat: 08:00 AM - 7:00 PM
           </p>
 
-          <img src={images.site} alt="Raja Electricals" />
+          <img src={contactStorefront} alt="Raja Electricals storefront" />
         </div>
 
         <form onSubmit={submit}>
