@@ -156,6 +156,11 @@ import toolsMeasurementTape from '../assets/product image/Tools and Instrument/M
 // fallback until the product-specific pump photos are added.
 const WATER_PUMP_FALLBACK = 'https://images.unsplash.com/photo-1542013936693-884638332954?auto=format&fit=crop&w=900&q=85';
 
+const WHATSAPP_ORDER_NUMBER = '919003900533';
+
+const productWhatsAppLink = product =>
+  `https://wa.me/${WHATSAPP_ORDER_NUMBER}?text=${encodeURIComponent(`Hello Raja Electricals, I would like to order / request a quote for ${product.name}.`)}`;
+
 const selectProduct = (item, page, go) => {
   localStorage.setItem('raja_selected_product', JSON.stringify(item));
   go(page, { keepOrder: page === 'contact' });
@@ -468,7 +473,7 @@ export function ProductsPage({ go, content }) {
               <p className="product-price">{item.price}</p>
               <p className="product-category">{productCategory(item)}</p>
             </button>
-            <button className="order-product" onClick={() => selectProduct(item, 'contact', go)}>Order / Quote</button>
+            <a className="order-product" href={productWhatsAppLink(item)} target="_blank" rel="noreferrer" style={{ display: 'block', boxSizing: 'border-box', textAlign: 'center', textDecoration: 'none' }}>Order / Quote on WhatsApp</a>
           </article>)}
         </div>
         {!filtered.length && <p className="no-products">No products match your search.</p>}
@@ -494,7 +499,7 @@ export function ProductDetailPage({ go, content }) {
   if (!product) return <section className="page-loading">Choose a product from our catalogue to view its details.</section>;
   const currentProduct = products.find(item => item.id === product.id) || product;
   const related = products.filter(item => item.id !== currentProduct.id && item.category === currentProduct.category).slice(0, 5);
-  const whatsapp = `https://wa.me/${String(content?.site?.whatsappNumber || '').replace(/\D/g, '')}?text=${encodeURIComponent(`Hello, I am interested in ${product.name}.`)}`;
+  const whatsapp = productWhatsAppLink(currentProduct);
   const phone = content?.site?.phone || '+91 9003900533';
   const openRelatedProduct = item => {
     localStorage.setItem('raja_selected_product', JSON.stringify(item));
@@ -509,7 +514,7 @@ export function ProductDetailPage({ go, content }) {
       <div className="detail-copy">
         <small>{productCategory(currentProduct)}</small><h1>{currentProduct.name}</h1>
         <p className="product-detail-price" style={{ fontSize: '18px', color: 'var(--red)', fontWeight: '700', margin: '10px 0' }}>{currentProduct.price}</p>
-        <p>{currentProduct.description}</p><Btn onClick={() => selectProduct(currentProduct, 'contact', go)}>Request this product</Btn>
+        <p>{currentProduct.description}</p><a className="btn" href={whatsapp} target="_blank" rel="noreferrer">Request this product on WhatsApp</a>
       </div>
       <aside className="details-box">
         <h3>Product Details</h3><p><b>Category</b><span>{currentProduct.category}</span></p>
