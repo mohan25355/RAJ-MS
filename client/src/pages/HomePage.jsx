@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from 'react';
 import { Award, Boxes, CheckCircle2, Clock, HardHat, Headphones, Package, Shield, Star, Truck, Users, Wrench, Zap } from 'lucide-react';
 import { categories as staticCategories, images } from '../data/catalog';
 import { Btn, CtaBand } from '../components/ui';
+import { Store } from 'lucide-react';
 
 const fallbackImage = item => item?.image || item?.logo || images.worker;
 const homeContent = {
@@ -169,7 +170,10 @@ export default function HomePage({ go }) {
           {slides.length
             ? <img key={slides[slide]} src={slides[slide]} alt="Raja Electricals supplies" />
             : <img src={images.worker} alt="Raja Electricals supplies" />}
-          <span><Truck size={19} />{site.deliveryText || 'All Your Electrical Needs, Under One Roof'}</span>
+         <span>
+  <Store size={19} />
+  {site.deliveryText || 'All Your Electrical Needs, Under One Roof'}
+</span>
           {slides.length > 1 && (
             <div className="hero-dots">
               {slides.map((_, index) => (
