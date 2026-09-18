@@ -135,19 +135,6 @@ export default function BrandsPage({ content }) {
 
       <section className="brands-section">
         <div className="logo-group">
-          <h2 className="marquee-title" style={{ color: '#e31b16' }}>OUR PARTNERS</h2>
-          <div className="logo-wall">
-            <div className="logo-grid">
-              {brandsData.map((item, index) => (
-                <div className="logo-card" key={item.id} style={{ '--logo-order': index }}>
-                  <img src={item.logo} alt={item.name} />
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        <div className="logo-group">
           <h2 className="marquee-title" style={{ color: '#e31b16' }}>OUR BRANDS</h2>
           <div className="logo-wall">
             <div className="logo-grid">
