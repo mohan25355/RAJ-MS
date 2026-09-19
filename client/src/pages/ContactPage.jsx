@@ -93,11 +93,11 @@ export default function ContactPage({ content }) {
             <Phone />
             {site.phone || '+91 9003900533'}
           </p>
-
+{/* 
           <p>
             <Mail />
             {site.email || 'sales@rkinnovations.com'}
-          </p>
+          </p> */}
 
           <p>
             <Clock />
