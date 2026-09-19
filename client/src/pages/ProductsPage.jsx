@@ -1,49 +1,8 @@
 import { useState } from 'react';
 import { Btn, PageHead } from '../components/ui';
-import { resolveApiUrl } from '../lib/api';
+import { resolveProductImage, handleProductImageError, WATER_PUMP_FALLBACK } from '../utils/productImageResolver';
 
-// ============================================
-// DYNAMIC PRODUCT ASSET RESOLUTION (Vite import.meta.glob)
-// Replaces 137+ static imports to optimize initial JS bundle size
-// ============================================
-
-const productAssetModules = import.meta.glob('../assets/product image/**/*', { eager: true, import: 'default' });
-
-const WATER_PUMP_FALLBACK = 'https://images.unsplash.com/photo-1542013936693-884638332954?auto=format&fit=crop&w=900&q=85';
 const WHATSAPP_ORDER_NUMBER = '919003900533';
-
-const PRODUCT_IMAGES = {};
-const CATEGORY_IMAGES = {
-  'Water Pumps': WATER_PUMP_FALLBACK,
-};
-
-for (const [path, url] of Object.entries(productAssetModules)) {
-  const parts = path.split('/');
-  const filenameWithExt = parts[parts.length - 1];
-  const filename = filenameWithExt.replace(/\.(jpg|jpeg|png|webp)$/i, '');
-  PRODUCT_IMAGES[filename] = url;
-
-  if (parts.length >= 3) {
-    const categoryFolder = parts[parts.length - 2];
-    if (!CATEGORY_IMAGES[categoryFolder]) {
-      CATEGORY_IMAGES[categoryFolder] = url;
-    }
-  }
-}
-
-// Fallback & specific aliases
-PRODUCT_IMAGES['Life Jacket / Life Buoy'] = PRODUCT_IMAGES['Life JacketLife Buoy'] || CATEGORY_IMAGES['Emergency Response Equipment'];
-PRODUCT_IMAGES['Scissors Barrier'] = PRODUCT_IMAGES['Queue Manager'];
-PRODUCT_IMAGES['Quatro Bins'] = PRODUCT_IMAGES['Trio Bins'];
-PRODUCT_IMAGES['Two in One'] = PRODUCT_IMAGES['Duo Bins'];
-
-PRODUCT_IMAGES['Submersible Pumps'] = WATER_PUMP_FALLBACK;
-PRODUCT_IMAGES['Garden Water Pumps'] = WATER_PUMP_FALLBACK;
-PRODUCT_IMAGES['Water Circulation Pump'] = WATER_PUMP_FALLBACK;
-PRODUCT_IMAGES['Deep Well Pumps'] = WATER_PUMP_FALLBACK;
-PRODUCT_IMAGES['Single Phase'] = WATER_PUMP_FALLBACK;
-PRODUCT_IMAGES['CDS Series'] = WATER_PUMP_FALLBACK;
-PRODUCT_IMAGES['Dewatering Pump'] = WATER_PUMP_FALLBACK;
 
 const productWhatsAppLink = product =>
   `https://wa.me/${WHATSAPP_ORDER_NUMBER}?text=${encodeURIComponent(`Hello Raja Electricals, I would like to order / request a quote for ${product.name}.`)}`;
@@ -77,61 +36,6 @@ const CATEGORY_DATA = [
   ['Tools and Instrument', ['Axe', 'Mallet', 'Hammer', 'Corkscrew', 'Pliers', 'Construction Box', 'Wheel Barrow', 'Single Wheel Barrow', 'Back Saw', 'Chain Saw', 'Spirit Level', 'Tool Box', 'Step Ladder', 'Measurement Tape']],
   ['Water Pumps', ['Submersible Pumps', 'Garden Water Pumps', 'Water Circulation Pump', 'Deep Well Pumps', 'Single Phase', 'CDS Series', 'Dewatering Pump']],
 ];
-
-// ============================================
-// HELPER FUNCTIONS
-// ============================================
-
-const getProductImage = (category, name) => {
-  return PRODUCT_IMAGES[name] || CATEGORY_IMAGES[category] || 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80';
-};
-
-const resolveProductImage = product => {
-  if (!product) return WATER_PUMP_FALLBACK;
-
-  const rawImage = typeof product.image === 'string' ? product.image.trim() : '';
-
-  if (rawImage !== '') {
-    if (
-      rawImage.startsWith('http://') ||
-      rawImage.startsWith('https://') ||
-      rawImage.startsWith('data:image')
-    ) {
-      if (product.updated_at || product.updatedAt) {
-        const v = new Date(product.updated_at || product.updatedAt).getTime();
-        if (!isNaN(v)) {
-          return rawImage.includes('?') ? `${rawImage}&v=${v}` : `${rawImage}?v=${v}`;
-        }
-      }
-      return rawImage;
-    }
-
-    if (rawImage.startsWith('/api/') || rawImage.startsWith('/')) {
-      const fullUrl = resolveApiUrl(rawImage);
-      if (product.updated_at || product.updatedAt) {
-        const v = new Date(product.updated_at || product.updatedAt).getTime();
-        if (!isNaN(v)) {
-          return fullUrl.includes('?') ? `${fullUrl}&v=${v}` : `${fullUrl}?v=${v}`;
-        }
-      }
-      return fullUrl;
-    }
-
-    const fileName = rawImage.split('/').pop().replace(/\.(jpg|jpeg|png|webp)$/i, '');
-    if (PRODUCT_IMAGES[fileName]) {
-      return PRODUCT_IMAGES[fileName];
-    }
-
-    return rawImage;
-  }
-
-  return getProductImage(product.category, product.name);
-};
-
-const handleImgError = (event, category) => {
-  event.currentTarget.onerror = null;
-  event.currentTarget.src = CATEGORY_IMAGES[category] || 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80';
-};
 
 // ============================================
 // BUILD PRODUCTS DATA
@@ -221,7 +125,7 @@ export function ProductsPage({ go, content }) {
           {filtered.map(item => <article key={item.id} className="product-card">
             <div className="product-badge">{item.badge}</div>
             <button className="product-open" onClick={() => selectProduct(item, 'productdetail', go)}>
-              <img src={resolveProductImage(item)} alt={item.name} onError={event => handleImgError(event, item.category)} loading="lazy" decoding="async"/>
+              <img src={resolveProductImage(item)} alt={item.name} onError={event => handleProductImageError(event, item)} loading="lazy" decoding="async"/>
               <h3>{item.name}</h3>
               <p className="product-price">{item.price}</p>
               <p className="product-category">{productCategory(item)}</p>
@@ -262,7 +166,7 @@ export function ProductDetailPage({ go, content }) {
   return <>
     <div className="crumb">Home / {productCategory(currentProduct)} / {currentProduct.name}</div>
     <section className="detail">
-      <div className="product-image"><span>{currentProduct.badge || 'Product'}</span><img src={resolveProductImage(currentProduct)} alt={currentProduct.name} onError={event => handleImgError(event, currentProduct.category)} loading="eager" decoding="async"/></div>
+      <div className="product-image"><span>{currentProduct.badge || 'Product'}</span><img src={resolveProductImage(currentProduct)} alt={currentProduct.name} onError={event => handleProductImageError(event, currentProduct)} loading="eager" decoding="async"/></div>
       <div className="detail-copy">
         <small>{productCategory(currentProduct)}</small><h1>{currentProduct.name}</h1>
         <p className="product-detail-price" style={{ fontSize: '18px', color: 'var(--red)', fontWeight: '700', margin: '10px 0' }}>{currentProduct.price}</p>
@@ -277,7 +181,7 @@ export function ProductDetailPage({ go, content }) {
     </section>
     <section className="related"><h2>Related Products in {currentProduct.category}</h2>
       {related.length > 0 ? <div className="related-products-grid">
-        {related.map(item => <button key={item.id} onClick={() => openRelatedProduct(item)}><img src={resolveProductImage(item)} alt={item.name} onError={event => handleImgError(event, item.category)} loading="lazy" decoding="async"/><b>{item.name}</b><span>{item.price}</span></button>)}
+        {related.map(item => <button key={item.id} onClick={() => openRelatedProduct(item)}><img src={resolveProductImage(item)} alt={item.name} onError={event => handleProductImageError(event, item)} loading="lazy" decoding="async"/><b>{item.name}</b><span>{item.price}</span></button>)}
       </div> : <p>No other products in this category.</p>}
     </section>
   </>;

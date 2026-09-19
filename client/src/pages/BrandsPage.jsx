@@ -217,7 +217,7 @@ export default function BrandsPage({ content }) {
         crumb="Brands"
         title={
           <>
-            Trusted Brands. <em>Better Living.</em>
+            Trusted <em>Brands</em>
           </>
         }
         desc="Top quality brands for your home, business and every project need."
@@ -474,45 +474,86 @@ export default function BrandsPage({ content }) {
             align-items: stretch;
           }
           .brand-logo-card {
-            height: 76px;
-            min-height: 76px;
-            padding: 8px 10px;
+            height: 84px;
+            min-height: 84px;
+            padding: 8px 12px;
           }
           .brand-logo-card img {
-            max-height: 50px;
+            max-height: 56px;
           }
         }
 
-        @media (max-width: 580px) {
+        @media (max-width: 640px) {
           .brands-page-wrapper {
-            padding: 32px 16px 40px;
+            padding: 28px 14px 36px;
           }
           .brands-category-grid {
             grid-template-columns: 1fr;
-            gap: 14px;
+            gap: 16px;
           }
           .category-card-header {
-            padding: 16px;
-            min-height: 95px;
+            padding: 16px 18px 14px;
+            min-height: 90px;
+          }
+          .category-brands-body {
+            padding: 14px 12px;
           }
           .category-brand-grid {
             grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: 10px;
           }
           .brand-logo-card {
-            height: 70px;
-            min-height: 70px;
-            padding: 6px 8px;
+            height: 96px;
+            min-height: 96px;
+            padding: 10px 12px;
+            border-radius: 12px;
           }
           .brand-logo-card img {
-            max-height: 44px;
+            max-width: 88%;
+            max-height: 70px;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+          }
+          .brand-fallback-text {
+            font-size: clamp(14px, 3.8vw, 17px);
+            font-weight: 800;
+            color: #1e293b;
+            letter-spacing: -0.01em;
+            line-height: 1.25;
+            padding: 0 4px;
           }
         }
 
-        @media (max-width: 440px) {
+        @media (max-width: 380px) {
+          .brands-page-wrapper {
+            padding: 20px 10px 30px;
+          }
+          .category-brands-body {
+            padding: 12px 10px;
+          }
+          .category-brand-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 8px;
+          }
+          .brand-logo-card {
+            height: 90px;
+            min-height: 90px;
+            padding: 8px 10px;
+          }
+          .brand-logo-card img {
+            max-width: 90%;
+            max-height: 64px;
+          }
+          .brand-fallback-text {
+            font-size: clamp(13px, 3.6vw, 15px);
+          }
+        }
+
+        @media (max-width: 330px) {
           .category-brand-grid {
             grid-template-columns: 1fr;
-            gap: 10px;
+            gap: 8px;
           }
         }
       `}</style>

@@ -5,7 +5,9 @@ import { Btn, CtaBand } from '../components/ui';
 import { Store } from 'lucide-react';
 import homeStorefront from '../assets/gallary/new home.jpeg';
 
-const fallbackImage = item => item?.image || item?.logo || images.worker;
+import { resolveProductImage, handleProductImageError } from '../utils/productImageResolver';
+
+const fallbackImage = item => resolveProductImage(item);
 const homeContent = {
   site: { welcome: 'Welcome to Raja Electricals', heroTitle: 'Powering Every Project.', heroText: 'Electrical · Hardware · Safety · Industrial Solutions', trustYears: 25, productCount: 5000, happyClients: 2000, deliveryText: 'All Your Electrical Needs, Under One Roof', supplyText: 'For over two decades, Raja Electricals has helped contractors, facilities and industrial teams source dependable products without unnecessary delays.' },
   categories: staticCategories.map(([name, image, count], id) => ({ id, name, image: image || images.worker, count })),
@@ -298,7 +300,7 @@ export default function HomePage({ go, content }) {
         <div className="cms-grid product-cms-grid">
           {products.slice(0, 4).map(item => (
             <article className="product-cms-card" key={item.id}>
-              <div><img src={fallbackImage(item)} alt={item.name} /><span>{item.badge}</span></div>
+              <div><img src={resolveProductImage(item)} alt={item.name} onError={e => handleProductImageError(e, item)} loading="lazy" decoding="async" /><span>{item.badge}</span></div>
               <h3>{item.name}</h3>
               <p>{item.price}</p>
               <button onClick={() => { localStorage.setItem('raja_selected_product', JSON.stringify(item)); go('productdetail'); }}>View details</button>
