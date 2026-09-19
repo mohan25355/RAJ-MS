@@ -72,7 +72,7 @@ const DEFAULT_CATEGORIES = [
 const DEFAULT_BRANDS = [
   // 1. Paints & Coatings (4)
   { id: 'b-birla', name: 'Birla Opus', category: 'Paints & Coatings', logo: '1.png', display_order: 1, is_active: true },
-  { id: 'b-nippon', name: 'Nippon Paint', category: 'Paints & Coatings', logo: '1.png', display_order: 2, is_active: true },
+  { id: 'b-nippon', name: 'Nippon Paint', category: 'Paints & Coatings', logo: null, display_order: 2, is_active: true },
   { id: 'b-nerolac', name: 'Kansai Nerolac', category: 'Paints & Coatings', logo: '10.jpg', display_order: 3, is_active: true },
   { id: 'b-vapour', name: 'Vapour Paints', category: 'Paints & Coatings', logo: '26.png', display_order: 4, is_active: true },
 
@@ -91,9 +91,9 @@ const DEFAULT_BRANDS = [
   { id: 'b-legrand', name: 'Legrand', category: 'Switches & Electrical', logo: '5.png', display_order: 1, is_active: true },
   { id: 'b-norwood', name: 'Norwood', category: 'Switches & Electrical', logo: '11.png', display_order: 2, is_active: true },
   { id: 'b-norisys', name: 'Norisys', category: 'Switches & Electrical', logo: '23.png', display_order: 3, is_active: true },
-  { id: 'b-gm', name: 'GM', category: 'Switches & Electrical', logo: '23.png', display_order: 4, is_active: true },
+  { id: 'b-gm', name: 'GM', category: 'Switches & Electrical', logo: null, display_order: 4, is_active: true },
   { id: 'b-anchor', name: 'Anchor by Panasonic', category: 'Switches & Electrical', logo: '7.png', display_order: 5, is_active: true },
-  { id: 'b-roma', name: 'Roma', category: 'Switches & Electrical', logo: '7.png', display_order: 6, is_active: true },
+  { id: 'b-roma', name: 'Roma', category: 'Switches & Electrical', logo: null, display_order: 6, is_active: true },
   { id: 'b-orbit-se', name: 'Orbit', category: 'Switches & Electrical', logo: '25.png', display_order: 7, is_active: true },
 
   // 5. Fans (8)
@@ -141,22 +141,6 @@ const DEFAULT_BRANDS = [
   { id: 'b-vguard', name: 'V-Guard', category: 'Home Appliances', logo: '13.png', display_order: 1, is_active: true },
 ];
 
-const CATEGORY_ORDER = [
-  'Paints & Coatings',
-  'Wires & Cables',
-  'Pipes & Plumbing',
-  'Pipes & Fittings',
-  'Switches & Electrical',
-  'Fans',
-  'Lighting',
-  'Sanitaryware & Bathroom',
-  'Water Heaters',
-  'Water Pumps',
-  'Waterproofing',
-  'Security & Protection',
-  'Security',
-];
-
 const CATEGORY_DISPLAY_NAMES = {
   'Pipes & Plumbing': 'Pipes & Fittings',
   'Security & Protection': 'Security',
@@ -168,39 +152,6 @@ const BRAND_DISPLAY_NAMES = {
   'Vapour Paints': 'Vapocure Paints',
   'Zycocil+': 'Zycosil+',
   'Europa': 'Europaa',
-};
-
-const BRAND_ORDER_MAP = {
-  'paints & coatings': ['birla opus', 'nippon paint', 'kansai nerolac', 'vapocure paints', 'vapour paints'],
-  'wires & cables': ['finolex cables', 'rr kabel', 'orbit', 'luker'],
-  'pipes & plumbing': ['astral pipes', 'finolex pipes', 'ashirvad'],
-  'pipes & fittings': ['astral pipes', 'finolex pipes', 'ashirvad'],
-  'switches & electrical': ['legrand', 'norwood', 'norisys', 'gm', 'anchor by panasonic', 'anchor', 'roma', 'orbit'],
-  'fans': ['crompton', 'atomberg', 'almonard', 'orient electric', 'polar', 'polstar', 'bajaj', 'luker'],
-  'lighting': ['philips', 'jaquar lighting', 'luker', 'orbit'],
-  'sanitaryware & bathroom': ['jaquar', 'essco', 'essco by jaquar', 'parryware', 'geberit'],
-  'water heaters': ['ao smith', 'a. o. smith', 'a.o. smith', 'bajaj', 'crompton', 'orient electric', 'luker', 'parryware'],
-  'water pumps': ['c.r.i. pumps', 'cri pumps', 'hasten'],
-  'waterproofing': ['dr. fixit', 'dr fixit', 'zycosil+', 'zycocil+'],
-  'security & protection': ['europaa', 'europa'],
-  'security': ['europaa', 'europa'],
-};
-
-const getCategoryRank = (cat) => {
-  const name = (cat.name || '').trim();
-  const idx = CATEGORY_ORDER.findIndex(c => c.toLowerCase() === name.toLowerCase());
-  return idx !== -1 ? idx + 1 : Number(cat.display_order) || 999;
-};
-
-const getBrandRank = (categoryName, brand) => {
-  const catKey = (categoryName || '').trim().toLowerCase();
-  const brandName = (brand.name || '').trim().toLowerCase();
-  const list = BRAND_ORDER_MAP[catKey];
-  if (list) {
-    const idx = list.indexOf(brandName);
-    if (idx !== -1) return idx + 1;
-  }
-  return Number(brand.display_order) || 999;
 };
 
 function BrandLogoCard({ brand }) {
@@ -245,16 +196,17 @@ export default function BrandsPage({ content }) {
 
   const categories = rawCategories
     .filter(cat => cat.is_active !== false && cat.is_active !== 'false')
-    .sort((a, b) => getCategoryRank(a) - getCategoryRank(b));
+    .sort((a, b) => (Number(a.display_order) || 999) - (Number(b.display_order) || 999));
 
   const brands = rawBrands
-    .filter(brand => brand.is_active !== false && brand.is_active !== 'false');
+    .filter(brand => brand.is_active !== false && brand.is_active !== 'false')
+    .sort((a, b) => (Number(a.display_order) || 999) - (Number(b.display_order) || 999));
 
   const categoriesWithBrands = categories
     .map(cat => {
-      const catBrands = brands
-        .filter(b => (b.category || '').trim().toLowerCase() === (cat.name || '').trim().toLowerCase())
-        .sort((a, b) => getBrandRank(cat.name, a) - getBrandRank(cat.name, b));
+      const catBrands = brands.filter(
+        b => (b.category || '').trim().toLowerCase() === (cat.name || '').trim().toLowerCase()
+      );
       return { ...cat, brands: catBrands };
     })
     .filter(cat => cat.brands.length > 0);

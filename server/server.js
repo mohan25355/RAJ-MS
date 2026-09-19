@@ -196,12 +196,12 @@ async function fetchFreshContent() {
     industriesResult,
   ] = await Promise.all([
     supabase.from('site_settings').select('data').eq('id', 1).maybeSingle(),
-    supabase.from('products').select('*').order('created_at', { ascending: false }),
-    supabase.from('projects').select('*').order('created_at', { ascending: false }),
-    supabase.from('gallery').select('*').order('created_at', { ascending: false }),
-    supabase.from('brands').select('*').order('created_at', { ascending: false }),
-    supabase.from('categories').select('*').order('created_at', { ascending: false }),
-    supabase.from('industries').select('*').order('created_at', { ascending: false }),
+    supabase.from('products').select('*'),
+    supabase.from('projects').select('*'),
+    supabase.from('gallery').select('*'),
+    supabase.from('brands').select('*'),
+    supabase.from('categories').select('*'),
+    supabase.from('industries').select('*'),
   ]);
 
   const results = [
@@ -224,13 +224,19 @@ async function fetchFreshContent() {
   const galleryRows = publicRecordsFromRows(galleryResult.data, 'gallery');
   galleryRows.sort((a, b) => (Number(a.display_order) || 999) - (Number(b.display_order) || 999));
 
+  const categoriesRows = publicRecordsFromRows(categoriesResult.data, 'categories');
+  categoriesRows.sort((a, b) => (Number(a.display_order) || 999) - (Number(b.display_order) || 999));
+
+  const brandsRows = publicRecordsFromRows(brandsResult.data, 'brands');
+  brandsRows.sort((a, b) => (Number(a.display_order) || 999) - (Number(b.display_order) || 999));
+
   const payload = {
     ...siteData,
     products: publicRecordsFromRows(productsResult.data, 'products'),
     projects: publicRecordsFromRows(projectsResult.data, 'projects'),
     gallery: galleryRows,
-    brands: publicRecordsFromRows(brandsResult.data, 'brands'),
-    categories: publicRecordsFromRows(categoriesResult.data, 'categories'),
+    brands: brandsRows,
+    categories: categoriesRows,
     industries: publicRecordsFromRows(industriesResult.data, 'industries'),
   };
 
@@ -366,6 +372,24 @@ app.delete('/api/:collection/:id', auth, async (req, res, next) => {
   try {
     const collection = req.params.collection;
     if (!managedCollections[collection]) return res.status(404).json({ error: 'Unknown collection.' });
+
+    if (collection === 'categories') {
+      const { data: catRow } = await supabase.from('categories').select('*').eq('id', req.params.id).maybeSingle();
+      const catName = catRow ? recordFromRow(catRow).name : null;
+      if (catName) {
+        const { data: linkedBrands } = await supabase.from('brands').select('*');
+        const count = (linkedBrands || []).filter(b => {
+          const cat = recordFromRow(b).category;
+          return cat && cat.trim().toLowerCase() === catName.trim().toLowerCase();
+        }).length;
+        if (count > 0 && req.query.force !== 'true') {
+          return res.status(400).json({
+            error: `Cannot delete category "${catName}" because ${count} brand(s) are assigned to it. Reassign or delete the brands first.`
+          });
+        }
+      }
+    }
+
     const { error, count } = await supabase.from(collection).delete({ count: 'exact' }).eq('id', req.params.id);
     if (error) throw error;
     if (!count) return res.status(404).json({ error: 'Item not found.' });

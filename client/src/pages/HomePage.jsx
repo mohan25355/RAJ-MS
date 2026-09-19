@@ -283,7 +283,7 @@ export default function HomePage({ go, content }) {
         `}</style>
       </Section>
 
-      <Section pill="CATEGORIES" featured sectionClass="category-section" eyebrow="OUR PRODUCT RANGE" title="Everything Your Project Needs" text="One dependable source for electricals, hardware, safety, tools, pumps and infrastructure supplies.">
+      {/* <Section pill="CATEGORIES" featured sectionClass="category-section" eyebrow="OUR PRODUCT RANGE" title="Everything Your Project Needs" text="One dependable source for electricals, hardware, safety, tools, pumps and infrastructure supplies.">
         <div className="cms-grid category-cms-grid">
           {categories.map(item => (
             <button key={item.id} className="image-card" onClick={() => go('products')}>
@@ -292,7 +292,7 @@ export default function HomePage({ go, content }) {
             </button>
           ))}
         </div>
-      </Section>
+      </Section> */}
 
       <Section pill="FEATURED" tone="amber" title="Popular Right Now" text="Top-selling products our customers trust.">
         <div className="cms-grid product-cms-grid">

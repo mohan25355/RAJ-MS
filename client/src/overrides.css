@@ -359,3 +359,221 @@ footer{grid-template-columns:repeat(3,1fr);justify-items:start}
   background: #f0f2f4;
 }
 
+/* Dedicated Brand Management CMS Styles */
+.brand-manager-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.brand-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  background: #fff;
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid #e0e4e6;
+}
+.brand-toolbar input[type="text"] {
+  flex: 1;
+  min-width: 200px;
+  padding: 10px 14px;
+  border: 1px solid #d8dcde;
+  border-radius: 6px;
+  font: 14px 'DM Sans', sans-serif;
+}
+.brand-toolbar select {
+  padding: 10px 14px;
+  border: 1px solid #d8dcde;
+  border-radius: 6px;
+  font: 14px 'DM Sans', sans-serif;
+  background: #fff;
+}
+.brand-grid-admin {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 16px;
+}
+.brand-card-admin {
+  background: #fff;
+  border: 1px solid #e0e4e6;
+  border-radius: 10px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+}
+.brand-card-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 12px;
+}
+.brand-card-logo {
+  width: 70px;
+  height: 50px;
+  object-fit: contain;
+  border: 1px solid #eee;
+  border-radius: 6px;
+  padding: 4px;
+  background: #fafafa;
+}
+.brand-card-badge-no-logo {
+  width: 70px;
+  height: 50px;
+  background: #f0f4f8;
+  color: var(--red);
+  border-radius: 6px;
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  font-size: 15px;
+  border: 1px dashed #cbd5e1;
+}
+.brand-card-title {
+  font-size: 18px;
+  font-weight: 800;
+  color: #172125;
+}
+.brand-card-placements {
+  margin: 12px 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.brand-placement-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  border-radius: 16px;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #334155;
+}
+.brand-placement-chip button {
+  background: none;
+  border: none;
+  color: #ef4444;
+  cursor: pointer;
+  padding: 0 2px;
+  font-size: 14px;
+  line-height: 1;
+}
+.brand-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid #f1f5f9;
+}
+.brand-card-actions button, .brand-card-actions label.btn-action-upload {
+  padding: 6px 10px;
+  font-size: 12px;
+  font-weight: 700;
+  border-radius: 5px;
+  border: 1px solid #cbd5e1;
+  background: #fff;
+  color: #334155;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.brand-card-actions button:hover, .brand-card-actions label.btn-action-upload:hover {
+  background: #f8fafc;
+}
+.brand-card-actions button.btn-danger {
+  color: #b91c1c;
+  border-color: #fca5a5;
+  background: #fef2f2;
+}
+.brand-card-actions button.btn-danger:hover {
+  background: #fee2e2;
+}
+
+/* Modal overlay */
+.brand-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(4px);
+  z-index: 999;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+}
+.brand-modal {
+  background: #fff;
+  border-radius: 12px;
+  width: min(650px, 95vw);
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 28px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+}
+.brand-modal h2 {
+  margin: 0 0 16px;
+  font-size: 24px;
+  color: #0f172a;
+}
+.brand-modal-categories {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 10px;
+  margin: 12px 0 20px;
+  background: #f8fafc;
+  padding: 14px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+}
+.category-option-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fff;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+}
+.category-option-row label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.category-option-row input[type="number"] {
+  width: 60px;
+  padding: 4px 6px;
+  font-size: 13px;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  text-align: center;
+}
+.brand-modal-preview {
+  width: 120px;
+  height: 80px;
+  object-fit: contain;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  padding: 4px;
+  background: #fafafa;
+  margin-top: 8px;
+}
+.brand-modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid #e2e8f0;
+}
+
+
