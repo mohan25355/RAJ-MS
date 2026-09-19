@@ -2,161 +2,47 @@ import { useState } from 'react';
 import { Btn, PageHead } from '../components/ui';
 
 // ============================================
-// IMPORT ALL PRODUCT IMAGES (137+ products)
+// DYNAMIC PRODUCT ASSET RESOLUTION (Vite import.meta.glob)
+// Replaces 137+ static imports to optimize initial JS bundle size
 // ============================================
 
-// Head Protection - 13 products
-import headProtectionHelmetStd from '../assets/product image/Head Protection/Safety Helmet Std. Series.jpg';
-import headProtectionHelmetVent from '../assets/product image/Head Protection/Safety Helmet Vent. Series.jpg';
-import headProtectionAbsHelmet from '../assets/product image/Head Protection/ABS Helmet.jpg';
-import headProtectionWeldingHelmet from '../assets/product image/Head Protection/Welding Helmet.jpg';
-import headProtectionWeldingShield from '../assets/product image/Head Protection/Welding Shield Helmet Mountable.jpg';
-import headProtectionGrindingFaceA from '../assets/product image/Head Protection/Grinding Face Shield A Type.jpg';
-import headProtectionGrindingFaceSpring from '../assets/product image/Head Protection/Grinding Face Shield Spring Type.jpg';
-import headProtectionGrindingFaceElastic from '../assets/product image/Head Protection/Grinding Face Shield Elastic Type.jpg';
-import headProtectionElectricalHelmet from '../assets/product image/Head Protection/Electrical Helmet.jpg';
-import headProtectionGrindingFaceRatchet from '../assets/product image/Head Protection/Grinding Face Shield Ratchet Type.jpg';
-import headProtectionHeatResistance from '../assets/product image/Head Protection/Heat Resistance Face Shield.jpg';
-import headProtectionHelmetLight from '../assets/product image/Head Protection/Helmet With Light.jpg';
-import headProtectionBumpCap from '../assets/product image/Head Protection/Bump Cap.jpg';
+const productAssetModules = import.meta.glob('../assets/product image/**/*', { eager: true, import: 'default' });
 
-// Ear Protection - 6 products
-import earProtectionEarMuff from '../assets/product image/Ear Protection/Ear Muff.jpg';
-import earProtectionExecutiveEarMuff from '../assets/product image/Ear Protection/Executive Ear Muff.jpg';
-import earProtectionHelmetMountable from '../assets/product image/Ear Protection/Helmet Mountable Ear Muff.jpg';
-import earProtectionReusableEarPlug from '../assets/product image/Ear Protection/Reusable Ear Plug.jpg';
-import earProtectionEarPlug from '../assets/product image/Ear Protection/Ear Plug.jpg';
-import earProtectionEarPlugDispenser from '../assets/product image/Ear Protection/Ear Plug Dispenser.jpg';
-
-// First Aid Products - 5 products
-import firstAidVinylKit from '../assets/product image/First Aid Products/Venyl Kit.jpg';
-import firstAidTravelKit from '../assets/product image/First Aid Products/Travel Kit.jpg';
-import firstAidMedicalKit from '../assets/product image/First Aid Products/Medical Kit.jpg';
-import firstAidPlasticKit from '../assets/product image/First Aid Products/Plastic Kit.jpg';
-import firstAidFoldableStretcher from '../assets/product image/First Aid Products/Foldable Stretcher.jpg';
-
-// Eye Protection - 6 products
-import eyeProtectionSafetyGoggles from '../assets/product image/Eye Protection/Safety Goggles.jpg';
-import eyeProtectionSafetySpectacles from '../assets/product image/Eye Protection/Safety Spectacles.jpg';
-import eyeProtectionProtectiveGoggles from '../assets/product image/Eye Protection/Protective Goggles.jpg';
-import eyeProtectionSafetyGlasses from '../assets/product image/Eye Protection/Safety Glasses.jpg';
-import eyeProtectionFaceShield from '../assets/product image/Eye Protection/Face Shield.jpg';
-import eyeProtectionEyeWashStation from '../assets/product image/Eye Protection/Eye Wash Station.jpg';
-
-// Fall Protection - 14 products
-import fallProtectionRetractableFall from '../assets/product image/Fall Protection/Retractable Fall Arrester.jpg';
-import fallProtectionParapetAnchor from '../assets/product image/Fall Protection/Parapet Anchor.jpg';
-import fallProtectionPpRope from '../assets/product image/Fall Protection/PP Rope.jpeg';
-import fallProtectionToolLanyard from '../assets/product image/Fall Protection/Tool Lanyard.jpg';
-import fallProtectionMultiPurposeHarness from '../assets/product image/Fall Protection/Multi Purpose Harness.jpg';
-import fallProtectionAClassHarness from '../assets/product image/Fall Protection/A CLASS Harness.jpg';
-import fallProtectionLClassHarness from '../assets/product image/Fall Protection/L Class Harness.jpg';
-import fallProtectionSafetyNetFishNet from '../assets/product image/Fall Protection/Safety Net With Fish Net.jpg';
-import fallProtectionSafetyNet3Layer from '../assets/product image/Fall Protection/3 Layer Safety Net.jpg';
-import fallProtectionBarricationFenceNet from '../assets/product image/Fall Protection/Barrication Fence Net.jpg';
-import fallProtectionKarabiner from '../assets/product image/Fall Protection/Karabiner.jpg';
-import fallProtectionSwingSeat from '../assets/product image/Fall Protection/Swing Seat.jpg';
-import fallProtectionDescender from '../assets/product image/Fall Protection/Descender.jpg';
-import fallProtectionHorizontalLifeLine from '../assets/product image/Fall Protection/Horizontal Life Line.jpg';
-
-// Respiratory Protection - 10 products
-import respiratoryProtectionCarbonMask from '../assets/product image/Respiratory Protection/Carbon Mask.jpg';
-import respiratoryProtection3PlyMaskLoop from '../assets/product image/Respiratory Protection/3Ply Mask Loop Type.jpg';
-import respiratoryProtection3M9000 from '../assets/product image/Respiratory Protection/3M 9000 IN.jpg';
-import respiratoryProtectionDuskMaskValve from '../assets/product image/Respiratory Protection/Dusk Mask With Valve.jpg';
-import respiratoryProtection3M9004 from '../assets/product image/Respiratory Protection/3M 9004 IN.jpg';
-import respiratoryProtectionDuskMask from '../assets/product image/Respiratory Protection/Dusk Mask.jpg';
-import respiratoryProtectionFullFaceMask from '../assets/product image/Respiratory Protection/Full Face Mask With Double Cartridges.jpg';
-import respiratoryProtectionHalfFaceMask from '../assets/product image/Respiratory Protection/Half Face Mask With Single Cartridges.jpg';
-import respiratoryProtection3MN95Mask from '../assets/product image/Respiratory Protection/3M N95 Mask.jpg';
-import respiratoryProtectionCartridges from '../assets/product image/Respiratory Protection/Cartridges.jpg';
-
-// Emergency Response Equipment - 3 products
-import emergencyResponseLifeJacket from '../assets/product image/Emergency Response Equipment/Life JacketLife Buoy.jpg';
-import emergencyResponseLotoKit from '../assets/product image/Emergency Response Equipment/Loto Kit.jpg';
-import emergencyResponseSpillKit from '../assets/product image/Emergency Response Equipment/Spill Kit.jpg';
-
-// Body Protection - 13 products
-import bodyProtectionNomexFireSuit from '../assets/product image/Body Protection/Nomex Fire Suit.jpg';
-import bodyProtectionAluminiumFireSuit from '../assets/product image/Body Protection/Aluminium Fire Suit.jpg';
-import bodyProtectionArcFlashSuit from '../assets/product image/Body Protection/ARC Flash Suit.jpg';
-import bodyProtectionPvcSuitHood from '../assets/product image/Body Protection/PVC Suit With Hood.jpg';
-import bodyProtectionCottonCoverall from '../assets/product image/Body Protection/Cotton Coverall.jpg';
-import bodyProtectionDisposableCoverall from '../assets/product image/Body Protection/Disposable Coverall.jpg';
-import bodyProtectionPvcApron from '../assets/product image/Body Protection/PVC Apron.jpg';
-import bodyProtectionLeatherApron from '../assets/product image/Body Protection/Leather Apron.jpg';
-import bodyProtectionCottonApron from '../assets/product image/Body Protection/Cotton Apron.jpg';
-import bodyProtectionLeatherArmGuard from '../assets/product image/Body Protection/Leather Arm Guard.jpg';
-import bodyProtectionLeatherLegGuard from '../assets/product image/Body Protection/Leather Leg Guard.jpg';
-import bodyProtectionLeatherShoulderGuard from '../assets/product image/Body Protection/Leather Shoulder Guard.jpg';
-import bodyProtectionRainCoat from '../assets/product image/Body Protection/Rain Coat.jpeg';
-
-// Road Safety Products - 22 products
-import roadSafetyStaffJacket from '../assets/product image/Road Safety Products/Staff Safety Jacket.jpg';
-import roadSafetySafetyJacket3Side from '../assets/product image/Road Safety Products/Safety Jacket 3 Side Open.jpg';
-import roadSafetyReflectiveVestBelt from '../assets/product image/Road Safety Products/Reflective Vest Belt.jpg';
-import roadSafetySecurityJacket from '../assets/product image/Road Safety Products/Security Jacket.jpg';
-import roadSafetySafetyCone from '../assets/product image/Road Safety Products/Safety Cone.jpg';
-import roadSafetyPuSpringPost from '../assets/product image/Road Safety Products/PU Spring Post.jpg';
-import roadSafetyQueueManager from '../assets/product image/Road Safety Products/Queue Manager.jpg';
-import roadSafetyRoadStuds from '../assets/product image/Road Safety Products/Road Studs.jpg';
-import roadSafetyPvcSpeedBreaker from '../assets/product image/Road Safety Products/PVC Speed Breaker.jpg';
-import roadSafetyCornerGuards from '../assets/product image/Road Safety Products/Corner Guards.jpg';
-import roadSafetyPvcFloorStands from '../assets/product image/Road Safety Products/PVC Floor Stands.jpg';
-import roadSafetyDomeMirror from '../assets/product image/Road Safety Products/Dome Mirror.jpg';
-import roadSafetyConvexMirror from '../assets/product image/Road Safety Products/Convex Mirror.jpg';
-import roadSafetyReflectionTape from '../assets/product image/Road Safety Products/Reflection Tape.jpg';
-import roadSafetyWindSockStand from '../assets/product image/Road Safety Products/Wind Sock With Stand.jpg';
-import roadSafetyPvcChain from '../assets/product image/Road Safety Products/PVC Chain.jpg';
-import roadSafetySafetyTriangle from '../assets/product image/Road Safety Products/Safety Triangle.jpg';
-import roadSafetySolarChevron from '../assets/product image/Road Safety Products/Solar Chevron.jpg';
-import roadSafetyBatonLight from '../assets/product image/Road Safety Products/Baton Light.jpg';
-import roadSafetyPvcWaterFilledBarrier from '../assets/product image/Road Safety Products/PVC Water Filled Barrier.jpg';
-import roadSafetyMetalDetector from '../assets/product image/Road Safety Products/Metal Detector.jpg';
-
-// Waste Management Products - 24 products
-import wasteManagement120LMobileGarbage from '../assets/product image/Waste Management Products/120L Mobile Garbage Bin.jpg';
-import wasteManagement240LMobileGarbage from '../assets/product image/Waste Management Products/240L Mobile Garbage Bin.jpg';
-import wasteManagement360LMobileGarbage from '../assets/product image/Waste Management Products/360L Mobile Garbage Bin.jpg';
-import wasteManagement660LMobileGarbage from '../assets/product image/Waste Management Products/660L Mobile Garbage Bin.jpg';
-import wasteManagement1100LMobileGarbage from '../assets/product image/Waste Management Products/1100L Mobile Garbage Bin.jpg';
-import wasteManagement60LtrBin from '../assets/product image/Waste Management Products/60 LTR Bin.jpg';
-import wasteManagement80LtrBin from '../assets/product image/Waste Management Products/80 LTR Bin.jpg';
-import wasteManagement110LtrBin from '../assets/product image/Waste Management Products/110 LTR Bin.jpg';
-import wasteManagement150LtrBin from '../assets/product image/Waste Management Products/150 LTR Bin.jpg';
-import wasteManagementSingleStand from '../assets/product image/Waste Management Products/Single Stand.jpg';
-import wasteManagementDoubleStand from '../assets/product image/Waste Management Products/Double Stand.jpg';
-import wasteManagementMetroSwingTop from '../assets/product image/Waste Management Products/Metro With Swing Top.jpg';
-import wasteManagementMetroOpenTop from '../assets/product image/Waste Management Products/Metro With Open Top.jpg';
-import wasteManagementMagnum15L from '../assets/product image/Waste Management Products/Magnum 15L.jpg';
-import wasteManagementMagnum20L from '../assets/product image/Waste Management Products/Magnum 20L.jpg';
-import wasteManagement120LPedalBin from '../assets/product image/Waste Management Products/120L Pedal Bin.png';
-import wasteManagement240LPedalBin from '../assets/product image/Waste Management Products/240L Pedal Bin.jpg';
-import wasteManagementTrollyBins from '../assets/product image/Waste Management Products/Trolly Bins.jpg';
-import wasteManagementDuoBins from '../assets/product image/Waste Management Products/Duo Bins.jpg';
-import wasteManagementTrioBins from '../assets/product image/Waste Management Products/Trio Bins.jpg';
-
-// Tools and Instrument - 14 products
-import toolsAxe from '../assets/product image/Tools and Instrument/Axe.jpg';
-import toolsMallet from '../assets/product image/Tools and Instrument/Mallet.jpg';
-import toolsHammer from '../assets/product image/Tools and Instrument/Hammer.jpg';
-import toolsCorkscrew from '../assets/product image/Tools and Instrument/Corkscrew.jpg';
-import toolsPliers from '../assets/product image/Tools and Instrument/Pliers.jpg';
-import toolsConstructionBox from '../assets/product image/Tools and Instrument/Construction Box.jpg';
-import toolsWheelBarrow from '../assets/product image/Tools and Instrument/Wheel Barrow.jpg';
-import toolsSingleWheelBarrow from '../assets/product image/Tools and Instrument/Single Wheel Barrow.jpg';
-import toolsBackSaw from '../assets/product image/Tools and Instrument/Back Saw.jpg';
-import toolsChainSaw from '../assets/product image/Tools and Instrument/Chain Saw.jpg';
-import toolsSpiritLevel from '../assets/product image/Tools and Instrument/Spirit Level.jpg';
-import toolsToolBox from '../assets/product image/Tools and Instrument/Tool Box.jpg';
-import toolsStepLadder from '../assets/product image/Tools and Instrument/Step Ladder.jpg';
-import toolsMeasurementTape from '../assets/product image/Tools and Instrument/Measurement Tape.jpg';
-
-// The Water Pumps folder currently has no image files. Use this temporary
-// fallback until the product-specific pump photos are added.
 const WATER_PUMP_FALLBACK = 'https://images.unsplash.com/photo-1542013936693-884638332954?auto=format&fit=crop&w=900&q=85';
-
 const WHATSAPP_ORDER_NUMBER = '919003900533';
+
+const PRODUCT_IMAGES = {};
+const CATEGORY_IMAGES = {
+  'Water Pumps': WATER_PUMP_FALLBACK,
+};
+
+for (const [path, url] of Object.entries(productAssetModules)) {
+  const parts = path.split('/');
+  const filenameWithExt = parts[parts.length - 1];
+  const filename = filenameWithExt.replace(/\.(jpg|jpeg|png|webp)$/i, '');
+  PRODUCT_IMAGES[filename] = url;
+
+  if (parts.length >= 3) {
+    const categoryFolder = parts[parts.length - 2];
+    if (!CATEGORY_IMAGES[categoryFolder]) {
+      CATEGORY_IMAGES[categoryFolder] = url;
+    }
+  }
+}
+
+// Fallback & specific aliases
+PRODUCT_IMAGES['Life Jacket / Life Buoy'] = PRODUCT_IMAGES['Life JacketLife Buoy'] || CATEGORY_IMAGES['Emergency Response Equipment'];
+PRODUCT_IMAGES['Scissors Barrier'] = PRODUCT_IMAGES['Queue Manager'];
+PRODUCT_IMAGES['Quatro Bins'] = PRODUCT_IMAGES['Trio Bins'];
+PRODUCT_IMAGES['Two in One'] = PRODUCT_IMAGES['Duo Bins'];
+
+PRODUCT_IMAGES['Submersible Pumps'] = WATER_PUMP_FALLBACK;
+PRODUCT_IMAGES['Garden Water Pumps'] = WATER_PUMP_FALLBACK;
+PRODUCT_IMAGES['Water Circulation Pump'] = WATER_PUMP_FALLBACK;
+PRODUCT_IMAGES['Deep Well Pumps'] = WATER_PUMP_FALLBACK;
+PRODUCT_IMAGES['Single Phase'] = WATER_PUMP_FALLBACK;
+PRODUCT_IMAGES['CDS Series'] = WATER_PUMP_FALLBACK;
+PRODUCT_IMAGES['Dewatering Pump'] = WATER_PUMP_FALLBACK;
 
 const productWhatsAppLink = product =>
   `https://wa.me/${WHATSAPP_ORDER_NUMBER}?text=${encodeURIComponent(`Hello Raja Electricals, I would like to order / request a quote for ${product.name}.`)}`;
@@ -164,192 +50,6 @@ const productWhatsAppLink = product =>
 const selectProduct = (item, page, go) => {
   localStorage.setItem('raja_selected_product', JSON.stringify(item));
   go(page, { keepOrder: page === 'contact' });
-};
-
-// ============================================
-// CATEGORY IMAGES (Fallback images)
-// ============================================
-
-const CATEGORY_IMAGES = {
-  'Head Protection': headProtectionHelmetStd,
-  'Ear Protection': earProtectionEarMuff,
-  'First Aid Products': firstAidMedicalKit,
-  'Eye Protection': eyeProtectionSafetyGoggles,
-  'Fall Protection': fallProtectionRetractableFall,
-  'Respiratory Protection': respiratoryProtectionCarbonMask,
-  'Emergency Response Equipment': emergencyResponseLifeJacket,
-  'Body Protection': bodyProtectionNomexFireSuit,
-  'Road Safety Products': roadSafetyStaffJacket,
-  'Waste Management Products': wasteManagement120LMobileGarbage,
-  'Tools and Instrument': toolsHammer,
-  'Water Pumps': WATER_PUMP_FALLBACK,
-};
-
-// ============================================
-// PRODUCT IMAGES (All 137+ products with local imports)
-// ============================================
-
-const PRODUCT_IMAGES = {
-  // ---- Head Protection ----
-  'Safety Helmet Std. Series': headProtectionHelmetStd,
-  'Safety Helmet Vent. Series': headProtectionHelmetVent,
-  'ABS Helmet': headProtectionAbsHelmet,
-  'Welding Helmet': headProtectionWeldingHelmet,
-  'Welding Shield Helmet Mountable': headProtectionWeldingShield,
-  'Grinding Face Shield A Type': headProtectionGrindingFaceA,
-  'Grinding Face Shield Spring Type': headProtectionGrindingFaceSpring,
-  'Grinding Face Shield Elastic Type': headProtectionGrindingFaceElastic,
-  'Electrical Helmet': headProtectionElectricalHelmet,
-  'Grinding Face Shield Ratchet Type': headProtectionGrindingFaceRatchet,
-  'Heat Resistance Face Shield': headProtectionHeatResistance,
-  'Helmet With Light': headProtectionHelmetLight,
-  'Bump Cap': headProtectionBumpCap,
-
-  // ---- Ear Protection ----
-  'Ear Muff': earProtectionEarMuff,
-  'Executive Ear Muff': earProtectionExecutiveEarMuff,
-  'Helmet Mountable Ear Muff': earProtectionHelmetMountable,
-  'Reusable Ear Plug': earProtectionReusableEarPlug,
-  'Ear Plug': earProtectionEarPlug,
-  'Ear Plug Dispenser': earProtectionEarPlugDispenser,
-
-  // ---- First Aid Products ----
-  'Venyl Kit': firstAidVinylKit,
-  'Travel Kit': firstAidTravelKit,
-  'Medical Kit': firstAidMedicalKit,
-  'Plastic Kit': firstAidPlasticKit,
-  'Foldable Stretcher': firstAidFoldableStretcher,
-
-  // ---- Eye Protection ----
-  'Safety Goggles': eyeProtectionSafetyGoggles,
-  'Safety Spectacles': eyeProtectionSafetySpectacles,
-  'Protective Goggles': eyeProtectionProtectiveGoggles,
-  'Safety Glasses': eyeProtectionSafetyGlasses,
-  'Face Shield': eyeProtectionFaceShield,
-  'Eye Wash Station': eyeProtectionEyeWashStation,
-
-  // ---- Fall Protection ----
-  'Retractable Fall Arrester': fallProtectionRetractableFall,
-  'Parapet Anchor': fallProtectionParapetAnchor,
-  'PP Rope': fallProtectionPpRope,
-  'Tool Lanyard': fallProtectionToolLanyard,
-  'Multi Purpose Harness': fallProtectionMultiPurposeHarness,
-  'A Class Harness': fallProtectionAClassHarness,
-  'L Class Harness': fallProtectionLClassHarness,
-  'Safety Net With Fish Net': fallProtectionSafetyNetFishNet,
-  '3 Layer Safety Net': fallProtectionSafetyNet3Layer,
-  'Barrication Fence Net': fallProtectionBarricationFenceNet,
-  'Karabiner': fallProtectionKarabiner,
-  'Swing Seat': fallProtectionSwingSeat,
-  'Descender': fallProtectionDescender,
-  'Horizontal Life Line': fallProtectionHorizontalLifeLine,
-
-  // ---- Respiratory Protection ----
-  'Carbon Mask': respiratoryProtectionCarbonMask,
-  '3Ply Mask Loop Type': respiratoryProtection3PlyMaskLoop,
-  '3M 9000 IN': respiratoryProtection3M9000,
-  'Dusk Mask With Valve': respiratoryProtectionDuskMaskValve,
-  '3M 9004 IN': respiratoryProtection3M9004,
-  'Dusk Mask': respiratoryProtectionDuskMask,
-  'Full Face Mask With Double Cartridges': respiratoryProtectionFullFaceMask,
-  'Half Face Mask With Single Cartridges': respiratoryProtectionHalfFaceMask,
-  '3M N95 Mask': respiratoryProtection3MN95Mask,
-  'Cartridges': respiratoryProtectionCartridges,
-
-  // ---- Emergency Response Equipment ----
-  'Life Jacket / Life Buoy': emergencyResponseLifeJacket,
-  'Loto Kit': emergencyResponseLotoKit,
-  'Spill Kit': emergencyResponseSpillKit,
-
-  // ---- Body Protection ----
-  'Nomex Fire Suit': bodyProtectionNomexFireSuit,
-  'Aluminium Fire Suit': bodyProtectionAluminiumFireSuit,
-  'ARC Flash Suit': bodyProtectionArcFlashSuit,
-  'PVC Suit With Hood': bodyProtectionPvcSuitHood,
-  'Cotton Coverall': bodyProtectionCottonCoverall,
-  'Disposable Coverall': bodyProtectionDisposableCoverall,
-  'PVC Apron': bodyProtectionPvcApron,
-  'Leather Apron': bodyProtectionLeatherApron,
-  'Cotton Apron': bodyProtectionCottonApron,
-  'Leather Arm Guard': bodyProtectionLeatherArmGuard,
-  'Leather Leg Guard': bodyProtectionLeatherLegGuard,
-  'Leather Shoulder Guard': bodyProtectionLeatherShoulderGuard,
-  'Rain Coat': bodyProtectionRainCoat,
-
-  // ---- Road Safety Products ----
-  'Staff Safety Jacket': roadSafetyStaffJacket,
-  'Safety Jacket 3 Side Open': roadSafetySafetyJacket3Side,
-  'Reflective Vest Belt': roadSafetyReflectiveVestBelt,
-  'Security Jacket': roadSafetySecurityJacket,
-  'Safety Cone': roadSafetySafetyCone,
-  'PU Spring Post': roadSafetyPuSpringPost,
-  'Queue Manager': roadSafetyQueueManager,
-  // No Scissors Barrier image is present; use the closest available road-safety image.
-  'Scissors Barrier': roadSafetyQueueManager,
-  'Road Studs': roadSafetyRoadStuds,
-  'PVC Speed Breaker': roadSafetyPvcSpeedBreaker,
-  'Corner Guards': roadSafetyCornerGuards,
-  'PVC Floor Stands': roadSafetyPvcFloorStands,
-  'Dome Mirror': roadSafetyDomeMirror,
-  'Convex Mirror': roadSafetyConvexMirror,
-  'Reflection Tape': roadSafetyReflectionTape,
-  'Wind Sock With Stand': roadSafetyWindSockStand,
-  'PVC Chain': roadSafetyPvcChain,
-  'Safety Triangle': roadSafetySafetyTriangle,
-  'Solar Chevron': roadSafetySolarChevron,
-  'Baton Light': roadSafetyBatonLight,
-  'PVC Water Filled Barrier': roadSafetyPvcWaterFilledBarrier,
-  'Metal Detector': roadSafetyMetalDetector,
-
-  // ---- Waste Management Products ----
-  '120L Mobile Garbage Bin': wasteManagement120LMobileGarbage,
-  '240L Mobile Garbage Bin': wasteManagement240LMobileGarbage,
-  '360L Mobile Garbage Bin': wasteManagement360LMobileGarbage,
-  '660L Mobile Garbage Bin': wasteManagement660LMobileGarbage,
-  '1100L Mobile Garbage Bin': wasteManagement1100LMobileGarbage,
-  '60 LTR Bin': wasteManagement60LtrBin,
-  '80 LTR Bin': wasteManagement80LtrBin,
-  '110 LTR Bin': wasteManagement110LtrBin,
-  '150 LTR Bin': wasteManagement150LtrBin,
-  'Single Stand': wasteManagementSingleStand,
-  'Double Stand': wasteManagementDoubleStand,
-  'Metro With Swing Top': wasteManagementMetroSwingTop,
-  'Metro With Open Top': wasteManagementMetroOpenTop,
-  'Magnum 15L': wasteManagementMagnum15L,
-  'Magnum 20L': wasteManagementMagnum20L,
-  '120L Pedal Bin': wasteManagement120LPedalBin,
-  '240L Pedal Bin': wasteManagement240LPedalBin,
-  'Trolly Bins': wasteManagementTrollyBins,
-  'Duo Bins': wasteManagementDuoBins,
-  'Trio Bins': wasteManagementTrioBins,
-  // These two image files are not in the asset folder yet.
-  'Quatro Bins': wasteManagementTrioBins,
-  'Two in One': wasteManagementDuoBins,
-
-  // ---- Tools and Instrument ----
-  'Axe': toolsAxe,
-  'Mallet': toolsMallet,
-  'Hammer': toolsHammer,
-  'Corkscrew': toolsCorkscrew,
-  'Pliers': toolsPliers,
-  'Construction Box': toolsConstructionBox,
-  'Wheel Barrow': toolsWheelBarrow,
-  'Single Wheel Barrow': toolsSingleWheelBarrow,
-  'Back Saw': toolsBackSaw,
-  'Chain Saw': toolsChainSaw,
-  'Spirit Level': toolsSpiritLevel,
-  'Tool Box': toolsToolBox,
-  'Step Ladder': toolsStepLadder,
-  'Measurement Tape': toolsMeasurementTape,
-
-  // ---- Water Pumps ----
-  'Submersible Pumps': WATER_PUMP_FALLBACK,
-  'Garden Water Pumps': WATER_PUMP_FALLBACK,
-  'Water Circulation Pump': WATER_PUMP_FALLBACK,
-  'Deep Well Pumps': WATER_PUMP_FALLBACK,
-  'Single Phase': WATER_PUMP_FALLBACK,
-  'CDS Series': WATER_PUMP_FALLBACK,
-  'Dewatering Pump': WATER_PUMP_FALLBACK,
 };
 
 // ============================================
@@ -385,6 +85,39 @@ const getProductImage = (category, name) => {
   return PRODUCT_IMAGES[name] || CATEGORY_IMAGES[category] || 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80';
 };
 
+const resolveProductImage = product => {
+  if (!product) return WATER_PUMP_FALLBACK;
+
+  const rawImage = typeof product.image === 'string' ? product.image.trim() : '';
+
+  if (rawImage !== '') {
+    if (
+      rawImage.startsWith('http://') ||
+      rawImage.startsWith('https://') ||
+      rawImage.startsWith('data:image') ||
+      rawImage.startsWith('/api/') ||
+      rawImage.startsWith('/')
+    ) {
+      if (product.updated_at || product.updatedAt) {
+        const v = new Date(product.updated_at || product.updatedAt).getTime();
+        if (!isNaN(v)) {
+          return rawImage.includes('?') ? `${rawImage}&v=${v}` : `${rawImage}?v=${v}`;
+        }
+      }
+      return rawImage;
+    }
+
+    const fileName = rawImage.split('/').pop().replace(/\.(jpg|jpeg|png|webp)$/i, '');
+    if (PRODUCT_IMAGES[fileName]) {
+      return PRODUCT_IMAGES[fileName];
+    }
+
+    return rawImage;
+  }
+
+  return getProductImage(product.category, product.name);
+};
+
 const handleImgError = (event, category) => {
   event.currentTarget.onerror = null;
   event.currentTarget.src = CATEGORY_IMAGES[category] || 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80';
@@ -415,11 +148,6 @@ const PRODUCTS_DATA = CATEGORY_DATA.flatMap(([category, entries], categoryIndex)
 const CATEGORIES_LIST = CATEGORY_DATA.map(([name]) => ({ id: name.toLowerCase().replace(/[^a-z0-9]+/g, '-'), name }));
 const productCategory = item => item.subcategory ? `${item.category} / ${item.subcategory}` : item.category;
 
-// Supabase is the source of truth. The local catalogue only keeps the page
-// usable until the one-time catalogue seed has been run.
-const uniqueItems = (items, key = 'id') => Array.from(
-  new Map(items.filter(Boolean).map(item => [item[key] || item.name, item])).values()
-);
 const catalogueFromContent = content => {
   const databaseProducts = Array.isArray(content?.products) ? content.products : [];
   const databaseCategories = Array.isArray(content?.categories) ? content.categories : [];
@@ -433,10 +161,25 @@ const catalogueFromContent = content => {
 // PRODUCTS PAGE COMPONENT
 // ============================================
 
+const HIDDEN_SIDEBAR_CATEGORIES = new Set([
+  'Home Appliances',
+  'Security & Protection',
+  'Waterproofing',
+  'Sanitaryware & Bathroom',
+  'Water Heaters',
+  'Fans',
+  'Lighting',
+  'Switches & Electrical',
+  'Pipes & Plumbing',
+  'Wires & Cables',
+  'Paints & Coatings',
+]);
+
 export function ProductsPage({ go, content }) {
   const [term, setTerm] = useState('');
   const [category, setCategory] = useState('');
   const { products, categories } = catalogueFromContent(content);
+  const sidebarCategories = categories.filter(item => !HIDDEN_SIDEBAR_CATEGORIES.has(item.name));
   const filtered = products.filter(item =>
     `${item.name} ${item.category} ${item.subcategory}`.toLowerCase().includes(term.toLowerCase()) && (!category || item.category === category)
   );
@@ -450,12 +193,12 @@ export function ProductsPage({ go, content }) {
           <span>Select a category</span>
           <select value={category} onChange={event => setCategory(event.target.value)} aria-label="Select a product category">
             <option value="">All products</option>
-            {categories.map(item => <option key={item.id} value={item.name}>{item.name}</option>)}
+            {sidebarCategories.map(item => <option key={item.id} value={item.name}>{item.name}</option>)}
           </select>
         </label>
         <div className="category-filter-list" aria-label="Product categories">
           <button className={!category ? 'selected' : ''} onClick={() => setCategory('')}>All products</button>
-          {categories.map(item => <button className={category === item.name ? 'selected' : ''} key={item.id} onClick={() => setCategory(item.name)}>{item.name}</button>)}
+          {sidebarCategories.map(item => <button className={category === item.name ? 'selected' : ''} key={item.id} onClick={() => setCategory(item.name)}>{item.name}</button>)}
         </div>
       </aside>
       <main>
@@ -468,7 +211,7 @@ export function ProductsPage({ go, content }) {
           {filtered.map(item => <article key={item.id} className="product-card">
             <div className="product-badge">{item.badge}</div>
             <button className="product-open" onClick={() => selectProduct(item, 'productdetail', go)}>
-              <img src={item.image || getProductImage(item.category, item.name)} alt={item.name} onError={event => handleImgError(event, item.category)} loading="lazy"/>
+              <img src={resolveProductImage(item)} alt={item.name} onError={event => handleImgError(event, item.category)} loading="lazy" decoding="async"/>
               <h3>{item.name}</h3>
               <p className="product-price">{item.price}</p>
               <p className="product-category">{productCategory(item)}</p>
@@ -490,8 +233,7 @@ export function ProductDetailPage({ go, content }) {
   const { products } = catalogueFromContent(content);
   const [product, setProduct] = useState(() => {
     try {
-      const selected = JSON.parse(localStorage.getItem('raja_selected_product'));
-      return selected && PRODUCTS_DATA.find(item => item.id === selected.id) || selected;
+      return JSON.parse(localStorage.getItem('raja_selected_product'));
     } catch {
       return null;
     }
@@ -510,7 +252,7 @@ export function ProductDetailPage({ go, content }) {
   return <>
     <div className="crumb">Home / {productCategory(currentProduct)} / {currentProduct.name}</div>
     <section className="detail">
-      <div className="product-image"><span>{currentProduct.badge || 'Product'}</span><img src={currentProduct.image || getProductImage(currentProduct.category, currentProduct.name)} alt={currentProduct.name} onError={event => handleImgError(event, currentProduct.category)}/></div>
+      <div className="product-image"><span>{currentProduct.badge || 'Product'}</span><img src={resolveProductImage(currentProduct)} alt={currentProduct.name} onError={event => handleImgError(event, currentProduct.category)} loading="eager" decoding="async"/></div>
       <div className="detail-copy">
         <small>{productCategory(currentProduct)}</small><h1>{currentProduct.name}</h1>
         <p className="product-detail-price" style={{ fontSize: '18px', color: 'var(--red)', fontWeight: '700', margin: '10px 0' }}>{currentProduct.price}</p>
@@ -525,7 +267,7 @@ export function ProductDetailPage({ go, content }) {
     </section>
     <section className="related"><h2>Related Products in {currentProduct.category}</h2>
       {related.length > 0 ? <div className="related-products-grid">
-        {related.map(item => <button key={item.id} onClick={() => openRelatedProduct(item)}><img src={item.image || getProductImage(item.category, item.name)} alt={item.name} onError={event => handleImgError(event, item.category)} loading="lazy"/><b>{item.name}</b><span>{item.price}</span></button>)}
+        {related.map(item => <button key={item.id} onClick={() => openRelatedProduct(item)}><img src={resolveProductImage(item)} alt={item.name} onError={event => handleImgError(event, item.category)} loading="lazy" decoding="async"/><b>{item.name}</b><span>{item.price}</span></button>)}
       </div> : <p>No other products in this category.</p>}
     </section>
   </>;

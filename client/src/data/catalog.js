@@ -1,4 +1,5 @@
 import safetyHelmetImage from '../assets/product image/Head Protection/Safety Helmet Std. Series.jpg';
+import paintsCategoryImage from '../assets/paints-category.png';
 
 export const images = {
   worker: 'https://images.openai.com/static-rsc-4/b7Jn2hdiJYiHiqVFxeJXXEtp2E48TpV_ZssZHxV7kMmrnJvG9AwJvIMBgVDq4qHDIdkviORzg-1_wFmyfOKcApTtKpuFwBMkkKQtE3FGvJIReYawsV5yKu0V12toTmcDgPp88dA4evKK45U3uBONzQh_P1XGVJGlu7c0qVl-GytXfUhiBjUtKidZWfQWbcKK?purpose=fullsize',
@@ -15,12 +16,13 @@ export const images = {
   site: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1000&q=85',
   safety: 'https://images.unsplash.com/photo-1586864387967-d02ef85d93e8?auto=format&fit=crop&w=1000&q=85',
   pipes: 'https://images.openai.com/static-rsc-4/sM0VS4b69O-PgcAA_7P6NRT9sLUa-ZcXIdVFzi97G2ry3g2kHthhLf3qiwWkfdfSN6QaOQQ6QAjB5NliwxmgjYu4gSyWGusF9W5r2nYBUm7xyYwe2sFS4hH4wBdSOl2fCkJtSgRvkZScyee0fWVGHq8VoD5-AxcsoJ0kDY8XZJ8?purpose=inline',
+  paints: paintsCategoryImage,
 };
 
 export const categories = [
   ['Electricals', images.hero, '250+ Products'], ['Industrial Safety', images.safety, '300+ Products'],
   ['Hardware & Tools', images.tools, '600+ Products'], ['Water Pumps', images.pump, '100+ Products'],
-  ['Plumbing', images.pipes, '200+ Products'], ['Paints', images.site, '150+ Products'],
+  ['Plumbing', images.pipes, '200+ Products'], ['Paints', images.paints, '150+ Products'],
   ['Wires & Cables', images.hero, '150+ Products'],
 ];
 

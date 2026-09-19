@@ -1,18 +1,18 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState, lazy, Suspense } from 'react';
 import { createRoot } from 'react-dom/client';
 
 import { Footer, Header } from './components/Layout';
-
 import HomePage from './pages/HomePage';
-import AboutPage from './pages/AboutPage';
-import { ProductDetailPage, ProductsPage } from './pages/ProductsPage';
-import GalleryPage from './pages/GalleryPage';
-import BrandsPage from './pages/BrandsPage';
-import ContactPage from './pages/ContactPage';
-import DashboardPage from './pages/DashboardPage';
+
+const AboutPage = lazy(() => import('./pages/AboutPage'));
+const ProductsPage = lazy(() => import('./pages/ProductsPage').then(m => ({ default: m.ProductsPage })));
+const ProductDetailPage = lazy(() => import('./pages/ProductsPage').then(m => ({ default: m.ProductDetailPage })));
+const GalleryPage = lazy(() => import('./pages/GalleryPage'));
+const BrandsPage = lazy(() => import('./pages/BrandsPage'));
+const ContactPage = lazy(() => import('./pages/ContactPage'));
+const DashboardPage = lazy(() => import('./pages/DashboardPage'));
 
 import { getContent } from './lib/api';
-import { testSupabase } from './lib/testSupabase';
 
 import preloaderLogoSrc from './assets/logo/logo.png';
 import promotionImage from './assets/addimage/add.jpeg';
@@ -26,6 +26,42 @@ import './footer-fix.css';
 import './about.css';
 import './home.css';
 
+/* -------------------------------------------------------
+   REACT ERROR BOUNDARY FOR RESILIENCE
+------------------------------------------------------- */
+
+class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false, error: null };
+  }
+
+  static getDerivedStateFromError(error) {
+    return { hasError: true, error };
+  }
+
+  componentDidCatch(error, errorInfo) {
+    console.error('Unhandled React Error:', error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div style={{ padding: '80px 20px', textAlign: 'center', fontFamily: 'sans-serif' }}>
+          <h2>Something went wrong loading this section</h2>
+          <p style={{ color: '#666', margin: '15px 0' }}>{this.state.error?.message || 'An unexpected error occurred.'}</p>
+          <button
+            onClick={() => { this.setState({ hasError: false }); window.location.reload(); }}
+            style={{ padding: '10px 20px', background: '#e31b16', color: '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold' }}
+          >
+            Reload Page
+          </button>
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
 
 /* -------------------------------------------------------
    PAGE CONFIGURATION
@@ -44,7 +80,6 @@ const pages = {
   dashboard: DashboardPage,
 };
 
-
 /* -------------------------------------------------------
    ROUTING
 ------------------------------------------------------- */
@@ -55,17 +90,13 @@ const getPage = () =>
     .toLowerCase()
     .replaceAll('-', '') || 'home';
 
-
 /* -------------------------------------------------------
    COMPANY CONTACT DETAILS
 ------------------------------------------------------- */
 
 const LEGACY_PHONE = '9941336125';
-
 const COMPANY_PHONE = '+91 9003900533';
-
 const COMPANY_WHATSAPP = '919003900533';
-
 
 /* -------------------------------------------------------
    CONTACT DATA CLEANUP
@@ -83,10 +114,8 @@ const replaceLegacyContact = (data) => {
 
   return {
     ...data,
-
     site: {
       ...site,
-
       phone: digits(site.phone).endsWith(LEGACY_PHONE)
         ? COMPANY_PHONE
         : site.phone,
@@ -97,7 +126,6 @@ const replaceLegacyContact = (data) => {
     },
   };
 };
-
 
 /* -------------------------------------------------------
    PRELOADER
@@ -111,22 +139,18 @@ function Preloader() {
       aria-label="Loading Raja Electricals"
     >
       <div className="preloader-brand" aria-hidden="true">
-
         <span className="preloader-mark-frame">
           <img
             src={preloaderLogoSrc}
             alt=""
           />
         </span>
-
         <span className="preloader-copy">
           <strong>RAJA</strong>
-
           <small style={{ color: '#ffffff' }}>
             Electrical 'N' Hardwares
           </small>
         </span>
-
       </div>
 
       <div className="preloader-track">
@@ -140,224 +164,119 @@ function Preloader() {
   );
 }
 
-
 /* -------------------------------------------------------
    MAIN APP
 ------------------------------------------------------- */
 
 function App() {
-
   const [page, setPage] = useState(getPage);
-
   const [content, setContent] = useState(null);
-
   const [loading, setLoading] = useState(true);
-
   const [showPromotion, setShowPromotion] = useState(true);
-
 
   /* -----------------------------------------------------
      LOAD WEBSITE CONTENT
   ----------------------------------------------------- */
 
-  const refreshContent = async () => {
+  const refreshContent = async (force = false) => {
     try {
-
-      const data = await getContent();
-
-      setContent(
-        replaceLegacyContact(data)
-      );
-
+      const data = await getContent(force);
+      setContent(replaceLegacyContact(data));
     } catch (error) {
-
-      console.error(
-        'Failed to load website content:',
-        error
-      );
-
+      console.error('Failed to load website content:', error);
       setContent({});
     }
   };
 
-
   /* -----------------------------------------------------
-     INITIAL APP LOAD
+     INITIAL APP LOAD & DATA-AWARE PRELOADER
   ----------------------------------------------------- */
 
   useEffect(() => {
+    let mounted = true;
+    const startTime = Date.now();
 
-    // Test Supabase connection
-    testSupabase();
+    refreshContent().finally(() => {
+      if (!mounted) return;
+      // Smooth transition with ~300ms min visual duration for aesthetics
+      const elapsed = Date.now() - startTime;
+      const remaining = Math.max(0, 300 - elapsed);
+      setTimeout(() => {
+        if (mounted) setLoading(false);
+      }, remaining);
+    });
 
-    // Load website content
-    refreshContent();
-
-
-    /*
-      Keep your existing preloader behavior.
-      It will disappear after 4 seconds.
-    */
-    const timer = window.setTimeout(() => {
-      setLoading(false);
-    }, 4000);
-
-
-    /* ---------------------------------------------------
-       ADMIN CONTENT UPDATE
-    --------------------------------------------------- */
+    // Fallback safety timeout (6s max) so network hiccups never trap the user permanently
+    const fallbackTimer = window.setTimeout(() => {
+      if (mounted) setLoading(false);
+    }, 6000);
 
     const refreshOnAdminSave = (event) => {
-
       if (event.type === 'raja-content-updated' || event.key === 'raja_content_updated') {
-        refreshContent();
+        refreshContent(true);
       }
-
     };
 
-
-    /* ---------------------------------------------------
-       REFRESH WHEN USER RETURNS TO TAB
-    --------------------------------------------------- */
-
-    const refreshOnFocus = () => {
-      refreshContent();
-    };
-
-
-    window.addEventListener(
-      'storage',
-      refreshOnAdminSave
-    );
-
-    window.addEventListener(
-      'raja-content-updated',
-      refreshOnAdminSave
-    );
-
-    window.addEventListener(
-      'focus',
-      refreshOnFocus
-    );
-
-
-    /* ---------------------------------------------------
-       CLEANUP
-    --------------------------------------------------- */
+    window.addEventListener('storage', refreshOnAdminSave);
+    window.addEventListener('raja-content-updated', refreshOnAdminSave);
 
     return () => {
-
-      window.clearTimeout(timer);
-
-      window.removeEventListener(
-        'storage',
-        refreshOnAdminSave
-      );
-
-      window.removeEventListener(
-        'raja-content-updated',
-        refreshOnAdminSave
-      );
-
-      window.removeEventListener(
-        'focus',
-        refreshOnFocus
-      );
-
+      mounted = false;
+      window.clearTimeout(fallbackTimer);
+      window.removeEventListener('storage', refreshOnAdminSave);
+      window.removeEventListener('raja-content-updated', refreshOnAdminSave);
     };
-
   }, []);
 
-
   /* -----------------------------------------------------
-     HASH / PAGE CHANGE
+     HASH / PAGE CHANGE (ROUTING ONLY, NO NETWORK REFETCH)
   ----------------------------------------------------- */
 
   useEffect(() => {
-
     const syncPage = () => {
-
       setPage(getPage());
-
-      refreshContent();
-
       window.scrollTo(0, 0);
-
     };
 
-
-    window.addEventListener(
-      'hashchange',
-      syncPage
-    );
-
-
+    window.addEventListener('hashchange', syncPage);
     return () => {
-
-      window.removeEventListener(
-        'hashchange',
-        syncPage
-      );
-
+      window.removeEventListener('hashchange', syncPage);
     };
-
   }, []);
-
 
   /* -----------------------------------------------------
      NAVIGATION
   ----------------------------------------------------- */
 
   const go = (target, options = {}) => {
-
     if (
-      (target === 'contact' ||
-        target === 'contactus') &&
+      (target === 'contact' || target === 'contactus') &&
       !options.keepOrder
     ) {
-
-      localStorage.removeItem(
-        'raja_selected_product'
-      );
-
+      localStorage.removeItem('raja_selected_product');
     }
 
-
     setPage(target);
-
     window.location.hash = target;
-
     window.scrollTo(0, 0);
-
   };
 
-
-  /* -----------------------------------------------------
-     CURRENT PAGE
-  ----------------------------------------------------- */
-
-  const Page =
-    pages[page] || HomePage;
-
-
-  /* -----------------------------------------------------
-     DASHBOARD
-  ----------------------------------------------------- */
+  const Page = pages[page] || HomePage;
 
   if (page === 'dashboard') {
-    return <Page />;
+    return (
+      <ErrorBoundary>
+        <Suspense fallback={<div className="page-loading" style={{ padding: '60px', textAlign: 'center' }}>Loading Admin Dashboard...</div>}>
+          <Page />
+        </Suspense>
+      </ErrorBoundary>
+    );
   }
-
-
-  /* -----------------------------------------------------
-     MAIN WEBSITE
-  ----------------------------------------------------- */
 
   return (
     <>
       {/* PRELOADER */}
       {loading && <Preloader />}
-
 
       {/* HEADER */}
       <Header
@@ -366,13 +285,15 @@ function App() {
         currentPage={page}
       />
 
-
-      {/* PAGE */}
-      <Page
-        go={go}
-        content={content}
-      />
-
+      {/* PAGE WITH ERROR BOUNDARY & SUSPENSE */}
+      <ErrorBoundary>
+        <Suspense fallback={<div className="page-loading" style={{ padding: '60px', textAlign: 'center' }}>Loading page content...</div>}>
+          <Page
+            go={go}
+            content={content}
+          />
+        </Suspense>
+      </ErrorBoundary>
 
       {/* FOOTER */}
       <Footer
@@ -380,58 +301,44 @@ function App() {
         site={content?.site}
       />
 
-
       {/* PROMOTION POPUP */}
-
       {!loading && showPromotion && (
-
         <div
           className="promotion-popup"
           role="dialog"
           aria-modal="true"
           aria-label="Special offer"
         >
-
           <div className="promotion-card">
-
             <button
               type="button"
               className="promotion-close"
-              onClick={() =>
-                setShowPromotion(false)
-              }
+              onClick={() => setShowPromotion(false)}
               aria-label="Close promotion"
             >
               ×
             </button>
 
-
             <img
               src={promotionImage}
               alt="Special offer"
+              loading="lazy"
+              decoding="async"
             />
-
 
             <button
               type="button"
               className="promotion-cancel"
-              onClick={() =>
-                setShowPromotion(false)
-              }
+              onClick={() => setShowPromotion(false)}
             >
               Cancel
             </button>
-
           </div>
-
         </div>
-
       )}
-
     </>
   );
 }
-
 
 /* -------------------------------------------------------
    START REACT
