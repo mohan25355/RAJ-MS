@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Btn, PageHead } from '../components/ui';
-import { resolveProductImage, handleProductImageError, WATER_PUMP_FALLBACK } from '../utils/productImageResolver';
+import { resolveProductImage, handleProductImageError, getProductImage, WATER_PUMP_FALLBACK } from '../utils/productImageResolver';
 
 const WHATSAPP_ORDER_NUMBER = '919003900533';
 

@@ -54,6 +54,10 @@ export const getLocalProductImage = (name, category) => {
   return CATEGORY_IMAGES[category] || GENERIC_PRODUCT_FALLBACK;
 };
 
+export const getProductImage = (category, name) => {
+  return getLocalProductImage(name, category);
+};
+
 export const resolveProductImage = (product) => {
   if (!product) return GENERIC_PRODUCT_FALLBACK;
 
