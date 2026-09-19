@@ -1,7 +1,14 @@
 const rawBaseUrl = (import.meta.env.VITE_API_BASE_URL || import.meta.env.VITE_API_URL || '').trim().replace(/\/$/, '');
 const defaultProductionUrl = 'https://raj-ms.onrender.com';
 const resolvedBaseUrl = rawBaseUrl || (import.meta.env.PROD ? defaultProductionUrl : '');
-const API = resolvedBaseUrl.endsWith('/api') ? resolvedBaseUrl : (resolvedBaseUrl ? `${resolvedBaseUrl}/api` : '/api');
+export const API = resolvedBaseUrl.endsWith('/api') ? resolvedBaseUrl : (resolvedBaseUrl ? `${resolvedBaseUrl}/api` : '/api');
+
+export function resolveApiUrl(path) {
+  if (!path) return '';
+  if (path.startsWith('http://') || path.startsWith('https://') || path.startsWith('data:')) return path;
+  const base = API.replace(/\/api$/, '');
+  return path.startsWith('/') ? `${base}${path}` : `${base}/${path}`;
+}
 
 let cachedContent = null;
 let contentInFlightPromise = null;

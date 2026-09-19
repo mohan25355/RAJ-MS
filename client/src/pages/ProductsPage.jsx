@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Btn, PageHead } from '../components/ui';
+import { resolveApiUrl } from '../lib/api';
 
 // ============================================
 // DYNAMIC PRODUCT ASSET RESOLUTION (Vite import.meta.glob)
@@ -94,9 +95,7 @@ const resolveProductImage = product => {
     if (
       rawImage.startsWith('http://') ||
       rawImage.startsWith('https://') ||
-      rawImage.startsWith('data:image') ||
-      rawImage.startsWith('/api/') ||
-      rawImage.startsWith('/')
+      rawImage.startsWith('data:image')
     ) {
       if (product.updated_at || product.updatedAt) {
         const v = new Date(product.updated_at || product.updatedAt).getTime();
@@ -105,6 +104,17 @@ const resolveProductImage = product => {
         }
       }
       return rawImage;
+    }
+
+    if (rawImage.startsWith('/api/') || rawImage.startsWith('/')) {
+      const fullUrl = resolveApiUrl(rawImage);
+      if (product.updated_at || product.updatedAt) {
+        const v = new Date(product.updated_at || product.updatedAt).getTime();
+        if (!isNaN(v)) {
+          return fullUrl.includes('?') ? `${fullUrl}&v=${v}` : `${fullUrl}?v=${v}`;
+        }
+      }
+      return fullUrl;
     }
 
     const fileName = rawImage.split('/').pop().replace(/\.(jpg|jpeg|png|webp)$/i, '');
@@ -149,11 +159,11 @@ const CATEGORIES_LIST = CATEGORY_DATA.map(([name]) => ({ id: name.toLowerCase().
 const productCategory = item => item.subcategory ? `${item.category} / ${item.subcategory}` : item.category;
 
 const catalogueFromContent = content => {
-  const databaseProducts = Array.isArray(content?.products) ? content.products : [];
-  const databaseCategories = Array.isArray(content?.categories) ? content.categories : [];
+  const databaseProducts = Array.isArray(content?.products) ? content.products : null;
+  const databaseCategories = Array.isArray(content?.categories) ? content.categories : null;
   return {
-    products: databaseProducts.length ? databaseProducts : PRODUCTS_DATA,
-    categories: databaseCategories.length ? databaseCategories : CATEGORIES_LIST,
+    products: databaseProducts !== null ? databaseProducts : PRODUCTS_DATA,
+    categories: databaseCategories !== null && databaseCategories.length ? databaseCategories : CATEGORIES_LIST,
   };
 };
 

@@ -117,9 +117,13 @@ function AnimatedHeroNumber({ targetValue, suffix = '+', duration = 2000 }) {
   );
 }
 
-export default function HomePage({ go }) {
+export default function HomePage({ go, content }) {
   const [slide, setSlide] = useState(0);
-  const { site, categories, products, brands, industries } = homeContent;
+  const site = content?.site || homeContent.site;
+  const categories = Array.isArray(content?.categories) && content.categories.length ? content.categories : homeContent.categories;
+  const products = Array.isArray(content?.products) && content.products.length ? content.products : homeContent.products;
+  const brands = Array.isArray(content?.brands) && content.brands.length ? content.brands : homeContent.brands;
+  const industries = Array.isArray(content?.industries) && content.industries.length ? content.industries : homeContent.industries;
 
   const slides = [site.heroImage, site.heroImage2, site.heroImage3].filter(Boolean);
   useEffect(() => {
