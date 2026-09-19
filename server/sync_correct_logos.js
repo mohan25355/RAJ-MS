@@ -9,10 +9,10 @@ const verifiedLogoMap = {
   'Birla Opus': '1.png',           // Verified Birla Opus logo
   'Nippon Paint': '26.png',        // Verified Nippon Paint logo
   'Kansai Nerolac': '10.jpg',      // Verified Kansai Nerolac logo
-  'Vapour Paints': null,           // Text badge (no fake logo)
+  'Vapour Paints': 'd17.jpg',      // Verified MRF Vapocure Paints logo (d17.jpg)
   'Finolex Cables': '3.jpg',       // Verified Finolex Cables logo
   'RR Kabel': '24.jpg',            // Verified RR Kabel logo
-  'Orbit': null,                   // Text badge (no fake logo)
+  'Orbit': 'd10.png',              // Verified Orbit logo (d10.png)
   'Luker': '21.png',               // Verified Luker logo
   'Astral Pipes': '4.jpg',         // Verified Astral Pipes logo
   'Finolex Pipes': '9.png',        // Verified Finolex Pipes logo
@@ -20,26 +20,26 @@ const verifiedLogoMap = {
   'Legrand': '5.png',              // Verified Legrand logo
   'Norwood': '7.png',              // Verified Norwood logo
   'Norisys': '23.png',             // Verified Norisys logo
-  'GM': null,                      // Text badge (no fake logo)
+  'GM': 'd7.png',                  // Verified GM Modular logo (d7.png)
   'Anchor by Panasonic': '25.png', // Verified Anchor by Panasonic logo
-  'Roma': null,                    // Text badge (no fake logo)
+  'Roma': 'd15.jpg',               // Verified Roma Switches logo (d15.jpg)
   'Crompton': '22.png',            // Verified Crompton logo
   'Atomberg': '16.jpg',            // Verified Atomberg logo
-  'Almonard': null,                // Text badge (no fake logo)
+  'Almonard': 'd1.jpg',            // Verified Almonard Fans logo (d1.jpg)
   'Orient Electric': '8.jpg',      // Verified Orient Electric logo
-  'Polar': null,                   // Text badge (no fake logo)
-  'Polstar': null,                 // Text badge (no fake logo)
-  'Bajaj': null,                   // Text badge (no fake logo)
+  'Polar': 'd9.jpg',               // Verified Polar Fans logo (d9.jpg)
+  'Polstar': 'd11.jpg',            // Verified Polstar Fans logo (d11.jpg)
+  'Bajaj': 'd4.png',               // Verified Bajaj logo (d4.png)
   'Philips': '14.jpg',             // Verified Philips logo
   'Jaquar Lighting': '20.png',     // Verified Jaquar Lighting logo
   'Jaquar': '20.png',              // Verified Jaquar logo
   'Essco by Jaquar': '6.jpg',      // Verified Essco by Jaquar logo
   'Parryware': '13.png',           // Verified Parryware logo
   'Geberit': '17.png',             // Verified Geberit logo
-  'A. O. Smith': null,             // Text badge (no fake logo)
+  'A. O. Smith': 'd2.png',         // Verified A. O. Smith logo (d2.png)
   'C.R.I. Pumps': '19.png',        // Verified C.R.I. Pumps logo
-  'Hasten': null,                  // Text badge (no fake logo)
-  'Dr. Fixit': null,               // Text badge (no fake logo)
+  'Hasten': null,                  // Text badge (no unverified fake logo)
+  'Dr. Fixit': 'd16.jpg',          // Verified Dr. Fixit logo (d16.jpg)
   'Zycocil+': '12.jpg',            // Verified Zycosil+ logo
   'Europa': '2.jpg'                // Verified Europa logo
 };
