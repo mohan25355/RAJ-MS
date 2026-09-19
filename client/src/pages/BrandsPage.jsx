@@ -59,10 +59,10 @@ const DEFAULT_CATEGORIES = [
   { id: 'cat-cables', name: 'Wires & Cables', description: 'Powering a safer tomorrow.', icon: 'Cable', color: 'gold', image: 'https://images.unsplash.com/photo-1530124566582-a618bc2615dc?auto=format&fit=crop&w=800&q=85', display_order: 2, is_active: true },
   { id: 'cat-pipes', name: 'Pipes & Plumbing', description: 'Flowing solutions for life.', icon: 'Droplets', color: 'blue', image: 'https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?auto=format&fit=crop&w=800&q=85', display_order: 3, is_active: true },
   { id: 'cat-switches', name: 'Switches & Electrical', description: 'Smart solutions for modern spaces.', icon: 'Wrench', color: 'purple', image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=800&q=85', display_order: 4, is_active: true },
-  { id: 'cat-lighting', name: 'Lighting', description: 'Bright ideas for every space.', icon: 'Lightbulb', color: 'gold', image: 'https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=800&q=85', display_order: 5, is_active: true },
-  { id: 'cat-fans', name: 'Fans', description: 'Cool comfort. Every day.', icon: 'Fan', color: 'blue', image: 'https://images.unsplash.com/photo-1615874694520-474822394e73?auto=format&fit=crop&w=800&q=85', display_order: 6, is_active: true },
-  { id: 'cat-heaters', name: 'Water Heaters', description: 'Hot water. Happier living.', icon: 'Thermometer', color: 'rose', image: 'https://images.unsplash.com/photo-1585704032915-c3400ca199e7?auto=format&fit=crop&w=800&q=85', display_order: 7, is_active: true },
-  { id: 'cat-sanitary', name: 'Sanitaryware & Bathroom', description: 'Elegance for everyday living.', icon: 'Bath', color: 'mint', image: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=800&q=85', display_order: 8, is_active: true },
+  { id: 'cat-fans', name: 'Fans', description: 'Cool comfort. Every day.', icon: 'Fan', color: 'blue', image: 'https://images.unsplash.com/photo-1615874694520-474822394e73?auto=format&fit=crop&w=800&q=85', display_order: 5, is_active: true },
+  { id: 'cat-lighting', name: 'Lighting', description: 'Bright ideas for every space.', icon: 'Lightbulb', color: 'gold', image: 'https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=800&q=85', display_order: 6, is_active: true },
+  { id: 'cat-sanitary', name: 'Sanitaryware & Bathroom', description: 'Elegance for everyday living.', icon: 'Bath', color: 'mint', image: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=800&q=85', display_order: 7, is_active: true },
+  { id: 'cat-heaters', name: 'Water Heaters', description: 'Hot water. Happier living.', icon: 'Thermometer', color: 'rose', image: 'https://images.unsplash.com/photo-1585704032915-c3400ca199e7?auto=format&fit=crop&w=800&q=85', display_order: 8, is_active: true },
   { id: 'cat-pumps', name: 'Water Pumps', description: 'Reliable flow. Always.', icon: 'Droplets', color: 'blue', image: 'https://images.unsplash.com/photo-1581093458791-9d09d2e70ae4?auto=format&fit=crop&w=800&q=85', display_order: 9, is_active: true },
   { id: 'cat-waterproofing', name: 'Waterproofing', description: 'Stronger spaces. Longer life.', icon: 'ShieldCheck', color: 'green', image: 'https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=800&q=85', display_order: 10, is_active: true },
   { id: 'cat-security', name: 'Security & Protection', description: 'Safety for a better tomorrow.', icon: 'Camera', color: 'purple', image: 'https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=800&q=85', display_order: 11, is_active: true },
@@ -87,43 +87,44 @@ const DEFAULT_BRANDS = [
   { id: 'b-finolex-p', name: 'Finolex Pipes', category: 'Pipes & Plumbing', logo: '15.png', display_order: 2, is_active: true },
   { id: 'b-ashirvad', name: 'Ashirvad', category: 'Pipes & Plumbing', logo: '9.png', display_order: 3, is_active: true },
 
-  // 4. Switches & Electrical (6)
+  // 4. Switches & Electrical (7)
   { id: 'b-legrand', name: 'Legrand', category: 'Switches & Electrical', logo: '5.png', display_order: 1, is_active: true },
   { id: 'b-norwood', name: 'Norwood', category: 'Switches & Electrical', logo: '11.png', display_order: 2, is_active: true },
   { id: 'b-norisys', name: 'Norisys', category: 'Switches & Electrical', logo: '23.png', display_order: 3, is_active: true },
   { id: 'b-gm', name: 'GM', category: 'Switches & Electrical', logo: '23.png', display_order: 4, is_active: true },
   { id: 'b-anchor', name: 'Anchor by Panasonic', category: 'Switches & Electrical', logo: '7.png', display_order: 5, is_active: true },
   { id: 'b-roma', name: 'Roma', category: 'Switches & Electrical', logo: '7.png', display_order: 6, is_active: true },
+  { id: 'b-orbit-se', name: 'Orbit', category: 'Switches & Electrical', logo: '25.png', display_order: 7, is_active: true },
 
-  // 5. Lighting (4)
+  // 5. Fans (8)
+  { id: 'b-crompton-f', name: 'Crompton', category: 'Fans', logo: '16.jpg', display_order: 1, is_active: true },
+  { id: 'b-atomberg', name: 'Atomberg', category: 'Fans', logo: 'd1.jpg', display_order: 2, is_active: true },
+  { id: 'b-almonard', name: 'Almonard', category: 'Fans', logo: 'd2.png', display_order: 3, is_active: true },
+  { id: 'b-orient-f', name: 'Orient Electric', category: 'Fans', logo: '22.png', display_order: 4, is_active: true },
+  { id: 'b-polar', name: 'Polar', category: 'Fans', logo: 'd4.png', display_order: 5, is_active: true },
+  { id: 'b-polstar', name: 'Polstar', category: 'Fans', logo: 'd3.jpg', display_order: 6, is_active: true },
+  { id: 'b-bajaj-f', name: 'Bajaj', category: 'Fans', logo: '8.jpg', display_order: 7, is_active: true },
+  { id: 'b-luker-f', name: 'Luker', category: 'Fans', logo: '25.png', display_order: 8, is_active: true },
+
+  // 6. Lighting (4)
   { id: 'b-philips', name: 'Philips', category: 'Lighting', logo: '14.jpg', display_order: 1, is_active: true },
   { id: 'b-jaquar-l', name: 'Jaquar Lighting', category: 'Lighting', logo: '20.png', display_order: 2, is_active: true },
   { id: 'b-luker-l', name: 'Luker', category: 'Lighting', logo: '25.png', display_order: 3, is_active: true },
   { id: 'b-orbit-l', name: 'Orbit', category: 'Lighting', logo: '25.png', display_order: 4, is_active: true },
 
-  // 6. Fans (8)
-  { id: 'b-atomberg', name: 'Atomberg', category: 'Fans', logo: 'd1.jpg', display_order: 1, is_active: true },
-  { id: 'b-crompton-f', name: 'Crompton', category: 'Fans', logo: '16.jpg', display_order: 2, is_active: true },
-  { id: 'b-almonard', name: 'Almonard', category: 'Fans', logo: 'd2.png', display_order: 3, is_active: true },
-  { id: 'b-bajaj-f', name: 'Bajaj', category: 'Fans', logo: '8.jpg', display_order: 4, is_active: true },
-  { id: 'b-polstar', name: 'Polstar', category: 'Fans', logo: 'd3.jpg', display_order: 5, is_active: true },
-  { id: 'b-orient-f', name: 'Orient Electric', category: 'Fans', logo: '22.png', display_order: 6, is_active: true },
-  { id: 'b-luker-f', name: 'Luker', category: 'Fans', logo: '25.png', display_order: 7, is_active: true },
-  { id: 'b-polar', name: 'Polar', category: 'Fans', logo: 'd4.png', display_order: 8, is_active: true },
+  // 7. Sanitaryware & Bathroom (4)
+  { id: 'b-jaquar-s', name: 'Jaquar', category: 'Sanitaryware & Bathroom', logo: '20.png', display_order: 1, is_active: true },
+  { id: 'b-essco', name: 'Essco by Jaquar', category: 'Sanitaryware & Bathroom', logo: '6.jpg', display_order: 2, is_active: true },
+  { id: 'b-parryware-s', name: 'Parryware', category: 'Sanitaryware & Bathroom', logo: '13.png', display_order: 3, is_active: true },
+  { id: 'b-geberit', name: 'Geberit', category: 'Sanitaryware & Bathroom', logo: '17.png', display_order: 4, is_active: true },
 
-  // 7. Water Heaters (6)
+  // 8. Water Heaters (6)
   { id: 'b-aosmith', name: 'A. O. Smith', category: 'Water Heaters', logo: '21.png', display_order: 1, is_active: true },
   { id: 'b-bajaj-h', name: 'Bajaj', category: 'Water Heaters', logo: '8.jpg', display_order: 2, is_active: true },
   { id: 'b-crompton-h', name: 'Crompton', category: 'Water Heaters', logo: '16.jpg', display_order: 3, is_active: true },
   { id: 'b-orient-h', name: 'Orient Electric', category: 'Water Heaters', logo: '22.png', display_order: 4, is_active: true },
   { id: 'b-luker-h', name: 'Luker', category: 'Water Heaters', logo: '25.png', display_order: 5, is_active: true },
   { id: 'b-parryware-h', name: 'Parryware', category: 'Water Heaters', logo: '13.png', display_order: 6, is_active: true },
-
-  // 8. Sanitaryware & Bathroom (4)
-  { id: 'b-jaquar-s', name: 'Jaquar', category: 'Sanitaryware & Bathroom', logo: '20.png', display_order: 1, is_active: true },
-  { id: 'b-essco', name: 'Essco by Jaquar', category: 'Sanitaryware & Bathroom', logo: '6.jpg', display_order: 2, is_active: true },
-  { id: 'b-geberit', name: 'Geberit', category: 'Sanitaryware & Bathroom', logo: '17.png', display_order: 3, is_active: true },
-  { id: 'b-parryware-s', name: 'Parryware', category: 'Sanitaryware & Bathroom', logo: '13.png', display_order: 4, is_active: true },
 
   // 9. Water Pumps (2)
   { id: 'b-cri', name: 'C.R.I. Pumps', category: 'Water Pumps', logo: '19.png', display_order: 1, is_active: true },
@@ -140,23 +141,86 @@ const DEFAULT_BRANDS = [
   { id: 'b-vguard', name: 'V-Guard', category: 'Home Appliances', logo: '13.png', display_order: 1, is_active: true },
 ];
 
+const CATEGORY_ORDER = [
+  'Paints & Coatings',
+  'Wires & Cables',
+  'Pipes & Plumbing',
+  'Pipes & Fittings',
+  'Switches & Electrical',
+  'Fans',
+  'Lighting',
+  'Sanitaryware & Bathroom',
+  'Water Heaters',
+  'Water Pumps',
+  'Waterproofing',
+  'Security & Protection',
+  'Security',
+];
+
+const CATEGORY_DISPLAY_NAMES = {
+  'Pipes & Plumbing': 'Pipes & Fittings',
+  'Security & Protection': 'Security',
+};
+
+const BRAND_DISPLAY_NAMES = {
+  'A. O. Smith': 'AO Smith',
+  'Essco by Jaquar': 'Essco',
+  'Vapour Paints': 'Vapocure Paints',
+  'Zycocil+': 'Zycosil+',
+  'Europa': 'Europaa',
+};
+
+const BRAND_ORDER_MAP = {
+  'paints & coatings': ['birla opus', 'nippon paint', 'kansai nerolac', 'vapocure paints', 'vapour paints'],
+  'wires & cables': ['finolex cables', 'rr kabel', 'orbit', 'luker'],
+  'pipes & plumbing': ['astral pipes', 'finolex pipes', 'ashirvad'],
+  'pipes & fittings': ['astral pipes', 'finolex pipes', 'ashirvad'],
+  'switches & electrical': ['legrand', 'norwood', 'norisys', 'gm', 'anchor by panasonic', 'anchor', 'roma', 'orbit'],
+  'fans': ['crompton', 'atomberg', 'almonard', 'orient electric', 'polar', 'polstar', 'bajaj', 'luker'],
+  'lighting': ['philips', 'jaquar lighting', 'luker', 'orbit'],
+  'sanitaryware & bathroom': ['jaquar', 'essco', 'essco by jaquar', 'parryware', 'geberit'],
+  'water heaters': ['ao smith', 'a. o. smith', 'a.o. smith', 'bajaj', 'crompton', 'orient electric', 'luker', 'parryware'],
+  'water pumps': ['c.r.i. pumps', 'cri pumps', 'hasten'],
+  'waterproofing': ['dr. fixit', 'dr fixit', 'zycosil+', 'zycocil+'],
+  'security & protection': ['europaa', 'europa'],
+  'security': ['europaa', 'europa'],
+};
+
+const getCategoryRank = (cat) => {
+  const name = (cat.name || '').trim();
+  const idx = CATEGORY_ORDER.findIndex(c => c.toLowerCase() === name.toLowerCase());
+  return idx !== -1 ? idx + 1 : Number(cat.display_order) || 999;
+};
+
+const getBrandRank = (categoryName, brand) => {
+  const catKey = (categoryName || '').trim().toLowerCase();
+  const brandName = (brand.name || '').trim().toLowerCase();
+  const list = BRAND_ORDER_MAP[catKey];
+  if (list) {
+    const idx = list.indexOf(brandName);
+    if (idx !== -1) return idx + 1;
+  }
+  return Number(brand.display_order) || 999;
+};
+
 function BrandLogoCard({ brand }) {
   const [hasError, setHasError] = useState(false);
   const isUrl = brand.websiteUrl && /^https?:\/\//i.test(brand.websiteUrl);
   const logoSrc = resolveLogoUrl(brand.logo);
+  const displayName = BRAND_DISPLAY_NAMES[brand.name] || brand.name;
 
   const content = (
-    <div className="brand-logo-card" title={brand.name}>
+    <div className="brand-logo-card" title={displayName}>
       {logoSrc && !hasError ? (
         <img
           src={logoSrc}
-          alt={brand.name}
+          alt={displayName}
           loading="lazy"
           decoding="async"
           onError={() => setHasError(true)}
         />
       ) : (
-        <span className="brand-fallback-text">{brand.name}</span>
+        <span className="brand-fallback-text">{displayName}</span>
       )}
     </div>
   );
@@ -181,17 +245,16 @@ export default function BrandsPage({ content }) {
 
   const categories = rawCategories
     .filter(cat => cat.is_active !== false && cat.is_active !== 'false')
-    .sort((a, b) => (Number(a.display_order) || 999) - (Number(b.display_order) || 999));
+    .sort((a, b) => getCategoryRank(a) - getCategoryRank(b));
 
   const brands = rawBrands
-    .filter(brand => brand.is_active !== false && brand.is_active !== 'false')
-    .sort((a, b) => (Number(a.display_order) || 999) - (Number(b.display_order) || 999));
+    .filter(brand => brand.is_active !== false && brand.is_active !== 'false');
 
   const categoriesWithBrands = categories
     .map(cat => {
-      const catBrands = brands.filter(
-        b => (b.category || '').trim().toLowerCase() === (cat.name || '').trim().toLowerCase()
-      );
+      const catBrands = brands
+        .filter(b => (b.category || '').trim().toLowerCase() === (cat.name || '').trim().toLowerCase())
+        .sort((a, b) => getBrandRank(cat.name, a) - getBrandRank(cat.name, b));
       return { ...cat, brands: catBrands };
     })
     .filter(cat => cat.brands.length > 0);
@@ -221,6 +284,7 @@ export default function BrandsPage({ content }) {
           {categoriesWithBrands.map(category => {
             const IconComponent = ICON_MAP[category.icon] || Package;
             const themeColor = category.color || 'blue';
+            const categoryTitle = CATEGORY_DISPLAY_NAMES[category.name] || category.name;
 
             return (
               <article className={`category-card category-card--${themeColor}`} key={category.id || category.name}>
@@ -234,7 +298,7 @@ export default function BrandsPage({ content }) {
                     <IconComponent size={20} strokeWidth={2.4} />
                   </div>
 
-                  <h2 className="category-card-title">{category.name}</h2>
+                  <h2 className="category-card-title">{categoryTitle}</h2>
                   {category.description && <p className="category-card-desc">{category.description}</p>}
                 </div>
 
