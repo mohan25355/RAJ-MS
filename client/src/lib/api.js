@@ -1,4 +1,4 @@
-const apiBaseUrl = (import.meta.env.VITE_API_URL || '').replace(/\/$/, '');
+const apiBaseUrl = (import.meta.env.VITE_API_BASE_URL || import.meta.env.VITE_API_URL || '').replace(/\/$/, '');
 const API = apiBaseUrl ? `${apiBaseUrl}/api` : '/api';
 
 let cachedContent = null;
