@@ -323,15 +323,100 @@ function App() {
   };
 
   /* -----------------------------------------------------
-     HASH / PAGE CHANGE (ROUTING ONLY, NO NETWORK REFETCH)
+     DYNAMIC SEO & ROUTING MANAGEMENT
   ----------------------------------------------------- */
+
+  const seoConfig = {
+    home: {
+      title: "Raja Electricals 'N' Hardware | Electrical, Hardware & Industrial Solutions",
+      description: "Raja Electricals 'N' Hardware is a premier supplier of industrial electricals, safety PPE, hardware tools, water pumps, cables, switchgear, and site supplies in Chennai, Tamil Nadu."
+    },
+    products: {
+      title: "Electrical & Hardware Products | Raja Electricals 'N' Hardware",
+      description: "Explore our extensive catalogue of genuine electrical cables, safety helmets, power tools, LED flood lights, pumps, and hardware supplies in Chennai."
+    },
+    brands: {
+      title: "Leading Electrical & Hardware Brands | Raja Electricals 'N' Hardware",
+      description: "Authorized products from trusted global brands including Havells, Bosch, 3M Safety, Finolex, Legrand, Nippon Paint, and more."
+    },
+    gallery: {
+      title: "Projects & Product Gallery | Raja Electricals 'N' Hardware",
+      description: "Browse images of our recent site supplies, project executions, electrical inventory, and store infrastructure in Chennai."
+    },
+    about: {
+      title: "About Raja Electricals 'N' Hardware | Dependable Supply Partner",
+      description: "Over 25 years of excellence in powering construction, manufacturing, and facility projects with genuine electrical and hardware solutions."
+    },
+    aboutus: {
+      title: "About Raja Electricals 'N' Hardware | Dependable Supply Partner",
+      description: "Over 25 years of excellence in powering construction, manufacturing, and facility projects with genuine electrical and hardware solutions."
+    },
+    contact: {
+      title: "Contact Raja Electricals 'N' Hardware | Chennai, Tamil Nadu",
+      description: "Get in touch with our expert sales team for product enquiries, price quotes, bulk orders, and same-day local delivery options in Chennai."
+    },
+    contactus: {
+      title: "Contact Raja Electricals 'N' Hardware | Chennai, Tamil Nadu",
+      description: "Get in touch with our expert sales team for product enquiries, price quotes, bulk orders, and same-day local delivery options in Chennai."
+    }
+  };
+
+  const updatePageSEO = (currentPage) => {
+    const config = seoConfig[currentPage] || seoConfig.home;
+    document.title = config.title;
+
+    let metaDesc = document.querySelector('meta[name="description"]');
+    if (!metaDesc) {
+      metaDesc = document.createElement('meta');
+      metaDesc.name = 'description';
+      document.head.appendChild(metaDesc);
+    }
+    metaDesc.content = config.description;
+
+    let ogTitle = document.querySelector('meta[property="og:title"]');
+    if (ogTitle) ogTitle.content = config.title;
+
+    let ogDesc = document.querySelector('meta[property="og:description"]');
+    if (ogDesc) ogDesc.content = config.description;
+
+    let breadcrumbScript = document.getElementById('dynamic-breadcrumb-schema');
+    if (!breadcrumbScript) {
+      breadcrumbScript = document.createElement('script');
+      breadcrumbScript.id = 'dynamic-breadcrumb-schema';
+      breadcrumbScript.type = 'application/ld+json';
+      document.head.appendChild(breadcrumbScript);
+    }
+
+    const breadcrumbs = [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://raj-ms-client-seven.vercel.app/" }
+    ];
+
+    if (currentPage !== 'home') {
+      const pageName = currentPage.charAt(0).toUpperCase() + currentPage.slice(1);
+      breadcrumbs.push({
+        "@type": "ListItem",
+        "position": 2,
+        "name": pageName,
+        "item": `https://raj-ms-client-seven.vercel.app/#${currentPage}`
+      });
+    }
+
+    breadcrumbScript.textContent = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": breadcrumbs
+    });
+  };
 
   useEffect(() => {
     const syncPage = () => {
-      setPage(getPage());
+      const currentPage = getPage();
+      setPage(currentPage);
+      updatePageSEO(currentPage);
       window.scrollTo(0, 0);
     };
 
+    syncPage();
     window.addEventListener('hashchange', syncPage);
     return () => {
       window.removeEventListener('hashchange', syncPage);

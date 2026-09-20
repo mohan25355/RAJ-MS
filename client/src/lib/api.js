@@ -35,7 +35,8 @@ export async function getContent(forceRefresh = false) {
 
   contentInFlightPromise = (async () => {
     try {
-      const response = await fetch(`${API}/content`);
+      const headers = forceRefresh ? { 'Cache-Control': 'no-cache', 'Pragma': 'no-cache' } : {};
+      const response = await fetch(`${API}/content`, { headers });
       const payload = await readPayload(response);
       if (!response.ok) throw new Error(payload?.error || 'Could not load website content.');
       cachedContent = payload;
@@ -51,6 +52,12 @@ export async function getContent(forceRefresh = false) {
 export function clearContentCache() {
   cachedContent = null;
   contentInFlightPromise = null;
+  try {
+    localStorage.setItem('raja_content_updated', Date.now().toString());
+    window.dispatchEvent(new Event('raja-content-updated'));
+  } catch (_e) {
+    // Ignore storage quota errors if any
+  }
 }
 
 export async function request(path, method = 'GET', body) {

@@ -244,13 +244,13 @@ const publicRecordsFromRows = (rows, collection) =>
 let contentCache = null;
 let contentCacheTime = 0;
 let inFlightContentPromise = null;
-
-const getContentCacheTTL = () => (parseInt(process.env.CONTENT_CACHE_TTL, 10) || 300) * 1000;
+let globalContentRevision = Date.now();
 
 function invalidateContentCache() {
   contentCache = null;
   contentCacheTime = 0;
   inFlightContentPromise = null;
+  globalContentRevision = Date.now();
 }
 
 async function fetchFreshContent() {
@@ -354,15 +354,67 @@ app.get('/api/health', (_req, res) => {
   res.json({ ok: connected, mongodb: connected ? 'connected' : 'disconnected', initialized: isInitialized });
 });
 
-// Optimized Content Endpoint with Server Cache, Stampede Protection & Stale Fallback
-app.get('/api/content', async (_req, res, next) => {
+app.get('/robots.txt', (_req, res) => {
+  res.setHeader('Content-Type', 'text/plain');
+  res.setHeader('Cache-Control', 'public, max-age=86400');
+  res.send(`User-agent: *
+Allow: /
+Disallow: /dashboard
+Disallow: /admin
+Disallow: /api/admin
+Disallow: /api/auth
+
+Sitemap: https://raj-ms-client-seven.vercel.app/sitemap.xml
+`);
+});
+
+app.get('/sitemap.xml', (_req, res) => {
+  res.setHeader('Content-Type', 'application/xml');
+  res.setHeader('Cache-Control', 'public, max-age=3600, stale-while-revalidate=86400');
+
+  const domain = 'https://raj-ms-client-seven.vercel.app';
+  const now = new Date().toISOString();
+
+  const staticUrls = [
+    { loc: `${domain}/`, priority: '1.0', changefreq: 'daily' },
+    { loc: `${domain}/#products`, priority: '0.9', changefreq: 'daily' },
+    { loc: `${domain}/#brands`, priority: '0.8', changefreq: 'weekly' },
+    { loc: `${domain}/#gallery`, priority: '0.7', changefreq: 'weekly' },
+    { loc: `${domain}/#about`, priority: '0.7', changefreq: 'monthly' },
+    { loc: `${domain}/#contact`, priority: '0.8', changefreq: 'monthly' }
+  ];
+
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${staticUrls.map(u => `  <url>
+    <loc>${u.loc}</loc>
+    <lastmod>${now}</lastmod>
+    <changefreq>${u.changefreq}</changefreq>
+    <priority>${u.priority}</priority>
+  </url>`).join('\n')}
+</urlset>`;
+
+  res.send(xml);
+});
+
+// Optimized Content Endpoint with ETag 304 Revalidation & Immediate Admin Update Freshness
+const getContentCacheTTL = () => (parseInt(process.env.CONTENT_CACHE_TTL, 10) || 300) * 1000;
+
+app.get('/api/content', async (req, res, next) => {
   try {
+    const etag = `W/"rev-${globalContentRevision}"`;
+    res.setHeader('ETag', etag);
+    res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
+
+    if (req.headers['if-none-match'] === etag) {
+      return res.status(304).end();
+    }
+
     const now = Date.now();
     const ttl = getContentCacheTTL();
 
-    // 1. Return fresh cache if valid
+    // 1. Return fresh in-memory cache if valid
     if (contentCache && (now - contentCacheTime < ttl)) {
-      res.setHeader('Cache-Control', 'public, max-age=60, stale-while-revalidate=300');
       return res.json(contentCache);
     }
 
@@ -375,13 +427,11 @@ app.get('/api/content', async (_req, res, next) => {
 
     try {
       const payload = await inFlightContentPromise;
-      res.setHeader('Cache-Control', 'public, max-age=60, stale-while-revalidate=300');
       return res.json(payload);
     } catch (dbError) {
       // 3. Stale Cache Fallback
       if (contentCache) {
         console.warn('Upstream database warning, serving stale content cache:', dbError.message);
-        res.setHeader('Cache-Control', 'public, max-age=30');
         return res.json(contentCache);
       }
       throw dbError;
@@ -743,9 +793,16 @@ async function ensureInitialHomeAdMigration() {
 }
 
 // Public Lightweight Endpoint for Active Home Advertisement
-app.get('/api/home-ads/active', async (_req, res, next) => {
+app.get('/api/home-ads/active', async (req, res, next) => {
   try {
-    res.setHeader('Cache-Control', 'public, max-age=60, stale-while-revalidate=300');
+    const etag = `W/"rev-${globalContentRevision}"`;
+    res.setHeader('ETag', etag);
+    res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
+
+    if (req.headers['if-none-match'] === etag) {
+      return res.status(304).end();
+    }
+
     const ads = await getHomeAdsFromSettings();
     const activeAd = ads.find(ad => ad.is_active && ad.image_url && typeof ad.image_url === 'string' && ad.image_url.trim() !== '');
 
