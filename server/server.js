@@ -98,10 +98,12 @@ const defaultProjects = [{ id: 'metro-rail', name: 'Chennai Metro Rail Project',
 async function ensureContentDefaults() { const record = await Content.findOne({ key: 'main' }); if (!record) return; const data = record.data; data.site = replaceLegacyContact({ phone: COMPANY_PHONE, email: 'sales@rkinnovations.com', address: 'Chennai, Tamil Nadu', whatsappNumber: COMPANY_WHATSAPP, whatsappMessage: 'Hello Raja Electricals', heroImage2: photo('photo-1581092160607-ee22621dd758', 1300), heroImage3: photo('photo-1544724569-5f546fd6f2b5', 1300), aboutKicker: 'ABOUT RAJA ELECTRICALS', aboutTitle: 'Supply that keeps work moving.', aboutIntro: 'A dependable supply partner for professionals building, maintaining and growing.', aboutDescription: 'For over two decades, Raja Electricals has helped contractors, facilities and industrial teams source dependable products without unnecessary delays.', aboutValues: 'Genuine products with warranty\nHelpful technical guidance\nReliable local delivery\nProject and bulk-order support', aboutImage: photo('photo-1516321318423-f06f85e504b3', 1300), ...data.site }); data.products = (data.products || []).map(product => ({ features: 'High quality construction\nReliable performance\nSuitable for professional use', specifications: 'Brand|RAJA\nMaterial|Premium grade\nApplications|Industrial and commercial', colors: '#f5bd13,#ef2b1c,#ffffff,#111111', catalogUrl: '', ...product })); data.projects = (data.projects?.length ? data.projects : defaultProjects); record.data = data; record.markModified('data'); await record.save(); }
 function auth(req, res, next) { try { req.admin = jwt.verify((req.headers.authorization || '').replace('Bearer ', ''), JWT_SECRET); next(); } catch { res.status(401).json({ error: 'Please sign in to continue.' }); } }
 
+const BUCKET_NAME = 'RAJA_ELE';
+
 const managedCollections = {
   products: ['id', 'name', 'category', 'description', 'price', 'image'],
   categories: ['id', 'name', 'description', 'icon', 'color', 'image', 'display_order', 'is_active', 'count'],
-  brands: ['id', 'name', 'category', 'category_id', 'logo', 'websiteUrl', 'website_url', 'description', 'display_order', 'is_active', 'products'],
+  brands: ['id', 'name', 'logo'],
   industries: ['id', 'name', 'image'],
   gallery: ['id', 'title', 'image'],
   projects: ['id', 'name', 'description', 'image'],
@@ -120,6 +122,72 @@ const rowForCollection = (collection, item) => {
   );
   return { ...columns, data: item, updated_at: new Date().toISOString() };
 };
+
+async function uploadBase64ToStorage(base64Data, folder, identifier) {
+  if (!base64Data || typeof base64Data !== 'string' || !base64Data.startsWith('data:image')) {
+    return base64Data;
+  }
+  const match = base64Data.match(/^data:(image\/[a-zA-Z+]+);base64,(.+)$/);
+  if (!match) return base64Data;
+
+  const contentType = match[1];
+  const buffer = Buffer.from(match[2], 'base64');
+  let ext = 'png';
+  if (contentType.includes('jpeg') || contentType.includes('jpg')) ext = 'jpg';
+  else if (contentType.includes('webp')) ext = 'webp';
+  else if (contentType.includes('png')) ext = 'png';
+
+  const safeId = String(identifier || Date.now()).replace(/[^a-zA-Z0-9_-]/g, '_');
+  const filePath = `${folder}/${safeId}-${Date.now()}.${ext}`;
+
+  const { data, error } = await supabase.storage
+    .from(BUCKET_NAME)
+    .upload(filePath, buffer, { contentType, upsert: true });
+
+  if (error) {
+    console.error(`Failed to upload image to Supabase Storage (${filePath}):`, error.message);
+    throw new Error(`Storage upload failed: ${error.message}`);
+  }
+
+  const { data: urlData } = supabase.storage.from(BUCKET_NAME).getPublicUrl(filePath);
+  return urlData?.publicUrl || base64Data;
+}
+
+async function safelyDeleteStorageImage(imageUrl, currentCollection, recordId) {
+  try {
+    if (!imageUrl || typeof imageUrl !== 'string' || !imageUrl.includes(`/object/public/${BUCKET_NAME}/`)) {
+      return;
+    }
+    const storagePath = imageUrl.split(`/object/public/${BUCKET_NAME}/`)[1];
+    if (!storagePath) return;
+
+    const [pRes, bRes] = await Promise.all([
+      supabase.from('products').select('id, image').neq('id', recordId),
+      supabase.from('brands').select('id, logo').neq('id', recordId)
+    ]);
+
+    const otherProductImages = (pRes.data || []).map(p => recordFromRow(p)?.image).filter(Boolean);
+    const otherBrandLogos = (bRes.data || []).map(b => recordFromRow(b)?.logo).filter(Boolean);
+
+    const isReferencedElsewhere = [...otherProductImages, ...otherBrandLogos].some(
+      url => typeof url === 'string' && url.includes(storagePath)
+    );
+
+    if (isReferencedElsewhere) {
+      console.log(`Storage file ${storagePath} is referenced elsewhere. Skipping deletion.`);
+      return;
+    }
+
+    const { error } = await supabase.storage.from(BUCKET_NAME).remove([storagePath]);
+    if (error) {
+      console.warn(`Safe storage cleanup warning for ${storagePath}:`, error.message);
+    } else {
+      console.log(`Successfully cleaned up unused storage file: ${storagePath}`);
+    }
+  } catch (err) {
+    console.warn(`Exception during safe storage cleanup:`, err.message);
+  }
+}
 
 // Public DTO Transformation: Strips huge embedded base64 strings from public JSON payload
 const publicRecordDTO = (row, collection) => {
@@ -345,27 +413,79 @@ app.post('/api/:collection', (req, res, next) => {
   try {
     const collection = req.params.collection;
     if (!managedCollections[collection]) return res.status(404).json({ error: 'Unknown collection.' });
-    const item = { ...req.body, id: req.body.id || id() };
-    const { data, error } = await supabase.from(collection).insert(rowForCollection(collection, item)).select().single();
-    if (error) throw error;
+
+    let item = { ...req.body, id: req.body.id || id() };
+
+    // Automatic Supabase Storage upload for Base64 image/logo payloads
+    if (collection === 'products' && item.image && typeof item.image === 'string' && item.image.startsWith('data:image')) {
+      item.image = await uploadBase64ToStorage(item.image, 'products', item.id);
+    } else if (collection === 'brands' && item.logo && typeof item.logo === 'string' && item.logo.startsWith('data:image')) {
+      item.logo = await uploadBase64ToStorage(item.logo, 'brands', item.id);
+    }
+
+    const rowPayload = rowForCollection(collection, item);
+    const { data, error } = await supabase.from(collection).insert(rowPayload).select().single();
+    if (error) {
+      if (item.image && typeof item.image === 'string' && item.image.includes('/object/public/RAJA_ELE/')) {
+        safelyDeleteStorageImage(item.image, collection, item.id);
+      }
+      if (item.logo && typeof item.logo === 'string' && item.logo.includes('/object/public/RAJA_ELE/')) {
+        safelyDeleteStorageImage(item.logo, collection, item.id);
+      }
+      return res.status(400).json({ error: error.message || 'Database insert failed.' });
+    }
+
     invalidateContentCache();
     res.status(201).json(recordFromRow(data));
-  } catch (error) { next(error); }
+  } catch (error) {
+    res.status(400).json({ error: error.message || 'Failed to create item.' });
+  }
 });
 
 app.put('/api/:collection/:id', auth, async (req, res, next) => {
   try {
     const collection = req.params.collection;
     if (!managedCollections[collection]) return res.status(404).json({ error: 'Unknown collection.' });
+
     const existing = await supabase.from(collection).select('*').eq('id', req.params.id).maybeSingle();
-    if (existing.error) throw existing.error;
+    if (existing.error) return res.status(400).json({ error: existing.error.message });
     if (!existing.data) return res.status(404).json({ error: 'Item not found.' });
-    const item = { ...recordFromRow(existing.data), ...req.body, id: req.params.id };
-    const { data, error } = await supabase.from(collection).update(rowForCollection(collection, item)).eq('id', req.params.id).select().single();
-    if (error) throw error;
+
+    const existingRecord = recordFromRow(existing.data);
+    let item = { ...existingRecord, ...req.body, id: req.params.id };
+
+    if (collection === 'products') {
+      if (req.body.image && typeof req.body.image === 'string' && req.body.image.startsWith('data:image')) {
+        item.image = await uploadBase64ToStorage(req.body.image, 'products', req.params.id);
+      } else if (req.body.image === undefined) {
+        item.image = existingRecord.image;
+      }
+    }
+
+    if (collection === 'brands') {
+      if (req.body.logo && typeof req.body.logo === 'string' && req.body.logo.startsWith('data:image')) {
+        item.logo = await uploadBase64ToStorage(req.body.logo, 'brands', req.params.id);
+      } else if (req.body.logo === undefined) {
+        item.logo = existingRecord.logo;
+      }
+    }
+
+    const rowPayload = rowForCollection(collection, item);
+    const { data, error } = await supabase.from(collection).update(rowPayload).eq('id', req.params.id).select().single();
+    if (error) return res.status(400).json({ error: error.message || 'Database update failed.' });
+
+    if (collection === 'products' && req.body.image && typeof req.body.image === 'string' && req.body.image.startsWith('data:image') && existingRecord.image && existingRecord.image !== item.image) {
+      safelyDeleteStorageImage(existingRecord.image, collection, req.params.id);
+    }
+    if (collection === 'brands' && req.body.logo && typeof req.body.logo === 'string' && req.body.logo.startsWith('data:image') && existingRecord.logo && existingRecord.logo !== item.logo) {
+      safelyDeleteStorageImage(existingRecord.logo, collection, req.params.id);
+    }
+
     invalidateContentCache();
     res.json(recordFromRow(data));
-  } catch (error) { next(error); }
+  } catch (error) {
+    res.status(400).json({ error: error.message || 'Failed to update item.' });
+  }
 });
 
 app.delete('/api/:collection/:id', auth, async (req, res, next) => {
@@ -390,12 +510,26 @@ app.delete('/api/:collection/:id', auth, async (req, res, next) => {
       }
     }
 
+    const { data: existingRow } = await supabase.from(collection).select('*').eq('id', req.params.id).maybeSingle();
+    const existingRecord = existingRow ? recordFromRow(existingRow) : null;
+
     const { error, count } = await supabase.from(collection).delete({ count: 'exact' }).eq('id', req.params.id);
-    if (error) throw error;
+    if (error) return res.status(400).json({ error: error.message || 'Database delete failed.' });
     if (!count) return res.status(404).json({ error: 'Item not found.' });
+
     invalidateContentCache();
+
+    if (existingRecord) {
+      const imageToClean = existingRecord.image || existingRecord.logo;
+      if (imageToClean) {
+        safelyDeleteStorageImage(imageToClean, collection, req.params.id);
+      }
+    }
+
     res.sendStatus(204);
-  } catch (error) { next(error); }
+  } catch (error) {
+    res.status(400).json({ error: error.message || 'Failed to delete item.' });
+  }
 });
 
 // Product Image Stream Route (Serves product images uploaded via Admin without embedding heavy base64 in content payload)

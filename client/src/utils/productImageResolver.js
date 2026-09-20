@@ -83,7 +83,7 @@ export const resolveProductImage = (product) => {
       if (product.updated_at || product.updatedAt) {
         const v = new Date(product.updated_at || product.updatedAt).getTime();
         if (!isNaN(v)) {
-          return fullUrl.includes('?') ? `${fullUrl}&v=${fullUrl}` : `${fullUrl}?v=${v}`;
+          return fullUrl.includes('?') ? `${fullUrl}&v=${v}` : `${fullUrl}?v=${v}`;
         }
       }
       return fullUrl;

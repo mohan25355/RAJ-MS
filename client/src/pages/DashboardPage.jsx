@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { ArrowDown, ArrowUp, ClipboardList, FolderKanban, Image as ImageIcon, LogOut, Package, Save, Settings, ShieldCheck, ShoppingBag, Tags } from 'lucide-react';
-import { getContent, request } from '../lib/api';
+import { ArrowDown, ArrowUp, ClipboardList, Image as ImageIcon, LogOut, Package, Save, ShieldCheck, ShoppingBag, Tags } from 'lucide-react';
+import { getContent, request, resolveApiUrl } from '../lib/api';
 
 const fields = {
   products: ['name', 'category', 'price', 'badge', 'description', 'features', 'specifications', 'colors'],
@@ -35,12 +35,9 @@ const blank = collection => {
 };
 
 const nav = [
-  ['site', Settings],
   ['products', Package],
   ['categories', Tags],
   ['brands', ShieldCheck],
-  ['industries', Package],
-  ['projects', FolderKanban],
   ['gallery', ImageIcon],
   ['enquiries', ClipboardList],
   ['orders', ShoppingBag],
@@ -49,7 +46,7 @@ const nav = [
 export default function DashboardPage() {
   const [token, setToken] = useState(localStorage.getItem('raja_admin_token'));
   const [content, setContent] = useState(null);
-  const [view, setView] = useState('site');
+  const [view, setView] = useState('products');
   const [editing, setEditing] = useState(null);
   const [records, setRecords] = useState([]);
   const [notice, setNotice] = useState('');
@@ -66,7 +63,12 @@ export default function DashboardPage() {
     }
   };
 
+  const validViewKeys = nav.map(([k]) => k);
   useEffect(() => {
+    if (!validViewKeys.includes(view)) {
+      setView('products');
+      return;
+    }
     if (token) reload();
   }, [token, view]);
 
@@ -275,7 +277,7 @@ export default function DashboardPage() {
             key={key}
           >
             <Icon size={16} />
-            {key === 'site' ? 'Website content' : labels[key]}
+            {labels[key]}
           </button>
         ))}
         <button onClick={logout}>
@@ -330,7 +332,7 @@ export default function DashboardPage() {
                 {list.map((item, idx) => (
                   <article key={item.id || idx}>
                     {(item.image || item.logo) ? (
-                      <img src={item.image || item.logo} alt="" />
+                      <img src={resolveApiUrl(item.image || item.logo)} alt="" />
                     ) : (
                       <div className="cms-no-img">{item.name?.slice(0, 2).toUpperCase() || 'NO'}</div>
                     )}
