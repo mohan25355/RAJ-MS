@@ -199,6 +199,31 @@ export default function DashboardPage() {
     }
   };
 
+  const [deletingRecord, setDeletingRecord] = useState(null);
+  const [deletingRecordProgress, setDeletingRecordProgress] = useState(false);
+  const [deleteRecordError, setDeleteRecordError] = useState('');
+
+  const handleDeleteRecord = item => {
+    setDeletingRecord(item);
+    setDeleteRecordError('');
+  };
+
+  const confirmDeleteRecord = async () => {
+    if (!deletingRecord) return;
+    setDeletingRecordProgress(true);
+    setDeleteRecordError('');
+    try {
+      await request(`/admin/${view}/${deletingRecord.id}`, 'DELETE');
+      setRecords(items => items.filter(item => item.id !== deletingRecord.id));
+      setNotice(`Deleted ${view === 'orders' ? 'order' : 'enquiry'} for "${deletingRecord.customerName || deletingRecord.name || 'customer'}".`);
+      setDeletingRecord(null);
+    } catch (error) {
+      setDeleteRecordError(error.message || `Unable to delete ${view === 'orders' ? 'order' : 'enquiry'}. Please try again.`);
+    } finally {
+      setDeletingRecordProgress(false);
+    }
+  };
+
   const updateStatus = async (id, status) => {
     try {
       await request(`/admin/${view}/${id}`, 'PATCH', { status });
@@ -308,7 +333,19 @@ export default function DashboardPage() {
         {notice && <p className="cms-notice">{notice}</p>}
 
         {isRecords ? (
-          <Records items={records} type={view} onStatus={updateStatus} />
+          <>
+            <Records items={records} type={view} onStatus={updateStatus} onDelete={handleDeleteRecord} />
+            {deletingRecord && (
+              <RecordDeleteModal
+                item={deletingRecord}
+                type={view}
+                onClose={() => setDeletingRecord(null)}
+                onConfirm={confirmDeleteRecord}
+                deleting={deletingRecordProgress}
+                errorMsg={deleteRecordError}
+              />
+            )}
+          </>
         ) : view === 'brands' ? (
           <BrandManager content={content} reload={reload} setNotice={setNotice} />
         ) : (
@@ -384,7 +421,7 @@ export default function DashboardPage() {
   );
 }
 
-function Records({ items, type, onStatus }) {
+function Records({ items, type, onStatus, onDelete }) {
   const options = type === 'orders' ? ['New', 'Confirmed', 'Processing', 'Completed', 'Cancelled'] : ['New', 'Contacted', 'Closed'];
   if (!items.length) return <p>No customer requests yet.</p>;
   return (
@@ -429,14 +466,67 @@ function Records({ items, type, onStatus }) {
                 )}
               </small>
             </div>
-            <select value={item.status || 'New'} onChange={event => onStatus(item.id, event.target.value)}>
-              {options.map(status => (
-                <option key={status}>{status}</option>
-              ))}
-            </select>
+            <div className="customer-record-actions" style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+              <select value={item.status || 'New'} onChange={event => onStatus(item.id, event.target.value)}>
+                {options.map(status => (
+                  <option key={status}>{status}</option>
+                ))}
+              </select>
+              <button
+                type="button"
+                className="delete"
+                onClick={() => onDelete(item)}
+                style={{ margin: 0 }}
+              >
+                Delete
+              </button>
+            </div>
           </article>
         );
       })}
+    </div>
+  );
+}
+
+function RecordDeleteModal({ item, type, onClose, onConfirm, deleting, errorMsg }) {
+  if (!item) return null;
+  const isOrder = type === 'orders';
+  const name = isOrder ? (item.customerName || item.name || 'this order') : (item.name || 'this enquiry');
+  const label = isOrder ? 'Order' : 'Enquiry';
+
+  return (
+    <div className="brand-modal-overlay">
+      <div className="brand-modal" style={{ maxWidth: '440px' }}>
+        <h2 style={{ color: '#b91c1c', margin: 0 }}>Delete {label}?</h2>
+        <p style={{ margin: '14px 0 20px 0', color: '#334155', fontSize: '14px', lineHeight: '1.5' }}>
+          Are you sure you want to delete this {label.toLowerCase()} for <strong>{name}</strong>? This action cannot be undone.
+        </p>
+
+        {errorMsg && (
+          <p className="cms-notice" style={{ background: '#fee2e2', color: '#b91c1c', marginBottom: '16px' }}>
+            {errorMsg}
+          </p>
+        )}
+
+        <div className="brand-modal-footer" style={{ display: 'flex', justifyContent: 'flex-end', gap: '10px' }}>
+          <button
+            type="button"
+            disabled={deleting}
+            onClick={onClose}
+            style={{ padding: '8px 16px', background: '#f1f5f9', border: '1px solid #cbd5e1', borderRadius: '6px', cursor: 'pointer' }}
+          >
+            Cancel
+          </button>
+          <button
+            type="button"
+            disabled={deleting}
+            onClick={onConfirm}
+            style={{ padding: '8px 16px', background: '#dc2626', color: '#ffffff', border: 'none', borderRadius: '6px', cursor: 'pointer', fontWeight: 'bold' }}
+          >
+            {deleting ? 'Deleting...' : 'Delete'}
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

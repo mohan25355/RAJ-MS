@@ -19,8 +19,9 @@ export default function ContactPage({ content }) {
   const submit = async event => {
     event.preventDefault();
     setNotice('');
+    const formEl = event.currentTarget;
 
-    const values = Object.fromEntries(new FormData(event.currentTarget));
+    const values = Object.fromEntries(new FormData(formEl));
     setSending(true);
 
     try {
@@ -40,12 +41,20 @@ export default function ContactPage({ content }) {
             source: 'Contact page — Connect with us form',
           });
 
-      setNotice(result.message);
-      event.currentTarget.reset();
+      setNotice(result?.message || 'Thanks — your enquiry has been sent.');
+
+      try {
+        if (formEl && typeof formEl.reset === 'function') {
+          formEl.reset();
+        }
+      } catch (resetErr) {
+        console.warn('Form reset warning:', resetErr);
+      }
+
       localStorage.removeItem('raja_selected_product');
       setSelected(null);
     } catch (error) {
-      setNotice(error.message);
+      setNotice(error?.message || 'Unable to send your enquiry. Please try again.');
     } finally {
       setSending(false);
     }

@@ -629,6 +629,28 @@ app.patch('/api/admin/:collection/:id', auth, async (req, res, next) => {
   } catch (error) { next(error); }
 });
 
+app.delete('/api/admin/:collection/:id', auth, async (req, res, next) => {
+  try {
+    res.setHeader('Cache-Control', 'no-store, private');
+    const collection = req.params.collection;
+    if (!['enquiries', 'orders'].includes(collection)) {
+      return res.status(404).json({ error: 'Unknown record type.' });
+    }
+
+    const { error, count } = await supabase
+      .from(collection)
+      .delete({ count: 'exact' })
+      .eq('id', req.params.id);
+
+    if (error) return res.status(400).json({ error: error.message || 'Database delete failed.' });
+    if (!count) return res.status(404).json({ error: 'Record not found.' });
+
+    res.sendStatus(204);
+  } catch (error) {
+    next(error);
+  }
+});
+
 // 404 & Error Handlers
 app.use((req, res) => {
   res.status(404).json({
