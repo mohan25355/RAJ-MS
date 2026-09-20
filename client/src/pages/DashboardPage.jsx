@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { ArrowDown, ArrowUp, ClipboardList, Image as ImageIcon, LogOut, Package, Save, ShieldCheck, ShoppingBag, Tags } from 'lucide-react';
+import { ArrowDown, ArrowUp, ClipboardList, Image as ImageIcon, LogOut, Megaphone, Package, Save, ShieldCheck, ShoppingBag, Tags } from 'lucide-react';
 import { getContent, request, resolveApiUrl } from '../lib/api';
 
 const fields = {
@@ -17,6 +17,7 @@ const labels = {
   brands: 'Brands',
   industries: 'Industries',
   gallery: 'Gallery',
+  home_ads: 'Home Ads',
   projects: 'Projects',
   enquiries: 'Customer enquiries',
   orders: 'Customer orders',
@@ -39,6 +40,7 @@ const nav = [
   ['categories', Tags],
   ['brands', ShieldCheck],
   ['gallery', ImageIcon],
+  ['home_ads', Megaphone],
   ['enquiries', ClipboardList],
   ['orders', ShoppingBag],
 ];
@@ -317,7 +319,7 @@ export default function DashboardPage() {
             <small>CONTENT MANAGER</small>
             <h1>{view === 'site' ? 'Homepage content' : labels[view]}</h1>
           </div>
-          {!isRecords && view !== 'site' && view !== 'brands' && (
+          {!isRecords && view !== 'site' && view !== 'brands' && view !== 'home_ads' && (
             <button
               className="add-btn"
               onClick={() => {
@@ -348,6 +350,8 @@ export default function DashboardPage() {
           </>
         ) : view === 'brands' ? (
           <BrandManager content={content} reload={reload} setNotice={setNotice} />
+        ) : view === 'home_ads' ? (
+          <HomeAdsManager setNotice={setNotice} />
         ) : (
           <>
             {current && (
@@ -1192,6 +1196,326 @@ function BrandModal({ brand, targetCategories, canonicalMap, onClose, onSave }) 
             </button>
             <button type="submit" className="add-btn" style={{ cursor: 'pointer' }}>
               {isEdit ? 'Save Changes' : 'Create Brand'}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+}
+
+function HomeAdsManager({ setNotice }) {
+  const [ads, setAds] = useState([]);
+  const [editingAd, setEditingAd] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  const loadHomeAds = async () => {
+    setLoading(true);
+    try {
+      const data = await request('/home-ads');
+      setAds(Array.isArray(data) ? data : []);
+    } catch (e) {
+      setNotice(e.message || 'Failed to load home advertisements.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    loadHomeAds();
+  }, []);
+
+  const handleAddNew = () => {
+    setEditingAd(null);
+    setIsModalOpen(true);
+  };
+
+  const handleEdit = ad => {
+    setEditingAd(ad);
+    setIsModalOpen(true);
+  };
+
+  const handleToggleActive = async ad => {
+    const newActive = !ad.is_active;
+    try {
+      await request(`/home-ads/${ad.id}/active`, 'PATCH', { is_active: newActive });
+      localStorage.setItem('raja_content_updated', String(Date.now()));
+      window.dispatchEvent(new Event('raja-content-updated'));
+      setNotice(`"${ad.title}" is now ${newActive ? 'Active' : 'Inactive'}.`);
+      loadHomeAds();
+    } catch (e) {
+      setNotice(e.message);
+    }
+  };
+
+  const handleDelete = async ad => {
+    if (!window.confirm(`Delete advertisement "${ad.title}"?\nThis action cannot be undone.`)) return;
+    try {
+      await request(`/home-ads/${ad.id}`, 'DELETE');
+      localStorage.setItem('raja_content_updated', String(Date.now()));
+      window.dispatchEvent(new Event('raja-content-updated'));
+      setNotice(`Advertisement "${ad.title}" deleted.`);
+      loadHomeAds();
+    } catch (e) {
+      setNotice(e.message);
+    }
+  };
+
+  const handleSaveForm = async formData => {
+    try {
+      const { isEdit, id, title, image, link_url, is_active } = formData;
+      if (isEdit) {
+        await request(`/home-ads/${id}`, 'PUT', { title, image, link_url, is_active });
+      } else {
+        await request('/home-ads', 'POST', { title, image, link_url, is_active });
+      }
+
+      localStorage.setItem('raja_content_updated', String(Date.now()));
+      window.dispatchEvent(new Event('raja-content-updated'));
+      setNotice(`Advertisement "${title}" saved successfully.`);
+      setIsModalOpen(false);
+      setEditingAd(null);
+      loadHomeAds();
+    } catch (e) {
+      setNotice(e.message);
+    }
+  };
+
+  if (loading) return <p>Loading advertisements...</p>;
+
+  return (
+    <div className="brand-manager-container">
+      <div className="brand-toolbar">
+        <button type="button" className="add-btn" onClick={handleAddNew}>
+          + Add Advertisement
+        </button>
+      </div>
+
+      {!ads.length ? (
+        <p style={{ marginTop: '20px', color: '#64748b' }}>No advertisement records found. Click "+ Add Advertisement" to create one.</p>
+      ) : (
+        <div className="brand-grid-admin">
+          {ads.map(ad => (
+            <div className="brand-card-admin" key={ad.id}>
+              <div>
+                <div className="brand-card-header" style={{ alignItems: 'flex-start' }}>
+                  <img
+                    className="brand-card-logo"
+                    src={resolveApiUrl(ad.image_url)}
+                    alt={ad.title}
+                    style={{ width: '90px', height: '90px', objectFit: 'cover', borderRadius: '6px' }}
+                  />
+                  <div>
+                    <div className="brand-card-title">{ad.title}</div>
+                    {ad.is_active ? (
+                      <span className="badge-active">● Active Popup</span>
+                    ) : (
+                      <span className="badge-inactive">● Inactive</span>
+                    )}
+                    {ad.link_url && (
+                      <small style={{ display: 'block', marginTop: '4px', color: '#64748b', wordBreak: 'break-all' }}>
+                        <strong>Link:</strong> {ad.link_url}
+                      </small>
+                    )}
+                  </div>
+                </div>
+              </div>
+
+              <div className="brand-card-actions" style={{ marginTop: '12px' }}>
+                <button type="button" onClick={() => handleEdit(ad)}>
+                  Edit
+                </button>
+                <button type="button" onClick={() => handleToggleActive(ad)}>
+                  {ad.is_active ? 'Deactivate' : 'Activate'}
+                </button>
+                <button type="button" className="btn-danger" onClick={() => handleDelete(ad)}>
+                  Delete
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {isModalOpen && (
+        <HomeAdModal
+          ad={editingAd}
+          onClose={() => setIsModalOpen(false)}
+          onSave={handleSaveForm}
+        />
+      )}
+    </div>
+  );
+}
+
+function HomeAdModal({ ad, onClose, onSave }) {
+  const isEdit = !!ad;
+  const [title, setTitle] = useState(ad?.title || '');
+  const [image, setImage] = useState(ad?.image_url || null);
+  const [linkUrl, setLinkUrl] = useState(ad?.link_url || '');
+  const [isActive, setIsActive] = useState(ad?.is_active !== false);
+  const [previewTab, setPreviewTab] = useState('desktop');
+  const [errorMsg, setErrorMsg] = useState('');
+  const [saving, setSaving] = useState(false);
+
+  const handleFileChange = e => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
+    if (!allowedTypes.includes(file.type.toLowerCase())) {
+      setErrorMsg('Please upload a JPG, PNG, or WebP image.');
+      return;
+    }
+
+    if (file.size > 10 * 1024 * 1024) {
+      setErrorMsg('Image file size must be less than 10MB.');
+      return;
+    }
+
+    setErrorMsg('');
+    const reader = new FileReader();
+    reader.onload = () => setImage(reader.result);
+    reader.readAsDataURL(file);
+  };
+
+  const handleSubmit = async e => {
+    e.preventDefault();
+    if (!title.trim()) {
+      setErrorMsg('Advertisement title is required.');
+      return;
+    }
+    if (!image) {
+      setErrorMsg('Advertisement image is required.');
+      return;
+    }
+
+    setSaving(true);
+    setErrorMsg('');
+
+    try {
+      await onSave({
+        isEdit,
+        id: ad?.id,
+        title: title.trim(),
+        image,
+        link_url: linkUrl.trim(),
+        is_active: isActive
+      });
+    } catch (err) {
+      setErrorMsg(err.message || 'Failed to save advertisement.');
+      setSaving(false);
+    }
+  };
+
+  return (
+    <div className="brand-modal-overlay">
+      <div className="brand-modal" style={{ maxWidth: '650px' }}>
+        <h2>{isEdit ? `Edit Advertisement: ${ad.title}` : 'Add Home Advertisement'}</h2>
+
+        {errorMsg && <p className="cms-notice" style={{ background: '#fee2e2', color: '#b91c1c' }}>{errorMsg}</p>}
+
+        <form onSubmit={handleSubmit}>
+          <label style={{ display: 'block', marginBottom: '14px', fontWeight: 'bold' }}>
+            Advertisement Title *
+            <input
+              type="text"
+              value={title}
+              onChange={e => setTitle(e.target.value)}
+              placeholder="e.g. Special Festive Discount Offer"
+              required
+              style={{ width: '100%', padding: '10px', marginTop: '6px', borderRadius: '6px', border: '1px solid #cbd5e1' }}
+            />
+          </label>
+
+          <label style={{ display: 'block', marginBottom: '14px', fontWeight: 'bold' }}>
+            Advertisement Image *
+            <input type="file" accept="image/jpeg,image/jpg,image/png,image/webp" onChange={handleFileChange} style={{ display: 'block', marginTop: '6px' }} />
+            <small style={{ display: 'block', marginTop: '4px', color: '#64748b' }}>Supported formats: JPG, PNG, WebP (Max 10MB)</small>
+          </label>
+
+          <label style={{ display: 'block', marginBottom: '14px', fontWeight: 'bold' }}>
+            Optional Click Link URL
+            <input
+              type="text"
+              value={linkUrl}
+              onChange={e => setLinkUrl(e.target.value)}
+              placeholder="e.g. /#products or https://..."
+              style={{ width: '100%', padding: '10px', marginTop: '6px', borderRadius: '6px', border: '1px solid #cbd5e1' }}
+            />
+          </label>
+
+          <label style={{ display: 'block', marginBottom: '14px', fontWeight: 'bold' }}>
+            Status
+            <select
+              value={isActive ? 'true' : 'false'}
+              onChange={e => setIsActive(e.target.value === 'true')}
+              style={{ width: '100%', padding: '10px', marginTop: '6px', borderRadius: '6px', border: '1px solid #cbd5e1', background: '#fff' }}
+            >
+              <option value="true">Active (Show on Home popup - Deactivates other ads)</option>
+              <option value="false">Inactive (Hidden from Home popup)</option>
+            </select>
+          </label>
+
+          {/* LIVE POPUP PREVIEW APPROXIMATION */}
+          <div style={{ marginTop: '16px', marginBottom: '16px', border: '1px dashed #cbd5e1', borderRadius: '8px', padding: '12px', background: '#f8fafc' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+              <span style={{ fontWeight: 'bold', fontSize: '13px', color: '#334155' }}>Live Home Popup Preview</span>
+              <div style={{ display: 'flex', gap: '6px' }}>
+                <button
+                  type="button"
+                  onClick={() => setPreviewTab('desktop')}
+                  style={{ padding: '4px 10px', fontSize: '12px', borderRadius: '4px', border: '1px solid #cbd5e1', background: previewTab === 'desktop' ? '#0f172a' : '#fff', color: previewTab === 'desktop' ? '#fff' : '#334155', cursor: 'pointer' }}
+                >
+                  Desktop Preview
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setPreviewTab('mobile')}
+                  style={{ padding: '4px 10px', fontSize: '12px', borderRadius: '4px', border: '1px solid #cbd5e1', background: previewTab === 'mobile' ? '#0f172a' : '#fff', color: previewTab === 'mobile' ? '#fff' : '#334155', cursor: 'pointer' }}
+                >
+                  Mobile Preview
+                </button>
+              </div>
+            </div>
+
+            <div style={{ background: 'rgba(0,0,0,0.6)', padding: '16px', borderRadius: '8px', display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '180px' }}>
+              <div style={{
+                background: '#fff',
+                borderRadius: '12px',
+                padding: '12px',
+                width: previewTab === 'mobile' ? '240px' : '380px',
+                position: 'relative',
+                textAlign: 'center',
+                boxShadow: '0 10px 25px rgba(0,0,0,0.3)',
+                transition: 'width 0.2s ease'
+              }}>
+                <span style={{ position: 'absolute', top: '6px', right: '12px', fontSize: '18px', color: '#64748b' }}>×</span>
+                {image ? (
+                  <img
+                    src={resolveApiUrl(image)}
+                    alt="Preview"
+                    style={{ width: '100%', maxHeight: previewTab === 'mobile' ? '220px' : '280px', objectFit: 'contain', borderRadius: '6px' }}
+                  />
+                ) : (
+                  <div style={{ height: '140px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#94a3b8', fontSize: '13px' }}>
+                    Select an image to preview popup
+                  </div>
+                )}
+                <div style={{ marginTop: '8px' }}>
+                  <span style={{ fontSize: '11px', background: '#f1f5f9', padding: '4px 8px', borderRadius: '4px', color: '#475569' }}>Cancel</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="brand-modal-footer">
+            <button type="button" disabled={saving} onClick={onClose} style={{ padding: '10px 16px', background: '#f1f5f9', border: '1px solid #cbd5e1', borderRadius: '6px', cursor: 'pointer' }}>
+              Cancel
+            </button>
+            <button type="submit" className="add-btn" disabled={saving} style={{ cursor: 'pointer' }}>
+              {saving ? 'Saving...' : isEdit ? 'Save Changes' : 'Create Advertisement'}
             </button>
           </div>
         </form>

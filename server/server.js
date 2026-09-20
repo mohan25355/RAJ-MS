@@ -407,7 +407,7 @@ app.put('/api/site', auth, async (req, res, next) => {
 
 // Dynamic Collections Routes
 app.post('/api/:collection', (req, res, next) => {
-  if (['enquiries', 'orders'].includes(req.params.collection)) return next('route');
+  if (['enquiries', 'orders', 'home-ads'].includes(req.params.collection)) return next('route');
   return auth(req, res, next);
 }, async (req, res, next) => {
   try {
@@ -442,7 +442,10 @@ app.post('/api/:collection', (req, res, next) => {
   }
 });
 
-app.put('/api/:collection/:id', auth, async (req, res, next) => {
+app.put('/api/:collection/:id', (req, res, next) => {
+  if (req.params.collection === 'home-ads') return next('route');
+  return auth(req, res, next);
+}, async (req, res, next) => {
   try {
     const collection = req.params.collection;
     if (!managedCollections[collection]) return res.status(404).json({ error: 'Unknown collection.' });
@@ -488,7 +491,10 @@ app.put('/api/:collection/:id', auth, async (req, res, next) => {
   }
 });
 
-app.delete('/api/:collection/:id', auth, async (req, res, next) => {
+app.delete('/api/:collection/:id', (req, res, next) => {
+  if (req.params.collection === 'home-ads') return next('route');
+  return auth(req, res, next);
+}, async (req, res, next) => {
   try {
     const collection = req.params.collection;
     if (!managedCollections[collection]) return res.status(404).json({ error: 'Unknown collection.' });
@@ -651,6 +657,274 @@ app.delete('/api/admin/:collection/:id', auth, async (req, res, next) => {
   }
 });
 
+// Home Ads CMS Backend Implementation
+async function getHomeAdsFromSettings() {
+  try {
+    const { data: current, error } = await supabase.from('site_settings').select('data').eq('id', 1).maybeSingle();
+    if (error) {
+      console.warn('Error reading site_settings for home_ads:', error.message);
+      return [];
+    }
+    const rootData = current?.data || {};
+    return Array.isArray(rootData.home_ads) ? rootData.home_ads : [];
+  } catch (err) {
+    console.warn('Exception reading home_ads from settings:', err.message);
+    return [];
+  }
+}
+
+async function updateHomeAdsInSettings(newHomeAds) {
+  const { data: current, error: selectErr } = await supabase.from('site_settings').select('data').eq('id', 1).maybeSingle();
+  if (selectErr) throw selectErr;
+
+  const existingRootData = current?.data && typeof current.data === 'object' ? current.data : {};
+  const updatedRootData = {
+    ...existingRootData,
+    home_ads: newHomeAds
+  };
+
+  const { error: upsertErr } = await supabase
+    .from('site_settings')
+    .upsert({ id: 1, data: updatedRootData, updated_at: new Date().toISOString() }, { onConflict: 'id' });
+
+  if (upsertErr) throw upsertErr;
+  invalidateContentCache();
+  return newHomeAds;
+}
+
+async function ensureInitialHomeAdMigration() {
+  try {
+    const existingAds = await getHomeAdsFromSettings();
+    if (existingAds.length > 0) {
+      return;
+    }
+
+    const fs = require('fs');
+    const localImagePath = path.join(__dirname, '../client/src/assets/addimage/add.jpeg');
+
+    if (!fs.existsSync(localImagePath)) {
+      console.warn('Initial promo image add.jpeg not found on disk. Skipping initial ad migration.');
+      return;
+    }
+
+    const buffer = fs.readFileSync(localImagePath);
+    const fileName = `home-ads/initial-promotion-banner-${Date.now()}.jpg`;
+
+    const { data: uploadData, error: uploadErr } = await supabase.storage
+      .from(BUCKET_NAME)
+      .upload(fileName, buffer, { contentType: 'image/jpeg', upsert: true });
+
+    if (uploadErr) {
+      console.warn('Failed to upload initial promo image add.jpeg to storage:', uploadErr.message);
+      return;
+    }
+
+    const { data: urlData } = supabase.storage.from(BUCKET_NAME).getPublicUrl(fileName);
+    const publicUrl = urlData?.publicUrl;
+
+    if (!publicUrl) return;
+
+    const initialAd = {
+      id: `ad-${Date.now()}`,
+      title: 'Special Promotion Banner',
+      image_url: publicUrl,
+      link_url: '',
+      is_active: true,
+      display_order: 1,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString()
+    };
+
+    await updateHomeAdsInSettings([initialAd]);
+    console.log('Successfully migrated initial add.jpeg promo banner to Supabase Storage & home_ads!');
+  } catch (err) {
+    console.warn('Warning: Initial home ad migration exception:', err.message);
+  }
+}
+
+// Public Lightweight Endpoint for Active Home Advertisement
+app.get('/api/home-ads/active', async (_req, res, next) => {
+  try {
+    res.setHeader('Cache-Control', 'public, max-age=60, stale-while-revalidate=300');
+    const ads = await getHomeAdsFromSettings();
+    const activeAd = ads.find(ad => ad.is_active && ad.image_url && typeof ad.image_url === 'string' && ad.image_url.trim() !== '');
+
+    if (!activeAd) {
+      return res.json({ success: true, data: null });
+    }
+
+    return res.json({
+      success: true,
+      data: {
+        id: activeAd.id,
+        title: activeAd.title || 'Special offer',
+        image_url: activeAd.image_url,
+        link_url: activeAd.link_url || '',
+        is_active: true
+      }
+    });
+  } catch (error) {
+    res.json({ success: true, data: null });
+  }
+});
+
+// Admin Home Ads CRUD Routes
+app.get('/api/home-ads', auth, async (_req, res, next) => {
+  try {
+    res.setHeader('Cache-Control', 'no-store, private');
+    const ads = await getHomeAdsFromSettings();
+    ads.sort((a, b) => (Number(a.display_order) || 999) - (Number(b.display_order) || 999));
+    res.json(ads);
+  } catch (error) { next(error); }
+});
+
+app.post('/api/home-ads', auth, async (req, res, next) => {
+  try {
+    res.setHeader('Cache-Control', 'no-store, private');
+    const { title, image, link_url, is_active, display_order } = req.body || {};
+
+    if (!title || !title.trim()) {
+      return res.status(400).json({ error: 'Advertisement title is required.' });
+    }
+
+    const adId = `ad-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
+    let imageUrl = image;
+
+    if (typeof image === 'string' && image.startsWith('data:image')) {
+      imageUrl = await uploadBase64ToStorage(image, 'home-ads', adId);
+    }
+
+    if (!imageUrl) {
+      return res.status(400).json({ error: 'Advertisement image is required.' });
+    }
+
+    const wantActive = is_active === true || is_active === 'true';
+    const existingAds = await getHomeAdsFromSettings();
+
+    const updatedAds = existingAds.map(ad => ({
+      ...ad,
+      is_active: wantActive ? false : (ad.is_active !== false)
+    }));
+
+    const newAd = {
+      id: adId,
+      title: title.trim(),
+      image_url: imageUrl,
+      link_url: String(link_url || '').trim(),
+      is_active: wantActive || (updatedAds.length === 0),
+      display_order: parseInt(display_order, 10) || updatedAds.length + 1,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString()
+    };
+
+    if (newAd.is_active) {
+      updatedAds.forEach(a => { a.is_active = false; });
+    }
+
+    updatedAds.push(newAd);
+    await updateHomeAdsInSettings(updatedAds);
+
+    res.status(201).json(newAd);
+  } catch (error) { next(error); }
+});
+
+app.put('/api/home-ads/:id', auth, async (req, res, next) => {
+  try {
+    res.setHeader('Cache-Control', 'no-store, private');
+    const existingAds = await getHomeAdsFromSettings();
+    const index = existingAds.findIndex(a => a.id === req.params.id);
+
+    if (index < 0) {
+      return res.status(404).json({ error: 'Advertisement not found.' });
+    }
+
+    const existingAd = existingAds[index];
+    let imageUrl = existingAd.image_url;
+
+    if (req.body.image && typeof req.body.image === 'string' && req.body.image.startsWith('data:image')) {
+      imageUrl = await uploadBase64ToStorage(req.body.image, 'home-ads', req.params.id);
+    }
+
+    const wantActive = req.body.is_active !== undefined ? (req.body.is_active === true || req.body.is_active === 'true') : existingAd.is_active;
+
+    let updatedAds = existingAds.map(ad => {
+      if (ad.id === req.params.id) {
+        return {
+          ...ad,
+          title: req.body.title ? String(req.body.title).trim() : ad.title,
+          image_url: imageUrl,
+          link_url: req.body.link_url !== undefined ? String(req.body.link_url).trim() : ad.link_url,
+          is_active: wantActive,
+          display_order: req.body.display_order !== undefined ? parseInt(req.body.display_order, 10) || ad.display_order : ad.display_order,
+          updated_at: new Date().toISOString()
+        };
+      }
+      return {
+        ...ad,
+        is_active: wantActive ? false : ad.is_active
+      };
+    });
+
+    await updateHomeAdsInSettings(updatedAds);
+
+    if (req.body.image && typeof req.body.image === 'string' && req.body.image.startsWith('data:image') && existingAd.image_url && existingAd.image_url !== imageUrl) {
+      safelyDeleteStorageImage(existingAd.image_url, 'home_ads', req.params.id);
+    }
+
+    const savedAd = updatedAds.find(a => a.id === req.params.id);
+    res.json(savedAd);
+  } catch (error) { next(error); }
+});
+
+app.patch('/api/home-ads/:id/active', auth, async (req, res, next) => {
+  try {
+    res.setHeader('Cache-Control', 'no-store, private');
+    const existingAds = await getHomeAdsFromSettings();
+    const index = existingAds.findIndex(a => a.id === req.params.id);
+
+    if (index < 0) {
+      return res.status(404).json({ error: 'Advertisement not found.' });
+    }
+
+    const wantActive = req.body.is_active === true || req.body.is_active === 'true';
+
+    const updatedAds = existingAds.map(ad => ({
+      ...ad,
+      is_active: ad.id === req.params.id ? wantActive : (wantActive ? false : ad.is_active)
+    }));
+
+    await updateHomeAdsInSettings(updatedAds);
+    const savedAd = updatedAds.find(a => a.id === req.params.id);
+    res.json(savedAd);
+  } catch (error) { next(error); }
+});
+
+app.delete('/api/home-ads/:id', auth, async (req, res, next) => {
+  try {
+    res.setHeader('Cache-Control', 'no-store, private');
+    const existingAds = await getHomeAdsFromSettings();
+    const targetAd = existingAds.find(a => a.id === req.params.id);
+
+    if (!targetAd) {
+      return res.status(404).json({ error: 'Advertisement not found.' });
+    }
+
+    const remainingAds = existingAds.filter(a => a.id !== req.params.id);
+
+    if (targetAd.is_active && remainingAds.length > 0) {
+      remainingAds[0].is_active = true;
+    }
+
+    await updateHomeAdsInSettings(remainingAds);
+
+    if (targetAd.image_url) {
+      safelyDeleteStorageImage(targetAd.image_url, 'home_ads', req.params.id);
+    }
+
+    res.sendStatus(204);
+  } catch (error) { next(error); }
+});
+
 // 404 & Error Handlers
 app.use((req, res) => {
   res.status(404).json({
@@ -670,6 +944,7 @@ app.use((err, _req, res, _next) => {
 let isInitialized = false;
 const server = app.listen(PORT, '0.0.0.0', () => {
   console.log(`Raja Electricals API running on port ${PORT}`);
+  ensureInitialHomeAdMigration();
 });
 
 // MongoDB is optional after the Supabase migration.

@@ -12,7 +12,7 @@ const BrandsPage = lazy(() => import('./pages/BrandsPage'));
 const ContactPage = lazy(() => import('./pages/ContactPage'));
 const DashboardPage = lazy(() => import('./pages/DashboardPage'));
 
-import { getContent } from './lib/api';
+import { API, getContent, resolveApiUrl } from './lib/api';
 
 import preloaderLogoSrc from './assets/logo/logo.png';
 import promotionImage from './assets/addimage/add.jpeg';
@@ -172,7 +172,9 @@ function App() {
   const [page, setPage] = useState(getPage);
   const [content, setContent] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [showPromotion, setShowPromotion] = useState(true);
+  const [activeAd, setActiveAd] = useState(null);
+  const [activeAdImage, setActiveAdImage] = useState(promotionImage);
+  const [showPromotion, setShowPromotion] = useState(false);
 
   /* -----------------------------------------------------
      LOAD WEBSITE CONTENT
@@ -189,31 +191,97 @@ function App() {
   };
 
   /* -----------------------------------------------------
+     DYNAMIC HOME ADVERTISEMENT LOAD (NON-BLOCKING WITH FALLBACK)
+  ----------------------------------------------------- */
+
+  const loadActiveAd = async (mountedRef) => {
+    try {
+      const response = await fetch(`${API}/home-ads/active`);
+      if (!response.ok) throw new Error('API request failed');
+      const result = await response.json();
+      const ad = result?.data;
+
+      if (ad && ad.image_url && typeof ad.image_url === 'string' && ad.image_url.trim() !== '') {
+        const resolvedUrl = resolveApiUrl(ad.image_url);
+        const seenKey = `raja_home_ad_seen_${ad.id}`;
+
+        if (sessionStorage.getItem(seenKey) === 'true') {
+          return;
+        }
+
+        let handled = false;
+        const triggerShow = () => {
+          if (handled) return;
+          handled = true;
+          if (mountedRef.current) {
+            setActiveAd(ad);
+            setActiveAdImage(resolvedUrl);
+            setShowPromotion(true);
+          }
+        };
+
+        const img = new Image();
+        img.onload = triggerShow;
+        img.onerror = () => {
+          if (handled) return;
+          handled = true;
+          if (mountedRef.current && sessionStorage.getItem('raja_home_ad_seen_default') !== 'true') {
+            setActiveAd(null);
+            setActiveAdImage(promotionImage);
+            setShowPromotion(true);
+          }
+        };
+        img.src = resolvedUrl;
+
+        // Immediate check for cached images (critical for page refresh & mobile viewports)
+        if (img.complete && img.naturalWidth !== 0) {
+          triggerShow();
+        }
+      } else {
+        if (mountedRef.current && sessionStorage.getItem('raja_home_ad_seen_default') !== 'true') {
+          setActiveAd(null);
+          setActiveAdImage(promotionImage);
+          setShowPromotion(true);
+        }
+      }
+    } catch (err) {
+      if (mountedRef.current && sessionStorage.getItem('raja_home_ad_seen_default') !== 'true') {
+        setActiveAd(null);
+        setActiveAdImage(promotionImage);
+        setShowPromotion(true);
+      }
+    }
+  };
+
+  /* -----------------------------------------------------
      INITIAL APP LOAD & DATA-AWARE PRELOADER
   ----------------------------------------------------- */
 
+  const mountedRef = React.useRef(true);
+
   useEffect(() => {
-    let mounted = true;
+    mountedRef.current = true;
     const startTime = Date.now();
 
     refreshContent().finally(() => {
-      if (!mounted) return;
-      // Smooth transition with ~300ms min visual duration for aesthetics
+      if (!mountedRef.current) return;
       const elapsed = Date.now() - startTime;
       const remaining = Math.max(0, 300 - elapsed);
       setTimeout(() => {
-        if (mounted) setLoading(false);
+        if (mountedRef.current) setLoading(false);
       }, remaining);
     });
 
-    // Fallback safety timeout (6s max) so network hiccups never trap the user permanently
+    loadActiveAd(mountedRef);
+
     const fallbackTimer = window.setTimeout(() => {
-      if (mounted) setLoading(false);
+      if (mountedRef.current) setLoading(false);
     }, 6000);
 
     const refreshOnAdminSave = (event) => {
       if (event.type === 'raja-content-updated' || event.key === 'raja_content_updated') {
         refreshContent(true);
+        loadActiveAd(mountedRef);
       }
     };
 
@@ -221,12 +289,38 @@ function App() {
     window.addEventListener('raja-content-updated', refreshOnAdminSave);
 
     return () => {
-      mounted = false;
+      mountedRef.current = false;
       window.clearTimeout(fallbackTimer);
       window.removeEventListener('storage', refreshOnAdminSave);
       window.removeEventListener('raja-content-updated', refreshOnAdminSave);
     };
   }, []);
+
+  const handleClosePromotion = () => {
+    setShowPromotion(false);
+    if (activeAd?.id) {
+      sessionStorage.setItem(`raja_home_ad_seen_${activeAd.id}`, 'true');
+    } else {
+      sessionStorage.setItem('raja_home_ad_seen_default', 'true');
+    }
+  };
+
+  const handleAdClick = () => {
+    if (activeAd?.link_url) {
+      const link = activeAd.link_url.trim();
+      if (link.startsWith('#')) {
+        go(link.replace(/^#/, ''));
+        handleClosePromotion();
+      } else if (link.startsWith('http://') || link.startsWith('https://')) {
+        window.open(link, '_blank', 'noopener,noreferrer');
+        handleClosePromotion();
+      } else if (link.startsWith('/')) {
+        const hashTarget = link.replace(/^\/#?/, '');
+        if (hashTarget) go(hashTarget);
+        handleClosePromotion();
+      }
+    }
+  };
 
   /* -----------------------------------------------------
      HASH / PAGE CHANGE (ROUTING ONLY, NO NETWORK REFETCH)
@@ -243,6 +337,16 @@ function App() {
       window.removeEventListener('hashchange', syncPage);
     };
   }, []);
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape' && showPromotion) {
+        handleClosePromotion();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [showPromotion, activeAd]);
 
   /* -----------------------------------------------------
      NAVIGATION
@@ -301,35 +405,42 @@ function App() {
         site={content?.site}
       />
 
-      {/* PROMOTION POPUP */}
-      {!loading && showPromotion && (
+      {/* PROMOTION POPUP (VISIBLE ONLY ON HOME PAGE) */}
+      {!loading && showPromotion && page === 'home' && (
         <div
           className="promotion-popup"
           role="dialog"
           aria-modal="true"
-          aria-label="Special offer"
+          aria-label={activeAd?.title || 'Special offer'}
+          onClick={(e) => {
+            if (e.target === e.currentTarget) {
+              handleClosePromotion();
+            }
+          }}
         >
           <div className="promotion-card">
             <button
               type="button"
               className="promotion-close"
-              onClick={() => setShowPromotion(false)}
+              onClick={handleClosePromotion}
               aria-label="Close promotion"
             >
               ×
             </button>
 
             <img
-              src={promotionImage}
-              alt="Special offer"
-              loading="lazy"
+              src={activeAdImage}
+              alt={activeAd?.title || 'Special offer'}
+              loading="eager"
               decoding="async"
+              onClick={activeAd?.link_url ? handleAdClick : undefined}
+              style={{ cursor: activeAd?.link_url ? 'pointer' : 'default' }}
             />
 
             <button
               type="button"
               className="promotion-cancel"
-              onClick={() => setShowPromotion(false)}
+              onClick={handleClosePromotion}
             >
               Cancel
             </button>
