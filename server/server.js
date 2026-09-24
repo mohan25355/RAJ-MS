@@ -27,16 +27,25 @@ const envOrigins = `${process.env.CLIENT_ORIGIN || ''},${process.env.CORS_ORIGIN
   .filter(Boolean);
 
 envOrigins.forEach(origin => {
-  if (!allowedOrigins.includes(origin)) {
-    allowedOrigins.push(origin);
+  const clean = origin.replace(/\/$/, '');
+  if (!allowedOrigins.includes(clean)) {
+    allowedOrigins.push(clean);
   }
 });
+
+const isAllowedOrigin = o => {
+  if (!o) return false;
+  const clean = o.trim().replace(/\/$/, '');
+  if (allowedOrigins.some(ao => ao.replace(/\/$/, '') === clean)) return true;
+  if (clean.startsWith('https://raj-ms-client-') && clean.endsWith('.vercel.app')) return true;
+  return false;
+};
 
 app.use(compression());
 app.use((req, res, next) => {
   const origin = req.headers.origin;
 
-  if (origin && allowedOrigins.includes(origin)) {
+  if (origin && isAllowedOrigin(origin)) {
     res.setHeader('Access-Control-Allow-Origin', origin);
   } else if (!origin && process.env.NODE_ENV !== 'production') {
     // Allow non-browser requests in dev
@@ -47,11 +56,11 @@ app.use((req, res, next) => {
   res.setHeader('Vary', 'Origin');
   res.setHeader('Access-Control-Allow-Credentials', 'true');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, Cache-Control, Pragma, If-None-Match, X-Requested-With');
   res.setHeader('Access-Control-Max-Age', '86400');
 
   if (req.method === 'OPTIONS') {
-    return res.sendStatus(204);
+    return res.status(204).end();
   }
   next();
 });
