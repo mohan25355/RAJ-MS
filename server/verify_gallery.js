@@ -48,15 +48,18 @@ async function runVerification() {
     Authorization: `Bearer ${token}`,
   };
 
-  // 3. Test Full CRUD Cycle with Temporary Test Item
-  console.log('3. Testing Full Gallery CRUD Cycle...');
+  // 3. Test Full CRUD Cycle with Temporary Test Base64 Image Item
+  console.log('3. Testing Full Gallery CRUD Cycle with Real Base64 Image Upload to Supabase Storage...');
   const testId = `test-temp-${Date.now()}`;
+  // 1x1 red pixel JPEG base64
+  const testBase64 = 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/2wBDAP//////////////////////////////////////////////////////////////////////////////////////wgALCAABAAEBAREA/8QAFBABAAAAAAAAAAAAAAAAAAAAAP/aAAgBAQABPxA=';
+
   const testItem = {
     id: testId,
     title: 'TEST GALLERY — REMOVE ME',
-    description: 'Temporary verification item',
+    description: 'Temporary verification item with Base64 upload',
     category: 'Store',
-    image: '1111.webp',
+    image: testBase64,
     display_order: 99,
     is_active: true,
   };
@@ -68,27 +71,61 @@ async function runVerification() {
     body: JSON.stringify(testItem),
   });
   const createData = await createRes.json();
-  console.log(`- CREATE status: ${createRes.status}, ID: ${createData.id}`);
+  console.log(`- CREATE status: ${createRes.status}, ID: ${createData.id}, Returned Image: ${createData.image}`);
+
+  if (!createData.image || !createData.image.includes('/storage/v1/object/public/RAJA_ELE/gallery/')) {
+    throw new Error(`CREATE failed to convert Base64 to Supabase Storage URL. Value: ${createData.image}`);
+  }
+
+  // Verify HTTP status of returned Supabase Storage Image URL
+  const imgHttpRes1 = await fetch(createData.image);
+  console.log(`- Storage Image HTTP status: ${imgHttpRes1.status} (Expected: 200), Content-Type: ${imgHttpRes1.headers.get('content-type')}`);
+  if (imgHttpRes1.status !== 200) {
+    throw new Error(`Storage image URL returned HTTP status ${imgHttpRes1.status} instead of 200!`);
+  }
 
   // READ (Public content)
   const contentRes1 = await fetch(`${API_BASE}/content`);
   const contentData1 = await contentRes1.json();
   const createdFound = (contentData1.gallery || []).find(g => g.id === testId);
   console.log(`- READ in public content: ${createdFound ? 'PASS (Found item)' : 'FAIL'}`);
+  console.log(`  Public Image URL: "${createdFound?.image}"`);
 
-  // UPDATE & DEACTIVATE
-  const updateRes = await fetch(`${API_BASE}/gallery/${testId}`, {
+  if (!createdFound?.image || !createdFound.image.startsWith('http')) {
+    throw new Error(`Public GET /api/content returned invalid image URL: "${createdFound?.image}"`);
+  }
+
+  // UPDATE TITLE (without changing image)
+  const updateTitleRes = await fetch(`${API_BASE}/gallery/${testId}`, {
     method: 'PUT',
     headers: authHeaders,
-    body: JSON.stringify({ ...testItem, title: 'TEST UPDATED', is_active: false }),
+    body: JSON.stringify({ title: 'TEST UPDATED TITLE ONLY' }),
   });
-  console.log(`- UPDATE & DEACTIVATE status: ${updateRes.status}`);
+  const updateTitleData = await updateTitleRes.json();
+  console.log(`- UPDATE TITLE ONLY status: ${updateTitleRes.status}, Preserved Image: ${updateTitleData.image}`);
+  if (updateTitleData.image !== createData.image) {
+    throw new Error(`Updating title accidentally changed or lost existing image URL!`);
+  }
 
-  // READ AFTER DEACTIVATE (Should show is_active: false in payload)
-  const contentRes2 = await fetch(`${API_BASE}/content`);
-  const contentData2 = await contentRes2.json();
-  const updatedFound = (contentData2.gallery || []).find(g => g.id === testId);
-  console.log(`- DEACTIVATE verified in content: ${updatedFound?.is_active === false ? 'PASS (Marked inactive)' : 'FAIL'}`);
+  // UPDATE & REPLACE IMAGE with 2nd Base64 Image
+  const testBase64_2 = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==';
+  const updateImgRes = await fetch(`${API_BASE}/gallery/${testId}`, {
+    method: 'PUT',
+    headers: authHeaders,
+    body: JSON.stringify({ image: testBase64_2 }),
+  });
+  const updateImgData = await updateImgRes.json();
+  console.log(`- REPLACE IMAGE status: ${updateImgRes.status}, New Image URL: ${updateImgData.image}`);
+  if (!updateImgData.image || !updateImgData.image.includes('/storage/v1/object/public/RAJA_ELE/gallery/')) {
+    throw new Error(`REPLACE IMAGE failed to convert 2nd Base64 to Supabase Storage URL!`);
+  }
+
+  // Verify 2nd image HTTP 200
+  const imgHttpRes2 = await fetch(updateImgData.image);
+  console.log(`- 2nd Storage Image HTTP status: ${imgHttpRes2.status} (Expected: 200)`);
+  if (imgHttpRes2.status !== 200) {
+    throw new Error(`2nd storage image returned HTTP status ${imgHttpRes2.status}!`);
+  }
 
   // DELETE
   const deleteRes = await fetch(`${API_BASE}/gallery/${testId}`, {

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { CtaBand, PageHead } from '../components/ui';
+import { resolveApiUrl } from '../lib/api';
 
 const galleryAssetModules = import.meta.glob('../assets/gallary/*', { eager: true, import: 'default' });
 
@@ -13,7 +14,7 @@ function resolveGalleryImageUrl(image) {
   if (matchedKey) {
     return galleryAssetModules[matchedKey];
   }
-  return image;
+  return resolveApiUrl(image);
 }
 
 export default function GalleryPage({ go, content }) {

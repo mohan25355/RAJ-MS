@@ -161,15 +161,25 @@ async function safelyDeleteStorageImage(imageUrl, currentCollection, recordId) {
     const storagePath = imageUrl.split(`/object/public/${BUCKET_NAME}/`)[1];
     if (!storagePath) return;
 
-    const [pRes, bRes] = await Promise.all([
+    const [pRes, bRes, gRes, cRes, iRes, prRes] = await Promise.all([
       supabase.from('products').select('id, image').neq('id', recordId),
-      supabase.from('brands').select('id, logo').neq('id', recordId)
+      supabase.from('brands').select('id, logo').neq('id', recordId),
+      supabase.from('gallery').select('id, image').neq('id', recordId),
+      supabase.from('categories').select('id, image').neq('id', recordId),
+      supabase.from('industries').select('id, image').neq('id', recordId),
+      supabase.from('projects').select('id, image').neq('id', recordId)
     ]);
 
-    const otherProductImages = (pRes.data || []).map(p => recordFromRow(p)?.image).filter(Boolean);
-    const otherBrandLogos = (bRes.data || []).map(b => recordFromRow(b)?.logo).filter(Boolean);
+    const otherImages = [
+      ...(pRes.data || []).map(p => recordFromRow(p)?.image),
+      ...(bRes.data || []).map(b => recordFromRow(b)?.logo),
+      ...(gRes.data || []).map(g => recordFromRow(g)?.image),
+      ...(cRes.data || []).map(c => recordFromRow(c)?.image),
+      ...(iRes.data || []).map(i => recordFromRow(i)?.image),
+      ...(prRes.data || []).map(pr => recordFromRow(pr)?.image),
+    ].filter(Boolean);
 
-    const isReferencedElsewhere = [...otherProductImages, ...otherBrandLogos].some(
+    const isReferencedElsewhere = otherImages.some(
       url => typeof url === 'string' && url.includes(storagePath)
     );
 
@@ -467,10 +477,11 @@ app.post('/api/:collection', (req, res, next) => {
     let item = { ...req.body, id: req.body.id || id() };
 
     // Automatic Supabase Storage upload for Base64 image/logo payloads
-    if (collection === 'products' && item.image && typeof item.image === 'string' && item.image.startsWith('data:image')) {
-      item.image = await uploadBase64ToStorage(item.image, 'products', item.id);
-    } else if (collection === 'brands' && item.logo && typeof item.logo === 'string' && item.logo.startsWith('data:image')) {
-      item.logo = await uploadBase64ToStorage(item.logo, 'brands', item.id);
+    if (item.image && typeof item.image === 'string' && item.image.startsWith('data:image')) {
+      item.image = await uploadBase64ToStorage(item.image, collection, item.id);
+    }
+    if (item.logo && typeof item.logo === 'string' && item.logo.startsWith('data:image')) {
+      item.logo = await uploadBase64ToStorage(item.logo, collection, item.id);
     }
 
     const rowPayload = rowForCollection(collection, item);
@@ -507,30 +518,26 @@ app.put('/api/:collection/:id', (req, res, next) => {
     const existingRecord = recordFromRow(existing.data);
     let item = { ...existingRecord, ...req.body, id: req.params.id };
 
-    if (collection === 'products') {
-      if (req.body.image && typeof req.body.image === 'string' && req.body.image.startsWith('data:image')) {
-        item.image = await uploadBase64ToStorage(req.body.image, 'products', req.params.id);
-      } else if (req.body.image === undefined) {
-        item.image = existingRecord.image;
-      }
+    if (req.body.image && typeof req.body.image === 'string' && req.body.image.startsWith('data:image')) {
+      item.image = await uploadBase64ToStorage(req.body.image, collection, req.params.id);
+    } else if (req.body.image === undefined) {
+      item.image = existingRecord.image;
     }
 
-    if (collection === 'brands') {
-      if (req.body.logo && typeof req.body.logo === 'string' && req.body.logo.startsWith('data:image')) {
-        item.logo = await uploadBase64ToStorage(req.body.logo, 'brands', req.params.id);
-      } else if (req.body.logo === undefined) {
-        item.logo = existingRecord.logo;
-      }
+    if (req.body.logo && typeof req.body.logo === 'string' && req.body.logo.startsWith('data:image')) {
+      item.logo = await uploadBase64ToStorage(req.body.logo, collection, req.params.id);
+    } else if (req.body.logo === undefined) {
+      item.logo = existingRecord.logo;
     }
 
     const rowPayload = rowForCollection(collection, item);
     const { data, error } = await supabase.from(collection).update(rowPayload).eq('id', req.params.id).select().single();
     if (error) return res.status(400).json({ error: error.message || 'Database update failed.' });
 
-    if (collection === 'products' && req.body.image && typeof req.body.image === 'string' && req.body.image.startsWith('data:image') && existingRecord.image && existingRecord.image !== item.image) {
+    if (req.body.image && typeof req.body.image === 'string' && req.body.image.startsWith('data:image') && existingRecord.image && existingRecord.image !== item.image) {
       safelyDeleteStorageImage(existingRecord.image, collection, req.params.id);
     }
-    if (collection === 'brands' && req.body.logo && typeof req.body.logo === 'string' && req.body.logo.startsWith('data:image') && existingRecord.logo && existingRecord.logo !== item.logo) {
+    if (req.body.logo && typeof req.body.logo === 'string' && req.body.logo.startsWith('data:image') && existingRecord.logo && existingRecord.logo !== item.logo) {
       safelyDeleteStorageImage(existingRecord.logo, collection, req.params.id);
     }
 
