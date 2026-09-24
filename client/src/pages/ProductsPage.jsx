@@ -17,16 +17,16 @@ const selectProduct = (item, page, go) => {
 // ============================================
 
 const CATEGORY_DATA = [
-  ['Head Protection', ['Safety Helmet Std. Series', 'Safety Helmet Vent. Series', 'ABS Helmet', 'Welding Helmet', 'Welding Shield Helmet Mountable', 'Grinding Face Shield A Type', 'Grinding Face Shield Spring Type', 'Grinding Face Shield Elastic Type', 'Electrical Helmet', 'Grinding Face Shield Ratchet Type', 'Heat Resistance Face Shield', 'Helmet With Light', 'Bump Cap']],
-  ['Ear Protection', ['Ear Muff', 'Executive Ear Muff', 'Helmet Mountable Ear Muff', 'Reusable Ear Plug', 'Ear Plug', 'Ear Plug Dispenser']],
-  ['First Aid Products', ['Venyl Kit', 'Travel Kit', 'Medical Kit', 'Plastic Kit', 'Foldable Stretcher']],
-  ['Eye Protection', ['Safety Goggles', 'Safety Spectacles', 'Protective Goggles', 'Safety Glasses', 'Face Shield', 'Eye Wash Station']],
-  ['Fall Protection', ['Retractable Fall Arrester', 'Parapet Anchor', 'PP Rope', 'Tool Lanyard', 'Multi Purpose Harness', 'A Class Harness', 'L Class Harness', 'Safety Net With Fish Net', '3 Layer Safety Net', 'Barrication Fence Net', 'Karabiner', 'Swing Seat', 'Descender', 'Horizontal Life Line']],
-  ['Respiratory Protection', ['Carbon Mask', '3Ply Mask Loop Type', '3M 9000 IN', 'Dusk Mask With Valve', '3M 9004 IN', 'Dusk Mask', 'Full Face Mask With Double Cartridges', 'Half Face Mask With Single Cartridges', '3M N95 Mask', 'Cartridges']],
-  ['Emergency Response Equipment', ['Life Jacket / Life Buoy', 'Loto Kit', 'Spill Kit']],
-  ['Body Protection', ['Nomex Fire Suit', 'Aluminium Fire Suit', 'ARC Flash Suit', 'PVC Suit With Hood', 'Cotton Coverall', 'Disposable Coverall', 'PVC Apron', 'Leather Apron', 'Cotton Apron', 'Leather Arm Guard', 'Leather Leg Guard', 'Leather Shoulder Guard', 'Rain Coat']],
-  ['Road Safety Products', ['Staff Safety Jacket', 'Safety Jacket 3 Side Open', 'Reflective Vest Belt', 'Security Jacket', 'Safety Cone', 'PU Spring Post', 'Queue Manager', 'Scissors Barrier', 'Road Studs', 'PVC Speed Breaker', 'Corner Guards', 'PVC Floor Stands', 'Dome Mirror', 'Convex Mirror', 'Reflection Tape', 'Wind Sock With Stand', 'PVC Chain', 'Safety Triangle', 'Solar Chevron', 'Baton Light', 'PVC Water Filled Barrier', 'Metal Detector']],
-  ['Waste Management Products', [
+  ['Construction Items', [
+    'Safety Helmet Std. Series', 'Safety Helmet Vent. Series', 'ABS Helmet', 'Welding Helmet', 'Welding Shield Helmet Mountable', 'Grinding Face Shield A Type', 'Grinding Face Shield Spring Type', 'Grinding Face Shield Elastic Type', 'Electrical Helmet', 'Grinding Face Shield Ratchet Type', 'Heat Resistance Face Shield', 'Helmet With Light', 'Bump Cap',
+    'Ear Muff', 'Executive Ear Muff', 'Helmet Mountable Ear Muff', 'Reusable Ear Plug', 'Ear Plug', 'Ear Plug Dispenser',
+    'Venyl Kit', 'Travel Kit', 'Medical Kit', 'Plastic Kit', 'Foldable Stretcher',
+    'Safety Goggles', 'Safety Spectacles', 'Protective Goggles', 'Safety Glasses', 'Face Shield', 'Eye Wash Station',
+    'Retractable Fall Arrester', 'Parapet Anchor', 'PP Rope', 'Tool Lanyard', 'Multi Purpose Harness', 'A Class Harness', 'L Class Harness', 'Safety Net With Fish Net', '3 Layer Safety Net', 'Barrication Fence Net', 'Karabiner', 'Swing Seat', 'Descender', 'Horizontal Life Line',
+    'Carbon Mask', '3Ply Mask Loop Type', '3M 9000 IN', 'Dusk Mask With Valve', '3M 9004 IN', 'Dusk Mask', 'Full Face Mask With Double Cartridges', 'Half Face Mask With Single Cartridges', '3M N95 Mask', 'Cartridges',
+    'Life Jacket / Life Buoy', 'Loto Kit', 'Spill Kit',
+    'Nomex Fire Suit', 'Aluminium Fire Suit', 'ARC Flash Suit', 'PVC Suit With Hood', 'Cotton Coverall', 'Disposable Coverall', 'PVC Apron', 'Leather Apron', 'Cotton Apron', 'Leather Arm Guard', 'Leather Leg Guard', 'Leather Shoulder Guard', 'Rain Coat',
+    'Staff Safety Jacket', 'Safety Jacket 3 Side Open', 'Reflective Vest Belt', 'Security Jacket', 'Safety Cone', 'PU Spring Post', 'Queue Manager', 'Scissors Barrier', 'Road Studs', 'PVC Speed Breaker', 'Corner Guards', 'PVC Floor Stands', 'Dome Mirror', 'Convex Mirror', 'Reflection Tape', 'Wind Sock With Stand', 'PVC Chain', 'Safety Triangle', 'Solar Chevron', 'Baton Light', 'PVC Water Filled Barrier', 'Metal Detector',
     ['Combination Series - FRP', ['Duo Bins', 'Trio Bins', 'Quatro Bins', 'Two in One']],
     ['Combination Series - SS', ['Duo Bins', 'Trio Bins']],
     ['Mobile Garbage Bins', ['120L Mobile Garbage Bin', '240L Mobile Garbage Bin', '360L Mobile Garbage Bin', '660L Mobile Garbage Bin', '1100L Mobile Garbage Bin']],
@@ -75,31 +75,41 @@ const catalogueFromContent = content => {
 // PRODUCTS PAGE COMPONENT
 // ============================================
 
-const HIDDEN_SIDEBAR_CATEGORIES = new Set([
-  'Home Appliances',
-  'Security & Protection',
-  'Waterproofing',
-  'Sanitaryware & Bathroom',
-  'Water Heaters',
-  'Fans',
-  'Lighting',
-  'Switches & Electrical',
-  'Pipes & Plumbing',
-  'Wires & Cables',
-  'Paints & Coatings',
-]);
+const PUBLIC_PRODUCT_CATEGORIES = [
+  { id: 'cat-water-pumps', name: 'Water Pumps', value: 'Water Pumps' },
+  { id: 'cat-construction-items', name: 'Construction Items', value: 'Construction Items' },
+  { id: 'cat-tools-instruments', name: 'Tools & Instruments', value: 'Tools & Instruments' },
+];
+
+const isCategoryMatch = (itemCategory, selectedCategoryKey) => {
+  if (!selectedCategoryKey) return true;
+  const cat = (itemCategory || '').trim().toLowerCase();
+  const sel = selectedCategoryKey.trim().toLowerCase();
+
+  if (sel === 'water pumps') {
+    return cat === 'water pumps';
+  }
+  if (sel === 'construction items') {
+    return cat === 'construction items';
+  }
+  if (sel === 'tools & instruments' || sel === 'tools and instrument') {
+    return cat === 'tools & instruments' || cat === 'tools and instrument';
+  }
+  return cat === sel;
+};
 
 export function ProductsPage({ go, content }) {
   const [term, setTerm] = useState('');
   const [category, setCategory] = useState('');
-  const { products, categories } = catalogueFromContent(content);
-  const sidebarCategories = categories.filter(item => !HIDDEN_SIDEBAR_CATEGORIES.has(item.name));
+  const { products } = catalogueFromContent(content);
+  const sidebarCategories = PUBLIC_PRODUCT_CATEGORIES;
   const filtered = products.filter(item =>
-    `${item.name} ${item.category} ${item.subcategory}`.toLowerCase().includes(term.toLowerCase()) && (!category || item.category === category)
+    `${item.name} ${item.category} ${item.subcategory}`.toLowerCase().includes(term.toLowerCase()) &&
+    isCategoryMatch(item.category, category)
   );
 
   return <>
-    <PageHead crumb="Products" title={<>Our <em>Products</em></>} desc={`Browse our complete industrial safety catalogue: ${products.length} products across ${categories.length} categories.`}/>
+    <PageHead crumb="Products" title={<>Our <em>Products</em></>} desc={`Browse our complete industrial catalogue: ${products.length} products across 3 categories.`}/>
     <section className="catalog">
       <aside className="product-categories">
         <h3>Categories</h3>
@@ -107,12 +117,12 @@ export function ProductsPage({ go, content }) {
           <span>Select a category</span>
           <select value={category} onChange={event => setCategory(event.target.value)} aria-label="Select a product category">
             <option value="">All products</option>
-            {sidebarCategories.map(item => <option key={item.id} value={item.name}>{item.name}</option>)}
+            {sidebarCategories.map(item => <option key={item.id} value={item.value}>{item.name}</option>)}
           </select>
         </label>
         <div className="category-filter-list" aria-label="Product categories">
           <button className={!category ? 'selected' : ''} onClick={() => setCategory('')}>All products</button>
-          {sidebarCategories.map(item => <button className={category === item.name ? 'selected' : ''} key={item.id} onClick={() => setCategory(item.name)}>{item.name}</button>)}
+          {sidebarCategories.map(item => <button className={category === item.value ? 'selected' : ''} key={item.id} onClick={() => setCategory(item.value)}>{item.name}</button>)}
         </div>
       </aside>
       <main>

@@ -311,7 +311,8 @@ async function fetchFreshContent() {
   const galleryRows = publicRecordsFromRows(galleryResult.data, 'gallery');
   galleryRows.sort((a, b) => (Number(a.display_order) || 999) - (Number(b.display_order) || 999));
 
-  const categoriesRows = publicRecordsFromRows(categoriesResult.data, 'categories');
+  const categoriesRows = publicRecordsFromRows(categoriesResult.data, 'categories')
+    .filter(c => c.is_active !== false && c.is_active !== 'false');
   categoriesRows.sort((a, b) => (Number(a.display_order) || 999) - (Number(b.display_order) || 999));
 
   const brandsRows = publicRecordsFromRows(brandsResult.data, 'brands');

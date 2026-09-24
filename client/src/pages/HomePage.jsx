@@ -22,6 +22,22 @@ const partnerLogoModules = import.meta.glob('../assets/PARTNERS/PARTNERS/*', {
   query: '?url',
 });
 const partnerLogo = file => partnerLogoModules[`../assets/PARTNERS/PARTNERS/${file}`];
+const dealerLogoModules = import.meta.glob('../assets/DEALERS/DEALERS/*', {
+  eager: true,
+  import: 'default',
+  query: '?url',
+});
+
+const resolveBrandLogo = logo => {
+  if (!logo) return null;
+  if (typeof logo === 'string' && (logo.startsWith('http') || logo.startsWith('data:'))) return logo;
+  if (typeof logo === 'string' && logo.startsWith('d')) {
+    const file = logo.slice(1);
+    return dealerLogoModules[`../assets/DEALERS/DEALERS/${file}`] || null;
+  }
+  return partnerLogoModules[`../assets/PARTNERS/PARTNERS/${logo}`] || null;
+};
+
 const galleryImageModules = import.meta.glob('../assets/gallary/*.webp', {
   eager: true,
   import: 'default',
@@ -127,6 +143,25 @@ export default function HomePage({ go, content }) {
   const products = Array.isArray(content?.products) && content.products.length ? content.products : homeContent.products;
   const brands = Array.isArray(content?.brands) && content.brands.length ? content.brands : homeContent.brands;
   const industries = Array.isArray(content?.industries) && content.industries.length ? content.industries : homeContent.industries;
+
+  const defaultCCBrands = [
+    { id: 'b-drfixit-cc', name: 'Dr. Fixit', logo: 'https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/brands/dr__fixit-1790264982598.png' },
+    { id: 'b-fosroc', name: 'Fosroc', logo: 'https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/brands/fosroc-1790264982994.png' },
+    { id: 'b-zycosil-cc', name: 'Zycosil+', logo: 'https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/brands/zycosil_-1790264983209.png' },
+    { id: 'b-mynk', name: 'MYNK', logo: 'https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/brands/mynk-1790264983680.jpg' },
+    { id: 'b-ramco', name: 'Ramco Supergrade', logo: 'https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/brands/ramco_supergrade-1790264983908.png' },
+  ];
+
+  const ccCategoryObj = Array.isArray(content?.categories)
+    ? content.categories.find(c => (c.name || '').trim().toLowerCase() === 'construction chemicals')
+    : null;
+  const isCcCategoryActive = ccCategoryObj ? (ccCategoryObj.is_active !== false && ccCategoryObj.is_active !== 'false') : true;
+
+  const apiCcBrands = Array.isArray(content?.brands)
+    ? content.brands.filter(b => (b.category || '').trim().toLowerCase() === 'construction chemicals' && b.is_active !== false && b.is_active !== 'false')
+    : [];
+
+  const constructionBrands = apiCcBrands.length > 0 ? apiCcBrands : defaultCCBrands;
 
   const slides = [site.heroImage, site.heroImage2, site.heroImage3].filter(Boolean);
   useEffect(() => {
@@ -604,6 +639,173 @@ export default function HomePage({ go, content }) {
           })}
         </div>
       </section>
+
+      {/* CONSTRUCTION CHEMICALS SECTION */}
+      {isCcCategoryActive && (
+        <section className="construction-chem-section" aria-label="Construction Chemicals">
+          <div className="construction-chem-card">
+            <div className="construction-chem-content">
+              <span className="section-pill" style={{ borderColor: 'var(--red)', color: 'var(--red)', background: 'rgba(239, 29, 29, 0.1)' }}>
+                CONSTRUCTION CHEMICALS
+              </span>
+              <h2>
+                Build Stronger. <em>Protect Longer.</em>
+              </h2>
+              <p>
+                Specialized construction chemical solutions for waterproofing, concrete protection, repair, durability and modern building needs.
+              </p>
+              <div className="construction-chem-actions">
+                <Btn onClick={() => go('brands')}>
+                  EXPLORE CONSTRUCTION CHEMICALS →
+                </Btn>
+              </div>
+            </div>
+
+            {constructionBrands.length > 0 && (
+              <div className="construction-chem-brands-wrapper">
+                <small className="construction-chem-brands-heading">TRUSTED CHEMICAL BRANDS</small>
+                <div className="construction-chem-brands-grid">
+                  {constructionBrands.map((brand, idx) => {
+                    const logoSrc = resolveBrandLogo(brand.logo);
+                    return (
+                      <div key={brand.id || brand.name || idx} className="construction-brand-tile" title={brand.name}>
+                        {logoSrc ? (
+                          <img
+                            src={logoSrc}
+                            alt={brand.name}
+                            loading="lazy"
+                            decoding="async"
+                            onError={(e) => {
+                              e.currentTarget.style.display = 'none';
+                              const fallback = e.currentTarget.nextElementSibling;
+                              if (fallback) fallback.style.display = 'block';
+                            }}
+                          />
+                        ) : null}
+                        <span
+                          className="construction-brand-fallback"
+                          style={{ display: logoSrc ? 'none' : 'block' }}
+                        >
+                          {brand.name}
+                        </span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+          </div>
+
+          <style>{`
+            .construction-chem-section {
+              margin: 48px 0;
+            }
+            .construction-chem-card {
+              padding: clamp(28px, 4vw, 52px);
+              background: linear-gradient(135deg, #111827 0%, #1f2937 100%);
+              border: 1px solid rgba(239, 29, 29, 0.25);
+              border-radius: 24px;
+              color: #ffffff;
+              box-shadow: 0 20px 45px rgba(0, 0, 0, 0.2);
+              display: grid;
+              grid-template-columns: minmax(300px, 1fr) minmax(320px, 1.25fr);
+              gap: 40px;
+              align-items: center;
+            }
+            .construction-chem-content h2 {
+              color: #ffffff;
+              font-size: clamp(26px, 3.2vw, 40px);
+              margin: 16px 0 16px;
+              line-height: 1.2;
+              font-weight: 800;
+              letter-spacing: -0.5px;
+            }
+            .construction-chem-content h2 em {
+              color: #ef1d1d;
+              font-style: normal;
+            }
+            .construction-chem-content p {
+              color: #9ca3af;
+              font-size: 15px;
+              line-height: 1.75;
+              margin: 0 0 28px;
+              max-width: 520px;
+            }
+            .construction-chem-brands-wrapper {
+              background: rgba(255, 255, 255, 0.04);
+              padding: 24px;
+              border-radius: 20px;
+              border: 1px solid rgba(255, 255, 255, 0.08);
+            }
+            .construction-chem-brands-heading {
+              display: block;
+              margin-bottom: 14px;
+              font-size: 11px;
+              font-weight: 800;
+              letter-spacing: 1.5px;
+              color: #ef1d1d;
+              text-transform: uppercase;
+            }
+            .construction-chem-brands-grid {
+              display: grid;
+              grid-template-columns: repeat(3, minmax(0, 1fr));
+              gap: 14px;
+            }
+            .construction-brand-tile {
+              height: 90px;
+              background: #ffffff;
+              border-radius: 14px;
+              padding: 12px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+              transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+              border: 1px solid #e5e7eb;
+            }
+            .construction-brand-tile:hover {
+              transform: translateY(-4px);
+              box-shadow: 0 10px 24px rgba(239, 29, 29, 0.22);
+              border-color: rgba(239, 29, 29, 0.4);
+            }
+            .construction-brand-tile img {
+              max-width: 100%;
+              max-height: 62px;
+              object-fit: contain;
+              display: block;
+            }
+            .construction-brand-fallback {
+              font-weight: 700;
+              font-size: 13px;
+              color: #111827;
+              text-align: center;
+            }
+            @media (max-width: 960px) {
+              .construction-chem-card {
+                grid-template-columns: 1fr;
+                gap: 32px;
+                padding: 30px 24px;
+              }
+              .construction-chem-brands-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+              }
+            }
+            @media (max-width: 580px) {
+              .construction-chem-brands-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 10px;
+              }
+              .construction-brand-tile {
+                height: 76px;
+                padding: 10px;
+              }
+              .construction-brand-tile img {
+                max-height: 48px;
+              }
+            }
+          `}</style>
+        </section>
+      )}
 
       <CtaBand go={go} />
     </>
