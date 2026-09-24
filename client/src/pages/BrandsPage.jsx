@@ -67,6 +67,7 @@ const DEFAULT_CATEGORIES = [
   { id: 'cat-waterproofing', name: 'Waterproofing', description: 'Stronger spaces. Longer life.', icon: 'ShieldCheck', color: 'green', image: 'https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=800&q=85', display_order: 10, is_active: true },
   { id: 'cat-security', name: 'Security & Protection', description: 'Safety for a better tomorrow.', icon: 'Camera', color: 'purple', image: 'https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=800&q=85', display_order: 11, is_active: true },
   { id: 'cat-appliances', name: 'Home Appliances', description: 'Everyday essentials. Trusted brands.', icon: 'House', color: 'orange', image: 'https://images.unsplash.com/photo-1556911220-bff31c812dba?auto=format&fit=crop&w=800&q=85', display_order: 12, is_active: true },
+  { id: 'cat-construction-chemicals', name: 'Construction Chemicals', description: 'High-performance chemical solutions for construction.', icon: 'Package', color: 'green', image: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=85', display_order: 13, is_active: true },
 ];
 
 const DEFAULT_BRANDS = [
@@ -139,6 +140,13 @@ const DEFAULT_BRANDS = [
 
   // 12. Home Appliances (1)
   { id: 'b-vguard', name: 'V-Guard', category: 'Home Appliances', logo: '13.png', display_order: 1, is_active: true },
+
+  // 13. Construction Chemicals (5)
+  { id: 'b-drfixit-cc', name: 'Dr. Fixit', category: 'Construction Chemicals', logo: 'https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/brands/dr__fixit-1790264982598.png', display_order: 1, is_active: true },
+  { id: 'b-fosroc', name: 'Fosroc', category: 'Construction Chemicals', logo: 'https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/brands/fosroc-1790264982994.png', display_order: 2, is_active: true },
+  { id: 'b-zycosil-cc', name: 'Zycosil+', category: 'Construction Chemicals', logo: 'https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/brands/zycosil_-1790264983209.png', display_order: 3, is_active: true },
+  { id: 'b-mynk', name: 'MYNK', category: 'Construction Chemicals', logo: 'https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/brands/mynk-1790264983680.jpg', display_order: 4, is_active: true },
+  { id: 'b-ramco', name: 'Ramco Supergrade', category: 'Construction Chemicals', logo: 'https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/brands/ramco_supergrade-1790264983908.png', display_order: 5, is_active: true },
 ];
 
 const CATEGORY_DISPLAY_NAMES = {

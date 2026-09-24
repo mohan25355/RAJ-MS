@@ -111,7 +111,7 @@ const BUCKET_NAME = 'RAJA_ELE';
 
 const managedCollections = {
   products: ['id', 'name', 'category', 'description', 'price', 'image'],
-  categories: ['id', 'name', 'description', 'icon', 'color', 'image', 'display_order', 'is_active', 'count'],
+  categories: ['id', 'name', 'image'],
   brands: ['id', 'name', 'logo'],
   industries: ['id', 'name', 'image'],
   gallery: ['id', 'title', 'image'],
