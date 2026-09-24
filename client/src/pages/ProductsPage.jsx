@@ -75,11 +75,56 @@ const catalogueFromContent = content => {
 // PRODUCTS PAGE COMPONENT
 // ============================================
 
-const PUBLIC_PRODUCT_CATEGORIES = [
-  { id: 'cat-water-pumps', name: 'Water Pumps', value: 'Water Pumps' },
-  { id: 'cat-construction-items', name: 'Construction Items', value: 'Construction Items' },
-  { id: 'cat-tools-instruments', name: 'Tools & Instruments', value: 'Tools & Instruments' },
+const BASE_PRODUCT_CATEGORIES = [
+  { id: 'cat-water-pumps', name: 'Water Pumps', value: 'Water Pumps', display_order: 9 },
+  { id: 'cat-construction-items', name: 'Construction Items', value: 'Construction Items', display_order: 14 },
+  { id: 'cat-tools-instruments', name: 'Tools & Instruments', value: 'Tools & Instruments', display_order: 15 },
 ];
+
+const BRAND_ONLY_CATEGORIES = new Set([
+  'Paints & Coatings',
+  'Wires & Cables',
+  'Pipes & Plumbing',
+  'Switches & Electrical',
+  'Fans',
+  'Lighting',
+  'Sanitaryware & Bathroom',
+  'Water Heaters',
+  'Waterproofing',
+  'Security & Protection',
+  'Construction Chemicals'
+]);
+
+const getProductSidebarCategories = content => {
+  const dbCategories = Array.isArray(content?.categories) ? content.categories : [];
+
+  const dynamicProductCats = dbCategories.filter(c => {
+    if (c.is_active === false || c.is_active === 'false') return false;
+    const name = (c.name || '').trim();
+    if (!name) return false;
+    if (BRAND_ONLY_CATEGORIES.has(name)) return false;
+    return true;
+  });
+
+  const categoryMap = new Map();
+  BASE_PRODUCT_CATEGORIES.forEach(c => categoryMap.set(c.name.toLowerCase(), c));
+
+  dynamicProductCats.forEach(c => {
+    const key = (c.name || '').trim().toLowerCase();
+    if (!categoryMap.has(key)) {
+      categoryMap.set(key, {
+        id: c.id || `cat-${key.replace(/[^a-z0-9]+/g, '-')}`,
+        name: c.name,
+        value: c.name,
+        display_order: Number(c.display_order) || 99
+      });
+    }
+  });
+
+  return Array.from(categoryMap.values()).sort(
+    (a, b) => (Number(a.display_order) || 999) - (Number(b.display_order) || 999)
+  );
+};
 
 const isCategoryMatch = (itemCategory, selectedCategoryKey) => {
   if (!selectedCategoryKey) return true;
@@ -102,14 +147,14 @@ export function ProductsPage({ go, content }) {
   const [term, setTerm] = useState('');
   const [category, setCategory] = useState('');
   const { products } = catalogueFromContent(content);
-  const sidebarCategories = PUBLIC_PRODUCT_CATEGORIES;
+  const sidebarCategories = getProductSidebarCategories(content);
   const filtered = products.filter(item =>
     `${item.name} ${item.category} ${item.subcategory}`.toLowerCase().includes(term.toLowerCase()) &&
     isCategoryMatch(item.category, category)
   );
 
   return <>
-    <PageHead crumb="Products" title={<>Our <em>Products</em></>} desc={`Browse our complete industrial catalogue: ${products.length} products across 3 categories.`}/>
+    <PageHead crumb="Products" title={<>Our <em>Products</em></>} desc={`Browse our complete industrial catalogue: ${products.length} products across ${sidebarCategories.length} categories.`}/>
     <section className="catalog">
       <aside className="product-categories">
         <h3>Categories</h3>
@@ -143,7 +188,11 @@ export function ProductsPage({ go, content }) {
             <a className="order-product" href={productWhatsAppLink(item)} target="_blank" rel="noreferrer" style={{ display: 'block', boxSizing: 'border-box', textAlign: 'center', textDecoration: 'none' }}>Order / Quote on WhatsApp</a>
           </article>)}
         </div>
-        {!filtered.length && <p className="no-products">No products match your search.</p>}
+        {!filtered.length && (
+          <p className="no-products">
+            {category ? `No products available in ${category} yet.` : 'No products match your search.'}
+          </p>
+        )}
       </main>
     </section>
   </>;
