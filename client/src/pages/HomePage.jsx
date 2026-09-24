@@ -32,6 +32,7 @@ const galleryImage = file => galleryImageModules[`../assets/gallary/${file}`];
 const brandsData = [
   ['1.png'], ['2.jpg'], ['3.jpg'], ['4.jpg'], ['5.png'], ['6.jpg'], ['7.png'], ['8.jpg'], ['9.png'], ['10.jpg'], ['11.png'], ['12.jpg'], ['13.png'],
   ['14.jpg'], ['15.png'], ['16.jpg'], ['17.png'], ['18.png'], ['19.png'], ['20.png'], ['21.png'], ['22.png'], ['23.png'], ['24.jpg'], ['25.png'], ['26.png'],
+  ['27.jpg'], ['28.jpg'],
 ].map(([file], index) => ({
   id: `brand-${index + 1}`,
   name: `Brand ${index + 1}`,

@@ -144,6 +144,7 @@ const DEFAULT_BRANDS = [
 const CATEGORY_DISPLAY_NAMES = {
   'Pipes & Plumbing': 'Pipes & Fittings',
   'Security & Protection': 'Security',
+  'Water Pumps': 'Water Management',
 };
 
 const BRAND_DISPLAY_NAMES = {
