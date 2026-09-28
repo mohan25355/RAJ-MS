@@ -1,0 +1,902 @@
+[
+  {
+    "id": "1790280204211-d9ney",
+    "name": "LED Panel Light",
+    "category": "Electricals",
+    "price": null,
+    "previous_image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-led_panel_light-v2-1790280949602.png",
+    "previous_data_image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-led_panel_light-v2-1790280949602.png",
+    "expected_local_file": "electricals_led_panel_light.png",
+    "full_product_record": {
+      "id": "1790280204211-d9ney",
+      "name": "LED Panel Light",
+      "category": "Electricals",
+      "description": "LED Panel Light from our Electricals catalogue. Contact us for specifications and quotation.",
+      "price": null,
+      "image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-led_panel_light-v2-1790280949602.png",
+      "data": {
+        "id": "1790280204211-d9ney",
+        "name": "LED Panel Light",
+        "badge": "Available",
+        "image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-led_panel_light-v2-1790280949602.png",
+        "price": "Price on request",
+        "category": "Electricals",
+        "updated_at": "2026-09-24T20:15:52.263Z",
+        "description": "LED Panel Light from our Electricals catalogue. Contact us for specifications and quotation.",
+        "subcategory": ""
+      },
+      "created_at": "2026-09-24T20:03:23.47+00:00",
+      "updated_at": "2026-09-24T20:15:52.263+00:00"
+    }
+  },
+  {
+    "id": "1790280204943-6nexb",
+    "name": "LED Downlight",
+    "category": "Electricals",
+    "price": null,
+    "previous_image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-led_downlight-v2-1790280952506.png",
+    "previous_data_image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-led_downlight-v2-1790280952506.png",
+    "expected_local_file": "electricals_led_downlight.png",
+    "full_product_record": {
+      "id": "1790280204943-6nexb",
+      "name": "LED Downlight",
+      "category": "Electricals",
+      "description": "LED Downlight from our Electricals catalogue. Contact us for specifications and quotation.",
+      "price": null,
+      "image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-led_downlight-v2-1790280952506.png",
+      "data": {
+        "id": "1790280204943-6nexb",
+        "name": "LED Downlight",
+        "badge": "Available",
+        "image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-led_downlight-v2-1790280952506.png",
+        "price": "Price on request",
+        "category": "Electricals",
+        "updated_at": "2026-09-24T20:15:53.665Z",
+        "description": "LED Downlight from our Electricals catalogue. Contact us for specifications and quotation.",
+        "subcategory": ""
+      },
+      "created_at": "2026-09-24T20:03:24.19+00:00",
+      "updated_at": "2026-09-24T20:15:53.665+00:00"
+    }
+  },
+  {
+    "id": "1790280205640-6xja7",
+    "name": "Modular Switch",
+    "category": "Electricals",
+    "price": null,
+    "previous_image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-modular_switch-v2-1790280953834.png",
+    "previous_data_image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-modular_switch-v2-1790280953834.png",
+    "expected_local_file": "electricals_modular_switch.png",
+    "full_product_record": {
+      "id": "1790280205640-6xja7",
+      "name": "Modular Switch",
+      "category": "Electricals",
+      "description": "Modular Switch from our Electricals catalogue. Contact us for specifications and quotation.",
+      "price": null,
+      "image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-modular_switch-v2-1790280953834.png",
+      "data": {
+        "id": "1790280205640-6xja7",
+        "name": "Modular Switch",
+        "badge": "Available",
+        "image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-modular_switch-v2-1790280953834.png",
+        "price": "Price on request",
+        "category": "Electricals",
+        "updated_at": "2026-09-24T20:15:54.723Z",
+        "description": "Modular Switch from our Electricals catalogue. Contact us for specifications and quotation.",
+        "subcategory": ""
+      },
+      "created_at": "2026-09-24T20:03:24.879+00:00",
+      "updated_at": "2026-09-24T20:15:54.723+00:00"
+    }
+  },
+  {
+    "id": "1790280206270-f6zy1",
+    "name": "Power Socket 6A/16A",
+    "category": "Electricals",
+    "price": null,
+    "previous_image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-power_socket_6a_16a-v2-1790280954898.png",
+    "previous_data_image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-power_socket_6a_16a-v2-1790280954898.png",
+    "expected_local_file": "electricals_power_socket_6a_16a.png",
+    "full_product_record": {
+      "id": "1790280206270-f6zy1",
+      "name": "Power Socket 6A/16A",
+      "category": "Electricals",
+      "description": "Power Socket 6A/16A from our Electricals catalogue. Contact us for specifications and quotation.",
+      "price": null,
+      "image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-power_socket_6a_16a-v2-1790280954898.png",
+      "data": {
+        "id": "1790280206270-f6zy1",
+        "name": "Power Socket 6A/16A",
+        "badge": "Available",
+        "image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-power_socket_6a_16a-v2-1790280954898.png",
+        "price": "Price on request",
+        "category": "Electricals",
+        "updated_at": "2026-09-24T20:15:55.725Z",
+        "description": "Power Socket 6A/16A from our Electricals catalogue. Contact us for specifications and quotation.",
+        "subcategory": ""
+      },
+      "created_at": "2026-09-24T20:03:25.979+00:00",
+      "updated_at": "2026-09-24T20:15:55.725+00:00"
+    }
+  },
+  {
+    "id": "1790280207316-ohheo",
+    "name": "Electrical Wire",
+    "category": "Electricals",
+    "price": null,
+    "previous_image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-electrical_wire-v2-1790280955919.png",
+    "previous_data_image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-electrical_wire-v2-1790280955919.png",
+    "expected_local_file": "electricals_electrical_wire.png",
+    "full_product_record": {
+      "id": "1790280207316-ohheo",
+      "name": "Electrical Wire",
+      "category": "Electricals",
+      "description": "Electrical Wire from our Electricals catalogue. Contact us for specifications and quotation.",
+      "price": null,
+      "image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-electrical_wire-v2-1790280955919.png",
+      "data": {
+        "id": "1790280207316-ohheo",
+        "name": "Electrical Wire",
+        "badge": "Available",
+        "image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-electrical_wire-v2-1790280955919.png",
+        "price": "Price on request",
+        "category": "Electricals",
+        "updated_at": "2026-09-24T20:15:56.942Z",
+        "description": "Electrical Wire from our Electricals catalogue. Contact us for specifications and quotation.",
+        "subcategory": ""
+      },
+      "created_at": "2026-09-24T20:03:26.554+00:00",
+      "updated_at": "2026-09-24T20:15:56.942+00:00"
+    }
+  },
+  {
+    "id": "1790280207857-fqj89",
+    "name": "MCB Mini Circuit Breaker",
+    "category": "Electricals",
+    "price": null,
+    "previous_image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-mcb_mini_circuit_breaker-v2-1790280957103.png",
+    "previous_data_image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-mcb_mini_circuit_breaker-v2-1790280957103.png",
+    "expected_local_file": "electricals_mcb_mini_circuit_breaker.png",
+    "full_product_record": {
+      "id": "1790280207857-fqj89",
+      "name": "MCB Mini Circuit Breaker",
+      "category": "Electricals",
+      "description": "MCB Mini Circuit Breaker from our Electricals catalogue. Contact us for specifications and quotation.",
+      "price": null,
+      "image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-mcb_mini_circuit_breaker-v2-1790280957103.png",
+      "data": {
+        "id": "1790280207857-fqj89",
+        "name": "MCB Mini Circuit Breaker",
+        "badge": "Available",
+        "image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-mcb_mini_circuit_breaker-v2-1790280957103.png",
+        "price": "Price on request",
+        "category": "Electricals",
+        "updated_at": "2026-09-24T20:15:58.069Z",
+        "description": "MCB Mini Circuit Breaker from our Electricals catalogue. Contact us for specifications and quotation.",
+        "subcategory": ""
+      },
+      "created_at": "2026-09-24T20:03:27.106+00:00",
+      "updated_at": "2026-09-24T20:15:58.069+00:00"
+    }
+  },
+  {
+    "id": "1790280208375-dmm9o",
+    "name": "Distribution Box",
+    "category": "Electricals",
+    "price": null,
+    "previous_image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-distribution_box-v2-1790280958231.png",
+    "previous_data_image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-distribution_box-v2-1790280958231.png",
+    "expected_local_file": "electricals_distribution_box.png",
+    "full_product_record": {
+      "id": "1790280208375-dmm9o",
+      "name": "Distribution Box",
+      "category": "Electricals",
+      "description": "Distribution Box from our Electricals catalogue. Contact us for specifications and quotation.",
+      "price": null,
+      "image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-distribution_box-v2-1790280958231.png",
+      "data": {
+        "id": "1790280208375-dmm9o",
+        "name": "Distribution Box",
+        "badge": "Available",
+        "image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-distribution_box-v2-1790280958231.png",
+        "price": "Price on request",
+        "category": "Electricals",
+        "updated_at": "2026-09-24T20:15:58.828Z",
+        "description": "Distribution Box from our Electricals catalogue. Contact us for specifications and quotation.",
+        "subcategory": ""
+      },
+      "created_at": "2026-09-24T20:03:27.583+00:00",
+      "updated_at": "2026-09-24T20:15:58.828+00:00"
+    }
+  },
+  {
+    "id": "1790280212112-qwef9",
+    "name": "Cable Tie",
+    "category": "Electricals",
+    "price": null,
+    "previous_image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-cable_tie-v2-1790280961406.png",
+    "previous_data_image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-cable_tie-v2-1790280961406.png",
+    "expected_local_file": "electricals_cable_tie.png",
+    "full_product_record": {
+      "id": "1790280212112-qwef9",
+      "name": "Cable Tie",
+      "category": "Electricals",
+      "description": "Cable Tie from our Electricals catalogue. Contact us for specifications and quotation.",
+      "price": null,
+      "image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-cable_tie-v2-1790280961406.png",
+      "data": {
+        "id": "1790280212112-qwef9",
+        "name": "Cable Tie",
+        "badge": "Available",
+        "image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-cable_tie-v2-1790280961406.png",
+        "price": "Price on request",
+        "category": "Electricals",
+        "updated_at": "2026-09-24T20:16:02.185Z",
+        "description": "Cable Tie from our Electricals catalogue. Contact us for specifications and quotation.",
+        "subcategory": ""
+      },
+      "created_at": "2026-09-24T20:03:31.321+00:00",
+      "updated_at": "2026-09-24T20:16:02.185+00:00"
+    }
+  },
+  {
+    "id": "1790280212572-cor70",
+    "name": "One Piece WC",
+    "category": "Sanitaryware",
+    "price": null,
+    "previous_image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-one_piece_wc-v2-1790280963208.png",
+    "previous_data_image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-one_piece_wc-v2-1790280963208.png",
+    "expected_local_file": "sanitaryware_one_piece_wc.png",
+    "full_product_record": {
+      "id": "1790280212572-cor70",
+      "name": "One Piece WC",
+      "category": "Sanitaryware",
+      "description": "One Piece WC from our Sanitaryware catalogue. Contact us for specifications and quotation.",
+      "price": null,
+      "image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-one_piece_wc-v2-1790280963208.png",
+      "data": {
+        "id": "1790280212572-cor70",
+        "name": "One Piece WC",
+        "badge": "Available",
+        "image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-one_piece_wc-v2-1790280963208.png",
+        "price": "Price on request",
+        "category": "Sanitaryware",
+        "updated_at": "2026-09-24T20:16:04.073Z",
+        "description": "One Piece WC from our Sanitaryware catalogue. Contact us for specifications and quotation.",
+        "subcategory": ""
+      },
+      "created_at": "2026-09-24T20:03:31.784+00:00",
+      "updated_at": "2026-09-24T20:16:04.073+00:00"
+    }
+  },
+  {
+    "id": "1790280216256-iu2fo",
+    "name": "Health Faucet",
+    "category": "Sanitaryware",
+    "price": null,
+    "previous_image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-health_faucet-v2-1790280965114.png",
+    "previous_data_image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-health_faucet-v2-1790280965114.png",
+    "expected_local_file": "sanitaryware_health_faucet.png",
+    "full_product_record": {
+      "id": "1790280216256-iu2fo",
+      "name": "Health Faucet",
+      "category": "Sanitaryware",
+      "description": "Health Faucet from our Sanitaryware catalogue. Contact us for specifications and quotation.",
+      "price": null,
+      "image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-health_faucet-v2-1790280965114.png",
+      "data": {
+        "id": "1790280216256-iu2fo",
+        "name": "Health Faucet",
+        "badge": "Available",
+        "image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-health_faucet-v2-1790280965114.png",
+        "price": "Price on request",
+        "category": "Sanitaryware",
+        "updated_at": "2026-09-24T20:16:06.099Z",
+        "description": "Health Faucet from our Sanitaryware catalogue. Contact us for specifications and quotation.",
+        "subcategory": ""
+      },
+      "created_at": "2026-09-24T20:03:35.464+00:00",
+      "updated_at": "2026-09-24T20:16:06.099+00:00"
+    }
+  },
+  {
+    "id": "1790280216740-giupf",
+    "name": "Overhead Shower",
+    "category": "Sanitaryware",
+    "price": null,
+    "previous_image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-overhead_shower-v2-1790280967179.png",
+    "previous_data_image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-overhead_shower-v2-1790280967179.png",
+    "expected_local_file": "sanitaryware_overhead_shower.png",
+    "full_product_record": {
+      "id": "1790280216740-giupf",
+      "name": "Overhead Shower",
+      "category": "Sanitaryware",
+      "description": "Overhead Shower from our Sanitaryware catalogue. Contact us for specifications and quotation.",
+      "price": null,
+      "image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-overhead_shower-v2-1790280967179.png",
+      "data": {
+        "id": "1790280216740-giupf",
+        "name": "Overhead Shower",
+        "badge": "Available",
+        "image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-overhead_shower-v2-1790280967179.png",
+        "price": "Price on request",
+        "category": "Sanitaryware",
+        "updated_at": "2026-09-24T20:16:07.885Z",
+        "description": "Overhead Shower from our Sanitaryware catalogue. Contact us for specifications and quotation.",
+        "subcategory": ""
+      },
+      "created_at": "2026-09-24T20:03:35.96+00:00",
+      "updated_at": "2026-09-24T20:16:07.885+00:00"
+    }
+  },
+  {
+    "id": "1790280208910-14jr2",
+    "name": "Ceiling Fan",
+    "category": "Electricals",
+    "price": null,
+    "previous_image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-ceiling_fan-v2-1790280968017.png",
+    "previous_data_image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-ceiling_fan-v2-1790280968017.png",
+    "expected_local_file": "electricals_ceiling_fan.png",
+    "full_product_record": {
+      "id": "1790280208910-14jr2",
+      "name": "Ceiling Fan",
+      "category": "Electricals",
+      "description": "Ceiling Fan from our Electricals catalogue. Contact us for specifications and quotation.",
+      "price": null,
+      "image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-ceiling_fan-v2-1790280968017.png",
+      "data": {
+        "id": "1790280208910-14jr2",
+        "name": "Ceiling Fan",
+        "badge": "Available",
+        "image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-ceiling_fan-v2-1790280968017.png",
+        "price": "Price on request",
+        "category": "Electricals",
+        "updated_at": "2026-09-24T20:16:09.011Z",
+        "description": "Ceiling Fan from our Electricals catalogue. Contact us for specifications and quotation.",
+        "subcategory": ""
+      },
+      "created_at": "2026-09-24T20:03:28.121+00:00",
+      "updated_at": "2026-09-24T20:16:09.011+00:00"
+    }
+  },
+  {
+    "id": "1790280213005-d7vfj",
+    "name": "Wall Hung WC",
+    "category": "Sanitaryware",
+    "price": null,
+    "previous_image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-wall_hung_wc-v2-1790280970217.png",
+    "previous_data_image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-wall_hung_wc-v2-1790280970217.png",
+    "expected_local_file": "sanitaryware_wall_hung_wc.png",
+    "full_product_record": {
+      "id": "1790280213005-d7vfj",
+      "name": "Wall Hung WC",
+      "category": "Sanitaryware",
+      "description": "Wall Hung WC from our Sanitaryware catalogue. Contact us for specifications and quotation.",
+      "price": null,
+      "image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-wall_hung_wc-v2-1790280970217.png",
+      "data": {
+        "id": "1790280213005-d7vfj",
+        "name": "Wall Hung WC",
+        "badge": "Available",
+        "image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-wall_hung_wc-v2-1790280970217.png",
+        "price": "Price on request",
+        "category": "Sanitaryware",
+        "updated_at": "2026-09-24T20:16:11.148Z",
+        "description": "Wall Hung WC from our Sanitaryware catalogue. Contact us for specifications and quotation.",
+        "subcategory": ""
+      },
+      "created_at": "2026-09-24T20:03:32.231+00:00",
+      "updated_at": "2026-09-24T20:16:11.148+00:00"
+    }
+  },
+  {
+    "id": "1790280217187-19jyz",
+    "name": "Angle Valve",
+    "category": "Sanitaryware",
+    "price": null,
+    "previous_image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-angle_valve-v2-1790280972572.png",
+    "previous_data_image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-angle_valve-v2-1790280972572.png",
+    "expected_local_file": "sanitaryware_angle_valve.png",
+    "full_product_record": {
+      "id": "1790280217187-19jyz",
+      "name": "Angle Valve",
+      "category": "Sanitaryware",
+      "description": "Angle Valve from our Sanitaryware catalogue. Contact us for specifications and quotation.",
+      "price": null,
+      "image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-angle_valve-v2-1790280972572.png",
+      "data": {
+        "id": "1790280217187-19jyz",
+        "name": "Angle Valve",
+        "badge": "Available",
+        "image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-angle_valve-v2-1790280972572.png",
+        "price": "Price on request",
+        "category": "Sanitaryware",
+        "updated_at": "2026-09-24T20:16:13.622Z",
+        "description": "Angle Valve from our Sanitaryware catalogue. Contact us for specifications and quotation.",
+        "subcategory": ""
+      },
+      "created_at": "2026-09-24T20:03:36.425+00:00",
+      "updated_at": "2026-09-24T20:16:13.622+00:00"
+    }
+  },
+  {
+    "id": "1790280209692-ndo7g",
+    "name": "Exhaust Fan",
+    "category": "Electricals",
+    "price": null,
+    "previous_image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-exhaust_fan-v2-1790280973754.png",
+    "previous_data_image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-exhaust_fan-v2-1790280973754.png",
+    "expected_local_file": "electricals_exhaust_fan.png",
+    "full_product_record": {
+      "id": "1790280209692-ndo7g",
+      "name": "Exhaust Fan",
+      "category": "Electricals",
+      "description": "Exhaust Fan from our Electricals catalogue. Contact us for specifications and quotation.",
+      "price": null,
+      "image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-exhaust_fan-v2-1790280973754.png",
+      "data": {
+        "id": "1790280209692-ndo7g",
+        "name": "Exhaust Fan",
+        "badge": "Available",
+        "image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-exhaust_fan-v2-1790280973754.png",
+        "price": "Price on request",
+        "category": "Electricals",
+        "updated_at": "2026-09-24T20:16:14.506Z",
+        "description": "Exhaust Fan from our Electricals catalogue. Contact us for specifications and quotation.",
+        "subcategory": ""
+      },
+      "created_at": "2026-09-24T20:03:29.012+00:00",
+      "updated_at": "2026-09-24T20:16:14.506+00:00"
+    }
+  },
+  {
+    "id": "1790280213473-x6mmt",
+    "name": "Wash Basin",
+    "category": "Sanitaryware",
+    "price": null,
+    "previous_image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-wash_basin-v2-1790280975574.png",
+    "previous_data_image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-wash_basin-v2-1790280975574.png",
+    "expected_local_file": "sanitaryware_wash_basin.png",
+    "full_product_record": {
+      "id": "1790280213473-x6mmt",
+      "name": "Wash Basin",
+      "category": "Sanitaryware",
+      "description": "Wash Basin from our Sanitaryware catalogue. Contact us for specifications and quotation.",
+      "price": null,
+      "image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-wash_basin-v2-1790280975574.png",
+      "data": {
+        "id": "1790280213473-x6mmt",
+        "name": "Wash Basin",
+        "badge": "Available",
+        "image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-wash_basin-v2-1790280975574.png",
+        "price": "Price on request",
+        "category": "Sanitaryware",
+        "updated_at": "2026-09-24T20:16:16.493Z",
+        "description": "Wash Basin from our Sanitaryware catalogue. Contact us for specifications and quotation.",
+        "subcategory": ""
+      },
+      "created_at": "2026-09-24T20:03:32.684+00:00",
+      "updated_at": "2026-09-24T20:16:16.493+00:00"
+    }
+  },
+  {
+    "id": "1790280218014-bu2mu",
+    "name": "Floor Drain",
+    "category": "Sanitaryware",
+    "price": null,
+    "previous_image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-floor_drain-v2-1790280977515.png",
+    "previous_data_image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-floor_drain-v2-1790280977515.png",
+    "expected_local_file": "sanitaryware_floor_drain.png",
+    "full_product_record": {
+      "id": "1790280218014-bu2mu",
+      "name": "Floor Drain",
+      "category": "Sanitaryware",
+      "description": "Floor Drain from our Sanitaryware catalogue. Contact us for specifications and quotation.",
+      "price": null,
+      "image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-floor_drain-v2-1790280977515.png",
+      "data": {
+        "id": "1790280218014-bu2mu",
+        "name": "Floor Drain",
+        "badge": "Available",
+        "image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-floor_drain-v2-1790280977515.png",
+        "price": "Price on request",
+        "category": "Sanitaryware",
+        "updated_at": "2026-09-24T20:16:19.241Z",
+        "description": "Floor Drain from our Sanitaryware catalogue. Contact us for specifications and quotation.",
+        "subcategory": ""
+      },
+      "created_at": "2026-09-24T20:03:37.23+00:00",
+      "updated_at": "2026-09-24T20:16:19.241+00:00"
+    }
+  },
+  {
+    "id": "1790280210199-oc11x",
+    "name": "Extension Board",
+    "category": "Electricals",
+    "price": null,
+    "previous_image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-extension_board-v2-1790280979384.png",
+    "previous_data_image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-extension_board-v2-1790280979384.png",
+    "expected_local_file": "electricals_extension_board.png",
+    "full_product_record": {
+      "id": "1790280210199-oc11x",
+      "name": "Extension Board",
+      "category": "Electricals",
+      "description": "Extension Board from our Electricals catalogue. Contact us for specifications and quotation.",
+      "price": null,
+      "image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-extension_board-v2-1790280979384.png",
+      "data": {
+        "id": "1790280210199-oc11x",
+        "name": "Extension Board",
+        "badge": "Available",
+        "image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-extension_board-v2-1790280979384.png",
+        "price": "Price on request",
+        "category": "Electricals",
+        "updated_at": "2026-09-24T20:16:20.473Z",
+        "description": "Extension Board from our Electricals catalogue. Contact us for specifications and quotation.",
+        "subcategory": ""
+      },
+      "created_at": "2026-09-24T20:03:29.44+00:00",
+      "updated_at": "2026-09-24T20:16:20.473+00:00"
+    }
+  },
+  {
+    "id": "1790280213887-bosf2",
+    "name": "Pedestal Basin",
+    "category": "Sanitaryware",
+    "price": null,
+    "previous_image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-pedestal_basin-v2-1790280981446.png",
+    "previous_data_image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-pedestal_basin-v2-1790280981446.png",
+    "expected_local_file": "sanitaryware_pedestal_basin.png",
+    "full_product_record": {
+      "id": "1790280213887-bosf2",
+      "name": "Pedestal Basin",
+      "category": "Sanitaryware",
+      "description": "Pedestal Basin from our Sanitaryware catalogue. Contact us for specifications and quotation.",
+      "price": null,
+      "image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-pedestal_basin-v2-1790280981446.png",
+      "data": {
+        "id": "1790280213887-bosf2",
+        "name": "Pedestal Basin",
+        "badge": "Available",
+        "image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-pedestal_basin-v2-1790280981446.png",
+        "price": "Price on request",
+        "category": "Sanitaryware",
+        "updated_at": "2026-09-24T20:16:22.533Z",
+        "description": "Pedestal Basin from our Sanitaryware catalogue. Contact us for specifications and quotation.",
+        "subcategory": ""
+      },
+      "created_at": "2026-09-24T20:03:33.09+00:00",
+      "updated_at": "2026-09-24T20:16:22.533+00:00"
+    }
+  },
+  {
+    "id": "1790280218520-s2goq",
+    "name": "PVC Waste Pipe",
+    "category": "Sanitaryware",
+    "price": null,
+    "previous_image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-pvc_waste_pipe-v2-1790280983563.png",
+    "previous_data_image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-pvc_waste_pipe-v2-1790280983563.png",
+    "expected_local_file": "sanitaryware_pvc_waste_pipe.png",
+    "full_product_record": {
+      "id": "1790280218520-s2goq",
+      "name": "PVC Waste Pipe",
+      "category": "Sanitaryware",
+      "description": "PVC Waste Pipe from our Sanitaryware catalogue. Contact us for specifications and quotation.",
+      "price": null,
+      "image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-pvc_waste_pipe-v2-1790280983563.png",
+      "data": {
+        "id": "1790280218520-s2goq",
+        "name": "PVC Waste Pipe",
+        "badge": "Available",
+        "image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-pvc_waste_pipe-v2-1790280983563.png",
+        "price": "Price on request",
+        "category": "Sanitaryware",
+        "updated_at": "2026-09-24T20:16:24.336Z",
+        "description": "PVC Waste Pipe from our Sanitaryware catalogue. Contact us for specifications and quotation.",
+        "subcategory": ""
+      },
+      "created_at": "2026-09-24T20:03:37.736+00:00",
+      "updated_at": "2026-09-24T20:16:24.336+00:00"
+    }
+  },
+  {
+    "id": "1790280210629-uogcd",
+    "name": "LED Tube Light 18W",
+    "category": "Electricals",
+    "price": null,
+    "previous_image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-led_tube_light_18w-v2-1790280984506.png",
+    "previous_data_image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-led_tube_light_18w-v2-1790280984506.png",
+    "expected_local_file": "electricals_led_tube_light_18w.png",
+    "full_product_record": {
+      "id": "1790280210629-uogcd",
+      "name": "LED Tube Light 18W",
+      "category": "Electricals",
+      "description": "LED Tube Light 18W from our Electricals catalogue. Contact us for specifications and quotation.",
+      "price": null,
+      "image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-led_tube_light_18w-v2-1790280984506.png",
+      "data": {
+        "id": "1790280210629-uogcd",
+        "name": "LED Tube Light 18W",
+        "badge": "Available",
+        "image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-led_tube_light_18w-v2-1790280984506.png",
+        "price": "Price on request",
+        "category": "Electricals",
+        "updated_at": "2026-09-24T20:16:25.548Z",
+        "description": "LED Tube Light 18W from our Electricals catalogue. Contact us for specifications and quotation.",
+        "subcategory": ""
+      },
+      "created_at": "2026-09-24T20:03:29.95+00:00",
+      "updated_at": "2026-09-24T20:16:25.548+00:00"
+    }
+  },
+  {
+    "id": "1790280214388-m2quj",
+    "name": "Basin Mixer Tap",
+    "category": "Sanitaryware",
+    "price": null,
+    "previous_image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-basin_mixer_tap-v2-1790280988038.png",
+    "previous_data_image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-basin_mixer_tap-v2-1790280988038.png",
+    "expected_local_file": "sanitaryware_basin_mixer_tap.png",
+    "full_product_record": {
+      "id": "1790280214388-m2quj",
+      "name": "Basin Mixer Tap",
+      "category": "Sanitaryware",
+      "description": "Basin Mixer Tap from our Sanitaryware catalogue. Contact us for specifications and quotation.",
+      "price": null,
+      "image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-basin_mixer_tap-v2-1790280988038.png",
+      "data": {
+        "id": "1790280214388-m2quj",
+        "name": "Basin Mixer Tap",
+        "badge": "Available",
+        "image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-basin_mixer_tap-v2-1790280988038.png",
+        "price": "Price on request",
+        "category": "Sanitaryware",
+        "updated_at": "2026-09-24T20:16:29.073Z",
+        "description": "Basin Mixer Tap from our Sanitaryware catalogue. Contact us for specifications and quotation.",
+        "subcategory": ""
+      },
+      "created_at": "2026-09-24T20:03:33.593+00:00",
+      "updated_at": "2026-09-24T20:16:29.073+00:00"
+    }
+  },
+  {
+    "id": "1790280218957-98av3",
+    "name": "Flush Tank / Cistern",
+    "category": "Sanitaryware",
+    "price": null,
+    "previous_image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-flush_tank___cistern-v2-1790280990079.png",
+    "previous_data_image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-flush_tank___cistern-v2-1790280990079.png",
+    "expected_local_file": "sanitaryware_flush_tank_cistern.png",
+    "full_product_record": {
+      "id": "1790280218957-98av3",
+      "name": "Flush Tank / Cistern",
+      "category": "Sanitaryware",
+      "description": "Flush Tank / Cistern from our Sanitaryware catalogue. Contact us for specifications and quotation.",
+      "price": null,
+      "image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-flush_tank___cistern-v2-1790280990079.png",
+      "data": {
+        "id": "1790280218957-98av3",
+        "name": "Flush Tank / Cistern",
+        "badge": "Available",
+        "image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-flush_tank___cistern-v2-1790280990079.png",
+        "price": "Price on request",
+        "category": "Sanitaryware",
+        "updated_at": "2026-09-24T20:16:31.000Z",
+        "description": "Flush Tank / Cistern from our Sanitaryware catalogue. Contact us for specifications and quotation.",
+        "subcategory": ""
+      },
+      "created_at": "2026-09-24T20:03:38.168+00:00",
+      "updated_at": "2026-09-24T20:16:31+00:00"
+    }
+  },
+  {
+    "id": "1790280211195-6sfhq",
+    "name": "LED Flood Light 50W",
+    "category": "Electricals",
+    "price": null,
+    "previous_image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-led_flood_light_50w-v2-1790280991135.png",
+    "previous_data_image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-led_flood_light_50w-v2-1790280991135.png",
+    "expected_local_file": "electricals_led_flood_light_50w.png",
+    "full_product_record": {
+      "id": "1790280211195-6sfhq",
+      "name": "LED Flood Light 50W",
+      "category": "Electricals",
+      "description": "LED Flood Light 50W from our Electricals catalogue. Contact us for specifications and quotation.",
+      "price": null,
+      "image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-led_flood_light_50w-v2-1790280991135.png",
+      "data": {
+        "id": "1790280211195-6sfhq",
+        "name": "LED Flood Light 50W",
+        "badge": "Available",
+        "image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-led_flood_light_50w-v2-1790280991135.png",
+        "price": "Price on request",
+        "category": "Electricals",
+        "updated_at": "2026-09-24T20:16:32.225Z",
+        "description": "LED Flood Light 50W from our Electricals catalogue. Contact us for specifications and quotation.",
+        "subcategory": ""
+      },
+      "created_at": "2026-09-24T20:03:30.402+00:00",
+      "updated_at": "2026-09-24T20:16:32.225+00:00"
+    }
+  },
+  {
+    "id": "1790280214799-dd6l2",
+    "name": "Bib Cock",
+    "category": "Sanitaryware",
+    "price": null,
+    "previous_image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-bib_cock-v2-1790280993203.png",
+    "previous_data_image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-bib_cock-v2-1790280993203.png",
+    "expected_local_file": "sanitaryware_bib_cock.png",
+    "full_product_record": {
+      "id": "1790280214799-dd6l2",
+      "name": "Bib Cock",
+      "category": "Sanitaryware",
+      "description": "Bib Cock from our Sanitaryware catalogue. Contact us for specifications and quotation.",
+      "price": null,
+      "image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-bib_cock-v2-1790280993203.png",
+      "data": {
+        "id": "1790280214799-dd6l2",
+        "name": "Bib Cock",
+        "badge": "Available",
+        "image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-bib_cock-v2-1790280993203.png",
+        "price": "Price on request",
+        "category": "Sanitaryware",
+        "updated_at": "2026-09-24T20:16:33.894Z",
+        "description": "Bib Cock from our Sanitaryware catalogue. Contact us for specifications and quotation.",
+        "subcategory": ""
+      },
+      "created_at": "2026-09-24T20:03:34.012+00:00",
+      "updated_at": "2026-09-24T20:16:33.894+00:00"
+    }
+  },
+  {
+    "id": "1790280219382-i1ix1",
+    "name": "Toilet Seat Cover",
+    "category": "Sanitaryware",
+    "price": null,
+    "previous_image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-toilet_seat_cover-v2-1790280994912.png",
+    "previous_data_image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-toilet_seat_cover-v2-1790280994912.png",
+    "expected_local_file": "sanitaryware_toilet_seat_cover.png",
+    "full_product_record": {
+      "id": "1790280219382-i1ix1",
+      "name": "Toilet Seat Cover",
+      "category": "Sanitaryware",
+      "description": "Toilet Seat Cover from our Sanitaryware catalogue. Contact us for specifications and quotation.",
+      "price": null,
+      "image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-toilet_seat_cover-v2-1790280994912.png",
+      "data": {
+        "id": "1790280219382-i1ix1",
+        "name": "Toilet Seat Cover",
+        "badge": "Available",
+        "image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-toilet_seat_cover-v2-1790280994912.png",
+        "price": "Price on request",
+        "category": "Sanitaryware",
+        "updated_at": "2026-09-24T20:16:35.828Z",
+        "description": "Toilet Seat Cover from our Sanitaryware catalogue. Contact us for specifications and quotation.",
+        "subcategory": ""
+      },
+      "created_at": "2026-09-24T20:03:38.601+00:00",
+      "updated_at": "2026-09-24T20:16:35.828+00:00"
+    }
+  },
+  {
+    "id": "1790280203246-qm9iw",
+    "name": "LED Bulb 9W",
+    "category": "Electricals",
+    "price": null,
+    "previous_image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-led_bulb_9w-v2-1790280947913.png",
+    "previous_data_image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-led_bulb_9w-v2-1790280947913.png",
+    "expected_local_file": "electricals_led_bulb_9w.png",
+    "full_product_record": {
+      "id": "1790280203246-qm9iw",
+      "name": "LED Bulb 9W",
+      "category": "Electricals",
+      "description": "LED Bulb 9W from our Electricals catalogue. Contact us for specifications and quotation.",
+      "price": null,
+      "image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-led_bulb_9w-v2-1790280947913.png",
+      "data": {
+        "id": "1790280203246-qm9iw",
+        "name": "LED Bulb 9W",
+        "badge": "Available",
+        "image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-led_bulb_9w-v2-1790280947913.png",
+        "price": "Price on request",
+        "category": "Electricals",
+        "updated_at": "2026-09-24T20:15:49.283Z",
+        "description": "LED Bulb 9W from our Electricals catalogue. Contact us for specifications and quotation.",
+        "subcategory": ""
+      },
+      "created_at": "2026-09-24T20:03:22.661+00:00",
+      "updated_at": "2026-09-24T20:15:49.283+00:00"
+    }
+  },
+  {
+    "id": "1790280211657-63fda",
+    "name": "PVC Conduit Pipe",
+    "category": "Electricals",
+    "price": null,
+    "previous_image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-pvc_conduit_pipe-v2-1790280996953.png",
+    "previous_data_image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-pvc_conduit_pipe-v2-1790280996953.png",
+    "expected_local_file": "electricals_pvc_conduit_pipe.png",
+    "full_product_record": {
+      "id": "1790280211657-63fda",
+      "name": "PVC Conduit Pipe",
+      "category": "Electricals",
+      "description": "PVC Conduit Pipe from our Electricals catalogue. Contact us for specifications and quotation.",
+      "price": null,
+      "image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-pvc_conduit_pipe-v2-1790280996953.png",
+      "data": {
+        "id": "1790280211657-63fda",
+        "name": "PVC Conduit Pipe",
+        "badge": "Available",
+        "image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-pvc_conduit_pipe-v2-1790280996953.png",
+        "price": "Price on request",
+        "category": "Electricals",
+        "updated_at": "2026-09-24T20:16:37.526Z",
+        "description": "PVC Conduit Pipe from our Electricals catalogue. Contact us for specifications and quotation.",
+        "subcategory": ""
+      },
+      "created_at": "2026-09-24T20:03:30.879+00:00",
+      "updated_at": "2026-09-24T20:16:37.526+00:00"
+    }
+  },
+  {
+    "id": "1790280215686-h1ceh",
+    "name": "Wall Mixer",
+    "category": "Sanitaryware",
+    "price": null,
+    "previous_image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-wall_mixer-v2-1790280998610.png",
+    "previous_data_image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-wall_mixer-v2-1790280998610.png",
+    "expected_local_file": "sanitaryware_wall_mixer.png",
+    "full_product_record": {
+      "id": "1790280215686-h1ceh",
+      "name": "Wall Mixer",
+      "category": "Sanitaryware",
+      "description": "Wall Mixer from our Sanitaryware catalogue. Contact us for specifications and quotation.",
+      "price": null,
+      "image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-wall_mixer-v2-1790280998610.png",
+      "data": {
+        "id": "1790280215686-h1ceh",
+        "name": "Wall Mixer",
+        "badge": "Available",
+        "image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-wall_mixer-v2-1790280998610.png",
+        "price": "Price on request",
+        "category": "Sanitaryware",
+        "updated_at": "2026-09-24T20:16:39.394Z",
+        "description": "Wall Mixer from our Sanitaryware catalogue. Contact us for specifications and quotation.",
+        "subcategory": ""
+      },
+      "created_at": "2026-09-24T20:03:34.904+00:00",
+      "updated_at": "2026-09-24T20:16:39.394+00:00"
+    }
+  },
+  {
+    "id": "1790280219833-kaizh",
+    "name": "Connection Hose",
+    "category": "Sanitaryware",
+    "price": null,
+    "previous_image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-connection_hose-v2-1790281000409.png",
+    "previous_data_image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-connection_hose-v2-1790281000409.png",
+    "expected_local_file": "sanitaryware_connection_hose.png",
+    "full_product_record": {
+      "id": "1790280219833-kaizh",
+      "name": "Connection Hose",
+      "category": "Sanitaryware",
+      "description": "Connection Hose from our Sanitaryware catalogue. Contact us for specifications and quotation.",
+      "price": null,
+      "image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-connection_hose-v2-1790281000409.png",
+      "data": {
+        "id": "1790280219833-kaizh",
+        "name": "Connection Hose",
+        "badge": "Available",
+        "image": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-connection_hose-v2-1790281000409.png",
+        "price": "Price on request",
+        "category": "Sanitaryware",
+        "updated_at": "2026-09-24T20:16:41.363Z",
+        "description": "Connection Hose from our Sanitaryware catalogue. Contact us for specifications and quotation.",
+        "subcategory": ""
+      },
+      "created_at": "2026-09-24T20:03:39.045+00:00",
+      "updated_at": "2026-09-24T20:16:41.363+00:00"
+    }
+  }
+]

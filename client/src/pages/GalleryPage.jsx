@@ -2,18 +2,66 @@ import { useEffect, useState } from 'react';
 import { CtaBand, PageHead } from '../components/ui';
 import { resolveApiUrl } from '../lib/api';
 
+import gallery01 from '../assets/gallery/gallery-01.jpeg';
+import gallery02 from '../assets/gallery/gallery-02.jpeg';
+import gallery03 from '../assets/gallery/gallery-03.jpeg';
+import gallery04 from '../assets/gallery/gallery-04.jpeg';
+import gallery05 from '../assets/gallery/gallery-05.jpeg';
+import gallery06 from '../assets/gallery/gallery-06.jpeg';
+import gallery07 from '../assets/gallery/gallery-07.jpeg';
+
+const LOCAL_GALLERY_IMAGES = [
+  gallery01,
+  gallery02,
+  gallery03,
+  gallery04,
+  gallery05,
+  gallery06,
+  gallery07,
+];
+
+const LOCAL_GALLERY_BY_ID = {
+  'g-1113': gallery01,
+  '1790257567009-dtkvf': gallery02,
+  '1790257343259-t7gj1': gallery03,
+  '1790257447637-0piko': gallery04,
+  '1790257475316-5src4': gallery05,
+  '1790257511023-tr05i': gallery06,
+  '1790257529703-8tbqz': gallery07,
+};
+
 const galleryAssetModules = import.meta.glob('../assets/gallary/*', { eager: true, import: 'default' });
 
-function resolveGalleryImageUrl(image) {
+function resolveGalleryImageUrl(item, idx = 0) {
+  if (!item) return '';
+
+  // 1. Resolve by exact record ID if available
+  const itemId = typeof item === 'object' ? item.id : item;
+  if (itemId && LOCAL_GALLERY_BY_ID[itemId]) {
+    return LOCAL_GALLERY_BY_ID[itemId];
+  }
+
+  const image = typeof item === 'object' ? item.image : item;
   if (!image) return '';
-  if (image.startsWith('http://') || image.startsWith('https://') || image.startsWith('data:')) {
+
+  // 2. Intercept blocked old Supabase URLs and map to local gallery image
+  if (typeof image === 'string' && image.includes('yfbzapzceoqkwzsmsjmk')) {
+    const safeIdx = Math.abs(Number(idx) || 0) % LOCAL_GALLERY_IMAGES.length;
+    return LOCAL_GALLERY_IMAGES[safeIdx];
+  }
+
+  // 3. Valid external or data URLs (excluding old Supabase)
+  if (typeof image === 'string' && (image.startsWith('http://') || image.startsWith('https://') || image.startsWith('data:'))) {
     return image;
   }
-  const fileName = image.split('/').pop();
+
+  // 4. Local asset glob fallback
+  const fileName = String(image).split('/').pop();
   const matchedKey = Object.keys(galleryAssetModules).find(k => k.endsWith(`/${fileName}`));
   if (matchedKey) {
     return galleryAssetModules[matchedKey];
   }
+
   return resolveApiUrl(image);
 }
 
@@ -96,7 +144,7 @@ export default function GalleryPage({ go, content }) {
         {/* GALLERY GRID */}
         <div className="gallery-grid">
           {filteredItems.map((item, idx) => {
-            const imageSrc = resolveGalleryImageUrl(item.image);
+            const imageSrc = resolveGalleryImageUrl(item, idx);
             const isFailed = failedImages[item.id];
 
             return (
@@ -184,7 +232,7 @@ export default function GalleryPage({ go, content }) {
 
             <div className="lightbox-content">
               <img
-                src={resolveGalleryImageUrl(activeLightboxItem.image)}
+                src={resolveGalleryImageUrl(activeLightboxItem, lightboxIndex)}
                 alt={activeLightboxItem.title || 'Gallery photograph preview'}
               />
             </div>
