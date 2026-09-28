@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { PageHead } from '../components/ui';
+import { getConstructionBrandLogo } from '../utils/constructionLogos';
 import {
   Bath,
   Cable,
@@ -28,7 +29,9 @@ const dealerLogoModules = import.meta.glob('../assets/DEALERS/DEALERS/*', {
   query: '?url',
 });
 
-const resolveLogoUrl = logo => {
+const resolveLogoUrl = (logo, brandName, brandId) => {
+  const localCcLogo = getConstructionBrandLogo(brandName) || getConstructionBrandLogo(brandId);
+  if (localCcLogo) return localCcLogo;
   if (!logo) return null;
   if (logo.startsWith('http') || logo.startsWith('data:')) return logo;
 
@@ -88,7 +91,7 @@ const DEFAULT_BRANDS = [
   { id: 'b-finolex-p', name: 'Finolex Pipes', category: 'Pipes & Plumbing', logo: '15.png', display_order: 2, is_active: true },
   { id: 'b-ashirvad', name: 'Ashirvad', category: 'Pipes & Plumbing', logo: '9.png', display_order: 3, is_active: true },
 
-  // 4. Switches & Electrical (7)
+  // 4. Switches & Electrical (8)
   { id: 'b-legrand', name: 'Legrand', category: 'Switches & Electrical', logo: '5.png', display_order: 1, is_active: true },
   { id: 'b-norwood', name: 'Norwood', category: 'Switches & Electrical', logo: '11.png', display_order: 2, is_active: true },
   { id: 'b-norisys', name: 'Norisys', category: 'Switches & Electrical', logo: '23.png', display_order: 3, is_active: true },
@@ -96,6 +99,7 @@ const DEFAULT_BRANDS = [
   { id: 'b-anchor', name: 'Anchor by Panasonic', category: 'Switches & Electrical', logo: '7.png', display_order: 5, is_active: true },
   { id: 'b-roma', name: 'Roma', category: 'Switches & Electrical', logo: null, display_order: 6, is_active: true },
   { id: 'b-orbit-se', name: 'Orbit', category: 'Switches & Electrical', logo: '25.png', display_order: 7, is_active: true },
+  { id: '1790259867309-9xf5a', name: 'RK Innovations', category: 'Switches & Electrical', logo: getConstructionBrandLogo('RK Innovations'), display_order: 8, is_active: true },
 
   // 5. Fans (8)
   { id: 'b-crompton-f', name: 'Crompton', category: 'Fans', logo: '16.jpg', display_order: 1, is_active: true },
@@ -127,9 +131,10 @@ const DEFAULT_BRANDS = [
   { id: 'b-luker-h', name: 'Luker', category: 'Water Heaters', logo: '25.png', display_order: 5, is_active: true },
   { id: 'b-parryware-h', name: 'Parryware', category: 'Water Heaters', logo: '13.png', display_order: 6, is_active: true },
 
-  // 9. Water Pumps (2)
+  // 9. Water Pumps (3)
   { id: 'b-cri', name: 'C.R.I. Pumps', category: 'Water Pumps', logo: '19.png', display_order: 1, is_active: true },
   { id: 'b-hasten', name: 'Hasten', category: 'Water Pumps', logo: '18.png', display_order: 2, is_active: true },
+  { id: '1790259662780-dxurm', name: 'VELORA', category: 'Water Pumps', logo: getConstructionBrandLogo('VELORA'), display_order: 3, is_active: true },
 
   // 10. Waterproofing (2)
   { id: 'b-drfixit', name: 'Dr. Fixit', category: 'Waterproofing', logo: '12.jpg', display_order: 1, is_active: true },
@@ -142,11 +147,11 @@ const DEFAULT_BRANDS = [
   { id: 'b-vguard', name: 'V-Guard', category: 'Home Appliances', logo: '13.png', display_order: 1, is_active: true },
 
   // 13. Construction Chemicals (5)
-  { id: 'b-drfixit-cc', name: 'Dr. Fixit', category: 'Construction Chemicals', logo: 'https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/brands/dr__fixit-1790264982598.png', display_order: 1, is_active: true },
-  { id: 'b-fosroc', name: 'Fosroc', category: 'Construction Chemicals', logo: 'https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/brands/fosroc-1790264982994.png', display_order: 2, is_active: true },
-  { id: 'b-zycosil-cc', name: 'Zycosil+', category: 'Construction Chemicals', logo: 'https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/brands/zycosil_-1790264983209.png', display_order: 3, is_active: true },
-  { id: 'b-mynk', name: 'MYNK', category: 'Construction Chemicals', logo: 'https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/brands/mynk-1790264983680.jpg', display_order: 4, is_active: true },
-  { id: 'b-ramco', name: 'Ramco Supergrade', category: 'Construction Chemicals', logo: 'https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/brands/ramco_supergrade-1790264983908.png', display_order: 5, is_active: true },
+  { id: 'b-drfixit-cc', name: 'Dr. Fixit', category: 'Construction Chemicals', logo: getConstructionBrandLogo('Dr. Fixit'), display_order: 1, is_active: true },
+  { id: 'b-fosroc', name: 'Fosroc', category: 'Construction Chemicals', logo: getConstructionBrandLogo('Fosroc'), display_order: 2, is_active: true },
+  { id: 'b-zycosil-cc', name: 'Zycosil+', category: 'Construction Chemicals', logo: getConstructionBrandLogo('Zycosil+'), display_order: 3, is_active: true },
+  { id: 'b-mynk', name: 'MYNK', category: 'Construction Chemicals', logo: getConstructionBrandLogo('MYNK'), display_order: 4, is_active: true },
+  { id: 'b-ramco', name: 'Ramco Supergrade', category: 'Construction Chemicals', logo: getConstructionBrandLogo('Ramco Supergrade'), display_order: 5, is_active: true },
 ];
 
 const CATEGORY_DISPLAY_NAMES = {
@@ -166,7 +171,7 @@ const BRAND_DISPLAY_NAMES = {
 function BrandLogoCard({ brand }) {
   const [hasError, setHasError] = useState(false);
   const isUrl = brand.websiteUrl && /^https?:\/\//i.test(brand.websiteUrl);
-  const logoSrc = resolveLogoUrl(brand.logo);
+  const logoSrc = resolveLogoUrl(brand.logo, brand.name, brand.id);
   const displayName = BRAND_DISPLAY_NAMES[brand.name] || brand.name;
 
   const content = (

@@ -6,6 +6,7 @@ import { Store } from 'lucide-react';
 import homeStorefront from '../assets/gallary/new home.jpeg';
 
 import { resolveProductImage, handleProductImageError } from '../utils/productImageResolver';
+import { getConstructionBrandLogo } from '../utils/constructionLogos';
 
 const fallbackImage = item => resolveProductImage(item);
 const homeContent = {
@@ -28,7 +29,9 @@ const dealerLogoModules = import.meta.glob('../assets/DEALERS/DEALERS/*', {
   query: '?url',
 });
 
-const resolveBrandLogo = logo => {
+const resolveBrandLogo = (logo, brandName, brandId) => {
+  const localCcLogo = getConstructionBrandLogo(brandName) || getConstructionBrandLogo(brandId);
+  if (localCcLogo) return localCcLogo;
   if (!logo) return null;
   if (typeof logo === 'string' && (logo.startsWith('http') || logo.startsWith('data:'))) return logo;
   if (typeof logo === 'string' && logo.startsWith('d')) {
@@ -145,11 +148,11 @@ export default function HomePage({ go, content }) {
   const industries = Array.isArray(content?.industries) && content.industries.length ? content.industries : homeContent.industries;
 
   const defaultCCBrands = [
-    { id: 'b-drfixit-cc', name: 'Dr. Fixit', logo: 'https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/brands/dr__fixit-1790264982598.png' },
-    { id: 'b-fosroc', name: 'Fosroc', logo: 'https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/brands/fosroc-1790264982994.png' },
-    { id: 'b-zycosil-cc', name: 'Zycosil+', logo: 'https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/brands/zycosil_-1790264983209.png' },
-    { id: 'b-mynk', name: 'MYNK', logo: 'https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/brands/mynk-1790264983680.jpg' },
-    { id: 'b-ramco', name: 'Ramco Supergrade', logo: 'https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/brands/ramco_supergrade-1790264983908.png' },
+    { id: 'b-drfixit-cc', name: 'Dr. Fixit', logo: getConstructionBrandLogo('Dr. Fixit') },
+    { id: 'b-fosroc', name: 'Fosroc', logo: getConstructionBrandLogo('Fosroc') },
+    { id: 'b-zycosil-cc', name: 'Zycosil+', logo: getConstructionBrandLogo('Zycosil+') },
+    { id: 'b-mynk', name: 'MYNK', logo: getConstructionBrandLogo('MYNK') },
+    { id: 'b-ramco', name: 'Ramco Supergrade', logo: getConstructionBrandLogo('Ramco Supergrade') },
   ];
 
   const ccCategoryObj = Array.isArray(content?.categories)
@@ -666,7 +669,7 @@ export default function HomePage({ go, content }) {
                 <small className="construction-chem-brands-heading">TRUSTED CHEMICAL BRANDS</small>
                 <div className="construction-chem-brands-grid">
                   {constructionBrands.map((brand, idx) => {
-                    const logoSrc = resolveBrandLogo(brand.logo);
+                    const logoSrc = resolveBrandLogo(brand.logo, brand.name, brand.id);
                     return (
                       <div key={brand.id || brand.name || idx} className="construction-brand-tile" title={brand.name}>
                         {logoSrc ? (

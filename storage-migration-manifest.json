@@ -1,0 +1,1404 @@
+[
+  {
+    "sourceBucket": "RAJA_ELE",
+    "sourcePath": "products/1790278938385-949ui-1790278938385.jpg",
+    "destinationBucket": "RAJA_ELE",
+    "destinationPath": "products/1790278938385-949ui-1790278938385.jpg",
+    "sourceUrl": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/1790278938385-949ui-1790278938385.jpg",
+    "destinationUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/1790278938385-949ui-1790278938385.jpg",
+    "referencedBy": [
+      {
+        "table": "products",
+        "recordId": "1790278938385-949ui",
+        "fieldName": "image"
+      },
+      {
+        "table": "products",
+        "recordId": "1790278938385-949ui",
+        "fieldName": "data.image"
+      }
+    ],
+    "status": "PENDING"
+  },
+  {
+    "sourceBucket": "RAJA_ELE",
+    "sourcePath": "products/1790279003631-n8h9b-1790279003631.jpg",
+    "destinationBucket": "RAJA_ELE",
+    "destinationPath": "products/1790279003631-n8h9b-1790279003631.jpg",
+    "sourceUrl": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/1790279003631-n8h9b-1790279003631.jpg",
+    "destinationUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/1790279003631-n8h9b-1790279003631.jpg",
+    "referencedBy": [
+      {
+        "table": "products",
+        "recordId": "1790279003631-n8h9b",
+        "fieldName": "image"
+      },
+      {
+        "table": "products",
+        "recordId": "1790279003631-n8h9b",
+        "fieldName": "data.image"
+      }
+    ],
+    "status": "PENDING"
+  },
+  {
+    "sourceBucket": "RAJA_ELE",
+    "sourcePath": "products/1790279022919-tp8ze-1790279022919.jpg",
+    "destinationBucket": "RAJA_ELE",
+    "destinationPath": "products/1790279022919-tp8ze-1790279022919.jpg",
+    "sourceUrl": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/1790279022919-tp8ze-1790279022919.jpg",
+    "destinationUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/1790279022919-tp8ze-1790279022919.jpg",
+    "referencedBy": [
+      {
+        "table": "products",
+        "recordId": "1790279022919-tp8ze",
+        "fieldName": "image"
+      },
+      {
+        "table": "products",
+        "recordId": "1790279022919-tp8ze",
+        "fieldName": "data.image"
+      }
+    ],
+    "status": "PENDING"
+  },
+  {
+    "sourceBucket": "RAJA_ELE",
+    "sourcePath": "products/1790279050401-s7fb8-1790279050401.jpg",
+    "destinationBucket": "RAJA_ELE",
+    "destinationPath": "products/1790279050401-s7fb8-1790279050401.jpg",
+    "sourceUrl": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/1790279050401-s7fb8-1790279050401.jpg",
+    "destinationUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/1790279050401-s7fb8-1790279050401.jpg",
+    "referencedBy": [
+      {
+        "table": "products",
+        "recordId": "1790279050401-s7fb8",
+        "fieldName": "image"
+      },
+      {
+        "table": "products",
+        "recordId": "1790279050401-s7fb8",
+        "fieldName": "data.image"
+      }
+    ],
+    "status": "PENDING"
+  },
+  {
+    "sourceBucket": "RAJA_ELE",
+    "sourcePath": "products/1790279075874-j2ikm-1790279075874.jpg",
+    "destinationBucket": "RAJA_ELE",
+    "destinationPath": "products/1790279075874-j2ikm-1790279075874.jpg",
+    "sourceUrl": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/1790279075874-j2ikm-1790279075874.jpg",
+    "destinationUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/1790279075874-j2ikm-1790279075874.jpg",
+    "referencedBy": [
+      {
+        "table": "products",
+        "recordId": "1790279075874-j2ikm",
+        "fieldName": "image"
+      },
+      {
+        "table": "products",
+        "recordId": "1790279075874-j2ikm",
+        "fieldName": "data.image"
+      }
+    ],
+    "status": "PENDING"
+  },
+  {
+    "sourceBucket": "RAJA_ELE",
+    "sourcePath": "products/1790279094801-ylqmv-1790279094802.jpg",
+    "destinationBucket": "RAJA_ELE",
+    "destinationPath": "products/1790279094801-ylqmv-1790279094802.jpg",
+    "sourceUrl": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/1790279094801-ylqmv-1790279094802.jpg",
+    "destinationUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/1790279094801-ylqmv-1790279094802.jpg",
+    "referencedBy": [
+      {
+        "table": "products",
+        "recordId": "1790279094801-ylqmv",
+        "fieldName": "image"
+      },
+      {
+        "table": "products",
+        "recordId": "1790279094801-ylqmv",
+        "fieldName": "data.image"
+      }
+    ],
+    "status": "PENDING"
+  },
+  {
+    "sourceBucket": "RAJA_ELE",
+    "sourcePath": "products/1790279115040-u359l-1790279115041.jpg",
+    "destinationBucket": "RAJA_ELE",
+    "destinationPath": "products/1790279115040-u359l-1790279115041.jpg",
+    "sourceUrl": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/1790279115040-u359l-1790279115041.jpg",
+    "destinationUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/1790279115040-u359l-1790279115041.jpg",
+    "referencedBy": [
+      {
+        "table": "products",
+        "recordId": "1790279115040-u359l",
+        "fieldName": "image"
+      },
+      {
+        "table": "products",
+        "recordId": "1790279115040-u359l",
+        "fieldName": "data.image"
+      }
+    ],
+    "status": "PENDING"
+  },
+  {
+    "sourceBucket": "RAJA_ELE",
+    "sourcePath": "products/1790279182845-1k6zz-1790279182845.jpg",
+    "destinationBucket": "RAJA_ELE",
+    "destinationPath": "products/1790279182845-1k6zz-1790279182845.jpg",
+    "sourceUrl": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/1790279182845-1k6zz-1790279182845.jpg",
+    "destinationUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/1790279182845-1k6zz-1790279182845.jpg",
+    "referencedBy": [
+      {
+        "table": "products",
+        "recordId": "1790279182845-1k6zz",
+        "fieldName": "image"
+      },
+      {
+        "table": "products",
+        "recordId": "1790279182845-1k6zz",
+        "fieldName": "data.image"
+      }
+    ],
+    "status": "PENDING"
+  },
+  {
+    "sourceBucket": "RAJA_ELE",
+    "sourcePath": "products/1790279216681-9m3v8-1790279216681.jpg",
+    "destinationBucket": "RAJA_ELE",
+    "destinationPath": "products/1790279216681-9m3v8-1790279216681.jpg",
+    "sourceUrl": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/1790279216681-9m3v8-1790279216681.jpg",
+    "destinationUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/1790279216681-9m3v8-1790279216681.jpg",
+    "referencedBy": [
+      {
+        "table": "products",
+        "recordId": "1790279216681-9m3v8",
+        "fieldName": "image"
+      },
+      {
+        "table": "products",
+        "recordId": "1790279216681-9m3v8",
+        "fieldName": "data.image"
+      }
+    ],
+    "status": "PENDING"
+  },
+  {
+    "sourceBucket": "RAJA_ELE",
+    "sourcePath": "products/1790279239173-h9mb2-1790279239173.jpg",
+    "destinationBucket": "RAJA_ELE",
+    "destinationPath": "products/1790279239173-h9mb2-1790279239173.jpg",
+    "sourceUrl": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/1790279239173-h9mb2-1790279239173.jpg",
+    "destinationUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/1790279239173-h9mb2-1790279239173.jpg",
+    "referencedBy": [
+      {
+        "table": "products",
+        "recordId": "1790279239173-h9mb2",
+        "fieldName": "image"
+      },
+      {
+        "table": "products",
+        "recordId": "1790279239173-h9mb2",
+        "fieldName": "data.image"
+      }
+    ],
+    "status": "PENDING"
+  },
+  {
+    "sourceBucket": "RAJA_ELE",
+    "sourcePath": "products/1790279266815-nsgj1-1790279266815.jpg",
+    "destinationBucket": "RAJA_ELE",
+    "destinationPath": "products/1790279266815-nsgj1-1790279266815.jpg",
+    "sourceUrl": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/1790279266815-nsgj1-1790279266815.jpg",
+    "destinationUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/1790279266815-nsgj1-1790279266815.jpg",
+    "referencedBy": [
+      {
+        "table": "products",
+        "recordId": "1790279266815-nsgj1",
+        "fieldName": "image"
+      },
+      {
+        "table": "products",
+        "recordId": "1790279266815-nsgj1",
+        "fieldName": "data.image"
+      }
+    ],
+    "status": "PENDING"
+  },
+  {
+    "sourceBucket": "RAJA_ELE",
+    "sourcePath": "products/1790279289586-ktkdx-1790279289586.jpg",
+    "destinationBucket": "RAJA_ELE",
+    "destinationPath": "products/1790279289586-ktkdx-1790279289586.jpg",
+    "sourceUrl": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/1790279289586-ktkdx-1790279289586.jpg",
+    "destinationUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/1790279289586-ktkdx-1790279289586.jpg",
+    "referencedBy": [
+      {
+        "table": "products",
+        "recordId": "1790279289586-ktkdx",
+        "fieldName": "image"
+      },
+      {
+        "table": "products",
+        "recordId": "1790279289586-ktkdx",
+        "fieldName": "data.image"
+      }
+    ],
+    "status": "PENDING"
+  },
+  {
+    "sourceBucket": "RAJA_ELE",
+    "sourcePath": "products/1790279309563-ctcj8-1790279309563.jpg",
+    "destinationBucket": "RAJA_ELE",
+    "destinationPath": "products/1790279309563-ctcj8-1790279309563.jpg",
+    "sourceUrl": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/1790279309563-ctcj8-1790279309563.jpg",
+    "destinationUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/1790279309563-ctcj8-1790279309563.jpg",
+    "referencedBy": [
+      {
+        "table": "products",
+        "recordId": "1790279309563-ctcj8",
+        "fieldName": "image"
+      },
+      {
+        "table": "products",
+        "recordId": "1790279309563-ctcj8",
+        "fieldName": "data.image"
+      }
+    ],
+    "status": "PENDING"
+  },
+  {
+    "sourceBucket": "RAJA_ELE",
+    "sourcePath": "products/1790279362477-1l39e-1790279362477.jpg",
+    "destinationBucket": "RAJA_ELE",
+    "destinationPath": "products/1790279362477-1l39e-1790279362477.jpg",
+    "sourceUrl": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/1790279362477-1l39e-1790279362477.jpg",
+    "destinationUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/1790279362477-1l39e-1790279362477.jpg",
+    "referencedBy": [
+      {
+        "table": "products",
+        "recordId": "1790279362477-1l39e",
+        "fieldName": "image"
+      },
+      {
+        "table": "products",
+        "recordId": "1790279362477-1l39e",
+        "fieldName": "data.image"
+      }
+    ],
+    "status": "PENDING"
+  },
+  {
+    "sourceBucket": "RAJA_ELE",
+    "sourcePath": "products/1790279381545-mm71x-1790279381545.jpg",
+    "destinationBucket": "RAJA_ELE",
+    "destinationPath": "products/1790279381545-mm71x-1790279381545.jpg",
+    "sourceUrl": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/1790279381545-mm71x-1790279381545.jpg",
+    "destinationUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/1790279381545-mm71x-1790279381545.jpg",
+    "referencedBy": [
+      {
+        "table": "products",
+        "recordId": "1790279381545-mm71x",
+        "fieldName": "image"
+      },
+      {
+        "table": "products",
+        "recordId": "1790279381545-mm71x",
+        "fieldName": "data.image"
+      }
+    ],
+    "status": "PENDING"
+  },
+  {
+    "sourceBucket": "RAJA_ELE",
+    "sourcePath": "products/1790279401874-ruziz-1790279401874.jpg",
+    "destinationBucket": "RAJA_ELE",
+    "destinationPath": "products/1790279401874-ruziz-1790279401874.jpg",
+    "sourceUrl": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/1790279401874-ruziz-1790279401874.jpg",
+    "destinationUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/1790279401874-ruziz-1790279401874.jpg",
+    "referencedBy": [
+      {
+        "table": "products",
+        "recordId": "1790279401874-ruziz",
+        "fieldName": "image"
+      },
+      {
+        "table": "products",
+        "recordId": "1790279401874-ruziz",
+        "fieldName": "data.image"
+      }
+    ],
+    "status": "PENDING"
+  },
+  {
+    "sourceBucket": "RAJA_ELE",
+    "sourcePath": "products/1790279421531-fiwv6-1790279421531.jpg",
+    "destinationBucket": "RAJA_ELE",
+    "destinationPath": "products/1790279421531-fiwv6-1790279421531.jpg",
+    "sourceUrl": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/1790279421531-fiwv6-1790279421531.jpg",
+    "destinationUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/1790279421531-fiwv6-1790279421531.jpg",
+    "referencedBy": [
+      {
+        "table": "products",
+        "recordId": "1790279421531-fiwv6",
+        "fieldName": "image"
+      },
+      {
+        "table": "products",
+        "recordId": "1790279421531-fiwv6",
+        "fieldName": "data.image"
+      }
+    ],
+    "status": "PENDING"
+  },
+  {
+    "sourceBucket": "RAJA_ELE",
+    "sourcePath": "products/1790279439546-153nl-1790279439546.jpg",
+    "destinationBucket": "RAJA_ELE",
+    "destinationPath": "products/1790279439546-153nl-1790279439546.jpg",
+    "sourceUrl": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/1790279439546-153nl-1790279439546.jpg",
+    "destinationUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/1790279439546-153nl-1790279439546.jpg",
+    "referencedBy": [
+      {
+        "table": "products",
+        "recordId": "1790279439546-153nl",
+        "fieldName": "image"
+      },
+      {
+        "table": "products",
+        "recordId": "1790279439546-153nl",
+        "fieldName": "data.image"
+      }
+    ],
+    "status": "PENDING"
+  },
+  {
+    "sourceBucket": "RAJA_ELE",
+    "sourcePath": "products/1790279483133-x6pug-1790279483133.jpg",
+    "destinationBucket": "RAJA_ELE",
+    "destinationPath": "products/1790279483133-x6pug-1790279483133.jpg",
+    "sourceUrl": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/1790279483133-x6pug-1790279483133.jpg",
+    "destinationUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/1790279483133-x6pug-1790279483133.jpg",
+    "referencedBy": [
+      {
+        "table": "products",
+        "recordId": "1790279483133-x6pug",
+        "fieldName": "image"
+      },
+      {
+        "table": "products",
+        "recordId": "1790279483133-x6pug",
+        "fieldName": "data.image"
+      }
+    ],
+    "status": "PENDING"
+  },
+  {
+    "sourceBucket": "RAJA_ELE",
+    "sourcePath": "products/1790279512463-gn860-1790279512463.jpg",
+    "destinationBucket": "RAJA_ELE",
+    "destinationPath": "products/1790279512463-gn860-1790279512463.jpg",
+    "sourceUrl": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/1790279512463-gn860-1790279512463.jpg",
+    "destinationUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/1790279512463-gn860-1790279512463.jpg",
+    "referencedBy": [
+      {
+        "table": "products",
+        "recordId": "1790279512463-gn860",
+        "fieldName": "image"
+      },
+      {
+        "table": "products",
+        "recordId": "1790279512463-gn860",
+        "fieldName": "data.image"
+      }
+    ],
+    "status": "PENDING"
+  },
+  {
+    "sourceBucket": "RAJA_ELE",
+    "sourcePath": "products/1790279537977-tnedw-1790279537977.jpg",
+    "destinationBucket": "RAJA_ELE",
+    "destinationPath": "products/1790279537977-tnedw-1790279537977.jpg",
+    "sourceUrl": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/1790279537977-tnedw-1790279537977.jpg",
+    "destinationUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/1790279537977-tnedw-1790279537977.jpg",
+    "referencedBy": [
+      {
+        "table": "products",
+        "recordId": "1790279537977-tnedw",
+        "fieldName": "image"
+      },
+      {
+        "table": "products",
+        "recordId": "1790279537977-tnedw",
+        "fieldName": "data.image"
+      }
+    ],
+    "status": "PENDING"
+  },
+  {
+    "sourceBucket": "RAJA_ELE",
+    "sourcePath": "products/1790279557155-upyki-1790279557155.jpg",
+    "destinationBucket": "RAJA_ELE",
+    "destinationPath": "products/1790279557155-upyki-1790279557155.jpg",
+    "sourceUrl": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/1790279557155-upyki-1790279557155.jpg",
+    "destinationUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/1790279557155-upyki-1790279557155.jpg",
+    "referencedBy": [
+      {
+        "table": "products",
+        "recordId": "1790279557155-upyki",
+        "fieldName": "image"
+      },
+      {
+        "table": "products",
+        "recordId": "1790279557155-upyki",
+        "fieldName": "data.image"
+      }
+    ],
+    "status": "PENDING"
+  },
+  {
+    "sourceBucket": "RAJA_ELE",
+    "sourcePath": "products/1790279576275-loy91-1790279576275.jpg",
+    "destinationBucket": "RAJA_ELE",
+    "destinationPath": "products/1790279576275-loy91-1790279576275.jpg",
+    "sourceUrl": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/1790279576275-loy91-1790279576275.jpg",
+    "destinationUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/1790279576275-loy91-1790279576275.jpg",
+    "referencedBy": [
+      {
+        "table": "products",
+        "recordId": "1790279576275-loy91",
+        "fieldName": "image"
+      },
+      {
+        "table": "products",
+        "recordId": "1790279576275-loy91",
+        "fieldName": "data.image"
+      }
+    ],
+    "status": "PENDING"
+  },
+  {
+    "sourceBucket": "RAJA_ELE",
+    "sourcePath": "products/electricals-led_panel_light-v2-1790280949602.png",
+    "destinationBucket": "RAJA_ELE",
+    "destinationPath": "products/electricals-led_panel_light-v2-1790280949602.png",
+    "sourceUrl": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-led_panel_light-v2-1790280949602.png",
+    "destinationUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-led_panel_light-v2-1790280949602.png",
+    "referencedBy": [
+      {
+        "table": "products",
+        "recordId": "1790280204211-d9ney",
+        "fieldName": "image"
+      },
+      {
+        "table": "products",
+        "recordId": "1790280204211-d9ney",
+        "fieldName": "data.image"
+      }
+    ],
+    "status": "PENDING"
+  },
+  {
+    "sourceBucket": "RAJA_ELE",
+    "sourcePath": "products/electricals-led_downlight-v2-1790280952506.png",
+    "destinationBucket": "RAJA_ELE",
+    "destinationPath": "products/electricals-led_downlight-v2-1790280952506.png",
+    "sourceUrl": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-led_downlight-v2-1790280952506.png",
+    "destinationUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-led_downlight-v2-1790280952506.png",
+    "referencedBy": [
+      {
+        "table": "products",
+        "recordId": "1790280204943-6nexb",
+        "fieldName": "image"
+      },
+      {
+        "table": "products",
+        "recordId": "1790280204943-6nexb",
+        "fieldName": "data.image"
+      }
+    ],
+    "status": "PENDING"
+  },
+  {
+    "sourceBucket": "RAJA_ELE",
+    "sourcePath": "products/electricals-modular_switch-v2-1790280953834.png",
+    "destinationBucket": "RAJA_ELE",
+    "destinationPath": "products/electricals-modular_switch-v2-1790280953834.png",
+    "sourceUrl": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-modular_switch-v2-1790280953834.png",
+    "destinationUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-modular_switch-v2-1790280953834.png",
+    "referencedBy": [
+      {
+        "table": "products",
+        "recordId": "1790280205640-6xja7",
+        "fieldName": "image"
+      },
+      {
+        "table": "products",
+        "recordId": "1790280205640-6xja7",
+        "fieldName": "data.image"
+      }
+    ],
+    "status": "PENDING"
+  },
+  {
+    "sourceBucket": "RAJA_ELE",
+    "sourcePath": "products/electricals-power_socket_6a_16a-v2-1790280954898.png",
+    "destinationBucket": "RAJA_ELE",
+    "destinationPath": "products/electricals-power_socket_6a_16a-v2-1790280954898.png",
+    "sourceUrl": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-power_socket_6a_16a-v2-1790280954898.png",
+    "destinationUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-power_socket_6a_16a-v2-1790280954898.png",
+    "referencedBy": [
+      {
+        "table": "products",
+        "recordId": "1790280206270-f6zy1",
+        "fieldName": "image"
+      },
+      {
+        "table": "products",
+        "recordId": "1790280206270-f6zy1",
+        "fieldName": "data.image"
+      }
+    ],
+    "status": "PENDING"
+  },
+  {
+    "sourceBucket": "RAJA_ELE",
+    "sourcePath": "products/electricals-electrical_wire-v2-1790280955919.png",
+    "destinationBucket": "RAJA_ELE",
+    "destinationPath": "products/electricals-electrical_wire-v2-1790280955919.png",
+    "sourceUrl": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-electrical_wire-v2-1790280955919.png",
+    "destinationUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-electrical_wire-v2-1790280955919.png",
+    "referencedBy": [
+      {
+        "table": "products",
+        "recordId": "1790280207316-ohheo",
+        "fieldName": "image"
+      },
+      {
+        "table": "products",
+        "recordId": "1790280207316-ohheo",
+        "fieldName": "data.image"
+      }
+    ],
+    "status": "PENDING"
+  },
+  {
+    "sourceBucket": "RAJA_ELE",
+    "sourcePath": "products/electricals-mcb_mini_circuit_breaker-v2-1790280957103.png",
+    "destinationBucket": "RAJA_ELE",
+    "destinationPath": "products/electricals-mcb_mini_circuit_breaker-v2-1790280957103.png",
+    "sourceUrl": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-mcb_mini_circuit_breaker-v2-1790280957103.png",
+    "destinationUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-mcb_mini_circuit_breaker-v2-1790280957103.png",
+    "referencedBy": [
+      {
+        "table": "products",
+        "recordId": "1790280207857-fqj89",
+        "fieldName": "image"
+      },
+      {
+        "table": "products",
+        "recordId": "1790280207857-fqj89",
+        "fieldName": "data.image"
+      }
+    ],
+    "status": "PENDING"
+  },
+  {
+    "sourceBucket": "RAJA_ELE",
+    "sourcePath": "products/electricals-distribution_box-v2-1790280958231.png",
+    "destinationBucket": "RAJA_ELE",
+    "destinationPath": "products/electricals-distribution_box-v2-1790280958231.png",
+    "sourceUrl": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-distribution_box-v2-1790280958231.png",
+    "destinationUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-distribution_box-v2-1790280958231.png",
+    "referencedBy": [
+      {
+        "table": "products",
+        "recordId": "1790280208375-dmm9o",
+        "fieldName": "image"
+      },
+      {
+        "table": "products",
+        "recordId": "1790280208375-dmm9o",
+        "fieldName": "data.image"
+      }
+    ],
+    "status": "PENDING"
+  },
+  {
+    "sourceBucket": "RAJA_ELE",
+    "sourcePath": "products/electricals-cable_tie-v2-1790280961406.png",
+    "destinationBucket": "RAJA_ELE",
+    "destinationPath": "products/electricals-cable_tie-v2-1790280961406.png",
+    "sourceUrl": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-cable_tie-v2-1790280961406.png",
+    "destinationUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-cable_tie-v2-1790280961406.png",
+    "referencedBy": [
+      {
+        "table": "products",
+        "recordId": "1790280212112-qwef9",
+        "fieldName": "image"
+      },
+      {
+        "table": "products",
+        "recordId": "1790280212112-qwef9",
+        "fieldName": "data.image"
+      }
+    ],
+    "status": "PENDING"
+  },
+  {
+    "sourceBucket": "RAJA_ELE",
+    "sourcePath": "products/sanitaryware-one_piece_wc-v2-1790280963208.png",
+    "destinationBucket": "RAJA_ELE",
+    "destinationPath": "products/sanitaryware-one_piece_wc-v2-1790280963208.png",
+    "sourceUrl": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-one_piece_wc-v2-1790280963208.png",
+    "destinationUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-one_piece_wc-v2-1790280963208.png",
+    "referencedBy": [
+      {
+        "table": "products",
+        "recordId": "1790280212572-cor70",
+        "fieldName": "image"
+      },
+      {
+        "table": "products",
+        "recordId": "1790280212572-cor70",
+        "fieldName": "data.image"
+      }
+    ],
+    "status": "PENDING"
+  },
+  {
+    "sourceBucket": "RAJA_ELE",
+    "sourcePath": "products/sanitaryware-health_faucet-v2-1790280965114.png",
+    "destinationBucket": "RAJA_ELE",
+    "destinationPath": "products/sanitaryware-health_faucet-v2-1790280965114.png",
+    "sourceUrl": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-health_faucet-v2-1790280965114.png",
+    "destinationUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-health_faucet-v2-1790280965114.png",
+    "referencedBy": [
+      {
+        "table": "products",
+        "recordId": "1790280216256-iu2fo",
+        "fieldName": "image"
+      },
+      {
+        "table": "products",
+        "recordId": "1790280216256-iu2fo",
+        "fieldName": "data.image"
+      }
+    ],
+    "status": "PENDING"
+  },
+  {
+    "sourceBucket": "RAJA_ELE",
+    "sourcePath": "products/sanitaryware-overhead_shower-v2-1790280967179.png",
+    "destinationBucket": "RAJA_ELE",
+    "destinationPath": "products/sanitaryware-overhead_shower-v2-1790280967179.png",
+    "sourceUrl": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-overhead_shower-v2-1790280967179.png",
+    "destinationUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-overhead_shower-v2-1790280967179.png",
+    "referencedBy": [
+      {
+        "table": "products",
+        "recordId": "1790280216740-giupf",
+        "fieldName": "image"
+      },
+      {
+        "table": "products",
+        "recordId": "1790280216740-giupf",
+        "fieldName": "data.image"
+      }
+    ],
+    "status": "PENDING"
+  },
+  {
+    "sourceBucket": "RAJA_ELE",
+    "sourcePath": "products/electricals-ceiling_fan-v2-1790280968017.png",
+    "destinationBucket": "RAJA_ELE",
+    "destinationPath": "products/electricals-ceiling_fan-v2-1790280968017.png",
+    "sourceUrl": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-ceiling_fan-v2-1790280968017.png",
+    "destinationUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-ceiling_fan-v2-1790280968017.png",
+    "referencedBy": [
+      {
+        "table": "products",
+        "recordId": "1790280208910-14jr2",
+        "fieldName": "image"
+      },
+      {
+        "table": "products",
+        "recordId": "1790280208910-14jr2",
+        "fieldName": "data.image"
+      }
+    ],
+    "status": "PENDING"
+  },
+  {
+    "sourceBucket": "RAJA_ELE",
+    "sourcePath": "products/sanitaryware-wall_hung_wc-v2-1790280970217.png",
+    "destinationBucket": "RAJA_ELE",
+    "destinationPath": "products/sanitaryware-wall_hung_wc-v2-1790280970217.png",
+    "sourceUrl": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-wall_hung_wc-v2-1790280970217.png",
+    "destinationUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-wall_hung_wc-v2-1790280970217.png",
+    "referencedBy": [
+      {
+        "table": "products",
+        "recordId": "1790280213005-d7vfj",
+        "fieldName": "image"
+      },
+      {
+        "table": "products",
+        "recordId": "1790280213005-d7vfj",
+        "fieldName": "data.image"
+      }
+    ],
+    "status": "PENDING"
+  },
+  {
+    "sourceBucket": "RAJA_ELE",
+    "sourcePath": "products/sanitaryware-angle_valve-v2-1790280972572.png",
+    "destinationBucket": "RAJA_ELE",
+    "destinationPath": "products/sanitaryware-angle_valve-v2-1790280972572.png",
+    "sourceUrl": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-angle_valve-v2-1790280972572.png",
+    "destinationUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-angle_valve-v2-1790280972572.png",
+    "referencedBy": [
+      {
+        "table": "products",
+        "recordId": "1790280217187-19jyz",
+        "fieldName": "image"
+      },
+      {
+        "table": "products",
+        "recordId": "1790280217187-19jyz",
+        "fieldName": "data.image"
+      }
+    ],
+    "status": "PENDING"
+  },
+  {
+    "sourceBucket": "RAJA_ELE",
+    "sourcePath": "products/electricals-exhaust_fan-v2-1790280973754.png",
+    "destinationBucket": "RAJA_ELE",
+    "destinationPath": "products/electricals-exhaust_fan-v2-1790280973754.png",
+    "sourceUrl": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-exhaust_fan-v2-1790280973754.png",
+    "destinationUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-exhaust_fan-v2-1790280973754.png",
+    "referencedBy": [
+      {
+        "table": "products",
+        "recordId": "1790280209692-ndo7g",
+        "fieldName": "image"
+      },
+      {
+        "table": "products",
+        "recordId": "1790280209692-ndo7g",
+        "fieldName": "data.image"
+      }
+    ],
+    "status": "PENDING"
+  },
+  {
+    "sourceBucket": "RAJA_ELE",
+    "sourcePath": "products/sanitaryware-wash_basin-v2-1790280975574.png",
+    "destinationBucket": "RAJA_ELE",
+    "destinationPath": "products/sanitaryware-wash_basin-v2-1790280975574.png",
+    "sourceUrl": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-wash_basin-v2-1790280975574.png",
+    "destinationUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-wash_basin-v2-1790280975574.png",
+    "referencedBy": [
+      {
+        "table": "products",
+        "recordId": "1790280213473-x6mmt",
+        "fieldName": "image"
+      },
+      {
+        "table": "products",
+        "recordId": "1790280213473-x6mmt",
+        "fieldName": "data.image"
+      }
+    ],
+    "status": "PENDING"
+  },
+  {
+    "sourceBucket": "RAJA_ELE",
+    "sourcePath": "products/sanitaryware-floor_drain-v2-1790280977515.png",
+    "destinationBucket": "RAJA_ELE",
+    "destinationPath": "products/sanitaryware-floor_drain-v2-1790280977515.png",
+    "sourceUrl": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-floor_drain-v2-1790280977515.png",
+    "destinationUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-floor_drain-v2-1790280977515.png",
+    "referencedBy": [
+      {
+        "table": "products",
+        "recordId": "1790280218014-bu2mu",
+        "fieldName": "image"
+      },
+      {
+        "table": "products",
+        "recordId": "1790280218014-bu2mu",
+        "fieldName": "data.image"
+      }
+    ],
+    "status": "PENDING"
+  },
+  {
+    "sourceBucket": "RAJA_ELE",
+    "sourcePath": "products/electricals-extension_board-v2-1790280979384.png",
+    "destinationBucket": "RAJA_ELE",
+    "destinationPath": "products/electricals-extension_board-v2-1790280979384.png",
+    "sourceUrl": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-extension_board-v2-1790280979384.png",
+    "destinationUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-extension_board-v2-1790280979384.png",
+    "referencedBy": [
+      {
+        "table": "products",
+        "recordId": "1790280210199-oc11x",
+        "fieldName": "image"
+      },
+      {
+        "table": "products",
+        "recordId": "1790280210199-oc11x",
+        "fieldName": "data.image"
+      }
+    ],
+    "status": "PENDING"
+  },
+  {
+    "sourceBucket": "RAJA_ELE",
+    "sourcePath": "products/sanitaryware-pedestal_basin-v2-1790280981446.png",
+    "destinationBucket": "RAJA_ELE",
+    "destinationPath": "products/sanitaryware-pedestal_basin-v2-1790280981446.png",
+    "sourceUrl": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-pedestal_basin-v2-1790280981446.png",
+    "destinationUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-pedestal_basin-v2-1790280981446.png",
+    "referencedBy": [
+      {
+        "table": "products",
+        "recordId": "1790280213887-bosf2",
+        "fieldName": "image"
+      },
+      {
+        "table": "products",
+        "recordId": "1790280213887-bosf2",
+        "fieldName": "data.image"
+      }
+    ],
+    "status": "PENDING"
+  },
+  {
+    "sourceBucket": "RAJA_ELE",
+    "sourcePath": "products/sanitaryware-pvc_waste_pipe-v2-1790280983563.png",
+    "destinationBucket": "RAJA_ELE",
+    "destinationPath": "products/sanitaryware-pvc_waste_pipe-v2-1790280983563.png",
+    "sourceUrl": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-pvc_waste_pipe-v2-1790280983563.png",
+    "destinationUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-pvc_waste_pipe-v2-1790280983563.png",
+    "referencedBy": [
+      {
+        "table": "products",
+        "recordId": "1790280218520-s2goq",
+        "fieldName": "image"
+      },
+      {
+        "table": "products",
+        "recordId": "1790280218520-s2goq",
+        "fieldName": "data.image"
+      }
+    ],
+    "status": "PENDING"
+  },
+  {
+    "sourceBucket": "RAJA_ELE",
+    "sourcePath": "products/electricals-led_tube_light_18w-v2-1790280984506.png",
+    "destinationBucket": "RAJA_ELE",
+    "destinationPath": "products/electricals-led_tube_light_18w-v2-1790280984506.png",
+    "sourceUrl": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-led_tube_light_18w-v2-1790280984506.png",
+    "destinationUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-led_tube_light_18w-v2-1790280984506.png",
+    "referencedBy": [
+      {
+        "table": "products",
+        "recordId": "1790280210629-uogcd",
+        "fieldName": "image"
+      },
+      {
+        "table": "products",
+        "recordId": "1790280210629-uogcd",
+        "fieldName": "data.image"
+      }
+    ],
+    "status": "PENDING"
+  },
+  {
+    "sourceBucket": "RAJA_ELE",
+    "sourcePath": "products/sanitaryware-basin_mixer_tap-v2-1790280988038.png",
+    "destinationBucket": "RAJA_ELE",
+    "destinationPath": "products/sanitaryware-basin_mixer_tap-v2-1790280988038.png",
+    "sourceUrl": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-basin_mixer_tap-v2-1790280988038.png",
+    "destinationUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-basin_mixer_tap-v2-1790280988038.png",
+    "referencedBy": [
+      {
+        "table": "products",
+        "recordId": "1790280214388-m2quj",
+        "fieldName": "image"
+      },
+      {
+        "table": "products",
+        "recordId": "1790280214388-m2quj",
+        "fieldName": "data.image"
+      }
+    ],
+    "status": "PENDING"
+  },
+  {
+    "sourceBucket": "RAJA_ELE",
+    "sourcePath": "products/sanitaryware-flush_tank___cistern-v2-1790280990079.png",
+    "destinationBucket": "RAJA_ELE",
+    "destinationPath": "products/sanitaryware-flush_tank___cistern-v2-1790280990079.png",
+    "sourceUrl": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-flush_tank___cistern-v2-1790280990079.png",
+    "destinationUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-flush_tank___cistern-v2-1790280990079.png",
+    "referencedBy": [
+      {
+        "table": "products",
+        "recordId": "1790280218957-98av3",
+        "fieldName": "image"
+      },
+      {
+        "table": "products",
+        "recordId": "1790280218957-98av3",
+        "fieldName": "data.image"
+      }
+    ],
+    "status": "PENDING"
+  },
+  {
+    "sourceBucket": "RAJA_ELE",
+    "sourcePath": "products/electricals-led_flood_light_50w-v2-1790280991135.png",
+    "destinationBucket": "RAJA_ELE",
+    "destinationPath": "products/electricals-led_flood_light_50w-v2-1790280991135.png",
+    "sourceUrl": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-led_flood_light_50w-v2-1790280991135.png",
+    "destinationUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-led_flood_light_50w-v2-1790280991135.png",
+    "referencedBy": [
+      {
+        "table": "products",
+        "recordId": "1790280211195-6sfhq",
+        "fieldName": "image"
+      },
+      {
+        "table": "products",
+        "recordId": "1790280211195-6sfhq",
+        "fieldName": "data.image"
+      }
+    ],
+    "status": "PENDING"
+  },
+  {
+    "sourceBucket": "RAJA_ELE",
+    "sourcePath": "products/sanitaryware-bib_cock-v2-1790280993203.png",
+    "destinationBucket": "RAJA_ELE",
+    "destinationPath": "products/sanitaryware-bib_cock-v2-1790280993203.png",
+    "sourceUrl": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-bib_cock-v2-1790280993203.png",
+    "destinationUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-bib_cock-v2-1790280993203.png",
+    "referencedBy": [
+      {
+        "table": "products",
+        "recordId": "1790280214799-dd6l2",
+        "fieldName": "image"
+      },
+      {
+        "table": "products",
+        "recordId": "1790280214799-dd6l2",
+        "fieldName": "data.image"
+      }
+    ],
+    "status": "PENDING"
+  },
+  {
+    "sourceBucket": "RAJA_ELE",
+    "sourcePath": "products/sanitaryware-toilet_seat_cover-v2-1790280994912.png",
+    "destinationBucket": "RAJA_ELE",
+    "destinationPath": "products/sanitaryware-toilet_seat_cover-v2-1790280994912.png",
+    "sourceUrl": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-toilet_seat_cover-v2-1790280994912.png",
+    "destinationUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-toilet_seat_cover-v2-1790280994912.png",
+    "referencedBy": [
+      {
+        "table": "products",
+        "recordId": "1790280219382-i1ix1",
+        "fieldName": "image"
+      },
+      {
+        "table": "products",
+        "recordId": "1790280219382-i1ix1",
+        "fieldName": "data.image"
+      }
+    ],
+    "status": "PENDING"
+  },
+  {
+    "sourceBucket": "RAJA_ELE",
+    "sourcePath": "products/electricals-led_bulb_9w-v2-1790280947913.png",
+    "destinationBucket": "RAJA_ELE",
+    "destinationPath": "products/electricals-led_bulb_9w-v2-1790280947913.png",
+    "sourceUrl": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-led_bulb_9w-v2-1790280947913.png",
+    "destinationUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-led_bulb_9w-v2-1790280947913.png",
+    "referencedBy": [
+      {
+        "table": "products",
+        "recordId": "1790280203246-qm9iw",
+        "fieldName": "image"
+      },
+      {
+        "table": "products",
+        "recordId": "1790280203246-qm9iw",
+        "fieldName": "data.image"
+      }
+    ],
+    "status": "PENDING"
+  },
+  {
+    "sourceBucket": "RAJA_ELE",
+    "sourcePath": "products/electricals-pvc_conduit_pipe-v2-1790280996953.png",
+    "destinationBucket": "RAJA_ELE",
+    "destinationPath": "products/electricals-pvc_conduit_pipe-v2-1790280996953.png",
+    "sourceUrl": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-pvc_conduit_pipe-v2-1790280996953.png",
+    "destinationUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals-pvc_conduit_pipe-v2-1790280996953.png",
+    "referencedBy": [
+      {
+        "table": "products",
+        "recordId": "1790280211657-63fda",
+        "fieldName": "image"
+      },
+      {
+        "table": "products",
+        "recordId": "1790280211657-63fda",
+        "fieldName": "data.image"
+      }
+    ],
+    "status": "PENDING"
+  },
+  {
+    "sourceBucket": "RAJA_ELE",
+    "sourcePath": "products/sanitaryware-wall_mixer-v2-1790280998610.png",
+    "destinationBucket": "RAJA_ELE",
+    "destinationPath": "products/sanitaryware-wall_mixer-v2-1790280998610.png",
+    "sourceUrl": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-wall_mixer-v2-1790280998610.png",
+    "destinationUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-wall_mixer-v2-1790280998610.png",
+    "referencedBy": [
+      {
+        "table": "products",
+        "recordId": "1790280215686-h1ceh",
+        "fieldName": "image"
+      },
+      {
+        "table": "products",
+        "recordId": "1790280215686-h1ceh",
+        "fieldName": "data.image"
+      }
+    ],
+    "status": "PENDING"
+  },
+  {
+    "sourceBucket": "RAJA_ELE",
+    "sourcePath": "products/sanitaryware-connection_hose-v2-1790281000409.png",
+    "destinationBucket": "RAJA_ELE",
+    "destinationPath": "products/sanitaryware-connection_hose-v2-1790281000409.png",
+    "sourceUrl": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-connection_hose-v2-1790281000409.png",
+    "destinationUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware-connection_hose-v2-1790281000409.png",
+    "referencedBy": [
+      {
+        "table": "products",
+        "recordId": "1790280219833-kaizh",
+        "fieldName": "image"
+      },
+      {
+        "table": "products",
+        "recordId": "1790280219833-kaizh",
+        "fieldName": "data.image"
+      }
+    ],
+    "status": "PENDING"
+  },
+  {
+    "sourceBucket": "RAJA_ELE",
+    "sourcePath": "brands/ramco_supergrade-1790264983908.png",
+    "destinationBucket": "RAJA_ELE",
+    "destinationPath": "brands/ramco_supergrade-1790264983908.png",
+    "sourceUrl": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/brands/ramco_supergrade-1790264983908.png",
+    "destinationUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/brands/ramco_supergrade-1790264983908.png",
+    "referencedBy": [
+      {
+        "table": "brands",
+        "recordId": "1790264985301-zq05s",
+        "fieldName": "logo"
+      },
+      {
+        "table": "brands",
+        "recordId": "1790264985301-zq05s",
+        "fieldName": "data.logo"
+      }
+    ],
+    "status": "PENDING"
+  },
+  {
+    "sourceBucket": "RAJA_ELE",
+    "sourcePath": "brands/1790259662780-dxurm-1790259662780.jpg",
+    "destinationBucket": "RAJA_ELE",
+    "destinationPath": "brands/1790259662780-dxurm-1790259662780.jpg",
+    "sourceUrl": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/brands/1790259662780-dxurm-1790259662780.jpg",
+    "destinationUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/brands/1790259662780-dxurm-1790259662780.jpg",
+    "referencedBy": [
+      {
+        "table": "brands",
+        "recordId": "1790259662780-dxurm",
+        "fieldName": "logo"
+      },
+      {
+        "table": "brands",
+        "recordId": "1790259662780-dxurm",
+        "fieldName": "data.logo"
+      }
+    ],
+    "status": "PENDING"
+  },
+  {
+    "sourceBucket": "RAJA_ELE",
+    "sourcePath": "brands/1790259867309-9xf5a-1790259867309.jpg",
+    "destinationBucket": "RAJA_ELE",
+    "destinationPath": "brands/1790259867309-9xf5a-1790259867309.jpg",
+    "sourceUrl": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/brands/1790259867309-9xf5a-1790259867309.jpg",
+    "destinationUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/brands/1790259867309-9xf5a-1790259867309.jpg",
+    "referencedBy": [
+      {
+        "table": "brands",
+        "recordId": "1790259867309-9xf5a",
+        "fieldName": "logo"
+      },
+      {
+        "table": "brands",
+        "recordId": "1790259867309-9xf5a",
+        "fieldName": "data.logo"
+      }
+    ],
+    "status": "PENDING"
+  },
+  {
+    "sourceBucket": "RAJA_ELE",
+    "sourcePath": "brands/dr__fixit-1790264982598.png",
+    "destinationBucket": "RAJA_ELE",
+    "destinationPath": "brands/dr__fixit-1790264982598.png",
+    "sourceUrl": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/brands/dr__fixit-1790264982598.png",
+    "destinationUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/brands/dr__fixit-1790264982598.png",
+    "referencedBy": [
+      {
+        "table": "brands",
+        "recordId": "1790264984338-ejigg",
+        "fieldName": "logo"
+      },
+      {
+        "table": "brands",
+        "recordId": "1790264984338-ejigg",
+        "fieldName": "data.logo"
+      }
+    ],
+    "status": "PENDING"
+  },
+  {
+    "sourceBucket": "RAJA_ELE",
+    "sourcePath": "brands/fosroc-1790264982994.png",
+    "destinationBucket": "RAJA_ELE",
+    "destinationPath": "brands/fosroc-1790264982994.png",
+    "sourceUrl": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/brands/fosroc-1790264982994.png",
+    "destinationUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/brands/fosroc-1790264982994.png",
+    "referencedBy": [
+      {
+        "table": "brands",
+        "recordId": "1790264984632-korc9",
+        "fieldName": "logo"
+      },
+      {
+        "table": "brands",
+        "recordId": "1790264984632-korc9",
+        "fieldName": "data.logo"
+      }
+    ],
+    "status": "PENDING"
+  },
+  {
+    "sourceBucket": "RAJA_ELE",
+    "sourcePath": "brands/zycosil_-1790264983209.png",
+    "destinationBucket": "RAJA_ELE",
+    "destinationPath": "brands/zycosil_-1790264983209.png",
+    "sourceUrl": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/brands/zycosil_-1790264983209.png",
+    "destinationUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/brands/zycosil_-1790264983209.png",
+    "referencedBy": [
+      {
+        "table": "brands",
+        "recordId": "1790264984817-o9qe1",
+        "fieldName": "logo"
+      },
+      {
+        "table": "brands",
+        "recordId": "1790264984817-o9qe1",
+        "fieldName": "data.logo"
+      }
+    ],
+    "status": "PENDING"
+  },
+  {
+    "sourceBucket": "RAJA_ELE",
+    "sourcePath": "brands/mynk-1790264983680.jpg",
+    "destinationBucket": "RAJA_ELE",
+    "destinationPath": "brands/mynk-1790264983680.jpg",
+    "sourceUrl": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/brands/mynk-1790264983680.jpg",
+    "destinationUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/brands/mynk-1790264983680.jpg",
+    "referencedBy": [
+      {
+        "table": "brands",
+        "recordId": "1790264985113-mmj6r",
+        "fieldName": "logo"
+      },
+      {
+        "table": "brands",
+        "recordId": "1790264985113-mmj6r",
+        "fieldName": "data.logo"
+      }
+    ],
+    "status": "PENDING"
+  },
+  {
+    "sourceBucket": "RAJA_ELE",
+    "sourcePath": "gallery/1790257567009-dtkvf-1790257567012.jpg",
+    "destinationBucket": "RAJA_ELE",
+    "destinationPath": "gallery/1790257567009-dtkvf-1790257567012.jpg",
+    "sourceUrl": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/gallery/1790257567009-dtkvf-1790257567012.jpg",
+    "destinationUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/gallery/1790257567009-dtkvf-1790257567012.jpg",
+    "referencedBy": [
+      {
+        "table": "gallery",
+        "recordId": "1790257567009-dtkvf",
+        "fieldName": "image"
+      },
+      {
+        "table": "gallery",
+        "recordId": "1790257567009-dtkvf",
+        "fieldName": "data.image"
+      }
+    ],
+    "status": "PENDING"
+  },
+  {
+    "sourceBucket": "RAJA_ELE",
+    "sourcePath": "gallery/1790257343259-t7gj1-1790257343263.jpg",
+    "destinationBucket": "RAJA_ELE",
+    "destinationPath": "gallery/1790257343259-t7gj1-1790257343263.jpg",
+    "sourceUrl": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/gallery/1790257343259-t7gj1-1790257343263.jpg",
+    "destinationUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/gallery/1790257343259-t7gj1-1790257343263.jpg",
+    "referencedBy": [
+      {
+        "table": "gallery",
+        "recordId": "1790257343259-t7gj1",
+        "fieldName": "image"
+      },
+      {
+        "table": "gallery",
+        "recordId": "1790257343259-t7gj1",
+        "fieldName": "data.image"
+      }
+    ],
+    "status": "PENDING"
+  },
+  {
+    "sourceBucket": "RAJA_ELE",
+    "sourcePath": "gallery/1790257447637-0piko-1790257447639.jpg",
+    "destinationBucket": "RAJA_ELE",
+    "destinationPath": "gallery/1790257447637-0piko-1790257447639.jpg",
+    "sourceUrl": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/gallery/1790257447637-0piko-1790257447639.jpg",
+    "destinationUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/gallery/1790257447637-0piko-1790257447639.jpg",
+    "referencedBy": [
+      {
+        "table": "gallery",
+        "recordId": "1790257447637-0piko",
+        "fieldName": "image"
+      },
+      {
+        "table": "gallery",
+        "recordId": "1790257447637-0piko",
+        "fieldName": "data.image"
+      }
+    ],
+    "status": "PENDING"
+  },
+  {
+    "sourceBucket": "RAJA_ELE",
+    "sourcePath": "gallery/1790257475316-5src4-1790257475317.jpg",
+    "destinationBucket": "RAJA_ELE",
+    "destinationPath": "gallery/1790257475316-5src4-1790257475317.jpg",
+    "sourceUrl": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/gallery/1790257475316-5src4-1790257475317.jpg",
+    "destinationUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/gallery/1790257475316-5src4-1790257475317.jpg",
+    "referencedBy": [
+      {
+        "table": "gallery",
+        "recordId": "1790257475316-5src4",
+        "fieldName": "image"
+      },
+      {
+        "table": "gallery",
+        "recordId": "1790257475316-5src4",
+        "fieldName": "data.image"
+      }
+    ],
+    "status": "PENDING"
+  },
+  {
+    "sourceBucket": "RAJA_ELE",
+    "sourcePath": "gallery/1790257511023-tr05i-1790257511025.jpg",
+    "destinationBucket": "RAJA_ELE",
+    "destinationPath": "gallery/1790257511023-tr05i-1790257511025.jpg",
+    "sourceUrl": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/gallery/1790257511023-tr05i-1790257511025.jpg",
+    "destinationUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/gallery/1790257511023-tr05i-1790257511025.jpg",
+    "referencedBy": [
+      {
+        "table": "gallery",
+        "recordId": "1790257511023-tr05i",
+        "fieldName": "image"
+      },
+      {
+        "table": "gallery",
+        "recordId": "1790257511023-tr05i",
+        "fieldName": "data.image"
+      }
+    ],
+    "status": "PENDING"
+  },
+  {
+    "sourceBucket": "RAJA_ELE",
+    "sourcePath": "gallery/1790257529703-8tbqz-1790257529707.jpg",
+    "destinationBucket": "RAJA_ELE",
+    "destinationPath": "gallery/1790257529703-8tbqz-1790257529707.jpg",
+    "sourceUrl": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/gallery/1790257529703-8tbqz-1790257529707.jpg",
+    "destinationUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/gallery/1790257529703-8tbqz-1790257529707.jpg",
+    "referencedBy": [
+      {
+        "table": "gallery",
+        "recordId": "1790257529703-8tbqz",
+        "fieldName": "image"
+      },
+      {
+        "table": "gallery",
+        "recordId": "1790257529703-8tbqz",
+        "fieldName": "data.image"
+      }
+    ],
+    "status": "PENDING"
+  },
+  {
+    "sourceBucket": "RAJA_ELE",
+    "sourcePath": "home-ads/ad-1789918156861-0pkwe-1789918156861.jpg",
+    "destinationBucket": "RAJA_ELE",
+    "destinationPath": "home-ads/ad-1789918156861-0pkwe-1789918156861.jpg",
+    "sourceUrl": "https://yfbzapzceoqkwzsmsjmk.supabase.co/storage/v1/object/public/RAJA_ELE/home-ads/ad-1789918156861-0pkwe-1789918156861.jpg",
+    "destinationUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/home-ads/ad-1789918156861-0pkwe-1789918156861.jpg",
+    "referencedBy": [
+      {
+        "table": "site_settings",
+        "recordId": 1,
+        "fieldName": "json_match_0"
+      }
+    ],
+    "status": "PENDING"
+  }
+]

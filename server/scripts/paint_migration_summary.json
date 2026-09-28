@@ -1,0 +1,205 @@
+{
+  "migrationResults": {
+    "totalProductsFound": 23,
+    "imagesFound": 23,
+    "imagesMatched": 23,
+    "imagesUploaded": 23,
+    "productsUpdated": 23,
+    "productsSkipped": 0,
+    "unmatchedImages": 0,
+    "failedUploads": 0,
+    "failedDbUpdates": 0,
+    "details": [
+      {
+        "id": "1790278938385-949ui",
+        "name": "Paint",
+        "category": "Nippon Paint",
+        "localFile": "paint/nippon/1.jpg",
+        "newUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/paint_nippon_1_d930d8cf6d.jpg",
+        "verified200": true
+      },
+      {
+        "id": "1790279003631-n8h9b",
+        "name": "Paint",
+        "category": "Nippon Paint",
+        "localFile": "paint/nippon/2.jpg",
+        "newUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/paint_nippon_2_0e79cc9178.jpg",
+        "verified200": true
+      },
+      {
+        "id": "1790279022919-tp8ze",
+        "name": "Paint",
+        "category": "Nippon Paint",
+        "localFile": "paint/nippon/3.jpg",
+        "newUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/paint_nippon_3_d0ac5e53f5.jpg",
+        "verified200": true
+      },
+      {
+        "id": "1790279050401-s7fb8",
+        "name": "Paint",
+        "category": "Nippon Paint",
+        "localFile": "paint/nippon/4.jpg",
+        "newUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/paint_nippon_4_4372899b44.jpg",
+        "verified200": true
+      },
+      {
+        "id": "1790279075874-j2ikm",
+        "name": "Paint",
+        "category": "Nippon Paint",
+        "localFile": "paint/nippon/5.jpg",
+        "newUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/paint_nippon_5_8e63c9f26f.jpg",
+        "verified200": true
+      },
+      {
+        "id": "1790279094801-ylqmv",
+        "name": "Paint",
+        "category": "Nippon Paint",
+        "localFile": "paint/nippon/6.jpg",
+        "newUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/paint_nippon_6_d94d590a3e.jpg",
+        "verified200": true
+      },
+      {
+        "id": "1790279115040-u359l",
+        "name": "Paint",
+        "category": "Nippon Paint",
+        "localFile": "paint/nippon/7.jpg",
+        "newUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/paint_nippon_7_78922ad5c1.jpg",
+        "verified200": true
+      },
+      {
+        "id": "1790279182845-1k6zz",
+        "name": "Paint",
+        "category": "Kansai Nerolac",
+        "localFile": "paint/nerolac/1.jpg",
+        "newUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/paint_nerolac_1_a2c618a241.jpg",
+        "verified200": true
+      },
+      {
+        "id": "1790279216681-9m3v8",
+        "name": "Paint",
+        "category": "Kansai Nerolac",
+        "localFile": "paint/nerolac/2.jpg",
+        "newUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/paint_nerolac_2_c40bbd3776.jpg",
+        "verified200": true
+      },
+      {
+        "id": "1790279239173-h9mb2",
+        "name": "Paint",
+        "category": "Kansai Nerolac",
+        "localFile": "paint/nerolac/3.jpg",
+        "newUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/paint_nerolac_3_a294ac1dc9.jpg",
+        "verified200": true
+      },
+      {
+        "id": "1790279266815-nsgj1",
+        "name": "Paint",
+        "category": "Kansai Nerolac",
+        "localFile": "paint/nerolac/4.jpg",
+        "newUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/paint_nerolac_4_bb2522ea87.jpg",
+        "verified200": true
+      },
+      {
+        "id": "1790279289586-ktkdx",
+        "name": "Paint",
+        "category": "Kansai Nerolac",
+        "localFile": "paint/nerolac/5.jpg",
+        "newUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/paint_nerolac_5_21cbac8644.jpg",
+        "verified200": true
+      },
+      {
+        "id": "1790279309563-ctcj8",
+        "name": "Paint",
+        "category": "Kansai Nerolac",
+        "localFile": "paint/nerolac/6.jpg",
+        "newUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/paint_nerolac_6_bd7e6f3559.jpg",
+        "verified200": true
+      },
+      {
+        "id": "1790279362477-1l39e",
+        "name": "Paint",
+        "category": "Birla Opus",
+        "localFile": "paint/opus/1.jpg",
+        "newUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/paint_opus_1_46b04eb29b.jpg",
+        "verified200": true
+      },
+      {
+        "id": "1790279381545-mm71x",
+        "name": "Paint",
+        "category": "Birla Opus",
+        "localFile": "paint/opus/2.jpg",
+        "newUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/paint_opus_2_b9a2cd0876.jpg",
+        "verified200": true
+      },
+      {
+        "id": "1790279401874-ruziz",
+        "name": "Paint",
+        "category": "Birla Opus",
+        "localFile": "paint/opus/3.jpg",
+        "newUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/paint_opus_3_7146c63810.jpg",
+        "verified200": true
+      },
+      {
+        "id": "1790279421531-fiwv6",
+        "name": "Paint",
+        "category": "Birla Opus",
+        "localFile": "paint/opus/4.jpg",
+        "newUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/paint_opus_4_e9d0e89818.jpg",
+        "verified200": true
+      },
+      {
+        "id": "1790279439546-153nl",
+        "name": "Paint",
+        "category": "Birla Opus",
+        "localFile": "paint/opus/5.jpg",
+        "newUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/paint_opus_5_42dbb9bdfd.jpg",
+        "verified200": true
+      },
+      {
+        "id": "1790279483133-x6pug",
+        "name": "Paint",
+        "category": "Vapocure Paints",
+        "localFile": "paint/vapocure/1.jpg",
+        "newUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/paint_vapocure_1_c1d0d2d9f9.jpg",
+        "verified200": true
+      },
+      {
+        "id": "1790279512463-gn860",
+        "name": "Paint",
+        "category": "Vapocure Paints",
+        "localFile": "paint/vapocure/2.jpg",
+        "newUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/paint_vapocure_2_800996b507.jpg",
+        "verified200": true
+      },
+      {
+        "id": "1790279537977-tnedw",
+        "name": "Paint",
+        "category": "Vapocure Paints",
+        "localFile": "paint/vapocure/3.jpg",
+        "newUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/paint_vapocure_3_b8d9987d12.jpg",
+        "verified200": true
+      },
+      {
+        "id": "1790279557155-upyki",
+        "name": "Paint",
+        "category": "Vapocure Paints",
+        "localFile": "paint/vapocure/4.jpg",
+        "newUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/paint_vapocure_4_371cb95e43.jpg",
+        "verified200": true
+      },
+      {
+        "id": "1790279576275-loy91",
+        "name": "Paint",
+        "category": "Vapocure Paints",
+        "localFile": "paint/vapocure/5.jpg",
+        "newUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/paint_vapocure_5_053b7e9de1.jpg",
+        "verified200": true
+      }
+    ]
+  },
+  "postAudit": {
+    "totalTargetProducts": 23,
+    "oldUrlCount": 0,
+    "newUrlCount": 23,
+    "http200Count": 23
+  }
+}
