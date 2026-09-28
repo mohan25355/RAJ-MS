@@ -1,0 +1,26 @@
+[
+  {
+    "id": "1790280212112-qwef9",
+    "name": "Cable Tie",
+    "category": "Electricals",
+    "description": "Cable Tie from our Electricals catalogue. Contact us for specifications and quotation.",
+    "price": "Price on request",
+    "image": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals_cable_tie.png",
+    "created_at": "2026-09-24T20:03:31.321+00:00",
+    "updated_at": "2026-09-24T20:16:02.185Z",
+    "badge": "Available",
+    "subcategory": ""
+  },
+  {
+    "id": "1790280211657-63fda",
+    "name": "PVC Conduit Pipe",
+    "category": "Electricals",
+    "description": "PVC Conduit Pipe from our Electricals catalogue. Contact us for specifications and quotation.",
+    "price": "Price on request",
+    "image": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals_pvc_conduit_pipe.png",
+    "created_at": "2026-09-24T20:03:30.879+00:00",
+    "updated_at": "2026-09-24T20:16:37.526Z",
+    "badge": "Available",
+    "subcategory": ""
+  }
+]

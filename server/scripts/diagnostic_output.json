@@ -1,0 +1,152 @@
+[
+  {
+    "product": "Health Faucet",
+    "id": "1790280216256-iu2fo",
+    "dbUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware_health-faucet_highres.png",
+    "apiUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware_health-faucet_highres.png",
+    "dbHttpStatus": 200,
+    "apiHttpStatus": 200,
+    "dbSizeKB": "128.8 KB",
+    "apiSizeKB": "128.8 KB"
+  },
+  {
+    "product": "Overhead Shower",
+    "id": "1790280216740-giupf",
+    "dbUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware_overhead-shower_highres.png",
+    "apiUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware_overhead-shower_highres.png",
+    "dbHttpStatus": 200,
+    "apiHttpStatus": 200,
+    "dbSizeKB": "120.3 KB",
+    "apiSizeKB": "120.3 KB"
+  },
+  {
+    "product": "One Piece WC",
+    "id": "1790280212572-cor70",
+    "dbUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware_one-piece-wc_highres.png",
+    "apiUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware_one-piece-wc_highres.png",
+    "dbHttpStatus": 200,
+    "apiHttpStatus": 200,
+    "dbSizeKB": "139.1 KB",
+    "apiSizeKB": "139.1 KB"
+  },
+  {
+    "product": "Wall Hung WC",
+    "id": "1790280213005-d7vfj",
+    "dbUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware_wall-hung-wc_highres.png",
+    "apiUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware_wall-hung-wc_highres.png",
+    "dbHttpStatus": 200,
+    "apiHttpStatus": 200,
+    "dbSizeKB": "133.9 KB",
+    "apiSizeKB": "133.9 KB"
+  },
+  {
+    "product": "Basin Mixer Tap",
+    "id": "1790280214388-m2quj",
+    "dbUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware_basin-mixer-tap_highres.png",
+    "apiUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware_basin-mixer-tap_highres.png",
+    "dbHttpStatus": 200,
+    "apiHttpStatus": 200,
+    "dbSizeKB": "129.1 KB",
+    "apiSizeKB": "129.1 KB"
+  },
+  {
+    "product": "Angle Valve",
+    "id": "1790280217187-19jyz",
+    "dbUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware_angle-valve_highres.png",
+    "apiUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware_angle-valve_highres.png",
+    "dbHttpStatus": 200,
+    "apiHttpStatus": 200,
+    "dbSizeKB": "119.9 KB",
+    "apiSizeKB": "119.9 KB"
+  },
+  {
+    "product": "Floor Drain",
+    "id": "1790280218014-bu2mu",
+    "dbUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware_floor-drain_highres.png",
+    "apiUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware_floor-drain_highres.png",
+    "dbHttpStatus": 200,
+    "apiHttpStatus": 200,
+    "dbSizeKB": "120.4 KB",
+    "apiSizeKB": "120.4 KB"
+  },
+  {
+    "product": "PVC Waste Pipe",
+    "id": "1790280218520-s2goq",
+    "dbUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware_pvc-waste-pipe_highres.png",
+    "apiUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware_pvc-waste-pipe_highres.png",
+    "dbHttpStatus": 200,
+    "apiHttpStatus": 200,
+    "dbSizeKB": "131.3 KB",
+    "apiSizeKB": "131.3 KB"
+  },
+  {
+    "product": "Flush Tank / Cistern",
+    "id": "1790280218957-98av3",
+    "dbUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware_flush-tank-cistern_highres.png",
+    "apiUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware_flush-tank-cistern_highres.png",
+    "dbHttpStatus": 200,
+    "apiHttpStatus": 200,
+    "dbSizeKB": "132.4 KB",
+    "apiSizeKB": "132.4 KB"
+  },
+  {
+    "product": "Wash Basin",
+    "id": "1790280213473-x6mmt",
+    "dbUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware_wash-basin_highres.png",
+    "apiUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware_wash-basin_highres.png",
+    "dbHttpStatus": 200,
+    "apiHttpStatus": 200,
+    "dbSizeKB": "120.0 KB",
+    "apiSizeKB": "120.0 KB"
+  },
+  {
+    "product": "Pedestal Basin",
+    "id": "1790280213887-bosf2",
+    "dbUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware_pedestal-basin_highres.png",
+    "apiUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware_pedestal-basin_highres.png",
+    "dbHttpStatus": 200,
+    "apiHttpStatus": 200,
+    "dbSizeKB": "134.6 KB",
+    "apiSizeKB": "134.6 KB"
+  },
+  {
+    "product": "Bib Cock",
+    "id": "1790280214799-dd6l2",
+    "dbUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware_bib-cock_highres.png",
+    "apiUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware_bib-cock_highres.png",
+    "dbHttpStatus": 200,
+    "apiHttpStatus": 200,
+    "dbSizeKB": "119.1 KB",
+    "apiSizeKB": "119.1 KB"
+  },
+  {
+    "product": "Toilet Seat Cover",
+    "id": "1790280219382-i1ix1",
+    "dbUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware_toilet-seat-cover_highres.png",
+    "apiUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware_toilet-seat-cover_highres.png",
+    "dbHttpStatus": 200,
+    "apiHttpStatus": 200,
+    "dbSizeKB": "134.4 KB",
+    "apiSizeKB": "134.4 KB"
+  },
+  {
+    "product": "Wall Mixer",
+    "id": "1790280215686-h1ceh",
+    "dbUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware_wall-mixer_highres.png",
+    "apiUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware_wall-mixer_highres.png",
+    "dbHttpStatus": 200,
+    "apiHttpStatus": 200,
+    "dbSizeKB": "118.2 KB",
+    "apiSizeKB": "118.2 KB"
+  },
+  {
+    "product": "Connection Hose",
+    "id": "1790280219833-kaizh",
+    "dbUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware_connection-hose_highres.png",
+    "apiUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/sanitaryware_connection-hose_highres.png",
+    "dbHttpStatus": 200,
+    "apiHttpStatus": 200,
+    "dbSizeKB": "135.9 KB",
+    "apiSizeKB": "135.9 KB"
+  }
+]

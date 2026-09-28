@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://raj-ms-client-seven.vercel.app/</loc>
+    <loc>https://rajaelectrical.com/</loc>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://raj-ms-client-seven.vercel.app/#products</loc>
+    <loc>https://rajaelectrical.com/#products</loc>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://raj-ms-client-seven.vercel.app/#brands</loc>
+    <loc>https://rajaelectrical.com/#brands</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://raj-ms-client-seven.vercel.app/#gallery</loc>
+    <loc>https://rajaelectrical.com/#gallery</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://raj-ms-client-seven.vercel.app/#about</loc>
+    <loc>https://rajaelectrical.com/#about</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://raj-ms-client-seven.vercel.app/#contact</loc>
+    <loc>https://rajaelectrical.com/#contact</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

@@ -5,4 +5,4 @@ Disallow: /admin
 Disallow: /api/admin
 Disallow: /api/auth
 
-Sitemap: https://raj-ms-client-seven.vercel.app/sitemap.xml
+Sitemap: https://rajaelectrical.com/sitemap.xml

@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /dashboard
+Disallow: /admin
+Disallow: /api/admin
+Disallow: /api/auth
+
+Sitemap: https://raj-ms-client-seven.vercel.app/sitemap.xml

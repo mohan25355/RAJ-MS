@@ -1,0 +1,26 @@
+[
+  {
+    "productName": "Cable Tie",
+    "productId": "1790280212112-qwef9",
+    "uploadedSource": "C:\\Users\\HP\\.gemini\\antigravity-ide\\brain\\b4893283-3f94-4382-b9f8-005bcb5bfb99\\media__1790623451657.jpg",
+    "supabaseObject": "products/electricals_cable-tie.jpg",
+    "publicUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals_cable-tie.jpg",
+    "sourceHash": "128e89250fc83c965147e301994c71c2f73c0717cd24cce7813e9325c3bd9c06",
+    "uploadedHash": "128e89250fc83c965147e301994c71c2f73c0717cd24cce7813e9325c3bd9c06",
+    "hashMatch": "YES",
+    "oldImage": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals_cable_tie.png",
+    "newImage": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals_cable-tie.jpg"
+  },
+  {
+    "productName": "PVC Conduit Pipe",
+    "productId": "1790280211657-63fda",
+    "uploadedSource": "C:\\Users\\HP\\.gemini\\antigravity-ide\\brain\\b4893283-3f94-4382-b9f8-005bcb5bfb99\\media__1790623451659.jpg",
+    "supabaseObject": "products/electricals_pvc-conduit-pipe.jpg",
+    "publicUrl": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals_pvc-conduit-pipe.jpg",
+    "sourceHash": "ed63a96811d4019252ec19ba6b7e665d0e606d65231d82523db7005e7c451707",
+    "uploadedHash": "ed63a96811d4019252ec19ba6b7e665d0e606d65231d82523db7005e7c451707",
+    "hashMatch": "YES",
+    "oldImage": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals_pvc_conduit_pipe.png",
+    "newImage": "https://ueohqicjodxwkwdxcrnj.supabase.co/storage/v1/object/public/RAJA_ELE/products/electricals_pvc-conduit-pipe.jpg"
+  }
+]

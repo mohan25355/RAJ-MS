@@ -5,14 +5,15 @@ const express = require('express');
 const compression = require('compression');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const mongoose = require('mongoose');
 
 const app = express();
 const PORT = process.env.PORT || 10000;
-const MONGODB_URI = process.env.MONGODB_URI;
 const JWT_SECRET = process.env.JWT_SECRET || 'change-this-development-secret';
 
 const allowedOrigins = [
+  'https://rajaelectrical.com',
+  'https://www.rajaelectrical.com',
+  'https://api.rajaelectrical.com',
   'https://raj-ms-client-seven.vercel.app',
   'http://localhost:5173',
   'http://localhost:3000',
@@ -80,32 +81,16 @@ initialContent.industries = [
   { id: 'infrastructure', name: 'Infrastructure', image: photo('photo-1541888946425-d81bb19240f5'), description: 'Safety and site-ready solutions for critical infrastructure.' },
 ];
 
-const contentSchema = new mongoose.Schema({ key: { type: String, unique: true }, data: mongoose.Schema.Types.Mixed }, { timestamps: true });
-const adminSchema = new mongoose.Schema({ email: { type: String, unique: true, lowercase: true, trim: true }, passwordHash: String }, { timestamps: true });
-const enquirySchema = new mongoose.Schema({ name: { type: String, required: true, trim: true }, company: String, phone: { type: String, required: true }, email: String, product: String, quantity: String, message: String, status: { type: String, default: 'New', enum: ['New', 'Contacted', 'Closed'] } }, { timestamps: true });
-enquirySchema.index({ createdAt: -1 });
-const orderSchema = new mongoose.Schema({ customerName: { type: String, required: true, trim: true }, phone: { type: String, required: true }, email: String, company: String, productId: String, productName: { type: String, required: true }, quantity: { type: Number, min: 1, required: true }, notes: String, status: { type: String, default: 'New', enum: ['New', 'Confirmed', 'Processing', 'Completed', 'Cancelled'] } }, { timestamps: true });
-orderSchema.index({ createdAt: -1 });
-const catalogueSchema = new mongoose.Schema({ productId: { type: String, required: true, unique: true }, fileName: { type: String, required: true }, data: { type: Buffer, required: true }, contentType: { type: String, default: 'application/pdf' }, size: Number }, { timestamps: true });
-const productSchema = new mongoose.Schema({ id: { type: String, required: true, unique: true, index: true }, name: { type: String, required: true, trim: true }, category: { type: String, required: true, trim: true, index: true }, price: String, badge: String, description: String, image: String, features: String, specifications: String, colors: String, catalogName: String }, { timestamps: true, strict: true });
-productSchema.index({ createdAt: -1 });
-
-const Content = mongoose.model('Content', contentSchema);
-const Admin = mongoose.model('Admin', adminSchema);
-const Enquiry = mongoose.model('Enquiry', enquirySchema);
-const Order = mongoose.model('Order', orderSchema);
-const Catalogue = mongoose.model('Catalogue', catalogueSchema);
-const Product = mongoose.model('Product', productSchema);
-
 const id = () => `${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
-function publicProduct(doc) { const product = doc.toObject ? doc.toObject() : doc; return { ...product, _id: undefined, __v: undefined, catalogUrl: product.catalogName ? `/api/catalogue/${product.id}` : undefined }; }
-async function content() { const record = await Content.findOne({ key: 'main' }).lean(); const products = await Product.find().sort({ createdAt: -1 }).lean(); return { ...record.data, products: products.length ? products.map(publicProduct) : (record.data.products || []) }; }
-async function updateContent(fn) { const record = await Content.findOne({ key: 'main' }); const next = fn(record.data); record.data = next; record.markModified('data'); await record.save(); return next; }
-async function seed() { const record = await Content.findOne({ key: 'main' }); if (!record) await Content.create({ key: 'main', data: initialContent }); else { const defaults = { phone: COMPANY_PHONE, email: 'sales@rkinnovations.com', address: 'No. 15, New No. 101, Periyar Street, Chennai, Tamil Nadu - 600 014.', whatsappNumber: COMPANY_WHATSAPP, whatsappMessage: 'Hello Raja Electricals, I would like to know more about your products.' }; const details = { features: 'High quality construction\nReliable performance\nSuitable for professional use', specifications: 'Brand|RAJA\nMaterial|Premium grade\nApplications|Industrial and commercial', colors: '#f5bd13,#ef2b1c,#ffffff,#111111', catalogUrl: '' }; const data = record.data; data.site = replaceLegacyContact({ ...defaults, ...data.site }); data.products = data.products.map(product => ({ ...details, ...product })); record.data = data; record.markModified('data'); await record.save(); } const email = (process.env.ADMIN_EMAIL || 'admin@rajaelectricals.in').toLowerCase(); if (!await Admin.exists({ email })) await Admin.create({ email, passwordHash: await bcrypt.hash(process.env.ADMIN_PASSWORD || 'Raja@123', 12) }); }
-async function migrateProducts() { const record = await Content.findOne({ key: 'main' }).lean(); for (const legacy of record?.data?.products || []) { const product = { ...legacy }; delete product.catalogUrl; await Product.updateOne({ id: product.id }, { $setOnInsert: product }, { upsert: true }); } }
-const defaultProjects = [{ id: 'metro-rail', name: 'Chennai Metro Rail Project', category: 'Infrastructure', location: 'Chennai, Tamil Nadu', year: '2024', products: 'Electrical & Safety Products', description: 'Supplied electrical components and safety equipment for station construction and tunnel works.', image: '' }, { id: 'manufacturing-plant', name: 'Manufacturing Plant Supply', category: 'Industrial', location: 'Chennai, Tamil Nadu', year: '2024', products: 'Industrial Hardware & Tools', description: 'Ongoing supply of industrial tools, hardware and maintenance essentials.', image: '' }, { id: 'it-park', name: 'IT Park Construction', category: 'Commercial', location: 'Chennai, Tamil Nadu', year: '2024', products: 'Complete Electrical Package', description: 'Delivered electrical solutions including cables, switchgear and lighting.', image: '' }];
-async function ensureContentDefaults() { const record = await Content.findOne({ key: 'main' }); if (!record) return; const data = record.data; data.site = replaceLegacyContact({ phone: COMPANY_PHONE, email: 'sales@rkinnovations.com', address: 'Chennai, Tamil Nadu', whatsappNumber: COMPANY_WHATSAPP, whatsappMessage: 'Hello Raja Electricals', heroImage2: photo('photo-1581092160607-ee22621dd758', 1300), heroImage3: photo('photo-1544724569-5f546fd6f2b5', 1300), aboutKicker: 'ABOUT RAJA ELECTRICALS', aboutTitle: 'Supply that keeps work moving.', aboutIntro: 'A dependable supply partner for professionals building, maintaining and growing.', aboutDescription: 'For over two decades, Raja Electricals has helped contractors, facilities and industrial teams source dependable products without unnecessary delays.', aboutValues: 'Genuine products with warranty\nHelpful technical guidance\nReliable local delivery\nProject and bulk-order support', aboutImage: photo('photo-1516321318423-f06f85e504b3', 1300), ...data.site }); data.products = (data.products || []).map(product => ({ features: 'High quality construction\nReliable performance\nSuitable for professional use', specifications: 'Brand|RAJA\nMaterial|Premium grade\nApplications|Industrial and commercial', colors: '#f5bd13,#ef2b1c,#ffffff,#111111', catalogUrl: '', ...product })); data.projects = (data.projects?.length ? data.projects : defaultProjects); record.data = data; record.markModified('data'); await record.save(); }
-function auth(req, res, next) { try { req.admin = jwt.verify((req.headers.authorization || '').replace('Bearer ', ''), JWT_SECRET); next(); } catch { res.status(401).json({ error: 'Please sign in to continue.' }); } }
+
+function auth(req, res, next) {
+  try {
+    req.admin = jwt.verify((req.headers.authorization || '').replace('Bearer ', ''), JWT_SECRET);
+    next();
+  } catch {
+    res.status(401).json({ error: 'Please sign in to continue.' });
+  }
+}
 
 const BUCKET_NAME = 'RAJA_ELE';
 
@@ -115,7 +100,7 @@ const managedCollections = {
   brands: ['id', 'name', 'logo'],
   industries: ['id', 'name', 'image'],
   gallery: ['id', 'title', 'image'],
-  projects: ['id', 'name', 'description', 'image'],
+  projects: ['id', 'name', 'image'],
 };
 const recordFromRow = row => {
   if (!row) return row;
@@ -307,6 +292,7 @@ async function fetchFreshContent() {
   }
 
   const siteData = siteResult.data?.data || {};
+  const siteInfo = siteData.site && Object.keys(siteData.site).length > 0 ? siteData.site : { ...initialContent.site, ...(siteData || {}) };
 
   const galleryRows = publicRecordsFromRows(galleryResult.data, 'gallery');
   galleryRows.sort((a, b) => (Number(a.display_order) || 999) - (Number(b.display_order) || 999));
@@ -320,6 +306,7 @@ async function fetchFreshContent() {
 
   const payload = {
     ...siteData,
+    site: siteInfo,
     products: publicRecordsFromRows(productsResult.data, 'products'),
     projects: publicRecordsFromRows(projectsResult.data, 'projects'),
     gallery: galleryRows,
@@ -344,15 +331,14 @@ app.post('/api/auth/login', async (req, res, next) => {
       return res.status(400).json({ error: 'Email and password are required.' });
     }
 
-    const { data: admin, error } = await supabase
-      .from('admins')
-      .select('email, password_hash')
-      .eq('email', email)
-      .maybeSingle();
-
+    const { data: rows, error } = await supabase.from('admins').select('*');
     if (error) throw error;
 
-    if (!admin?.password_hash || !(await bcrypt.compare(password, admin.password_hash))) {
+    const admins = recordsFromRows(rows);
+    const admin = admins.find(a => String(a.email || '').trim().toLowerCase() === email);
+    const hash = admin?.password_hash || admin?.passwordHash;
+
+    if (!admin || !hash || !(await bcrypt.compare(password, hash))) {
       return res.status(401).json({ error: 'Invalid email or password.' });
     }
 
@@ -368,10 +354,24 @@ app.post('/api/auth/logout', (_req, res) => {
   res.sendStatus(204);
 });
 
-app.get('/api/health', (_req, res) => {
+app.get('/api/health', async (_req, res) => {
   res.setHeader('Cache-Control', 'no-cache');
-  const connected = mongoose.connection.readyState === 1;
-  res.json({ ok: connected, mongodb: connected ? 'connected' : 'disconnected', initialized: isInitialized });
+  try {
+    const { error } = await supabase.from('site_settings').select('id').limit(1);
+    const dbOk = !error;
+    res.json({
+      ok: dbOk,
+      service: 'raja-electricals-api',
+      database: dbOk ? 'supabase' : 'disconnected'
+    });
+  } catch (err) {
+    res.status(500).json({
+      ok: false,
+      service: 'raja-electricals-api',
+      database: 'disconnected',
+      error: err.message
+    });
+  }
 });
 
 app.get('/robots.txt', (_req, res) => {
@@ -384,7 +384,7 @@ Disallow: /admin
 Disallow: /api/admin
 Disallow: /api/auth
 
-Sitemap: https://raj-ms-client-seven.vercel.app/sitemap.xml
+Sitemap: https://rajaelectrical.com/sitemap.xml
 `);
 });
 
@@ -392,7 +392,7 @@ app.get('/sitemap.xml', (_req, res) => {
   res.setHeader('Content-Type', 'application/xml');
   res.setHeader('Cache-Control', 'public, max-age=3600, stale-while-revalidate=86400');
 
-  const domain = 'https://raj-ms-client-seven.vercel.app';
+  const domain = 'https://rajaelectrical.com';
   const now = new Date().toISOString();
 
   const staticUrls = [
@@ -466,7 +466,7 @@ app.put('/api/site', auth, async (req, res, next) => {
   try {
     const current = await supabase.from('site_settings').select('data').eq('id', 1).maybeSingle();
     if (current.error) throw current.error;
-    const site = { ...(current.data?.data?.site || {}), ...req.body };
+    const site = req.body;
     const data = { ...(current.data?.data || {}), site };
     const { error } = await supabase.from('site_settings').upsert({ id: 1, data, updated_at: new Date().toISOString() }, { onConflict: 'id' });
     if (error) throw error;
@@ -649,7 +649,9 @@ app.post('/api/enquiries', async (req, res, next) => {
     const { name, phone, company, email, product, quantity, message, source } = req.body || {};
     if (!name || !phone) return res.status(400).json({ error: 'Name and phone number are required.' });
     const submittedAt = new Date().toISOString();
+    const numId = Date.now();
     const enquiry = {
+      id: numId,
       name: String(name).trim(),
       phone: String(phone).trim(),
       company: String(company || '').trim(),
@@ -661,7 +663,7 @@ app.post('/api/enquiries', async (req, res, next) => {
       status: 'New',
       submittedAt,
     };
-    const { error } = await supabase.from('enquiries').insert({ data: enquiry, created_at: submittedAt });
+    const { error } = await supabase.from('enquiries').insert({ id: numId, data: enquiry, created_at: submittedAt });
     if (error) throw error;
     res.status(201).json({ message: 'Thanks — your enquiry has been sent.' });
   } catch (error) { next(error); }
@@ -671,7 +673,9 @@ app.post('/api/orders', async (req, res, next) => {
   try {
     const { customerName, phone, productName, quantity } = req.body || {};
     if (!customerName || !phone || !productName || !quantity) return res.status(400).json({ error: 'Customer details, product and quantity are required.' });
-    const { error } = await supabase.from('orders').insert({ data: { ...req.body, status: 'New' }, created_at: new Date().toISOString() });
+    const numId = Date.now();
+    const orderObj = { ...req.body, id: numId, status: 'New' };
+    const { error } = await supabase.from('orders').insert({ id: numId, data: orderObj, created_at: new Date().toISOString() });
     if (error) throw error;
     res.status(201).json({ message: 'Your order request has been received.' });
   } catch (error) { next(error); }
@@ -999,6 +1003,87 @@ app.delete('/api/home-ads/:id', auth, async (req, res, next) => {
   } catch (error) { next(error); }
 });
 
+// PDF Catalogue streaming & upload endpoints
+app.get('/api/catalogue/:id', async (req, res, next) => {
+  try {
+    const productId = req.params.id;
+    const filePath = `catalogues/${productId}.pdf`;
+    const { data, error } = await supabase.storage.from(BUCKET_NAME).download(filePath);
+    if (error || !data) {
+      const { data: urlData } = supabase.storage.from(BUCKET_NAME).getPublicUrl(filePath);
+      if (urlData?.publicUrl) {
+        return res.redirect(urlData.publicUrl);
+      }
+      return res.status(404).json({ error: 'Catalogue PDF not found.' });
+    }
+    const arrayBuffer = await data.arrayBuffer();
+    const buffer = Buffer.from(arrayBuffer);
+    res.setHeader('Content-Type', 'application/pdf');
+    res.setHeader('Content-Disposition', `inline; filename="${productId}-catalogue.pdf"`);
+    res.setHeader('Cache-Control', 'public, max-age=86400');
+    return res.send(buffer);
+  } catch (error) {
+    next(error);
+  }
+});
+
+app.post('/api/products/:id/catalogue', auth, async (req, res, next) => {
+  try {
+    const productId = req.params.id;
+    const { pdfData, fileName } = req.body || {};
+    if (!pdfData || typeof pdfData !== 'string') {
+      return res.status(400).json({ error: 'PDF data is required.' });
+    }
+
+    const base64Data = pdfData.replace(/^data:application\/pdf;base64,/, '');
+    const buffer = Buffer.from(base64Data, 'base64');
+    const filePath = `catalogues/${productId}.pdf`;
+
+    const { error: uploadError } = await supabase.storage
+      .from(BUCKET_NAME)
+      .upload(filePath, buffer, { contentType: 'application/pdf', upsert: true });
+
+    if (uploadError) {
+      return res.status(400).json({ error: `Catalogue upload failed: ${uploadError.message}` });
+    }
+
+    const catalogName = fileName || `${productId}-catalogue.pdf`;
+    const { data: existingRow } = await supabase.from('products').select('*').eq('id', productId).maybeSingle();
+    if (existingRow) {
+      const existing = recordFromRow(existingRow);
+      const updated = { ...existing, catalogName };
+      const rowPayload = rowForCollection('products', updated);
+      await supabase.from('products').update(rowPayload).eq('id', productId);
+    }
+
+    invalidateContentCache();
+    return res.json({ message: 'Catalogue uploaded successfully', catalogUrl: `/api/catalogue/${productId}` });
+  } catch (error) {
+    next(error);
+  }
+});
+
+app.delete('/api/products/:id/catalogue', auth, async (req, res, next) => {
+  try {
+    const productId = req.params.id;
+    const filePath = `catalogues/${productId}.pdf`;
+    await supabase.storage.from(BUCKET_NAME).remove([filePath]);
+
+    const { data: existingRow } = await supabase.from('products').select('*').eq('id', productId).maybeSingle();
+    if (existingRow) {
+      const existing = recordFromRow(existingRow);
+      const { catalogName, ...rest } = existing;
+      const rowPayload = rowForCollection('products', rest);
+      await supabase.from('products').update(rowPayload).eq('id', productId);
+    }
+
+    invalidateContentCache();
+    return res.sendStatus(204);
+  } catch (error) {
+    next(error);
+  }
+});
+
 // 404 & Error Handlers
 app.use((req, res) => {
   res.status(404).json({
@@ -1015,27 +1100,14 @@ app.use((err, _req, res, _next) => {
   res.status(err.status || 500).json({ error: 'Something went wrong. Please try again.' });
 });
 
-let isInitialized = false;
 const server = app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Raja Electricals API running on port ${PORT}`);
+  console.log(`Raja Electricals API running on port ${PORT} (Supabase DB)`);
   ensureInitialHomeAdMigration();
 });
-
-// MongoDB is optional after the Supabase migration.
-if (MONGODB_URI) {
-  mongoose.connect(MONGODB_URI, { serverSelectionTimeoutMS: 5000 })
-    .then(() => Promise.all([seed(), ensureContentDefaults(), migrateProducts()]))
-    .then(() => { isInitialized = true; console.log('Legacy MongoDB initialization complete'); })
-    .catch(error => console.error('Legacy MongoDB initialization warning (non-blocking):', error.message));
-} else {
-  isInitialized = true;
-  console.log('Running with Supabase only.');
-}
 
 process.on('SIGTERM', () => {
   console.log('SIGTERM received, shutting down gracefully...');
   server.close(() => {
-    mongoose.connection.close();
     process.exit(0);
   });
 });

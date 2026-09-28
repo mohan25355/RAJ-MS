@@ -2,10 +2,10 @@
   "name": "raja-electricals-server",
   "version": "1.0.0",
   "private": true,
-  "description": "Raja Electricals Express API + MongoDB server",
+  "description": "Raja Electricals Express API Server",
   "main": "server.js",
   "scripts": {
-    "build": "npm --prefix ../client install && npm --prefix ../client run build",
+    "build": "node --check server.js",
     "dev": "node server.js",
     "start": "node server.js"
   },
@@ -17,7 +17,9 @@
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "jsonwebtoken": "^9.0.3",
-    "mongoose": "^9.9.1",
     "pg": "^8.23.0"
+  },
+  "devDependencies": {
+    "archiver": "^8.0.0"
   }
 }
