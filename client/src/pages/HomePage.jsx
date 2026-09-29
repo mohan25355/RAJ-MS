@@ -10,7 +10,7 @@ import { getConstructionBrandLogo } from '../utils/constructionLogos';
 
 const fallbackImage = item => resolveProductImage(item);
 const homeContent = {
-  site: { welcome: 'Welcome to Raja Electricals', heroTitle: 'Powering Every Project.', heroText: 'Electrical · Hardware · Safety · Industrial Solutions', trustYears: 25, productCount: 5000, happyClients: 2000, deliveryText: 'All Your Electrical Needs, Under One Roof', supplyText: 'For over two decades, Raja Electricals has helped contractors, facilities and industrial teams source dependable products without unnecessary delays.' },
+  site: { welcome: 'Welcome to Raja Electricals', heroTitle: 'Powering Every Project.', heroText: 'Electrical · Hardware · Safety · Industrial Solutions', trustYears: 25, productCount: 5000, happyClients: 2000, deliveryText: 'All Your Electrical Need, Under One Roof', supplyText: 'For over two decades, Raja Electricals has helped contractors, facilities and industrial teams source dependable products without unnecessary delays.' },
   categories: staticCategories.map(([name, image, count], id) => ({ id, name, image: image || images.worker, count })),
   products: [{ id: 1, name: 'Industrial Safety Helmet', image: images.helmet, price: 'Contact for price', badge: 'Popular' }, { id: 2, name: 'Power Tools', image: images.tools, price: 'Contact for price', badge: 'Featured' }, { id: 3, name: 'Water Pump', image: images.pump, price: 'Contact for price', badge: 'Reliable' }, { id: 4, name: 'Electrical Supplies', image: images.worker, price: 'Contact for price', badge: 'Top rated' }],
   brands: [{ id: 1, name: 'Electrical Brands', logo: images.worker, products: 'Electrical supplies' }, { id: 2, name: 'Safety Brands', logo: images.safety, products: 'Safety products' }, { id: 3, name: 'Tool Brands', logo: images.tools, products: 'Tools and hardware' }],
@@ -95,11 +95,11 @@ function useCountUp(targetValue, duration = 2000) {
     const animate = (currentTime) => {
       if (!startTime) startTime = currentTime;
       const progress = Math.min((currentTime - startTime) / duration, 1);
-      
+
       // Easing function for smooth animation
       const easeOutExpo = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
       const currentValue = Math.floor(easeOutExpo * targetValue);
-      
+
       setValue(currentValue);
 
       if (progress < 1) {
@@ -123,18 +123,15 @@ function useCountUp(targetValue, duration = 2000) {
 
 // Component for hero animated numbers
 function AnimatedHeroNumber({ targetValue, suffix = '+', duration = 2000 }) {
-  const { value, elementRef } = useCountUp(targetValue, duration);
-  
-  const formatValue = (val) => {
-    if (val >= 1000) {
-      return (val / 1000).toFixed(1).replace(/\.0$/, '') + 'k';
-    }
-    return val.toString();
-  };
+  const rawString = String(targetValue ?? '');
+  const numericTarget = parseInt(rawString.replace(/\D/g, ''), 10) || 0;
+  const { value, elementRef } = useCountUp(numericTarget, duration);
+
+  const cleanSuffix = rawString.includes('+') ? '+' : suffix;
 
   return (
     <b ref={elementRef}>
-      {formatValue(value)}{suffix}
+      {value}{cleanSuffix}
     </b>
   );
 }
@@ -179,13 +176,13 @@ export default function HomePage({ go, content }) {
     { icon: Headphones, title: 'Real Support', desc: 'Talk to a knowledgeable team from enquiry to delivery.', color: '#0d9488' },
     { icon: Shield, title: 'Quality Assured', desc: 'Genuine branded products with warranty protection.', color: '#16a34a' },
     { icon: Package, title: 'Bulk Orders', desc: 'Special pricing and handling for large project quantities.', color: '#7c3aed' },
-    { icon: Clock, title: '24hr Dispatch', desc: 'Same-day processing for orders placed before 2pm.', color: '#f59e0b' },
+    { icon: Clock, title: 'QUICK RESPONSE', desc: 'Fast assistance for urgent product enquiries and requirements.', color: '#f59e0b' },
   ];
 
   const trustStats = [
     { icon: Award, value: site.trustYears || 25, label: 'Years of Trust', suffix: '' },
-    { icon: Users, value: site.happyClients || 2000, label: 'Happy Customers', suffix: '+' },
-    { icon: Package, value: site.productCount || 5000, label: 'Products', suffix: '+' },
+    { icon: Users, value: site.happyClients || 2000, label: 'Happy Customers', suffix: '' },
+    { icon: Package, value: site.productCount || 5000, label: 'Products', suffix: '' },
     { icon: Shield, value: 100, label: 'Genuine Products', suffix: '%' },
   ];
 
@@ -216,10 +213,10 @@ export default function HomePage({ go, content }) {
           {slides.length
             ? <img key={slides[slide]} src={slides[slide]} alt="Raja Electricals supplies" />
             : <img src={images.worker} alt="Raja Electricals supplies" />}
-         <span>
-  <Store size={19} />
-  {site.deliveryText || 'All Your Electrical Needs, Under One Roof'}
-</span>
+          <span>
+            <Store size={19} />
+            {(!site.deliveryText || site.deliveryText.includes('Delivery') || site.deliveryText.includes('Needs')) ? 'All Your Electrical Need, Under One Roof' : site.deliveryText}
+          </span>
           {slides.length > 1 && (
             <div className="hero-dots">
               {slides.map((_, index) => (
@@ -615,7 +612,7 @@ export default function HomePage({ go, content }) {
         `}</style>
       </section>
 
-      
+
 
       <Section pill="INDUSTRIES" tone="green" title="Industries We Serve" text="Products and support shaped around your work.">
         <div className="cms-grid industry-cms-grid">
