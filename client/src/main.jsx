@@ -111,6 +111,7 @@ const replaceLegacyContact = (data) => {
   }
 
   const site = data.site;
+  const whatsappDigits = digits(site.whatsappNumber);
 
   return {
     ...data,
@@ -120,7 +121,7 @@ const replaceLegacyContact = (data) => {
         ? COMPANY_PHONE
         : site.phone,
 
-      whatsappNumber: digits(site.whatsappNumber).endsWith(LEGACY_PHONE)
+      whatsappNumber: (whatsappDigits.endsWith(LEGACY_PHONE) || whatsappDigits.endsWith('9003900533') || !site.whatsappNumber)
         ? COMPANY_WHATSAPP
         : site.whatsappNumber,
     },
